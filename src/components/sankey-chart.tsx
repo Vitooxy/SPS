@@ -72,6 +72,7 @@ interface LayoutItemLink extends RawItemLink {
   sy: number;
   ty: number;
   lineWidth: number;
+  pathIndex: number;
 }
 
 type InteractionMode = 'single' | 'addition' | 'subtraction';
@@ -270,6 +271,7 @@ function buildItemLinkPaths(
   }
 
   const result: LayoutItemLink[] = [];
+  let globalIdx = 0;
 
   for (const [key, group] of linkGroups) {
     const aggLink = links.find(
@@ -308,6 +310,7 @@ function buildItemLinkPaths(
         sy,
         ty,
         lineWidth,
+        pathIndex: globalIdx++,
       });
     }
   }
@@ -445,68 +448,87 @@ export default function SankeyChart() {
   // Determine which itemLinks are active based on selected nodes
   const activeItemLinkSet = useMemo(() => {
     if (!layout || selectedNodes.length === 0) return null;
-    const activeSet = new Set<number>(); // indices into itemLinkPaths
+    const activeSet = new Set<number>();
 
     for (const nodeId of selectedNodes) {
       const node = layout.nodes.find((n) => n.id === nodeId);
       if (!node) continue;
 
-      const isLeftmost = node.column === 0; // Stimulus
-      const isRightmost = node.column === layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
+      const isLeftmost = node.column === 0;
+      const maxCol = layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
+      const isRightmost = node.column === maxCol;
 
       const links = nodeItemLinks[nodeId] || [];
 
       if (isLeftmost) {
-        // Forward tracing: from this node, follow items to the right
-        // Find all items that pass through this node
-        const itemIdsThroughNode = new Set<string>();
+        // Forward: only itemLinks that START from this exact node
+        const itemIdsFromNode = new Set<string>();
         for (const il of links) {
-          itemIdsThroughNode.add(il.itemId);
+          if (il.source === nodeId) {
+            activeSet.add(il.pathIndex);
+            itemIdsFromNode.add(il.itemId);
+          }
         }
-
-        // Show all itemLinks for these items (full path from left to right)
+        // Follow these items through remaining axes, but skip links on column 0
         for (let i = 0; i < layout.itemLinkPaths.length; i++) {
           const il = layout.itemLinkPaths[i];
-          if (itemIdsThroughNode.has(il.itemId)) {
-            activeSet.add(i);
+          if (itemIdsFromNode.has(il.itemId)) {
+            const srcNode = layout.nodes.find(n => n.id === il.source);
+            if (srcNode && srcNode.column > 0) {
+              activeSet.add(i);
+            }
           }
         }
       } else if (isRightmost) {
-        // Backward tracing: to this node, follow items from the left
-        const itemIdsThroughNode = new Set<string>();
+        // Backward: only itemLinks that END at this exact node
+        const itemIdsToNode = new Set<string>();
         for (const il of links) {
-          itemIdsThroughNode.add(il.itemId);
+          if (il.target === nodeId) {
+            activeSet.add(il.pathIndex);
+            itemIdsToNode.add(il.itemId);
+          }
         }
-
+        // Follow backward, but skip links on the rightmost column
         for (let i = 0; i < layout.itemLinkPaths.length; i++) {
           const il = layout.itemLinkPaths[i];
-          if (itemIdsThroughNode.has(il.itemId)) {
-            activeSet.add(i);
+          if (itemIdsToNode.has(il.itemId)) {
+            const tgtNode = layout.nodes.find(n => n.id === il.target);
+            if (tgtNode && tgtNode.column < maxCol) {
+              activeSet.add(i);
+            }
           }
         }
       } else {
-        // Middle node: only show directly connected itemLinks
+        // Middle: only direct connections
         for (const il of links) {
-          const idx = layout.itemLinkPaths.indexOf(il);
-          if (idx >= 0) activeSet.add(idx);
+          activeSet.add(il.pathIndex);
         }
       }
     }
 
-    return activeSet;
+    return activeSet.size > 0 ? activeSet : null;
   }, [layout, selectedNodes, nodeItemLinks]);
 
-  // Determine which nodes are active
+  // Determine which nodes are active - only selected nodes on the same axis
   const activeNodeSet = useMemo(() => {
     if (!layout || !activeItemLinkSet) return null;
     const nodeSet = new Set<number>();
+    // Always include selected nodes
+    for (const nid of selectedNodes) nodeSet.add(nid);
+    // Include nodes on OTHER axes that active links connect to
+    const selectedAxes = new Set(selectedNodes.map(nid => {
+      const n = layout.nodes.find(x => x.id === nid);
+      return n?.column ?? -1;
+    }));
     for (const idx of activeItemLinkSet) {
       const il = layout.itemLinkPaths[idx];
-      nodeSet.add(il.source);
-      nodeSet.add(il.target);
+      const srcNode = layout.nodes.find(n => n.id === il.source);
+      const tgtNode = layout.nodes.find(n => n.id === il.target);
+      if (srcNode && !selectedAxes.has(srcNode.column)) nodeSet.add(il.source);
+      if (tgtNode && !selectedAxes.has(tgtNode.column)) nodeSet.add(il.target);
     }
     return nodeSet;
-  }, [layout, activeItemLinkSet]);
+  }, [layout, activeItemLinkSet, selectedNodes]);
 
   // Node click handler
   const handleNodeClick = useCallback(
