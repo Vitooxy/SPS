@@ -83,7 +83,7 @@ const NODE_WIDTH = 12;
 const NODE_GAP = 3;
 const SUBCAT_BAR_WIDTH = 14;
 const SUBCAT_BAR_GAP = 3;
-const CHART_PADDING = { top: 50, bottom: 160, left: 110, right: 210 };
+const CHART_PADDING = { top: 50, bottom: 160, left: 140, right: 210 };
 const ITEM_LINE_MIN_WIDTH = 1.5;
 
 // ─── Layout Engine ───────────────────────────────────────────────────────────
@@ -886,12 +886,11 @@ export default function SankeyChart() {
                 rx={2}
               />
               <text
-                x={barX - 4}
+                x={barX - 6}
                 y={minY + barH / 2}
                 textAnchor="end"
                 dominantBaseline="central"
                 className="fill-foreground text-[9px] font-medium"
-                transform={`rotate(-90, ${barX - 4}, ${minY + barH / 2})`}
               >
                 {group.subcat}
               </text>
