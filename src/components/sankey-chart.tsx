@@ -450,6 +450,17 @@ export default function SankeyChart() {
     const activeSet = new Set<number>();
 
     if (mode === 'subtraction') {
+      // If a category is selected, show all items for that category (ignore subtraction logic)
+      if (selectedCategory) {
+        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+          const il = layout.itemLinkPaths[i];
+          if (il.category === selectedCategory) {
+            activeSet.add(i);
+          }
+        }
+        return activeSet.size > 0 ? activeSet : null;
+      }
+
       // Subtraction mode: first node = base, rest = exclusions
       const baseNodeId = selectedNodes[0];
       const excludeNodeIds = new Set(selectedNodes.slice(1));
