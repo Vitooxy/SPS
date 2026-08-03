@@ -81,9 +81,9 @@ type InteractionMode = 'single' | 'addition' | 'subtraction';
 
 const NODE_WIDTH = 12;
 const NODE_GAP = 3;
-const SUBCAT_BAR_WIDTH = 14;
-const SUBCAT_BAR_GAP = 3;
-const CHART_PADDING = { top: 50, bottom: 160, left: 340, right: 210 };
+const SUBCAT_BAR_WIDTH = 10;
+const SUBCAT_BAR_GAP = 2;
+const CHART_PADDING = { top: 50, bottom: 160, left: 92, right: 210 };
 const ITEM_LINE_MIN_WIDTH = 1.5;
 
 // ─── Layout Engine ───────────────────────────────────────────────────────────
@@ -1006,7 +1006,7 @@ export default function SankeyChart() {
                   node.column === maxColumn
                     ? node.x + node.width + 6
                     : node.column === 0
-                      ? node.x - 4
+                      ? node.x + node.width + 4
                       : node.x + node.width / 2
                 }
                 y={node.y + node.height / 2}
@@ -1014,7 +1014,7 @@ export default function SankeyChart() {
                   node.column === maxColumn
                     ? 'start'
                     : node.column === 0
-                      ? 'end'
+                      ? 'start'
                       : 'middle'
                 }
                 dominantBaseline="central"
