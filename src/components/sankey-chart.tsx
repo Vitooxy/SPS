@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 
-/* ─── Types ─────────────────────────────────────────────────────── */
+// ── Types ───────────────────────────────────────────────────────────────────
 
 interface RawNode {
   id: number;
@@ -18,15 +18,30 @@ interface RawLink {
   source: number;
   target: number;
   value: number;
-  itemIds: string[];
-  categories: string[];
+}
+
+interface RawItemLink {
+  itemId: string;
+  source: number;
+  target: number;
+  category: string;
+  color: string;
+}
+
+interface RawItem {
+  id: string;
+  text: string;
+  scale: string;
+  derivedPrimary: string[];
+  category: string;
 }
 
 interface SankeyData {
   nodes: RawNode[];
   links: RawLink[];
+  itemLinks: RawItemLink[];
   nodeItems: Record<string, string[]>;
-  items: { id: string; text: string; scale: string }[];
+  items: RawItem[];
   axisOrder: string[];
   axisLabels: Record<string, string>;
   axisItemCounts: Record<string, number>;
@@ -37,603 +52,867 @@ interface SankeyData {
   stimulusSubcatColors: Record<string, string>;
 }
 
-type Mode = 'single' | 'addition' | 'subtraction';
-
-interface LNode extends RawNode {
-  x0: number; x1: number; y0: number; y1: number;
+interface LayoutNode extends RawNode {
+  x: number;
+  y: number;
+  height: number;
+  width: number;
 }
 
-interface LLink {
-  source: number; target: number; value: number;
-  itemIds: string[]; categories: string[];
-  sy0: number; sy1: number; ty0: number; ty1: number;
-  path: string; color: string;
+interface LayoutLink extends RawLink {
+  sy0: number;
+  sy1: number;
+  ty0: number;
+  ty1: number;
+  width: number;
 }
 
-/* ── Layout with barycentric reordering ────────────────────────── */
+interface LayoutItemLink extends RawItemLink {
+  path: string;
+  sy: number;
+  ty: number;
+  lineWidth: number;
+}
 
-const CAT_ORDER = [
-  'Overload', 'Aversion', 'Coping', 'Perceptual Sensitivity',
-  'Affective and Aesthetic', 'Social Cognition and Empathy',
-  'Cognitive Processing', 'Other Descriptors',
-];
+type InteractionMode = 'single' | 'addition' | 'subtraction';
 
-function layout(data: SankeyData, W: number, H: number) {
-  const PT = 52, PB = 60, PL = 80, PR = 160;
-  const NW = 12, NP = 3;
-  const iW = W - PL - PR, iH = H - PT - PB;
+// ─── Constants ───────────────────────────────────────────────────────────────
 
-  const cols = new Map<number, RawNode[]>();
-  for (const n of data.nodes) {
-    if (!cols.has(n.column)) cols.set(n.column, []);
-    cols.get(n.column)!.push(n);
+const NODE_WIDTH = 12;
+const NODE_GAP = 3;
+const SUBCAT_BAR_WIDTH = 14;
+const SUBCAT_BAR_GAP = 3;
+const CHART_PADDING = { top: 50, bottom: 160, left: 110, right: 180 };
+const ITEM_LINE_MIN_WIDTH = 1.5;
+
+// ─── Layout Engine ───────────────────────────────────────────────────────────
+
+function computeLayout(
+  data: SankeyData,
+  width: number,
+  height: number,
+): { nodes: LayoutNode[]; links: LayoutLink[] } {
+  const { nodes, links, axisOrder } = data;
+  const chartW = width - CHART_PADDING.left - CHART_PADDING.right;
+  const chartH = height - CHART_PADDING.top - CHART_PADDING.bottom;
+
+  // Group nodes by column
+  const columns: RawNode[][] = axisOrder.map(() => []);
+  for (const node of nodes) {
+    columns[node.column].push(node);
   }
-  const ck = [...cols.keys()].sort((a, b) => a - b);
-  const nc = ck.length;
-  const gap = nc > 1 ? (iW - NW * nc) / (nc - 1) : 0;
 
-  const flow = new Map<number, number>();
-  for (const n of data.nodes) {
-    let inf = 0, outf = 0;
-    for (const l of data.links) {
-      if (l.target === n.id) inf += l.value;
-      if (l.source === n.id) outf += l.value;
-    }
-    flow.set(n.id, Math.max(inf, outf, 1));
+  // Compute node heights based on aggregated link flow
+  const nodeFlow = new Map<number, number>();
+  for (const link of links) {
+    nodeFlow.set(link.source, (nodeFlow.get(link.source) || 0) + link.value);
+    nodeFlow.set(link.target, (nodeFlow.get(link.target) || 0) + link.value);
   }
 
-  const nm = new Map<number, LNode>();
-  const lnodes: LNode[] = [];
-  const subcatOrd = data.stimulusSubcatOrder;
-
-  for (const c of ck) {
-    const arr = cols.get(c)!;
-    const ci = ck.indexOf(c);
-    const x = PL + ci * (NW + gap);
-    const tf = arr.reduce((s, n) => s + (flow.get(n.id) || 1), 0);
-    const tp = (arr.length - 1) * NP;
-    const sc = (iH - tp) / Math.max(tf, 1);
-
-    if (c === ck[0]) {
-      arr.sort((a, b) => {
-        const sa = subcatOrd.indexOf(a.subcategory || 'Missing');
-        const sb = subcatOrd.indexOf(b.subcategory || 'Missing');
-        if (sa !== sb) return sa - sb;
-        return a.value.localeCompare(b.value);
-      });
-    } else if (c === ck[ck.length - 1]) {
-      arr.sort((a, b) => {
-        const ca = CAT_ORDER.indexOf(a.category || '');
-        const cb = CAT_ORDER.indexOf(b.category || '');
-        if (ca !== cb) return ca - cb;
-        return a.value.localeCompare(b.value);
-      });
-    } else {
-      arr.sort((a, b) => (flow.get(b.id) || 0) - (flow.get(a.id) || 0));
-    }
-
-    let y = PT;
-    for (const n of arr) {
-      const h = Math.max((flow.get(n.id) || 1) * sc, 2);
-      const ln: LNode = { ...n, x0: x, x1: x + NW, y0: y, y1: y + h };
-      lnodes.push(ln);
-      nm.set(n.id, ln);
-      y += h + NP;
+  // Assign x positions
+  const colSpacing = chartW / (axisOrder.length - 1);
+  for (let col = 0; col < columns.length; col++) {
+    for (const node of columns[col]) {
+      (node as LayoutNode).x = CHART_PADDING.left + col * colSpacing - NODE_WIDTH / 2;
+      (node as LayoutNode).width = NODE_WIDTH;
     }
   }
 
-  // Barycentric reordering
-  const middleCols = ck.filter(c => c !== ck[0] && c !== ck[ck.length - 1]);
+  // Assign y positions based on flow
+  for (const col of columns) {
+    const totalFlow = col.reduce((sum, n) => sum + (nodeFlow.get(n.id) || 0), 0);
+    const totalGaps = (col.length - 1) * NODE_GAP;
+    const availableH = chartH - totalGaps;
+    const scale = totalFlow > 0 ? availableH / totalFlow : 0;
+
+    let y = CHART_PADDING.top;
+    for (const node of col) {
+      const flow = nodeFlow.get(node.id) || 0;
+      const h = Math.max(flow * scale, 4);
+      (node as LayoutNode).y = y;
+      (node as LayoutNode).height = h;
+      y += h + NODE_GAP;
+    }
+  }
+
+  // Compute link positions
+  const sourceOffsets = new Map<number, number>();
+  const targetOffsets = new Map<number, number>();
+  const layoutLinks: LayoutLink[] = [];
+
+  for (const link of links) {
+    const src = nodes.find((n) => n.id === link.source) as LayoutNode;
+    const tgt = nodes.find((n) => n.id === link.target) as LayoutNode;
+
+    const srcOff = sourceOffsets.get(link.source) || 0;
+    const tgtOff = targetOffsets.get(link.target) || 0;
+
+    const srcFlow = nodeFlow.get(link.source) || 1;
+    const tgtFlow = nodeFlow.get(link.target) || 1;
+    const linkH_src = (link.value / srcFlow) * src.height;
+    const linkH_tgt = (link.value / tgtFlow) * tgt.height;
+
+    layoutLinks.push({
+      ...link,
+      sy0: src.y + srcOff,
+      sy1: src.y + srcOff + linkH_src,
+      ty0: tgt.y + tgtOff,
+      ty1: tgt.y + tgtOff + linkH_tgt,
+      width: Math.min(linkH_src, linkH_tgt),
+    });
+
+    sourceOffsets.set(link.source, srcOff + linkH_src);
+    targetOffsets.set(link.target, tgtOff + linkH_tgt);
+  }
+
+  return { nodes: nodes as LayoutNode[], links: layoutLinks };
+}
+
+// ─── Barycentric Reordering ──────────────────────────────────────────────────
+
+function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; links: LayoutLink[] }) {
+  const { axisOrder } = data;
+  const { nodes } = layout;
+
+  // Build adjacency: for each node, which nodes in the next column does it connect to
+  const forwardAdj = new Map<number, { nodeId: number; weight: number }[]>();
+  const backwardAdj = new Map<number, { nodeId: number; weight: number }[]>();
+
+  for (const link of layout.links) {
+    if (!forwardAdj.has(link.source)) forwardAdj.set(link.source, []);
+    forwardAdj.get(link.source)!.push({ nodeId: link.target, weight: link.value });
+    if (!backwardAdj.has(link.target)) backwardAdj.set(link.target, []);
+    backwardAdj.get(link.target)!.push({ nodeId: link.source, weight: link.value });
+  }
+
+  // Reorder columns 1 to n-2 (middle columns) using barycentric heuristic
   for (let iter = 0; iter < 4; iter++) {
-    for (const c of middleCols) {
-      const arr = cols.get(c)!;
-      const bary: Map<number, number> = new Map();
-      for (const n of arr) {
-        let totalWeight = 0, weightedPos = 0;
-        for (const l of data.links) {
-          if (l.target === n.id) {
-            const sn = nm.get(l.source);
-            if (sn) { weightedPos += ((sn.y0 + sn.y1) / 2) * l.value; totalWeight += l.value; }
-          }
-        }
-        for (const l of data.links) {
-          if (l.source === n.id) {
-            const tn = nm.get(l.target);
-            if (tn) { weightedPos += ((tn.y0 + tn.y1) / 2) * l.value; totalWeight += l.value; }
-          }
-        }
-        const curNode = nm.get(n.id);
-        bary.set(n.id, totalWeight > 0 ? weightedPos / totalWeight : (curNode ? (curNode.y0 + curNode.y1) / 2 : 0));
-      }
-      arr.sort((a, b) => (bary.get(a.id) || 0) - (bary.get(b.id) || 0));
+    // Forward pass: reorder based on previous column
+    for (let col = 1; col < axisOrder.length; col++) {
+      const colNodes = nodes.filter((n) => n.column === col);
+      const prevColNodes = nodes.filter((n) => n.column === col - 1);
 
-      const tf = arr.reduce((s, n) => s + (flow.get(n.id) || 1), 0);
-      const tp = (arr.length - 1) * NP;
-      const sc = (iH - tp) / Math.max(tf, 1);
-      let y = PT;
-      for (const n of arr) {
-        const h = Math.max((flow.get(n.id) || 1) * sc, 2);
-        const prev = nm.get(n.id)!;
-        nm.set(n.id, { ...n, x0: prev.x0, x1: prev.x1, y0: y, y1: y + h });
-        y += h + NP;
+      for (const node of colNodes) {
+        const adj = backwardAdj.get(node.id) || [];
+        let barycenter = 0;
+        let totalWeight = 0;
+        for (const { nodeId, weight } of adj) {
+          const prevNode = prevColNodes.find((n) => n.id === nodeId);
+          if (prevNode) {
+            barycenter += (prevNode.y + prevNode.height / 2) * weight;
+            totalWeight += weight;
+          }
+        }
+        (node as any)._barycenter = totalWeight > 0 ? barycenter / totalWeight : node.y;
+      }
+
+      colNodes.sort((a, b) => (a as any)._barycenter - (b as any)._barycenter);
+
+      // Reassign y positions
+      const totalGaps = (colNodes.length - 1) * NODE_GAP;
+      const totalH = colNodes.reduce((sum, n) => sum + n.height, 0);
+      const chartH = 800 - CHART_PADDING.top - CHART_PADDING.bottom;
+      const scale = totalH > 0 ? (chartH - totalGaps) / totalH : 0;
+      let y = CHART_PADDING.top;
+      for (const node of colNodes) {
+        node.y = y;
+        y += node.height * scale + NODE_GAP;
       }
     }
   }
 
-  const finalNodes: LNode[] = [];
-  for (const c of ck) {
-    for (const n of cols.get(c)!) finalNodes.push(nm.get(n.id)!);
+  // Recompute link positions after reordering
+  const sourceOffsets = new Map<number, number>();
+  const targetOffsets = new Map<number, number>();
+
+  for (const link of layout.links) {
+    const src = nodes.find((n) => n.id === link.source)!;
+    const tgt = nodes.find((n) => n.id === link.target)!;
+
+    const srcOff = sourceOffsets.get(link.source) || 0;
+    const tgtOff = targetOffsets.get(link.target) || 0;
+
+    const srcFlow = layout.links
+      .filter((l) => l.source === link.source)
+      .reduce((s, l) => s + l.value, 0);
+    const tgtFlow = layout.links
+      .filter((l) => l.target === link.target)
+      .reduce((s, l) => s + l.value, 0);
+
+    const linkH_src = (link.value / srcFlow) * src.height;
+    const linkH_tgt = (link.value / tgtFlow) * tgt.height;
+
+    link.sy0 = src.y + srcOff;
+    link.sy1 = src.y + srcOff + linkH_src;
+    link.ty0 = tgt.y + tgtOff;
+    link.ty1 = tgt.y + tgtOff + linkH_tgt;
+    link.width = Math.min(linkH_src, linkH_tgt);
+
+    sourceOffsets.set(link.source, srcOff + linkH_src);
+    targetOffsets.set(link.target, tgtOff + linkH_tgt);
   }
-
-  // Link geometry
-  const allLinks: LLink[] = [];
-  const so = new Map<number, number>(), to = new Map<number, number>();
-  for (const n of finalNodes) { so.set(n.id, n.y0); to.set(n.id, n.y0); }
-
-  const sortedLinks = [...data.links].sort((a, b) => {
-    const sa = nm.get(a.source), sb = nm.get(b.source);
-    const ta = nm.get(a.target), tb = nm.get(b.target);
-    if (!sa || !sb || !ta || !tb) return 0;
-    return sa.y0 !== sb.y0 ? sa.y0 - sb.y0 : ta.y0 - tb.y0;
-  });
-
-  for (const l of sortedLinks) {
-    const sn = nm.get(l.source), tn = nm.get(l.target);
-    if (!sn || !tn) continue;
-
-    const stot = data.links.filter(x => x.source === l.source).reduce((s, x) => s + x.value, 0);
-    const ttot = data.links.filter(x => x.target === l.target).reduce((s, x) => s + x.value, 0);
-    const sH = sn.y1 - sn.y0, tH = tn.y1 - tn.y0;
-    const lsh = (l.value / Math.max(stot, 1)) * sH;
-    const lth = (l.value / Math.max(ttot, 1)) * tH;
-    const sy0 = so.get(l.source)!, ty0 = to.get(l.target)!;
-
-    let linkColor = '#808080';
-    if (l.categories.length > 0) {
-      linkColor = data.categoryColors[l.categories[0]] || '#808080';
-    }
-
-    const xi = (sn.x1 + tn.x0) / 2;
-    const path = [
-      `M${sn.x1},${sy0}`,
-      `C${xi},${sy0} ${xi},${ty0} ${tn.x0},${ty0}`,
-      `L${tn.x0},${ty0 + lth}`,
-      `C${xi},${ty0 + lth} ${xi},${sy0 + lsh} ${sn.x1},${sy0 + lsh}`,
-      'Z'
-    ].join(' ');
-
-    allLinks.push({ ...l, sy0, sy1: sy0 + lsh, ty0, ty1: ty0 + lth, path, color: linkColor });
-    so.set(l.source, sy0 + lsh);
-    to.set(l.target, ty0 + lth);
-  }
-
-  return { nodes: finalNodes, links: allLinks, nm };
 }
 
-/* ─── Component ─────────────────────────────────────────────────── */
+// ─── Build per-item link paths ──────────────────────────────────────────────
+
+function buildItemLinkPaths(
+  layout: { nodes: LayoutNode[]; links: LayoutLink[] },
+  itemLinks: RawItemLink[],
+): LayoutItemLink[] {
+  const { nodes, links } = layout;
+
+  // Group itemLinks by (source, target) to calculate offsets within each aggregated link
+  const linkGroups = new Map<string, RawItemLink[]>();
+  for (const il of itemLinks) {
+    const key = `${il.source}-${il.target}`;
+    if (!linkGroups.has(key)) linkGroups.set(key, []);
+    linkGroups.get(key)!.push(il);
+  }
+
+  const result: LayoutItemLink[] = [];
+
+  for (const [key, group] of linkGroups) {
+    const aggLink = links.find(
+      (l) => l.source === group[0].source && l.target === group[0].target,
+    );
+    if (!aggLink) continue;
+
+    const srcNode = nodes.find((n) => n.id === aggLink.source)!;
+    const tgtNode = nodes.find((n) => n.id === aggLink.target)!;
+
+    // Total height available for this link
+    const totalH_src = aggLink.sy1 - aggLink.sy0;
+    const totalH_tgt = aggLink.ty1 - aggLink.ty0;
+
+    // Each item gets equal share
+    const n = group.length;
+    const itemH_src = totalH_src / n;
+    const itemH_tgt = totalH_tgt / n;
+    const lineWidth = Math.max(ITEM_LINE_MIN_WIDTH, Math.min(itemH_src, itemH_tgt));
+
+    for (let i = 0; i < n; i++) {
+      const il = group[i];
+      const sy = aggLink.sy0 + i * itemH_src + itemH_src / 2;
+      const ty = aggLink.ty0 + i * itemH_tgt + itemH_tgt / 2;
+
+      // Bezier path
+      const srcX = srcNode.x + NODE_WIDTH;
+      const tgtX = tgtNode.x;
+      const cpX = (srcX + tgtX) / 2;
+
+      const path = `M${srcX},${sy} C${cpX},${sy} ${cpX},${ty} ${tgtX},${ty}`;
+
+      result.push({
+        ...il,
+        path,
+        sy,
+        ty,
+        lineWidth,
+      });
+    }
+  }
+
+  return result;
+}
+
+// ─── Subcategory grouping for Stimulus ───────────────────────────────────────
+
+function getStimulusSubcatOrder(
+  nodes: LayoutNode[],
+  subcatOrder: string[],
+  subcats: Record<string, string>,
+): { subcat: string; nodes: LayoutNode[] }[] {
+  const stimulusNodes = nodes.filter((n) => n.axis === 'Stimulus');
+  const groups: { subcat: string; nodes: LayoutNode[] }[] = [];
+
+  for (const sc of subcatOrder) {
+    const groupNodes = stimulusNodes.filter((n) => subcats[n.value] === sc);
+    if (groupNodes.length > 0) {
+      groups.push({ subcat: sc, nodes: groupNodes });
+    }
+  }
+
+  return groups;
+}
+
+// ─── Main Component ──────────────────────────────────────────────────────────
 
 export default function SankeyChart() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<SankeyData | null>(null);
-  const [mode, setMode] = useState<Mode>('single');
-  const [sel, setSel] = useState<Set<number>>(new Set());
-  const [hovNode, setHovNode] = useState<number | null>(null);
-  const [hovLink, setHovLink] = useState<number | null>(null);
-  const [clickedLink, setClickedLink] = useState<number | null>(null);
-  const [tip, setTip] = useState<{ x: number; y: number; html: string } | null>(null);
-  const [dims, setDims] = useState({ w: 1600, h: 900 });
-  const ref = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
+  const [layout, setLayout] = useState<{
+    nodes: LayoutNode[];
+    links: LayoutLink[];
+    itemLinkPaths: LayoutItemLink[];
+  } | null>(null);
+  const [mode, setMode] = useState<InteractionMode>('single');
+  const [selectedNodes, setSelectedNodes] = useState<number[]>([]);
+  const [activeItemIds, setActiveItemIds] = useState<Set<string>>(new Set());
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
+  const [tooltip, setTooltip] = useState<{
+    x: number;
+    y: number;
+    content: string;
+  } | null>(null);
+  const [linkTooltip, setLinkTooltip] = useState<{
+    x: number;
+    y: number;
+    items: RawItem[];
+  } | null>(null);
 
-  useEffect(() => { fetch('/sankey-data.json').then(r => r.json()).then(setData).catch(console.error); }, []);
-
+  // Load data
   useEffect(() => {
-    const fn = () => {
-      if (ref.current) setDims({ w: ref.current.clientWidth, h: Math.max(700, window.innerHeight) });
-    };
-    fn();
-    window.addEventListener('resize', fn);
-    return () => window.removeEventListener('resize', fn);
+    fetch('/sankey-data.json')
+      .then((r) => r.json())
+      .then((d: SankeyData) => {
+        setData(d);
+      })
+      .catch((err) => console.error('Failed to load sankey data:', err));
   }, []);
 
-  const L = useMemo(() => data ? layout(data, dims.w, dims.h) : null, [data, dims]);
+  // Compute layout when data changes
+  useEffect(() => {
+    if (!data) return;
+    const w = dimensions.width;
+    const h = dimensions.height;
+    const result = computeLayout(data, w, h);
+    barycentricReorder(data, result);
+    const itemLinkPaths = buildItemLinkPaths(result, data.itemLinks);
+    setLayout({ ...result, itemLinkPaths });
+  }, [data, dimensions]);
 
-  // Build node key map for path tracing
-  const nodeKeyToId = useMemo(() => {
-    if (!data) return new Map<string, number>();
-    const m = new Map<string, number>();
-    for (const n of data.nodes) m.set(`${n.axis}::${n.value}`, n.id);
-    return m;
-  }, [data]);
+  // Resize observer
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width } = entry.contentRect;
+        if (width > 0) {
+          setDimensions({
+            width: Math.max(1000, width),
+            height: Math.max(600, Math.min(900, width * 0.65)),
+          });
+        }
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
-  // Build items map
+  // Build lookup maps
   const itemsMap = useMemo(() => {
-    if (!data) return new Map<string, { id: string; text: string; scale: string; values: Record<string, string[]> }>();
-    const m = new Map();
-    // Re-parse item values from links
+    if (!data) return {};
+    const map: Record<string, RawItem> = {};
     for (const item of data.items) {
-      m.set(item.id, item);
+      map[item.id] = item;
     }
-    return m;
+    return map;
   }, [data]);
 
-  // Compute active links based on selected nodes (ONE DIRECTION only)
-  // For Stimulus nodes: trace FORWARD (left to right)
-  // For Primary Code nodes: trace BACKWARD (right to left)
-  // For middle nodes: trace both directions
-  const active = useMemo(() => {
-    if (!L || !data || sel.size === 0) return null;
+  const nodeKeyToId = useMemo(() => {
+    if (!layout) return {};
+    const map: Record<string, number> = {};
+    for (const node of layout.nodes) {
+      map[`${node.axis}::${node.value}`] = node.id;
+    }
+    return map;
+  }, [layout]);
 
-    const activeLinkIndices = new Set<number>();
-    const activeNodeIds = new Set<number>();
+  const nodeIdToKey = useMemo(() => {
+    if (!layout) return {};
+    const map: Record<number, string> = {};
+    for (const node of layout.nodes) {
+      map[node.id] = `${node.axis}::${node.value}`;
+    }
+    return map;
+  }, [layout]);
 
-    for (const nid of sel) {
-      const node = L.nodes.find(n => n.id === nid);
+  // Pre-compute: for each node, which itemLinks pass through it
+  const nodeItemLinks = useMemo(() => {
+    if (!layout) return {};
+    const map: Record<number, LayoutItemLink[]> = {};
+    for (const il of layout.itemLinkPaths) {
+      if (!map[il.source]) map[il.source] = [];
+      map[il.source].push(il);
+      if (!map[il.target]) map[il.target] = [];
+      map[il.target].push(il);
+    }
+    return map;
+  }, [layout]);
+
+  // Determine which itemLinks are active based on selected nodes
+  const activeItemLinkSet = useMemo(() => {
+    if (!layout || selectedNodes.length === 0) return null;
+    const activeSet = new Set<number>(); // indices into itemLinkPaths
+
+    for (const nodeId of selectedNodes) {
+      const node = layout.nodes.find((n) => n.id === nodeId);
       if (!node) continue;
 
-      const isFirst = node.column === 0; // Stimulus
-      const lastAxis = data.axisOrder[data.axisOrder.length - 1];
-      const isLast = node.axis === lastAxis;
+      const isLeftmost = node.column === 0; // Stimulus
+      const isRightmost = node.column === layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
 
-      // Find all items through this node
-      const itemIds = new Set(data.nodeItems[String(nid)] || []);
+      const links = nodeItemLinks[nodeId] || [];
 
-      if (isFirst) {
-        // FORWARD: show all links on paths from this node to the right
-        // Find all links where source or target is touched by these items
-        for (let i = 0; i < L.links.length; i++) {
-          const link = L.links[i];
-          // Check if this link is on a path from the selected node
-          // A link is active if any of its items pass through the selected node
-          if (link.itemIds.some(id => itemIds.has(id))) {
-            activeLinkIndices.add(i);
-            activeNodeIds.add(link.source);
-            activeNodeIds.add(link.target);
+      if (isLeftmost) {
+        // Forward tracing: from this node, follow items to the right
+        // Find all items that pass through this node
+        const itemIdsThroughNode = new Set<string>();
+        for (const il of links) {
+          itemIdsThroughNode.add(il.itemId);
+        }
+
+        // Show all itemLinks for these items (full path from left to right)
+        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+          const il = layout.itemLinkPaths[i];
+          if (itemIdsThroughNode.has(il.itemId)) {
+            activeSet.add(i);
           }
         }
-      } else if (isLast) {
-        // BACKWARD: show all links on paths from the left to this node
-        for (let i = 0; i < L.links.length; i++) {
-          const link = L.links[i];
-          if (link.itemIds.some(id => itemIds.has(id))) {
-            activeLinkIndices.add(i);
-            activeNodeIds.add(link.source);
-            activeNodeIds.add(link.target);
+      } else if (isRightmost) {
+        // Backward tracing: to this node, follow items from the left
+        const itemIdsThroughNode = new Set<string>();
+        for (const il of links) {
+          itemIdsThroughNode.add(il.itemId);
+        }
+
+        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+          const il = layout.itemLinkPaths[i];
+          if (itemIdsThroughNode.has(il.itemId)) {
+            activeSet.add(i);
           }
         }
       } else {
-        // Middle node: show direct connections only (one step each direction)
-        for (let i = 0; i < L.links.length; i++) {
-          const link = L.links[i];
-          if (link.source === nid || link.target === nid) {
-            activeLinkIndices.add(i);
-            activeNodeIds.add(link.source);
-            activeNodeIds.add(link.target);
-          }
+        // Middle node: only show directly connected itemLinks
+        for (const il of links) {
+          const idx = layout.itemLinkPaths.indexOf(il);
+          if (idx >= 0) activeSet.add(idx);
         }
       }
     }
 
-    return { al: activeLinkIndices, an: activeNodeIds };
-  }, [L, sel, data]);
+    return activeSet;
+  }, [layout, selectedNodes, nodeItemLinks]);
 
-  const clickNode = useCallback((nid: number) => {
-    setSel(prev => {
-      const s = new Set(prev);
-      if (mode === 'single') { s.clear(); s.add(nid); }
-      else { s.has(nid) ? s.delete(nid) : s.add(nid); }
-      return s;
-    });
-    setClickedLink(null);
-  }, [mode]);
+  // Determine which nodes are active
+  const activeNodeSet = useMemo(() => {
+    if (!layout || !activeItemLinkSet) return null;
+    const nodeSet = new Set<number>();
+    for (const idx of activeItemLinkSet) {
+      const il = layout.itemLinkPaths[idx];
+      nodeSet.add(il.source);
+      nodeSet.add(il.target);
+    }
+    return nodeSet;
+  }, [layout, activeItemLinkSet]);
 
-  const clickLink = useCallback((idx: number) => {
-    setClickedLink(prev => prev === idx ? null : idx);
-    setSel(new Set()); // Clear node selection when clicking a link
-  }, []);
-
-  const nOp = (id: number) => {
-    if (!active) return 1;
-    return active.an.has(id) ? 1 : 0.15;
-  };
-
-  const lOp = (i: number) => {
-    if (hovLink === i) return 0.85;
-    if (!active) return 0.35;
-    return active.al.has(i) ? 0.7 : 0.04;
-  };
-
-  const showTip = useCallback((e: React.MouseEvent, html: string) => {
-    if (!ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    setTip({ x: e.clientX - r.left + 14, y: e.clientY - r.top - 8, html });
-  }, []);
-  const hideTip = useCallback(() => setTip(null), []);
-
-  // Axis labels with counts
-  const axLbl = useMemo(() => {
-    if (!L) return [];
-    const seen = new Set<string>();
-    const res: { axis: string; label: string; x: number; count: number }[] = [];
-    for (const n of L.nodes) {
-      if (!seen.has(n.axis)) {
-        seen.add(n.axis);
-        res.push({
-          axis: n.axis,
-          label: data?.axisLabels[n.axis] || n.axis,
-          x: (n.x0 + n.x1) / 2,
-          count: data?.axisItemCounts[n.axis] || 0,
+  // Node click handler
+  const handleNodeClick = useCallback(
+    (nodeId: number) => {
+      if (mode === 'single') {
+        setSelectedNodes([nodeId]);
+        // Find items through this node
+        const node = layout?.nodes.find((n) => n.id === nodeId);
+        if (node) {
+          const itemIds = data?.nodeItems[String(nodeId)] || [];
+          setActiveItemIds(new Set(itemIds));
+        }
+      } else if (mode === 'addition') {
+        setSelectedNodes((prev) => {
+          if (prev.includes(nodeId)) return prev.filter((id) => id !== nodeId);
+          return [...prev, nodeId];
+        });
+        // Add items
+        const itemIds = data?.nodeItems[String(nodeId)] || [];
+        setActiveItemIds((prev) => {
+          const next = new Set(prev);
+          for (const id of itemIds) next.add(id);
+          return next;
+        });
+      } else if (mode === 'subtraction') {
+        setSelectedNodes((prev) => {
+          if (prev.includes(nodeId)) return prev.filter((id) => id !== nodeId);
+          return [...prev, nodeId];
+        });
+        // Toggle items
+        const itemIds = data?.nodeItems[String(nodeId)] || [];
+        setActiveItemIds((prev) => {
+          const next = new Set(prev);
+          const itemSet = new Set(itemIds);
+          // Check if these items are already active
+          const allActive = itemIds.every((id) => prev.has(id));
+          if (allActive && itemIds.length > 0) {
+            for (const id of itemIds) next.delete(id);
+          } else {
+            for (const id of itemIds) next.add(id);
+          }
+          return next;
         });
       }
-    }
-    return res;
-  }, [L, data]);
+      setLinkTooltip(null);
+    },
+    [mode, layout, data],
+  );
+
+  // Item link click handler
+  const handleItemLinkClick = useCallback(
+    (il: LayoutItemLink, event: React.MouseEvent) => {
+      const item = itemsMap[il.itemId];
+      if (item) {
+        setActiveItemIds(new Set([il.itemId]));
+        setSelectedNodes([]);
+        setLinkTooltip({
+          x: event.clientX,
+          y: event.clientY,
+          items: [item],
+        });
+      }
+    },
+    [itemsMap],
+  );
+
+  // Clear selection
+  const handleClear = useCallback(() => {
+    setSelectedNodes([]);
+    setActiveItemIds(new Set());
+    setLinkTooltip(null);
+  }, []);
+
+  // Get items for bottom panel
+  const panelItems = useMemo(() => {
+    if (activeItemIds.size === 0) return [];
+    return Array.from(activeItemIds)
+      .map((id) => itemsMap[id])
+      .filter(Boolean);
+  }, [activeItemIds, itemsMap]);
+
+  if (!data || !layout) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
+  const { width, height } = dimensions;
+  const { nodes, links, itemLinkPaths } = layout;
+  const maxColumn = Math.max(...nodes.map((n) => n.column));
 
   // Stimulus subcategory groups
-  const stimGroups = useMemo(() => {
-    if (!L || !data) return [];
-    const stimNodes = L.nodes.filter(n => n.axis === 'Stimulus');
-    const groups: { subcat: string; color: string; y0: number; y1: number }[] = [];
-    let cc = '', st = 0;
-    for (let i = 0; i < stimNodes.length; i++) {
-      const sc = stimNodes[i].subcategory || 'Missing';
-      if (sc !== cc) {
-        if (cc) groups.push({ subcat: cc, color: data.stimulusSubcatColors[cc] || '#999', y0: stimNodes[st].y0 - 1, y1: stimNodes[i - 1].y1 + 1 });
-        cc = sc; st = i;
-      }
-      if (i === stimNodes.length - 1) groups.push({ subcat: cc, color: data.stimulusSubcatColors[cc] || '#999', y0: stimNodes[st].y0 - 1, y1: stimNodes[i].y1 + 1 });
-    }
-    return groups;
-  }, [L, data]);
+  const stimulusGroups = getStimulusSubcatOrder(
+    nodes,
+    data.stimulusSubcatOrder,
+    data.stimulusSubcats,
+  );
 
-  // Category groups (last column)
-  const catGroups = useMemo(() => {
-    if (!L || !data) return [];
-    const last = L.nodes.filter(n => n.axis === 'DerivedPrimary');
-    const gs: { cat: string; color: string; y0: number; y1: number }[] = [];
-    let cc = '', st = 0;
-    for (let i = 0; i < last.length; i++) {
-      const c = last[i].category || 'Other';
-      if (c !== cc) {
-        if (cc) gs.push({ cat: cc, color: data.categoryColors[cc] || '#999', y0: last[st].y0 - 1, y1: last[i - 1].y1 + 1 });
-        cc = c; st = i;
-      }
-      if (i === last.length - 1) gs.push({ cat: cc, color: data.categoryColors[cc] || '#999', y0: last[st].y0 - 1, y1: last[i].y1 + 1 });
-    }
-    return gs;
-  }, [L, data]);
+  // Primary code category groups (for right-side bars)
+  const primaryCodeNodes = nodes.filter((n) => n.axis === 'DerivedPrimary');
+  const categoryGroups = new Map<string, LayoutNode[]>();
+  for (const node of primaryCodeNodes) {
+    const cat = node.category || 'Other Descriptors';
+    if (!categoryGroups.has(cat)) categoryGroups.set(cat, []);
+    categoryGroups.get(cat)!.push(node);
+  }
 
-  // Items for clicked link
-  const linkItems = useMemo(() => {
-    if (!data || clickedLink === null || !L) return [];
-    const link = L.links[clickedLink];
-    if (!link) return [];
-    return data.items.filter(it => link.itemIds.includes(it.id));
-  }, [data, clickedLink, L]);
-
-  // Items for selected nodes
-  const selItems = useMemo(() => {
-    if (!data || !active) return [];
-    const ids = new Set<string>();
-    for (const nid of sel) for (const id of data.nodeItems[String(nid)] || []) ids.add(id);
-    return data.items.filter(it => ids.has(it.id));
-  }, [data, active, sel]);
-
-  if (!data || !L) return <div className="flex items-center justify-center h-screen"><p className="text-muted-foreground animate-pulse">Loading...</p></div>;
+  const isAnySelected = selectedNodes.length > 0 || activeItemIds.size > 0;
 
   return (
-    <div ref={ref} className="relative w-full h-screen bg-white overflow-auto select-none">
-      {/* Header */}
-      <div className="sticky top-0 z-30 flex items-center justify-between px-5 py-2 bg-white/95 backdrop-blur-sm border-b border-gray-200">
-        <div className="min-w-0">
-          <h1 className="text-sm font-bold text-gray-900 tracking-tight">
-            SPS Items (v3.13) — axis composition of each Derived Primary Code
-          </h1>
-          <p className="text-[10px] text-gray-500 mt-0.5">
-            6-axis schema: Stimulus | Process | Outcome &amp; Appraised Valence | Response | Cognitive Disposition | Primary Code. &ldquo;&mdash;&rdquo; skipped per item, middle axes barycentrically reordered. Ribbon color = primary-code category.
-          </p>
-        </div>
-        <div className="flex items-center gap-1.5 shrink-0 ml-4">
-          {(['single', 'addition', 'subtraction'] as Mode[]).map(m => (
-            <button key={m} onClick={() => { setMode(m); setSel(new Set()); setClickedLink(null); }}
-              className={`px-2.5 py-1 text-[11px] font-medium rounded border transition-all ${
-                mode === m ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-              }`}>
-              {m === 'single' ? 'Single' : m === 'addition' ? 'Addition' : 'Subtraction'}
-            </button>
-          ))}
-          {(sel.size > 0 || clickedLink !== null) && (
-            <button onClick={() => { setSel(new Set()); setClickedLink(null); }}
-              className="ml-1 px-2.5 py-1 text-[11px] font-medium rounded border border-gray-300 text-gray-500 hover:bg-gray-50">
-              Clear
-            </button>
-          )}
-        </div>
+    <div className="w-full" ref={containerRef}>
+      {/* Title */}
+      <div className="text-center mb-2">
+        <h1 className="text-lg font-semibold text-foreground">
+          SPS Items — Axis Composition of Each Derived Primary Code
+        </h1>
+        <p className="text-xs text-muted-foreground mt-0.5">
+          6-axis schema: Stimulus | Process | Outcome & Appraised Valence | Response | Cognitive
+          Disposition | Primary Code. &ldquo;—&rdquo; skipped per item. Ribbon color = primary-code
+          category.
+        </p>
       </div>
 
-      {/* SVG */}
-      <svg width={dims.w} height={dims.h} className="block">
-        {/* Stimulus subcategory side bars */}
-        {stimGroups.map((g, i) => {
-          const firstStim = L.nodes.find(n => n.axis === 'Stimulus');
-          const barX = (firstStim?.x0 || 0) - 18;
-          const my = (g.y0 + g.y1) / 2;
-          return (
-            <g key={`sg${i}`}>
-              <rect x={barX} y={g.y0} width={10} height={g.y1 - g.y0} fill={g.color} rx={2} opacity={0.85} />
-              <text x={barX - 4} y={my} textAnchor="end" dominantBaseline="middle"
-                fill={g.color} fontSize={10} fontWeight={600} fontFamily="system-ui,sans-serif"
-                transform={`rotate(-90, ${barX - 4}, ${my})`}>
-                {g.subcat}
-              </text>
-            </g>
-          );
-        })}
-
-        {/* Axis headers with counts */}
-        {axLbl.map(({ axis, label, x, count }) => (
-          <g key={axis}>
-            <text x={x} y={20} textAnchor="middle" fill="#374151"
-              fontSize={12} fontWeight={700} fontFamily="system-ui,sans-serif">
-              {label}
-            </text>
-            <text x={x} y={34} textAnchor="middle" fill="#6B7280"
-              fontSize={10} fontFamily="system-ui,sans-serif">
-              (n={count})
-            </text>
-          </g>
+      {/* Mode buttons */}
+      <div className="flex items-center justify-end gap-2 mb-2">
+        <span className="text-xs text-muted-foreground mr-2">Mode:</span>
+        {(['single', 'addition', 'subtraction'] as InteractionMode[]).map((m) => (
+          <button
+            key={m}
+            onClick={() => {
+              setMode(m);
+              handleClear();
+            }}
+            className={`px-3 py-1 text-xs rounded border transition-colors ${
+              mode === m
+                ? 'bg-primary text-primary-foreground border-primary'
+                : 'bg-background text-foreground border-border hover:bg-muted'
+            }`}
+          >
+            {m.charAt(0).toUpperCase() + m.slice(1)}
+          </button>
         ))}
+        {isAnySelected && (
+          <button
+            onClick={handleClear}
+            className="px-3 py-1 text-xs rounded border border-border bg-background text-foreground hover:bg-muted ml-2"
+          >
+            Clear
+          </button>
+        )}
+      </div>
 
-        {/* Category side bars (right) */}
-        {catGroups.map((g, i) => {
-          const lastNode = L.nodes.find(n => n.axis === 'DerivedPrimary');
-          const barX = (lastNode?.x1 || 0) + 8;
-          const my = (g.y0 + g.y1) / 2;
+      {/* Chart */}
+      <svg width={width} height={height} className="block">
+        {/* Axis labels */}
+        {data.axisOrder.map((axis, i) => {
+          const colNodes = nodes.filter((n) => n.column === i);
+          if (colNodes.length === 0) return null;
+          const x = colNodes[0].x + NODE_WIDTH / 2;
+          const count = data.axisItemCounts[axis] || 0;
           return (
-            <g key={`cg${i}`}>
-              <rect x={barX} y={g.y0} width={8} height={g.y1 - g.y0} fill={g.color} rx={1} opacity={0.85} />
-              <text x={barX + 14} y={my} dominantBaseline="middle"
-                fill={g.color} fontSize={9.5} fontWeight={600} fontFamily="system-ui,sans-serif"
-                transform={`rotate(-90, ${barX + 14}, ${my})`}>
-                {g.cat}
+            <text
+              key={axis}
+              x={x}
+              y={CHART_PADDING.top - 16}
+              textAnchor="middle"
+              className="fill-foreground text-[11px] font-semibold"
+            >
+              {data.axisLabels[axis]} (n={count})
+            </text>
+          );
+        })}
+
+        {/* Stimulus subcategory bars (left side) */}
+        {stimulusGroups.map((group) => {
+          if (group.nodes.length === 0) return null;
+          const minY = Math.min(...group.nodes.map((n) => n.y));
+          const maxY = Math.max(...group.nodes.map((n) => n.y + n.height));
+          const barX = group.nodes[0].x - SUBCAT_BAR_WIDTH - SUBCAT_BAR_GAP;
+          const barH = maxY - minY;
+          const color = data.stimulusSubcatColors[group.subcat] || '#D9D9D9';
+          return (
+            <g key={group.subcat}>
+              <rect
+                x={barX}
+                y={minY}
+                width={SUBCAT_BAR_WIDTH}
+                height={barH}
+                fill={color}
+                rx={2}
+              />
+              <text
+                x={barX - 4}
+                y={minY + barH / 2}
+                textAnchor="end"
+                dominantBaseline="central"
+                className="fill-foreground text-[9px] font-medium"
+                transform={`rotate(-90, ${barX - 4}, ${minY + barH / 2})`}
+              >
+                {group.subcat}
               </text>
             </g>
           );
         })}
 
-        {/* Links */}
-        <g>
-          {L.links.map((l, i) => (
-            <path key={i} d={l.path} fill={l.color} opacity={lOp(i)} stroke="none"
-              className="transition-opacity duration-150 cursor-pointer"
-              onClick={() => clickLink(i)}
-              onMouseEnter={e => {
-                setHovLink(i);
-                const sn = L.nm.get(l.source), tn = L.nm.get(l.target);
-                showTip(e, `<b>${sn?.value}</b> → <b>${tn?.value}</b><br/>${l.itemIds.length} item(s)<br/>Categories: ${l.categories.join(', ') || 'N/A'}`);
+        {/* Primary code category bars (right side) */}
+        {Array.from(categoryGroups.entries()).map(([cat, catNodes]) => {
+          if (catNodes.length === 0) return null;
+          const minY = Math.min(...catNodes.map((n) => n.y));
+          const maxY = Math.max(...catNodes.map((n) => n.y + n.height));
+          const lastNode = catNodes[catNodes.length - 1];
+          const barX = lastNode.x + NODE_WIDTH + 6;
+          const barH = maxY - minY;
+          const color = data.categoryColors[cat] || '#A5A5A5';
+          return (
+            <g key={cat}>
+              <rect x={barX} y={minY} width={6} height={barH} fill={color} rx={1} />
+              <text
+                x={barX + 12}
+                y={minY + barH / 2}
+                dominantBaseline="central"
+                className="fill-foreground text-[9px] font-medium"
+              >
+                {cat}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Item link lines (one per item) */}
+        {itemLinkPaths.map((il, idx) => {
+          const isActive = activeItemLinkSet?.has(idx) ?? false;
+          const isDimmed = isAnySelected && !isActive;
+          const isHovered =
+            hoveredNode === il.source || hoveredNode === il.target;
+
+          return (
+            <path
+              key={`${il.itemId}-${il.source}-${il.target}-${idx}`}
+              d={il.path}
+              fill="none"
+              stroke={il.color}
+              strokeWidth={il.lineWidth}
+              opacity={isDimmed ? 0.06 : isActive ? 0.85 : isHovered ? 0.6 : 0.3}
+              className="cursor-pointer transition-opacity duration-150"
+              onClick={(e) => handleItemLinkClick(il, e)}
+              onMouseEnter={(e) => {
+                const item = itemsMap[il.itemId];
+                if (item) {
+                  setLinkTooltip({
+                    x: e.clientX,
+                    y: e.clientY,
+                    items: [item],
+                  });
+                }
               }}
-              onMouseMove={e => {
-                const sn = L.nm.get(l.source), tn = L.nm.get(l.target);
-                showTip(e, `<b>${sn?.value}</b> → <b>${tn?.value}</b><br/>${l.itemIds.length} item(s)<br/>Categories: ${l.categories.join(', ') || 'N/A'}`);
-              }}
-              onMouseLeave={() => { setHovLink(null); hideTip(); }}
+              onMouseLeave={() => setLinkTooltip(null)}
             />
-          ))}
-        </g>
+          );
+        })}
 
         {/* Nodes */}
-        <g>
-          {L.nodes.map(n => {
-            const op = nOp(n.id);
-            const isSel = sel.has(n.id);
-            const isHov = hovNode === n.id;
-            const h = n.y1 - n.y0;
-            const isLast = n.axis === 'DerivedPrimary';
-            const lx = isLast ? n.x1 + 5 : n.x0 - 4;
-            const anch = isLast ? 'start' : 'end';
+        {nodes.map((node) => {
+          const isActive = activeNodeSet?.has(node.id) ?? false;
+          const isDimmed = isAnySelected && !isActive;
+          const isHovered = hoveredNode === node.id;
+          const isSelected = selectedNodes.includes(node.id);
 
-            return (
-              <g key={n.id} className="cursor-pointer"
-                onClick={() => clickNode(n.id)}
-                onMouseEnter={e => {
-                  setHovNode(n.id);
-                  const its = data.nodeItems[String(n.id)] || [];
-                  showTip(e, `<b>${n.value}</b><br/>${data.axisLabels[n.axis] || n.axis}<br/>${its.length} item(s)`);
+          return (
+            <g key={node.id}>
+              <rect
+                x={node.x}
+                y={node.y}
+                width={node.width}
+                height={node.height}
+                fill={node.color}
+                stroke={isSelected ? '#000' : isHovered ? '#333' : 'none'}
+                strokeWidth={isSelected ? 1.5 : isHovered ? 1 : 0}
+                opacity={isDimmed ? 0.15 : 1}
+                className="cursor-pointer transition-opacity duration-150"
+                onClick={() => handleNodeClick(node.id)}
+                onMouseEnter={(e) => {
+                  setHoveredNode(node.id);
+                  const count = data.nodeItems[String(node.id)]?.length || 0;
+                  setTooltip({
+                    x: e.clientX,
+                    y: e.clientY,
+                    content: `${node.value} (${count} items)`,
+                  });
                 }}
-                onMouseMove={e => {
-                  const its = data.nodeItems[String(n.id)] || [];
-                  showTip(e, `<b>${n.value}</b><br/>${data.axisLabels[n.axis] || n.axis}<br/>${its.length} item(s)`);
+                onMouseLeave={() => {
+                  setHoveredNode(null);
+                  setTooltip(null);
                 }}
-                onMouseLeave={() => { setHovNode(null); hideTip(); }}
+              />
+              {/* Node label */}
+              <text
+                x={
+                  node.column === maxColumn
+                    ? node.x + node.width + 4
+                    : node.column === 0
+                      ? node.x - 4
+                      : node.x + node.width / 2
+                }
+                y={node.y + node.height / 2}
+                textAnchor={
+                  node.column === maxColumn
+                    ? 'start'
+                    : node.column === 0
+                      ? 'end'
+                      : 'middle'
+                }
+                dominantBaseline="central"
+                className="fill-foreground text-[8px] pointer-events-none"
+                opacity={isDimmed ? 0.2 : 1}
               >
-                <rect x={n.x0} y={n.y0} width={n.x1 - n.x0} height={h} fill={n.color}
-                  opacity={op} rx={1}
-                  stroke={isSel ? '#111' : isHov ? '#555' : 'none'}
-                  strokeWidth={isSel ? 1.5 : 0.5}
-                  className="transition-opacity duration-150" />
-                {h > 6 && (
-                  <text x={lx} y={(n.y0 + n.y1) / 2} textAnchor={anch} dominantBaseline="middle"
-                    fill="#374151" fontSize={h > 14 ? 9 : 7} fontFamily="system-ui,sans-serif"
-                    opacity={op < 0.3 ? 0.15 : 0.8} className="pointer-events-none">
-                    {n.value.length > 22 ? n.value.slice(0, 20) + '…' : n.value}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </g>
+                {node.value}
+              </text>
+            </g>
+          );
+        })}
       </svg>
 
       {/* Tooltip */}
-      {tip && (
-        <div className="absolute z-50 pointer-events-none px-2.5 py-1.5 rounded text-[11px] leading-relaxed shadow-lg border border-gray-200 bg-white"
-          style={{ left: Math.min(tip.x, dims.w - 260), top: tip.y }}
-          dangerouslySetInnerHTML={{ __html: tip.html }} />
+      {tooltip && (
+        <div
+          className="fixed z-50 px-2 py-1 text-xs bg-card border border-border rounded shadow-sm pointer-events-none"
+          style={{ left: tooltip.x + 12, top: tooltip.y - 30 }}
+        >
+          {tooltip.content}
+        </div>
       )}
 
-      {/* Bottom legend */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur border-t border-gray-200 px-5 py-2">
-        <div className="flex items-center gap-4 flex-wrap">
-          <span className="text-[10px] font-semibold text-gray-700">Primary-code category:</span>
-          {CAT_ORDER.map(cat => (
-            <div key={cat} className="flex items-center gap-1">
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: data.categoryColors[cat] || '#999' }} />
-              <span className="text-[10px] text-gray-600">{cat}</span>
+      {/* Link tooltip */}
+      {linkTooltip && (
+        <div
+          className="fixed z-50 px-3 py-2 text-xs bg-card border border-border rounded shadow-lg max-w-xs"
+          style={{ left: linkTooltip.x + 12, top: linkTooltip.y - 10 }}
+        >
+          {linkTooltip.items.map((item) => (
+            <div key={item.id} className="mb-1">
+              <span className="font-mono text-[10px] text-muted-foreground">{item.id}</span>
+              <p className="text-[11px] text-foreground leading-tight">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Bottom panel: item list */}
+      {panelItems.length > 0 && (
+        <div className="mt-4 border-t border-border pt-3">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-xs font-semibold text-foreground">
+              Items ({panelItems.length})
+            </h3>
+            <button
+              onClick={handleClear}
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
+              Clear
+            </button>
+          </div>
+          <div className="max-h-48 overflow-y-auto space-y-1">
+            {panelItems.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-start gap-2 text-xs p-1.5 rounded hover:bg-muted/50"
+              >
+                <span className="font-mono text-[10px] text-muted-foreground shrink-0 w-20">
+                  {item.id}
+                </span>
+                <span className="text-foreground leading-snug">{item.text}</span>
+                <span
+                  className="shrink-0 text-[10px] px-1.5 py-0.5 rounded"
+                  style={{
+                    backgroundColor: data.categoryColors[item.category] || '#A5A5A5',
+                    color: '#fff',
+                  }}
+                >
+                  {item.category}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Legend */}
+      <div className="mt-4 pt-3 border-t border-border">
+        <p className="text-[10px] text-muted-foreground mb-1.5 text-center font-medium">
+          Primary-code category
+        </p>
+        <div className="flex items-center justify-center gap-4 flex-wrap">
+          {Object.entries(data.categoryColors).map(([cat, color]) => (
+            <div key={cat} className="flex items-center gap-1.5">
+              <div
+                className="w-3 h-3 rounded-sm"
+                style={{ backgroundColor: color }}
+              />
+              <span className="text-[10px] text-foreground">{cat}</span>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Bottom panel: clicked link items */}
-      {clickedLink !== null && L && (
-        <div className="fixed bottom-8 left-0 right-0 z-30 bg-white/95 backdrop-blur border-t border-gray-200 max-h-[200px] overflow-auto">
-          <div className="px-5 py-2">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className="text-[11px] font-semibold text-gray-900">
-                Link: {L.links[clickedLink]?.itemIds.length} item(s)
-              </span>
-              {(() => {
-                const sn = L.nm.get(L.links[clickedLink]?.source || -1);
-                const tn = L.nm.get(L.links[clickedLink]?.target || -1);
-                return (
-                  <>
-                    {sn && <span className="px-1.5 py-0.5 rounded text-[9px] font-medium text-white" style={{ backgroundColor: sn.color }}>{sn.value}</span>}
-                    <span className="text-gray-400">→</span>
-                    {tn && <span className="px-1.5 py-0.5 rounded text-[9px] font-medium text-white" style={{ backgroundColor: tn.color }}>{tn.value}</span>}
-                  </>
-                );
-              })()}
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0.5">
-              {linkItems.slice(0, 30).map(it => (
-                <div key={it.id} className="text-[10px] text-gray-600 leading-snug truncate">
-                  <span className="font-medium text-gray-800">{it.id}</span> {it.text}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Bottom panel: selected node items */}
-      {sel.size > 0 && clickedLink === null && active && (
-        <div className="fixed bottom-8 left-0 right-0 z-30 bg-white/95 backdrop-blur border-t border-gray-200 max-h-[160px] overflow-auto">
-          <div className="px-5 py-2">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className="text-[11px] font-semibold text-gray-900">{selItems.length} item(s)</span>
-              {Array.from(sel).map(id => {
-                const n = L.nm.get(id);
-                return n ? <span key={id} className="px-1.5 py-0.5 rounded text-[9px] font-medium text-white" style={{ backgroundColor: n.color }}>{n.value}</span> : null;
-              })}
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0.5">
-              {selItems.slice(0, 20).map(it => (
-                <div key={it.id} className="text-[10px] text-gray-600 leading-snug truncate">
-                  <span className="font-medium text-gray-800">{it.id}</span> {it.text}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
