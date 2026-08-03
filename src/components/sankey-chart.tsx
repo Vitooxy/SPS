@@ -437,6 +437,7 @@ export default function SankeyChart() {
     if (!layout) return {};
     const map: Record<number, LayoutItemLink[]> = {};
     for (const il of layout.itemLinkPaths) {
+      if (!il) continue;
       if (!map[il.source]) map[il.source] = [];
       map[il.source].push(il);
       if (!map[il.target]) map[il.target] = [];
@@ -521,7 +522,9 @@ export default function SankeyChart() {
       return n?.column ?? -1;
     }));
     for (const idx of activeItemLinkSet) {
+      if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
       const il = layout.itemLinkPaths[idx];
+      if (!il) continue;
       const srcNode = layout.nodes.find(n => n.id === il.source);
       const tgtNode = layout.nodes.find(n => n.id === il.target);
       if (srcNode && !selectedAxes.has(srcNode.column)) nodeSet.add(il.source);
