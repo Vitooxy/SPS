@@ -678,11 +678,10 @@ export default function SankeyChart() {
   // Node click handler
   const handleNodeClick = useCallback(
     (nodeId: number) => {
+      setSelectedCategory(null);
       if (mode === 'single') {
-        setSelectedCategory(null);
         setSelectedNodes([nodeId]);
       } else if (mode === 'addition') {
-        setSelectedCategory(null);
         setSelectedNodes((prev) => {
           if (prev.includes(nodeId)) return prev.filter((id) => id !== nodeId);
           return [...prev, nodeId];
@@ -691,21 +690,17 @@ export default function SankeyChart() {
         setSelectedNodes((prev) => {
           if (prev.length === 0) {
             // First click: set as base
-            setSelectedCategory(null);
             return [nodeId];
           }
           if (prev[0] === nodeId) {
             // Clicking the base node again: clear all
-            setSelectedCategory(null);
             return [];
           }
           if (prev.includes(nodeId)) {
             // Already in exclusion list: remove it
-            // Keep selectedCategory if it was set (category click + exclusion toggle)
             return prev.filter((id) => id !== nodeId);
           }
           // Add to exclusion list
-          // Keep selectedCategory if it was set
           return [...prev, nodeId];
         });
       }
