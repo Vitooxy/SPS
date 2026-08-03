@@ -450,67 +450,97 @@ export default function SankeyChart() {
     const activeSet = new Set<number>();
 
     if (mode === 'subtraction') {
-      // Subtraction mode: first node = base, rest = exclusions
-      const baseNodeId = selectedNodes[0];
-      const excludeNodeIds = new Set(selectedNodes.slice(1));
-
-      // Step 1: compute base paths from baseNodeId
-      const baseNode = layout.nodes.find((n) => n.id === baseNodeId);
-      if (!baseNode) return null;
-
-      const isBaseLeftmost = baseNode.column === 0;
-      const maxCol = layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
-      const isBaseRightmost = baseNode.column === maxCol;
-
-      const baseItemIds = new Set<string>();
-      const baseLinks = nodeItemLinks[baseNodeId] || [];
-
-      if (isBaseLeftmost) {
-        for (const il of baseLinks) {
-          if (il.source === baseNodeId) {
-            activeSet.add(il.pathIndex);
-            baseItemIds.add(il.itemId);
-          }
+      // Subtraction mode: category or first node = base, rest = exclusions
+      const excludeNodeIds = new Set<number>();
+      
+      if (selectedCategory) {
+        // Category is the base: all items belonging to this category
+        // All selectedNodes are exclusions (nodes clicked after the category)
+        for (const nid of selectedNodes) {
+          excludeNodeIds.add(nid);
         }
+        
+        // Base: all itemLinks whose category matches selectedCategory
+        const baseItemIds = new Set<string>();
         for (let i = 0; i < layout.itemLinkPaths.length; i++) {
           const il = layout.itemLinkPaths[i];
-          if (baseItemIds.has(il.itemId)) {
-            const srcNode = layout.nodes.find(n => n.id === il.source);
-            if (srcNode && srcNode.column > 0) activeSet.add(i);
-          }
-        }
-      } else if (isBaseRightmost) {
-        for (const il of baseLinks) {
-          if (il.target === baseNodeId) {
-            activeSet.add(il.pathIndex);
+          if (il.category === selectedCategory) {
+            activeSet.add(i);
             baseItemIds.add(il.itemId);
           }
         }
-        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
-          const il = layout.itemLinkPaths[i];
-          if (baseItemIds.has(il.itemId)) {
-            const tgtNode = layout.nodes.find(n => n.id === il.target);
-            if (tgtNode && tgtNode.column < maxCol) activeSet.add(i);
-          }
-        }
-      } else {
-        // Middle column: find all items passing through this node, then show ALL their links
-        for (const il of baseLinks) {
-          if (il.source === baseNodeId || il.target === baseNodeId) {
-            activeSet.add(il.pathIndex);
-            baseItemIds.add(il.itemId);
-          }
-        }
+        
+        // Also add all other links for these items (complete paths)
         for (let i = 0; i < layout.itemLinkPaths.length; i++) {
           const il = layout.itemLinkPaths[i];
           if (baseItemIds.has(il.itemId)) {
             activeSet.add(i);
           }
         }
+      } else {
+        // No category: first node = base, rest = exclusions
+        const baseNodeId = selectedNodes[0];
+        for (const nid of selectedNodes.slice(1)) {
+          excludeNodeIds.add(nid);
+        }
+
+        // Step 1: compute base paths from baseNodeId
+        const baseNode = layout.nodes.find((n) => n.id === baseNodeId);
+        if (!baseNode) return null;
+
+        const isBaseLeftmost = baseNode.column === 0;
+        const maxCol = layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
+        const isBaseRightmost = baseNode.column === maxCol;
+
+        const baseItemIds = new Set<string>();
+        const baseLinks = nodeItemLinks[baseNodeId] || [];
+
+        if (isBaseLeftmost) {
+          for (const il of baseLinks) {
+            if (il.source === baseNodeId) {
+              activeSet.add(il.pathIndex);
+              baseItemIds.add(il.itemId);
+            }
+          }
+          for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+            const il = layout.itemLinkPaths[i];
+            if (baseItemIds.has(il.itemId)) {
+              const srcNode = layout.nodes.find(n => n.id === il.source);
+              if (srcNode && srcNode.column > 0) activeSet.add(i);
+            }
+          }
+        } else if (isBaseRightmost) {
+          for (const il of baseLinks) {
+            if (il.target === baseNodeId) {
+              activeSet.add(il.pathIndex);
+              baseItemIds.add(il.itemId);
+            }
+          }
+          for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+            const il = layout.itemLinkPaths[i];
+            if (baseItemIds.has(il.itemId)) {
+              const tgtNode = layout.nodes.find(n => n.id === il.target);
+              if (tgtNode && tgtNode.column < maxCol) activeSet.add(i);
+            }
+          }
+        } else {
+          // Middle column: find all items passing through this node, then show ALL their links
+          for (const il of baseLinks) {
+            if (il.source === baseNodeId || il.target === baseNodeId) {
+              activeSet.add(il.pathIndex);
+              baseItemIds.add(il.itemId);
+            }
+          }
+          for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+            const il = layout.itemLinkPaths[i];
+            if (baseItemIds.has(il.itemId)) {
+              activeSet.add(i);
+            }
+          }
+        }
       }
 
       // Step 2: remove only links directly connected to excluded nodes
-      // (not all links for items that touch the excluded node)
       if (excludeNodeIds.size > 0) {
         const filteredSet = new Set<number>();
         for (const idx of activeSet) {
@@ -667,7 +697,11 @@ export default function SankeyChart() {
   // Node click handler
   const handleNodeClick = useCallback(
     (nodeId: number) => {
-      setSelectedCategory(null);
+      // In subtraction mode, don't clear selectedCategory if it's set
+      // (category serves as base, clicked nodes become exclusions)
+      if (mode !== 'subtraction' || !selectedCategory) {
+        setSelectedCategory(null);
+      }
       if (mode === 'single') {
         setSelectedNodes([nodeId]);
       } else if (mode === 'addition') {
@@ -695,7 +729,7 @@ export default function SankeyChart() {
       }
       setLinkTooltip(null);
     },
-    [mode, layout, data],
+    [mode, layout, data, selectedCategory],
   );
 
   // Item link click handler
