@@ -637,7 +637,7 @@
       "column": 5,
       "category": "Cognitive Processing",
       "subcategory": null,
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "id": 71,
@@ -646,7 +646,7 @@
       "column": 5,
       "category": "Cognitive Processing",
       "subcategory": null,
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "id": 72,
@@ -655,7 +655,7 @@
       "column": 5,
       "category": "Cognitive Processing",
       "subcategory": null,
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "id": 73,
@@ -664,7 +664,7 @@
       "column": 5,
       "category": "Cognitive Processing",
       "subcategory": null,
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "id": 74,
@@ -673,7 +673,7 @@
       "column": 5,
       "category": "Cognitive Processing",
       "subcategory": null,
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "id": 75,
@@ -682,7 +682,7 @@
       "column": 5,
       "category": "Cognitive Processing",
       "subcategory": null,
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "id": 76,
@@ -691,7 +691,7 @@
       "column": 5,
       "category": "Cognitive Processing",
       "subcategory": null,
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "id": 77,
@@ -1707,14 +1707,14 @@
       "source": 7,
       "target": 39,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "HSP_8",
       "source": 39,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "HSP_9",
@@ -2995,14 +2995,14 @@
       "source": 7,
       "target": 38,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "HSP_60",
       "source": 38,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "HSP_61",
@@ -3037,14 +3037,14 @@
       "source": 7,
       "target": 38,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "HSP_67",
       "source": 38,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "HSP_71",
@@ -3289,42 +3289,42 @@
       "source": 7,
       "target": 38,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
       "source": 7,
       "target": 41,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
       "source": 38,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
       "source": 38,
       "target": 74,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
       "source": 41,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
       "source": 41,
       "target": 74,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_5",
@@ -3443,63 +3443,63 @@
       "source": 7,
       "target": 25,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
       "source": 25,
       "target": 38,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
       "source": 25,
       "target": 39,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
       "source": 38,
       "target": 73,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
       "source": 38,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
       "source": 38,
       "target": 71,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
       "source": 39,
       "target": 73,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
       "source": 39,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
       "source": 39,
       "target": 71,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_9",
@@ -3576,21 +3576,21 @@
       "source": 7,
       "target": 38,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_12",
       "source": 38,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_12",
       "source": 38,
       "target": 72,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_13",
@@ -3723,21 +3723,21 @@
       "source": 7,
       "target": 38,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_16",
       "source": 38,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_16",
       "source": 38,
       "target": 72,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_17",
@@ -3863,14 +3863,14 @@
       "source": 7,
       "target": 38,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "DOES_20",
       "source": 38,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_2",
@@ -4724,35 +4724,35 @@
       "source": 7,
       "target": 40,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_49",
       "source": 40,
       "target": 75,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_50",
       "source": 7,
       "target": 39,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_50",
       "source": 39,
       "target": 70,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_50",
       "source": 39,
       "target": 71,
       "category": "Cognitive Processing",
-      "color": "#7030A0"
+      "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_51",
@@ -7777,7 +7777,7 @@
     "Perceptual Sensitivity": "#4472C4",
     "Affective and Aesthetic": "#7030A0",
     "Social Cognition and Empathy": "#00B050",
-    "Cognitive Processing": "#7030A0",
+    "Cognitive Processing": "#00B0F0",
     "Other Descriptors": "#A5A5A5"
   },
   "stimulusSubcats": {
