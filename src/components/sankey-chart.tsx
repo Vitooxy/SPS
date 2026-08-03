@@ -450,8 +450,8 @@ export default function SankeyChart() {
     const activeSet = new Set<number>();
 
     if (mode === 'subtraction') {
-      // If a category is selected, show all items for that category (ignore subtraction logic)
-      if (selectedCategory) {
+      // If a category is selected (no exclusions yet), show all items for that category
+      if (selectedCategory && selectedNodes.length <= 1) {
         for (let i = 0; i < layout.itemLinkPaths.length; i++) {
           const il = layout.itemLinkPaths[i];
           if (il.category === selectedCategory) {
@@ -461,67 +461,72 @@ export default function SankeyChart() {
         return activeSet.size > 0 ? activeSet : null;
       }
 
-      // Subtraction mode: first node = base, rest = exclusions
-      const baseNodeId = selectedNodes[0];
-      const excludeNodeIds = new Set(selectedNodes.slice(1));
-
-      // Step 1: compute base paths from baseNodeId
-      const baseNode = layout.nodes.find((n) => n.id === baseNodeId);
-      if (!baseNode) return null;
-
-      const isBaseLeftmost = baseNode.column === 0;
+      // Determine base nodes vs exclusion nodes
+      // Base nodes: nodes on the rightmost column (DerivedPrimary) or the first clicked node
+      // Exclusion nodes: nodes on other columns
       const maxCol = layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
-      const isBaseRightmost = baseNode.column === maxCol;
+      const baseNodeIds = new Set<number>();
+      const excludeNodeIds = new Set<number>();
 
+      for (const nid of selectedNodes) {
+        const node = layout.nodes.find(n => n.id === nid);
+        if (!node) continue;
+        if (node.column === maxCol) {
+          baseNodeIds.add(nid);
+        } else {
+          excludeNodeIds.add(nid);
+        }
+      }
+
+      // If no base nodes from rightmost column, use first node as base
+      if (baseNodeIds.size === 0 && selectedNodes.length > 0) {
+        baseNodeIds.add(selectedNodes[0]);
+      }
+
+      // Step 1: compute base paths from all base nodes
       const baseItemIds = new Set<string>();
-      const baseLinks = nodeItemLinks[baseNodeId] || [];
 
-      if (isBaseLeftmost) {
-        for (const il of baseLinks) {
-          if (il.source === baseNodeId) {
-            activeSet.add(il.pathIndex);
-            baseItemIds.add(il.itemId);
+      for (const baseNodeId of baseNodeIds) {
+        const baseNode = layout.nodes.find((n) => n.id === baseNodeId);
+        if (!baseNode) continue;
+
+        const isBaseLeftmost = baseNode.column === 0;
+        const isBaseRightmost = baseNode.column === maxCol;
+        const baseLinks = nodeItemLinks[baseNodeId] || [];
+
+        if (isBaseLeftmost) {
+          for (const il of baseLinks) {
+            if (il.source === baseNodeId) {
+              activeSet.add(il.pathIndex);
+              baseItemIds.add(il.itemId);
+            }
           }
-        }
-        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
-          const il = layout.itemLinkPaths[i];
-          if (baseItemIds.has(il.itemId)) {
-            const srcNode = layout.nodes.find(n => n.id === il.source);
-            if (srcNode && srcNode.column > 0) activeSet.add(i);
+        } else if (isBaseRightmost) {
+          for (const il of baseLinks) {
+            if (il.target === baseNodeId) {
+              activeSet.add(il.pathIndex);
+              baseItemIds.add(il.itemId);
+            }
           }
-        }
-      } else if (isBaseRightmost) {
-        for (const il of baseLinks) {
-          if (il.target === baseNodeId) {
-            activeSet.add(il.pathIndex);
-            baseItemIds.add(il.itemId);
-          }
-        }
-        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
-          const il = layout.itemLinkPaths[i];
-          if (baseItemIds.has(il.itemId)) {
-            const tgtNode = layout.nodes.find(n => n.id === il.target);
-            if (tgtNode && tgtNode.column < maxCol) activeSet.add(i);
-          }
-        }
-      } else {
-        // Middle column: find all items passing through this node, then show ALL their links
-        for (const il of baseLinks) {
-          if (il.source === baseNodeId || il.target === baseNodeId) {
-            activeSet.add(il.pathIndex);
-            baseItemIds.add(il.itemId);
-          }
-        }
-        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
-          const il = layout.itemLinkPaths[i];
-          if (baseItemIds.has(il.itemId)) {
-            activeSet.add(i);
+        } else {
+          for (const il of baseLinks) {
+            if (il.source === baseNodeId || il.target === baseNodeId) {
+              activeSet.add(il.pathIndex);
+              baseItemIds.add(il.itemId);
+            }
           }
         }
       }
 
-      // Step 2: remove only links directly connected to excluded nodes
-      // (not all links for items that touch the excluded node)
+      // Show ALL links for base items across all columns
+      for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+        const il = layout.itemLinkPaths[i];
+        if (baseItemIds.has(il.itemId)) {
+          activeSet.add(i);
+        }
+      }
+
+      // Step 2: remove links directly connected to excluded nodes
       if (excludeNodeIds.size > 0) {
         const filteredSet = new Set<number>();
         for (const idx of activeSet) {
