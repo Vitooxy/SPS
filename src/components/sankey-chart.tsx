@@ -83,7 +83,7 @@ const NODE_WIDTH = 12;
 const NODE_GAP = 3;
 const SUBCAT_BAR_WIDTH = 10;
 const SUBCAT_BAR_GAP = 2;
-const CHART_PADDING = { top: 50, bottom: 160, left: 92, right: 210 };
+const CHART_PADDING = { top: 50, bottom: 160, left: 200, right: 210 };
 const ITEM_LINE_MIN_WIDTH = 1.5;
 
 // ─── Layout Engine ───────────────────────────────────────────────────────────
@@ -97,47 +97,11 @@ function computeLayout(
   const chartW = width - CHART_PADDING.left - CHART_PADDING.right;
   const chartH = height - CHART_PADDING.top - CHART_PADDING.bottom;
 
-  // Group nodes by column
+  // Group nodes by column (preserve order from JSON data)
   const columns: RawNode[][] = axisOrder.map(() => []);
   for (const node of nodes) {
     columns[node.column].push(node);
   }
-
-  // Sort last column (DerivedPrimary) by category order, then by name
-  const categoryOrder = [
-    'Overload', 'Aversion', 'Coping', 'Perceptual Sensitivity',
-    'Affective and Aesthetic', 'Social Cognition and Empathy',
-    'Cognitive Processing', 'Other Descriptors',
-  ];
-  const lastCol = columns[columns.length - 1];
-  lastCol.sort((a, b) => {
-    const ai = categoryOrder.indexOf(a.category || 'Other Descriptors');
-    const bi = categoryOrder.indexOf(b.category || 'Other Descriptors');
-    if (ai !== bi) return ai - bi;
-    return a.value.localeCompare(b.value);
-  });
-  // Reassign IDs based on new order
-  const allNodes = columns.flat();
-  const idMap = new Map<number, number>();
-  allNodes.forEach((n, i) => idMap.set(n.id, i));
-  for (const node of allNodes) node.id = idMap.get(node.id)!;
-  // Update links
-  for (const link of links) {
-    link.source = idMap.get(link.source)!;
-    link.target = idMap.get(link.target)!;
-  }
-  // Update itemLinks
-  for (const il of data.itemLinks) {
-    il.source = idMap.get(il.source)!;
-    il.target = idMap.get(il.target)!;
-  }
-  // Update nodeItems
-  const newNodeItems: Record<string, string[]> = {};
-  for (const [oldId, items] of Object.entries(data.nodeItems)) {
-    const newId = idMap.get(Number(oldId));
-    if (newId !== undefined) newNodeItems[String(newId)] = items;
-  }
-  (data as any).nodeItems = newNodeItems;
 
   // Compute node heights based on aggregated link flow
   const nodeFlow = new Map<number, number>();
@@ -203,7 +167,7 @@ function computeLayout(
   }
 
   const nodeKeyToId = new Map<string, number>();
-  for (const node of allNodes) {
+  for (const node of nodes) {
     nodeKeyToId.set(`${node.axis}::${node.value}`, node.id);
   }
 
@@ -227,10 +191,11 @@ function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; lin
     backwardAdj.get(link.target)!.push({ nodeId: link.source, weight: link.value });
   }
 
-  // Reorder columns 1 to n-2 (middle columns) using barycentric heuristic
+  // Reorder columns 1 to n-2 (middle columns only) using barycentric heuristic
+  // First column (Stimulus) and last column (Primary Code) preserve their order from data
   for (let iter = 0; iter < 4; iter++) {
     // Forward pass: reorder based on previous column
-    for (let col = 1; col < axisOrder.length; col++) {
+    for (let col = 1; col < axisOrder.length - 1; col++) {
       const colNodes = nodes.filter((n) => n.column === col);
       const prevColNodes = nodes.filter((n) => n.column === col - 1);
 
@@ -872,7 +837,7 @@ export default function SankeyChart() {
           if (group.nodes.length === 0) return null;
           const minY = Math.min(...group.nodes.map((n) => n.y));
           const maxY = Math.max(...group.nodes.map((n) => n.y + n.height));
-          const barX = 80;
+          const barX = 95;
           const barH = maxY - minY;
           const color = data.stimulusSubcatColors[group.subcat] || '#D9D9D9';
           return (
@@ -886,9 +851,9 @@ export default function SankeyChart() {
                 rx={2}
               />
               <text
-                x={barX - 8}
+                x={8}
                 y={minY + barH / 2}
-                textAnchor="end"
+                textAnchor="start"
                 dominantBaseline="central"
                 className="fill-foreground text-[9px] font-medium"
               >
@@ -1006,7 +971,7 @@ export default function SankeyChart() {
                   node.column === maxColumn
                     ? node.x + node.width + 6
                     : node.column === 0
-                      ? node.x + node.width + 4
+                      ? node.x - 6
                       : node.x + node.width / 2
                 }
                 y={node.y + node.height / 2}
@@ -1014,7 +979,7 @@ export default function SankeyChart() {
                   node.column === maxColumn
                     ? 'start'
                     : node.column === 0
-                      ? 'start'
+                      ? 'end'
                       : 'middle'
                 }
                 dominantBaseline="central"
