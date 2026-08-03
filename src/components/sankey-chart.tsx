@@ -50,7 +50,7 @@ interface LLink {
   path: string; color: string;
 }
 
-/* ─── Layout with barycentric reordering ────────────────────────── */
+/* ── Layout with barycentric reordering ────────────────────────── */
 
 const CAT_ORDER = [
   'Overload', 'Aversion', 'Coping', 'Perceptual Sensitivity',
@@ -63,7 +63,6 @@ function layout(data: SankeyData, W: number, H: number) {
   const NW = 12, NP = 3;
   const iW = W - PL - PR, iH = H - PT - PB;
 
-  // Group by column
   const cols = new Map<number, RawNode[]>();
   for (const n of data.nodes) {
     if (!cols.has(n.column)) cols.set(n.column, []);
@@ -73,7 +72,6 @@ function layout(data: SankeyData, W: number, H: number) {
   const nc = ck.length;
   const gap = nc > 1 ? (iW - NW * nc) / (nc - 1) : 0;
 
-  // Flow per node
   const flow = new Map<number, number>();
   for (const n of data.nodes) {
     let inf = 0, outf = 0;
@@ -86,10 +84,6 @@ function layout(data: SankeyData, W: number, H: number) {
 
   const nm = new Map<number, LNode>();
   const lnodes: LNode[] = [];
-
-  // Initial ordering for first and last columns
-  // First column (Stimulus): sort by subcategory order, then by value
-  // Last column (DerivedPrimary): sort by category order, then by value
   const subcatOrd = data.stimulusSubcatOrder;
 
   for (const c of ck) {
@@ -101,7 +95,6 @@ function layout(data: SankeyData, W: number, H: number) {
     const sc = (iH - tp) / Math.max(tf, 1);
 
     if (c === ck[0]) {
-      // Stimulus: sort by subcategory, then value
       arr.sort((a, b) => {
         const sa = subcatOrd.indexOf(a.subcategory || 'Missing');
         const sb = subcatOrd.indexOf(b.subcategory || 'Missing');
@@ -109,7 +102,6 @@ function layout(data: SankeyData, W: number, H: number) {
         return a.value.localeCompare(b.value);
       });
     } else if (c === ck[ck.length - 1]) {
-      // Primary Code: sort by category
       arr.sort((a, b) => {
         const ca = CAT_ORDER.indexOf(a.category || '');
         const cb = CAT_ORDER.indexOf(b.category || '');
@@ -117,7 +109,6 @@ function layout(data: SankeyData, W: number, H: number) {
         return a.value.localeCompare(b.value);
       });
     } else {
-      // Middle columns: sort by flow desc initially
       arr.sort((a, b) => (flow.get(b.id) || 0) - (flow.get(a.id) || 0));
     }
 
@@ -131,81 +122,54 @@ function layout(data: SankeyData, W: number, H: number) {
     }
   }
 
-  // Barycentric reordering for middle columns
+  // Barycentric reordering
   const middleCols = ck.filter(c => c !== ck[0] && c !== ck[ck.length - 1]);
-
   for (let iter = 0; iter < 4; iter++) {
     for (const c of middleCols) {
       const arr = cols.get(c)!;
-
-      // Compute barycenter for each node
       const bary: Map<number, number> = new Map();
       for (const n of arr) {
-        let totalWeight = 0;
-        let weightedPos = 0;
-
-        // Look at links from previous column
+        let totalWeight = 0, weightedPos = 0;
         for (const l of data.links) {
           if (l.target === n.id) {
             const sn = nm.get(l.source);
-            if (sn) {
-              const center = (sn.y0 + sn.y1) / 2;
-              weightedPos += center * l.value;
-              totalWeight += l.value;
-            }
+            if (sn) { weightedPos += ((sn.y0 + sn.y1) / 2) * l.value; totalWeight += l.value; }
           }
         }
-        // Look at links to next column
         for (const l of data.links) {
           if (l.source === n.id) {
             const tn = nm.get(l.target);
-            if (tn) {
-              const center = (tn.y0 + tn.y1) / 2;
-              weightedPos += center * l.value;
-              totalWeight += l.value;
-            }
+            if (tn) { weightedPos += ((tn.y0 + tn.y1) / 2) * l.value; totalWeight += l.value; }
           }
         }
-
         const curNode = nm.get(n.id);
         bary.set(n.id, totalWeight > 0 ? weightedPos / totalWeight : (curNode ? (curNode.y0 + curNode.y1) / 2 : 0));
       }
-
-      // Sort by barycenter
       arr.sort((a, b) => (bary.get(a.id) || 0) - (bary.get(b.id) || 0));
 
-      // Recompute y positions
       const tf = arr.reduce((s, n) => s + (flow.get(n.id) || 1), 0);
       const tp = (arr.length - 1) * NP;
       const sc = (iH - tp) / Math.max(tf, 1);
-
       let y = PT;
       for (const n of arr) {
         const h = Math.max((flow.get(n.id) || 1) * sc, 2);
         const prev = nm.get(n.id)!;
-        const ln: LNode = { ...n, x0: prev.x0, x1: prev.x1, y0: y, y1: y + h };
-        nm.set(n.id, ln);
+        nm.set(n.id, { ...n, x0: prev.x0, x1: prev.x1, y0: y, y1: y + h });
         y += h + NP;
       }
     }
   }
 
-  // Final layout nodes
   const finalNodes: LNode[] = [];
   for (const c of ck) {
-    const arr = cols.get(c)!;
-    for (const n of arr) {
-      finalNodes.push(nm.get(n.id)!);
-    }
+    for (const n of cols.get(c)!) finalNodes.push(nm.get(n.id)!);
   }
 
-  // Compute link geometry
-  // For links with multiple categories, split into sub-links
+  // Link geometry
   const allLinks: LLink[] = [];
   const so = new Map<number, number>(), to = new Map<number, number>();
   for (const n of finalNodes) { so.set(n.id, n.y0); to.set(n.id, n.y0); }
 
-  // Sort links
   const sortedLinks = [...data.links].sort((a, b) => {
     const sa = nm.get(a.source), sb = nm.get(b.source);
     const ta = nm.get(a.target), tb = nm.get(b.target);
@@ -224,20 +188,8 @@ function layout(data: SankeyData, W: number, H: number) {
     const lth = (l.value / Math.max(ttot, 1)) * tH;
     const sy0 = so.get(l.source)!, ty0 = to.get(l.target)!;
 
-    // Determine link color: use the dominant category
     let linkColor = '#808080';
     if (l.categories.length > 0) {
-      // Count items per category
-      const catCounts: Record<string, number> = {};
-      for (const cat of l.categories) catCounts[cat] = 0;
-      for (const itemId of l.itemIds) {
-        const item = data.items.find(it => it.id === itemId);
-        if (item) {
-          // Find which categories this item's primary codes belong to
-          // We need to look at the nodeItems for the last column
-        }
-      }
-      // Use first category color
       linkColor = data.categoryColors[l.categories[0]] || '#808080';
     }
 
@@ -250,10 +202,7 @@ function layout(data: SankeyData, W: number, H: number) {
       'Z'
     ].join(' ');
 
-    allLinks.push({
-      ...l, sy0, sy1: sy0 + lsh, ty0, ty1: ty0 + lth, path, color: linkColor,
-    });
-
+    allLinks.push({ ...l, sy0, sy1: sy0 + lsh, ty0, ty1: ty0 + lth, path, color: linkColor });
     so.set(l.source, sy0 + lsh);
     to.set(l.target, ty0 + lth);
   }
@@ -269,6 +218,7 @@ export default function SankeyChart() {
   const [sel, setSel] = useState<Set<number>>(new Set());
   const [hovNode, setHovNode] = useState<number | null>(null);
   const [hovLink, setHovLink] = useState<number | null>(null);
+  const [clickedLink, setClickedLink] = useState<number | null>(null);
   const [tip, setTip] = useState<{ x: number; y: number; html: string } | null>(null);
   const [dims, setDims] = useState({ w: 1600, h: 900 });
   const ref = useRef<HTMLDivElement>(null);
@@ -286,30 +236,109 @@ export default function SankeyChart() {
 
   const L = useMemo(() => data ? layout(data, dims.w, dims.h) : null, [data, dims]);
 
-  // Active set
+  // Build node key map for path tracing
+  const nodeKeyToId = useMemo(() => {
+    if (!data) return new Map<string, number>();
+    const m = new Map<string, number>();
+    for (const n of data.nodes) m.set(`${n.axis}::${n.value}`, n.id);
+    return m;
+  }, [data]);
+
+  // Build items map
+  const itemsMap = useMemo(() => {
+    if (!data) return new Map<string, { id: string; text: string; scale: string; values: Record<string, string[]> }>();
+    const m = new Map();
+    // Re-parse item values from links
+    for (const item of data.items) {
+      m.set(item.id, item);
+    }
+    return m;
+  }, [data]);
+
+  // Compute active links based on selected nodes (ONE DIRECTION only)
+  // For Stimulus nodes: trace FORWARD (left to right)
+  // For Primary Code nodes: trace BACKWARD (right to left)
+  // For middle nodes: trace both directions
   const active = useMemo(() => {
     if (!L || !data || sel.size === 0) return null;
-    const ids = new Set<string>();
-    for (const nid of sel) for (const id of data.nodeItems[String(nid)] || []) ids.add(id);
-    const an = new Set<number>(), al = new Set<number>();
-    for (const n of L.nodes) if ((data.nodeItems[String(n.id)] || []).some(id => ids.has(id))) an.add(n.id);
-    for (let i = 0; i < L.links.length; i++) if (L.links[i].itemIds.some(id => ids.has(id))) al.add(i);
-    return { an, al, ids };
+
+    const activeLinkIndices = new Set<number>();
+    const activeNodeIds = new Set<number>();
+
+    for (const nid of sel) {
+      const node = L.nodes.find(n => n.id === nid);
+      if (!node) continue;
+
+      const isFirst = node.column === 0; // Stimulus
+      const lastAxis = data.axisOrder[data.axisOrder.length - 1];
+      const isLast = node.axis === lastAxis;
+
+      // Find all items through this node
+      const itemIds = new Set(data.nodeItems[String(nid)] || []);
+
+      if (isFirst) {
+        // FORWARD: show all links on paths from this node to the right
+        // Find all links where source or target is touched by these items
+        for (let i = 0; i < L.links.length; i++) {
+          const link = L.links[i];
+          // Check if this link is on a path from the selected node
+          // A link is active if any of its items pass through the selected node
+          if (link.itemIds.some(id => itemIds.has(id))) {
+            activeLinkIndices.add(i);
+            activeNodeIds.add(link.source);
+            activeNodeIds.add(link.target);
+          }
+        }
+      } else if (isLast) {
+        // BACKWARD: show all links on paths from the left to this node
+        for (let i = 0; i < L.links.length; i++) {
+          const link = L.links[i];
+          if (link.itemIds.some(id => itemIds.has(id))) {
+            activeLinkIndices.add(i);
+            activeNodeIds.add(link.source);
+            activeNodeIds.add(link.target);
+          }
+        }
+      } else {
+        // Middle node: show direct connections only (one step each direction)
+        for (let i = 0; i < L.links.length; i++) {
+          const link = L.links[i];
+          if (link.source === nid || link.target === nid) {
+            activeLinkIndices.add(i);
+            activeNodeIds.add(link.source);
+            activeNodeIds.add(link.target);
+          }
+        }
+      }
+    }
+
+    return { al: activeLinkIndices, an: activeNodeIds };
   }, [L, sel, data]);
 
-  const click = useCallback((nid: number) => {
+  const clickNode = useCallback((nid: number) => {
     setSel(prev => {
       const s = new Set(prev);
       if (mode === 'single') { s.clear(); s.add(nid); }
       else { s.has(nid) ? s.delete(nid) : s.add(nid); }
       return s;
     });
+    setClickedLink(null);
   }, [mode]);
 
-  const nOp = (id: number) => !active ? 1 : active.an.has(id) ? 1 : 0.08;
+  const clickLink = useCallback((idx: number) => {
+    setClickedLink(prev => prev === idx ? null : idx);
+    setSel(new Set()); // Clear node selection when clicking a link
+  }, []);
+
+  const nOp = (id: number) => {
+    if (!active) return 1;
+    return active.an.has(id) ? 1 : 0.15;
+  };
+
   const lOp = (i: number) => {
-    if (hovLink === i) return 0.7;
-    return !active ? 0.3 : active.al.has(i) ? 0.5 : 0.02;
+    if (hovLink === i) return 0.85;
+    if (!active) return 0.35;
+    return active.al.has(i) ? 0.7 : 0.04;
   };
 
   const showTip = useCallback((e: React.MouseEvent, html: string) => {
@@ -372,10 +401,21 @@ export default function SankeyChart() {
     return gs;
   }, [L, data]);
 
+  // Items for clicked link
+  const linkItems = useMemo(() => {
+    if (!data || clickedLink === null || !L) return [];
+    const link = L.links[clickedLink];
+    if (!link) return [];
+    return data.items.filter(it => link.itemIds.includes(it.id));
+  }, [data, clickedLink, L]);
+
+  // Items for selected nodes
   const selItems = useMemo(() => {
     if (!data || !active) return [];
-    return data.items.filter(it => active.ids.has(it.id));
-  }, [data, active]);
+    const ids = new Set<string>();
+    for (const nid of sel) for (const id of data.nodeItems[String(nid)] || []) ids.add(id);
+    return data.items.filter(it => ids.has(it.id));
+  }, [data, active, sel]);
 
   if (!data || !L) return <div className="flex items-center justify-center h-screen"><p className="text-muted-foreground animate-pulse">Loading...</p></div>;
 
@@ -393,15 +433,15 @@ export default function SankeyChart() {
         </div>
         <div className="flex items-center gap-1.5 shrink-0 ml-4">
           {(['single', 'addition', 'subtraction'] as Mode[]).map(m => (
-            <button key={m} onClick={() => { setMode(m); setSel(new Set()); }}
+            <button key={m} onClick={() => { setMode(m); setSel(new Set()); setClickedLink(null); }}
               className={`px-2.5 py-1 text-[11px] font-medium rounded border transition-all ${
                 mode === m ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
               }`}>
               {m === 'single' ? 'Single' : m === 'addition' ? 'Addition' : 'Subtraction'}
             </button>
           ))}
-          {sel.size > 0 && (
-            <button onClick={() => setSel(new Set())}
+          {(sel.size > 0 || clickedLink !== null) && (
+            <button onClick={() => { setSel(new Set()); setClickedLink(null); }}
               className="ml-1 px-2.5 py-1 text-[11px] font-medium rounded border border-gray-300 text-gray-500 hover:bg-gray-50">
               Clear
             </button>
@@ -464,14 +504,15 @@ export default function SankeyChart() {
           {L.links.map((l, i) => (
             <path key={i} d={l.path} fill={l.color} opacity={lOp(i)} stroke="none"
               className="transition-opacity duration-150 cursor-pointer"
+              onClick={() => clickLink(i)}
               onMouseEnter={e => {
                 setHovLink(i);
                 const sn = L.nm.get(l.source), tn = L.nm.get(l.target);
-                showTip(e, `<b>${sn?.value}</b> → <b>${tn?.value}</b><br/>${l.itemIds.length} item(s)<br/>Categories: ${l.categories.join(', ')}`);
+                showTip(e, `<b>${sn?.value}</b> → <b>${tn?.value}</b><br/>${l.itemIds.length} item(s)<br/>Categories: ${l.categories.join(', ') || 'N/A'}`);
               }}
               onMouseMove={e => {
                 const sn = L.nm.get(l.source), tn = L.nm.get(l.target);
-                showTip(e, `<b>${sn?.value}</b> → <b>${tn?.value}</b><br/>${l.itemIds.length} item(s)<br/>Categories: ${l.categories.join(', ')}`);
+                showTip(e, `<b>${sn?.value}</b> → <b>${tn?.value}</b><br/>${l.itemIds.length} item(s)<br/>Categories: ${l.categories.join(', ') || 'N/A'}`);
               }}
               onMouseLeave={() => { setHovLink(null); hideTip(); }}
             />
@@ -491,7 +532,7 @@ export default function SankeyChart() {
 
             return (
               <g key={n.id} className="cursor-pointer"
-                onClick={() => click(n.id)}
+                onClick={() => clickNode(n.id)}
                 onMouseEnter={e => {
                   setHovNode(n.id);
                   const its = data.nodeItems[String(n.id)] || [];
@@ -541,8 +582,39 @@ export default function SankeyChart() {
         </div>
       </div>
 
-      {/* Bottom panel: selected items */}
-      {sel.size > 0 && active && (
+      {/* Bottom panel: clicked link items */}
+      {clickedLink !== null && L && (
+        <div className="fixed bottom-8 left-0 right-0 z-30 bg-white/95 backdrop-blur border-t border-gray-200 max-h-[200px] overflow-auto">
+          <div className="px-5 py-2">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <span className="text-[11px] font-semibold text-gray-900">
+                Link: {L.links[clickedLink]?.itemIds.length} item(s)
+              </span>
+              {(() => {
+                const sn = L.nm.get(L.links[clickedLink]?.source || -1);
+                const tn = L.nm.get(L.links[clickedLink]?.target || -1);
+                return (
+                  <>
+                    {sn && <span className="px-1.5 py-0.5 rounded text-[9px] font-medium text-white" style={{ backgroundColor: sn.color }}>{sn.value}</span>}
+                    <span className="text-gray-400">→</span>
+                    {tn && <span className="px-1.5 py-0.5 rounded text-[9px] font-medium text-white" style={{ backgroundColor: tn.color }}>{tn.value}</span>}
+                  </>
+                );
+              })()}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0.5">
+              {linkItems.slice(0, 30).map(it => (
+                <div key={it.id} className="text-[10px] text-gray-600 leading-snug truncate">
+                  <span className="font-medium text-gray-800">{it.id}</span> {it.text}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Bottom panel: selected node items */}
+      {sel.size > 0 && clickedLink === null && active && (
         <div className="fixed bottom-8 left-0 right-0 z-30 bg-white/95 backdrop-blur border-t border-gray-200 max-h-[160px] overflow-auto">
           <div className="px-5 py-2">
             <div className="flex items-center gap-2 mb-1 flex-wrap">
