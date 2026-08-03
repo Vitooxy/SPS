@@ -82,7 +82,7 @@ const NODE_WIDTH = 12;
 const NODE_GAP = 3;
 const SUBCAT_BAR_WIDTH = 14;
 const SUBCAT_BAR_GAP = 3;
-const CHART_PADDING = { top: 50, bottom: 160, left: 110, right: 180 };
+const CHART_PADDING = { top: 50, bottom: 160, left: 110, right: 280 };
 const ITEM_LINE_MIN_WIDTH = 1.5;
 
 // ─── Layout Engine ───────────────────────────────────────────────────────────
@@ -809,17 +809,18 @@ export default function SankeyChart() {
           const minY = Math.min(...catNodes.map((n) => n.y));
           const maxY = Math.max(...catNodes.map((n) => n.y + n.height));
           const lastNode = catNodes[catNodes.length - 1];
-          const barX = lastNode.x + NODE_WIDTH + 80;
+          const barX = lastNode.x + NODE_WIDTH + 160;
           const barH = maxY - minY;
           const color = data.categoryColors[cat] || '#A5A5A5';
           return (
             <g key={cat}>
-              <rect x={barX} y={minY} width={6} height={barH} fill={color} rx={1} />
+              <rect x={barX} y={minY} width={8} height={barH} fill={color} rx={1} />
               <text
-                x={barX + 12}
+                x={barX + 14}
                 y={minY + barH / 2}
                 dominantBaseline="central"
-                className="fill-foreground text-[9px] font-medium"
+                className="fill-foreground text-[10px] font-semibold"
+                transform={`rotate(-90, ${barX + 14}, ${minY + barH / 2})`}
               >
                 {cat}
               </text>
@@ -894,10 +895,21 @@ export default function SankeyChart() {
                 }}
               />
               {/* Node label */}
+              {node.column === maxColumn && (
+                <line
+                  x1={node.x + node.width}
+                  y1={node.y + node.height / 2}
+                  x2={node.x + node.width + 4}
+                  y2={node.y + node.height / 2}
+                  stroke={node.color}
+                  strokeWidth={1}
+                  opacity={isDimmed ? 0.15 : 0.5}
+                />
+              )}
               <text
                 x={
                   node.column === maxColumn
-                    ? node.x + node.width + 4
+                    ? node.x + node.width + 6
                     : node.column === 0
                       ? node.x - 4
                       : node.x + node.width / 2
