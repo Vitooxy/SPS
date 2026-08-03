@@ -351,7 +351,6 @@ export default function SankeyChart() {
   } | null>(null);
   const [mode, setMode] = useState<InteractionMode>('single');
   const [selectedNodes, setSelectedNodes] = useState<number[]>([]);
-  const [activeItemIds, setActiveItemIds] = useState<Set<string>>(new Set());
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
   const [tooltip, setTooltip] = useState<{
     x: number;
@@ -451,6 +450,79 @@ export default function SankeyChart() {
     if (!layout || selectedNodes.length === 0) return null;
     const activeSet = new Set<number>();
 
+    if (mode === 'subtraction') {
+      // Subtraction mode: first node = base, rest = exclusions
+      const baseNodeId = selectedNodes[0];
+      const excludeNodeIds = new Set(selectedNodes.slice(1));
+
+      // Step 1: compute base paths from baseNodeId
+      const baseNode = layout.nodes.find((n) => n.id === baseNodeId);
+      if (!baseNode) return null;
+
+      const isBaseLeftmost = baseNode.column === 0;
+      const maxCol = layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
+      const isBaseRightmost = baseNode.column === maxCol;
+
+      const baseItemIds = new Set<string>();
+      const baseLinks = nodeItemLinks[baseNodeId] || [];
+
+      if (isBaseLeftmost) {
+        for (const il of baseLinks) {
+          if (il.source === baseNodeId) {
+            activeSet.add(il.pathIndex);
+            baseItemIds.add(il.itemId);
+          }
+        }
+        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+          const il = layout.itemLinkPaths[i];
+          if (baseItemIds.has(il.itemId)) {
+            const srcNode = layout.nodes.find(n => n.id === il.source);
+            if (srcNode && srcNode.column > 0) activeSet.add(i);
+          }
+        }
+      } else if (isBaseRightmost) {
+        for (const il of baseLinks) {
+          if (il.target === baseNodeId) {
+            activeSet.add(il.pathIndex);
+            baseItemIds.add(il.itemId);
+          }
+        }
+        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+          const il = layout.itemLinkPaths[i];
+          if (baseItemIds.has(il.itemId)) {
+            const tgtNode = layout.nodes.find(n => n.id === il.target);
+            if (tgtNode && tgtNode.column < maxCol) activeSet.add(i);
+          }
+        }
+      } else {
+        for (const il of baseLinks) activeSet.add(il.pathIndex);
+        for (const il of baseLinks) baseItemIds.add(il.itemId);
+      }
+
+      // Step 2: remove paths that pass through any excluded node
+      if (excludeNodeIds.size > 0) {
+        // Find all itemIds that pass through excluded nodes
+        const excludeItemIds = new Set<string>();
+        for (const exNodeId of excludeNodeIds) {
+          const exItemIds = data?.nodeItems[String(exNodeId)] || [];
+          for (const id of exItemIds) excludeItemIds.add(id);
+        }
+        // Rebuild: only keep links whose itemId is NOT excluded
+        const filteredSet = new Set<number>();
+        for (const idx of activeSet) {
+          if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
+          const il = layout.itemLinkPaths[idx];
+          if (il && !excludeItemIds.has(il.itemId)) {
+            filteredSet.add(idx);
+          }
+        }
+        return filteredSet.size > 0 ? filteredSet : null;
+      }
+
+      return activeSet.size > 0 ? activeSet : null;
+    }
+
+    // Addition / Single mode: union of paths through selected nodes
     for (const nodeId of selectedNodes) {
       const node = layout.nodes.find((n) => n.id === nodeId);
       if (!node) continue;
@@ -462,7 +534,6 @@ export default function SankeyChart() {
       const links = nodeItemLinks[nodeId] || [];
 
       if (isLeftmost) {
-        // Forward: only itemLinks that START from this exact node
         const itemIdsFromNode = new Set<string>();
         for (const il of links) {
           if (il.source === nodeId) {
@@ -470,7 +541,6 @@ export default function SankeyChart() {
             itemIdsFromNode.add(il.itemId);
           }
         }
-        // Follow these items through remaining axes, but skip links on column 0
         for (let i = 0; i < layout.itemLinkPaths.length; i++) {
           const il = layout.itemLinkPaths[i];
           if (itemIdsFromNode.has(il.itemId)) {
@@ -481,7 +551,6 @@ export default function SankeyChart() {
           }
         }
       } else if (isRightmost) {
-        // Backward: only itemLinks that END at this exact node
         const itemIdsToNode = new Set<string>();
         for (const il of links) {
           if (il.target === nodeId) {
@@ -489,7 +558,6 @@ export default function SankeyChart() {
             itemIdsToNode.add(il.itemId);
           }
         }
-        // Follow backward, but skip links on the rightmost column
         for (let i = 0; i < layout.itemLinkPaths.length; i++) {
           const il = layout.itemLinkPaths[i];
           if (itemIdsToNode.has(il.itemId)) {
@@ -500,7 +568,6 @@ export default function SankeyChart() {
           }
         }
       } else {
-        // Middle: only direct connections
         for (const il of links) {
           activeSet.add(il.pathIndex);
         }
@@ -508,72 +575,88 @@ export default function SankeyChart() {
     }
 
     return activeSet.size > 0 ? activeSet : null;
-  }, [layout, selectedNodes, nodeItemLinks]);
+  }, [layout, selectedNodes, nodeItemLinks, mode, data]);
 
   // Determine which nodes are active - only selected nodes on the same axis
   const activeNodeSet = useMemo(() => {
     if (!layout || !activeItemLinkSet) return null;
     const nodeSet = new Set<number>();
-    // Always include selected nodes
-    for (const nid of selectedNodes) nodeSet.add(nid);
-    // Include nodes on OTHER axes that active links connect to
-    const selectedAxes = new Set(selectedNodes.map(nid => {
-      const n = layout.nodes.find(x => x.id === nid);
-      return n?.column ?? -1;
-    }));
+
+    if (mode === 'subtraction') {
+      // Only highlight the base node (first selected), not exclusion nodes
+      if (selectedNodes.length > 0) nodeSet.add(selectedNodes[0]);
+      const excludeNodeIds = new Set(selectedNodes.slice(1));
+      // Include nodes on OTHER axes that active links connect to
+      const baseNode = layout.nodes.find(n => n.id === selectedNodes[0]);
+      const baseColumn = baseNode?.column ?? -1;
+      for (const idx of activeItemLinkSet) {
+        if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
+        const il = layout.itemLinkPaths[idx];
+        if (!il) continue;
+        const srcNode = layout.nodes.find(n => n.id === il.source);
+        const tgtNode = layout.nodes.find(n => n.id === il.target);
+        if (srcNode && srcNode.column !== baseColumn && !excludeNodeIds.has(il.source)) nodeSet.add(il.source);
+        if (tgtNode && tgtNode.column !== baseColumn && !excludeNodeIds.has(il.target)) nodeSet.add(il.target);
+      }
+    } else {
+      // Always include selected nodes
+      for (const nid of selectedNodes) nodeSet.add(nid);
+      // Include nodes on OTHER axes that active links connect to
+      const selectedAxes = new Set(selectedNodes.map(nid => {
+        const n = layout.nodes.find(x => x.id === nid);
+        return n?.column ?? -1;
+      }));
+      for (const idx of activeItemLinkSet) {
+        if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
+        const il = layout.itemLinkPaths[idx];
+        if (!il) continue;
+        const srcNode = layout.nodes.find(n => n.id === il.source);
+        const tgtNode = layout.nodes.find(n => n.id === il.target);
+        if (srcNode && !selectedAxes.has(srcNode.column)) nodeSet.add(il.source);
+        if (tgtNode && !selectedAxes.has(tgtNode.column)) nodeSet.add(il.target);
+      }
+    }
+    return nodeSet;
+  }, [layout, activeItemLinkSet, selectedNodes, mode]);
+
+  // Compute active item IDs from activeItemLinkSet (for bottom panel)
+  const activeItemIds = useMemo(() => {
+    if (!activeItemLinkSet || !layout) return null;
+    const ids = new Set<string>();
     for (const idx of activeItemLinkSet) {
       if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
       const il = layout.itemLinkPaths[idx];
-      if (!il) continue;
-      const srcNode = layout.nodes.find(n => n.id === il.source);
-      const tgtNode = layout.nodes.find(n => n.id === il.target);
-      if (srcNode && !selectedAxes.has(srcNode.column)) nodeSet.add(il.source);
-      if (tgtNode && !selectedAxes.has(tgtNode.column)) nodeSet.add(il.target);
+      if (il) ids.add(il.itemId);
     }
-    return nodeSet;
-  }, [layout, activeItemLinkSet, selectedNodes]);
+    return ids.size > 0 ? ids : null;
+  }, [activeItemLinkSet, layout]);
 
   // Node click handler
   const handleNodeClick = useCallback(
     (nodeId: number) => {
       if (mode === 'single') {
         setSelectedNodes([nodeId]);
-        // Find items through this node
-        const node = layout?.nodes.find((n) => n.id === nodeId);
-        if (node) {
-          const itemIds = data?.nodeItems[String(nodeId)] || [];
-          setActiveItemIds(new Set(itemIds));
-        }
       } else if (mode === 'addition') {
         setSelectedNodes((prev) => {
           if (prev.includes(nodeId)) return prev.filter((id) => id !== nodeId);
           return [...prev, nodeId];
         });
-        // Add items
-        const itemIds = data?.nodeItems[String(nodeId)] || [];
-        setActiveItemIds((prev) => {
-          const next = new Set(prev);
-          for (const id of itemIds) next.add(id);
-          return next;
-        });
       } else if (mode === 'subtraction') {
         setSelectedNodes((prev) => {
-          if (prev.includes(nodeId)) return prev.filter((id) => id !== nodeId);
-          return [...prev, nodeId];
-        });
-        // Toggle items
-        const itemIds = data?.nodeItems[String(nodeId)] || [];
-        setActiveItemIds((prev) => {
-          const next = new Set(prev);
-          const itemSet = new Set(itemIds);
-          // Check if these items are already active
-          const allActive = itemIds.every((id) => prev.has(id));
-          if (allActive && itemIds.length > 0) {
-            for (const id of itemIds) next.delete(id);
-          } else {
-            for (const id of itemIds) next.add(id);
+          if (prev.length === 0) {
+            // First click: set as base
+            return [nodeId];
           }
-          return next;
+          if (prev[0] === nodeId) {
+            // Clicking the base node again: clear all
+            return [];
+          }
+          if (prev.includes(nodeId)) {
+            // Already in exclusion list: remove it
+            return prev.filter((id) => id !== nodeId);
+          }
+          // Add to exclusion list
+          return [...prev, nodeId];
         });
       }
       setLinkTooltip(null);
@@ -586,8 +669,6 @@ export default function SankeyChart() {
     (il: LayoutItemLink, event: React.MouseEvent) => {
       const item = itemsMap[il.itemId];
       if (item) {
-        setActiveItemIds(new Set([il.itemId]));
-        setSelectedNodes([]);
         setLinkTooltip({
           x: event.clientX,
           y: event.clientY,
@@ -601,13 +682,12 @@ export default function SankeyChart() {
   // Clear selection
   const handleClear = useCallback(() => {
     setSelectedNodes([]);
-    setActiveItemIds(new Set());
     setLinkTooltip(null);
   }, []);
 
   // Get items for bottom panel
   const panelItems = useMemo(() => {
-    if (activeItemIds.size === 0) return [];
+    if (!activeItemIds || activeItemIds.size === 0) return [];
     return Array.from(activeItemIds)
       .map((id) => itemsMap[id])
       .filter(Boolean);
@@ -641,7 +721,7 @@ export default function SankeyChart() {
     categoryGroups.get(cat)!.push(node);
   }
 
-  const isAnySelected = selectedNodes.length > 0 || activeItemIds.size > 0;
+  const isAnySelected = selectedNodes.length > 0 || (activeItemIds?.size ?? 0) > 0;
 
   return (
     <div className="w-full" ref={containerRef}>
