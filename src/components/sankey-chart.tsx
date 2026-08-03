@@ -494,8 +494,19 @@ export default function SankeyChart() {
           }
         }
       } else {
-        for (const il of baseLinks) activeSet.add(il.pathIndex);
-        for (const il of baseLinks) baseItemIds.add(il.itemId);
+        // Middle column: find all items passing through this node, then show ALL their links
+        for (const il of baseLinks) {
+          if (il.source === baseNodeId || il.target === baseNodeId) {
+            activeSet.add(il.pathIndex);
+            baseItemIds.add(il.itemId);
+          }
+        }
+        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+          const il = layout.itemLinkPaths[i];
+          if (baseItemIds.has(il.itemId)) {
+            activeSet.add(i);
+          }
+        }
       }
 
       // Step 2: remove only links directly connected to excluded nodes
@@ -561,8 +572,19 @@ export default function SankeyChart() {
           }
         }
       } else {
+        // Middle column: find all items passing through this node, then show ALL their links
+        const itemIdsThroughNode = new Set<string>();
         for (const il of links) {
-          activeSet.add(il.pathIndex);
+          if (il.source === nodeId || il.target === nodeId) {
+            itemIdsThroughNode.add(il.itemId);
+          }
+        }
+        // Now find ALL links for those items across all columns
+        for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+          const il = layout.itemLinkPaths[i];
+          if (itemIdsThroughNode.has(il.itemId)) {
+            activeSet.add(i);
+          }
         }
       }
     }
