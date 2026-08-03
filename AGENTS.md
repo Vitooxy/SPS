@@ -24,9 +24,8 @@ pnpm run start    # production server
 
 | File | Purpose |
 |------|---------|
-| `src/components/sankey-chart.tsx` | Main alluvial visualization component with layout engine and interactions |
-| `src/lib/sankey-layout.ts` | Utility for building SVG bezier link paths |
-| `public/sankey-data.json` | Pre-processed data (nodes, links, items) parsed from Excel |
+| `src/components/sankey-chart.tsx` | Main alluvial visualization component with layout engine, per-item link rendering, and interactions |
+| `public/sankey-data.json` | Pre-processed data (nodes, item-links, items) parsed from Excel |
 | `src/app/page.tsx` | Root page rendering the chart |
 | `src/app/layout.tsx` | Root layout with metadata |
 
@@ -39,9 +38,9 @@ pnpm run start    # production server
 
 ## Interaction Modes
 
-1. **Single**: Click one node → show only its paths, dim everything else
+1. **Single**: Click one node → show only paths through that node (one direction: left→right or right→left), dim everything else
 2. **Addition**: Click multiple nodes → union of all their paths shown
-3. **Subtraction**: Toggle nodes on/off to refine path selection
+3. **Subtraction**: First click establishes base paths, subsequent clicks remove links connected to the clicked node
 
 ## Conventions
 

@@ -45,7 +45,6 @@ interface SankeyData {
   axisOrder: string[];
   axisLabels: Record<string, string>;
   axisItemCounts: Record<string, number>;
-  categoryMap: Record<string, string>;
   categoryColors: Record<string, string>;
   stimulusSubcats: Record<string, string>;
   stimulusSubcatOrder: string[];
@@ -412,15 +411,6 @@ export default function SankeyChart() {
     }
     return map;
   }, [data]);
-
-  const nodeKeyToId = useMemo(() => {
-    if (!layout) return {};
-    const map: Record<string, number> = {};
-    for (const node of layout.nodes) {
-      map[`${node.axis}::${node.value}`] = node.id;
-    }
-    return map;
-  }, [layout]);
 
   const nodeIdToKey = useMemo(() => {
     if (!layout) return {};
