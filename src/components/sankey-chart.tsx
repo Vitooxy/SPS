@@ -450,19 +450,13 @@ export default function SankeyChart() {
     const activeSet = new Set<number>();
 
     if (mode === 'subtraction') {
-      // If a category is selected, show all links connecting to nodes in that category
+      // If a category is selected, use union logic for all nodes in that category
+      // (don't treat them as base + exclusions)
       if (selectedCategory) {
-        // Find all nodes belonging to this category
-        const categoryNodeIds = new Set<number>();
-        for (const node of layout.nodes) {
-          if (node.category === selectedCategory) {
-            categoryNodeIds.add(node.id);
-          }
-        }
-        // Show all links where source or target is in this category
+        // Show all links for the selected category
         for (let i = 0; i < layout.itemLinkPaths.length; i++) {
           const il = layout.itemLinkPaths[i];
-          if (categoryNodeIds.has(il.source) || categoryNodeIds.has(il.target)) {
+          if (il.category === selectedCategory) {
             activeSet.add(i);
           }
         }
