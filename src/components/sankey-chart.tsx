@@ -809,7 +809,7 @@ export default function SankeyChart() {
           const minY = Math.min(...catNodes.map((n) => n.y));
           const maxY = Math.max(...catNodes.map((n) => n.y + n.height));
           const lastNode = catNodes[catNodes.length - 1];
-          const barX = lastNode.x + NODE_WIDTH + 6;
+          const barX = lastNode.x + NODE_WIDTH + 80;
           const barH = maxY - minY;
           const color = data.categoryColors[cat] || '#A5A5A5';
           return (
