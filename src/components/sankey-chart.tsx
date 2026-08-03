@@ -83,7 +83,7 @@ const NODE_WIDTH = 12;
 const NODE_GAP = 3;
 const SUBCAT_BAR_WIDTH = 14;
 const SUBCAT_BAR_GAP = 3;
-const CHART_PADDING = { top: 50, bottom: 160, left: 140, right: 210 };
+const CHART_PADDING = { top: 50, bottom: 160, left: 340, right: 210 };
 const ITEM_LINE_MIN_WIDTH = 1.5;
 
 // ─── Layout Engine ───────────────────────────────────────────────────────────
