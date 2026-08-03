@@ -624,20 +624,35 @@ export default function SankeyChart() {
     const nodeSet = new Set<number>();
 
     if (mode === 'subtraction') {
-      // Only highlight the base node (first selected), not exclusion nodes
-      if (selectedNodes.length > 0) nodeSet.add(selectedNodes[0]);
-      const excludeNodeIds = new Set(selectedNodes.slice(1));
-      // Include nodes on OTHER axes that active links connect to
-      const baseNode = layout.nodes.find(n => n.id === selectedNodes[0]);
-      const baseColumn = baseNode?.column ?? -1;
+      // Determine base nodes (rightmost column) and exclusion nodes (other columns)
+      const maxCol = layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
+      const baseNodeIds = new Set<number>();
+      const excludeNodeIds = new Set<number>();
+
+      for (const nid of selectedNodes) {
+        const node = layout.nodes.find(n => n.id === nid);
+        if (!node) continue;
+        if (node.column === maxCol) {
+          baseNodeIds.add(nid);
+        } else {
+          excludeNodeIds.add(nid);
+        }
+      }
+      // If no base nodes from rightmost column, use first node as base
+      if (baseNodeIds.size === 0 && selectedNodes.length > 0) {
+        baseNodeIds.add(selectedNodes[0]);
+      }
+
+      // Highlight all base nodes
+      for (const nid of baseNodeIds) nodeSet.add(nid);
+
+      // Include all nodes that active links connect to (except exclusion nodes)
       for (const idx of activeItemLinkSet) {
         if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
         const il = layout.itemLinkPaths[idx];
         if (!il) continue;
-        const srcNode = layout.nodes.find(n => n.id === il.source);
-        const tgtNode = layout.nodes.find(n => n.id === il.target);
-        if (srcNode && srcNode.column !== baseColumn && !excludeNodeIds.has(il.source)) nodeSet.add(il.source);
-        if (tgtNode && tgtNode.column !== baseColumn && !excludeNodeIds.has(il.target)) nodeSet.add(il.target);
+        if (!excludeNodeIds.has(il.source)) nodeSet.add(il.source);
+        if (!excludeNodeIds.has(il.target)) nodeSet.add(il.target);
       }
     } else {
       // Always include selected nodes
