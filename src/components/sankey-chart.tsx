@@ -499,20 +499,14 @@ export default function SankeyChart() {
         for (const il of baseLinks) baseItemIds.add(il.itemId);
       }
 
-      // Step 2: remove paths that pass through any excluded node
+      // Step 2: remove only links directly connected to excluded nodes
+      // (not all links for items that touch the excluded node)
       if (excludeNodeIds.size > 0) {
-        // Find all itemIds that pass through excluded nodes
-        const excludeItemIds = new Set<string>();
-        for (const exNodeId of excludeNodeIds) {
-          const exItemIds = data?.nodeItems[String(exNodeId)] || [];
-          for (const id of exItemIds) excludeItemIds.add(id);
-        }
-        // Rebuild: only keep links whose itemId is NOT excluded
         const filteredSet = new Set<number>();
         for (const idx of activeSet) {
           if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
           const il = layout.itemLinkPaths[idx];
-          if (il && !excludeItemIds.has(il.itemId)) {
+          if (il && !excludeNodeIds.has(il.source) && !excludeNodeIds.has(il.target)) {
             filteredSet.add(idx);
           }
         }
