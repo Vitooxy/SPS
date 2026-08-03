@@ -1,0 +1,3923 @@
+{
+  "nodes": [
+    {
+      "id": 0,
+      "axis": "Stimulus",
+      "value": "Artistic Stimuli",
+      "column": 0,
+      "category": null,
+      "color": "#e84393"
+    },
+    {
+      "id": 1,
+      "axis": "Stimulus",
+      "value": "Auditory",
+      "column": 0,
+      "category": null,
+      "color": "#fdcb6e"
+    },
+    {
+      "id": 2,
+      "axis": "Stimulus",
+      "value": "Bodily State",
+      "column": 0,
+      "category": null,
+      "color": "#fab1a0"
+    },
+    {
+      "id": 3,
+      "axis": "Stimulus",
+      "value": "Changes",
+      "column": 0,
+      "category": null,
+      "color": "#00b894"
+    },
+    {
+      "id": 4,
+      "axis": "Stimulus",
+      "value": "Close Others",
+      "column": 0,
+      "category": null,
+      "color": "#ffeaa7"
+    },
+    {
+      "id": 5,
+      "axis": "Stimulus",
+      "value": "Conflict",
+      "column": 0,
+      "category": null,
+      "color": "#ff7675"
+    },
+    {
+      "id": 6,
+      "axis": "Stimulus",
+      "value": "Crowd",
+      "column": 0,
+      "category": null,
+      "color": "#dfe6e9"
+    },
+    {
+      "id": 7,
+      "axis": "Stimulus",
+      "value": "Gustatory",
+      "column": 0,
+      "category": null,
+      "color": "#00b894"
+    },
+    {
+      "id": 8,
+      "axis": "Stimulus",
+      "value": "Intense Input",
+      "column": 0,
+      "category": null,
+      "color": "#d63031"
+    },
+    {
+      "id": 9,
+      "axis": "Stimulus",
+      "value": "Internal Mentation",
+      "column": 0,
+      "category": null,
+      "color": "#a29bfe"
+    },
+    {
+      "id": 10,
+      "axis": "Stimulus",
+      "value": "Linguistic",
+      "column": 0,
+      "category": null,
+      "color": "#0984e3"
+    },
+    {
+      "id": 11,
+      "axis": "Stimulus",
+      "value": "Nonverbal Social Cues",
+      "column": 0,
+      "category": null,
+      "color": "#74b9ff"
+    },
+    {
+      "id": 12,
+      "axis": "Stimulus",
+      "value": "Observation or Competition",
+      "column": 0,
+      "category": null,
+      "color": "#fd79a8"
+    },
+    {
+      "id": 13,
+      "axis": "Stimulus",
+      "value": "Olfactory",
+      "column": 0,
+      "category": null,
+      "color": "#00cec9"
+    },
+    {
+      "id": 14,
+      "axis": "Stimulus",
+      "value": "Other's Mood",
+      "column": 0,
+      "category": null,
+      "color": "#55efc4"
+    },
+    {
+      "id": 15,
+      "axis": "Stimulus",
+      "value": "Stimulus-Dense Environment",
+      "column": 0,
+      "category": null,
+      "color": "#636e72"
+    },
+    {
+      "id": 16,
+      "axis": "Stimulus",
+      "value": "Subtlety",
+      "column": 0,
+      "category": null,
+      "color": "#b2bec3"
+    },
+    {
+      "id": 17,
+      "axis": "Stimulus",
+      "value": "Tactile",
+      "column": 0,
+      "category": null,
+      "color": "#6c5ce7"
+    },
+    {
+      "id": 18,
+      "axis": "Stimulus",
+      "value": "Thermoception",
+      "column": 0,
+      "category": null,
+      "color": "#81ecec"
+    },
+    {
+      "id": 19,
+      "axis": "Stimulus",
+      "value": "Time/Task Pressure",
+      "column": 0,
+      "category": null,
+      "color": "#e17055"
+    },
+    {
+      "id": 20,
+      "axis": "Stimulus",
+      "value": "Uncertainty",
+      "column": 0,
+      "category": null,
+      "color": "#6c5ce7"
+    },
+    {
+      "id": 21,
+      "axis": "Stimulus",
+      "value": "Unspecified",
+      "column": 0,
+      "category": null,
+      "color": "#b2bec3"
+    },
+    {
+      "id": 22,
+      "axis": "Stimulus",
+      "value": "Visual",
+      "column": 0,
+      "category": null,
+      "color": "#e17055"
+    },
+    {
+      "id": 23,
+      "axis": "Process",
+      "value": "Action Knowledge",
+      "column": 1,
+      "category": null,
+      "color": "#fdcb6e"
+    },
+    {
+      "id": 24,
+      "axis": "Process",
+      "value": "Affective Influence",
+      "column": 1,
+      "category": null,
+      "color": "#e84393"
+    },
+    {
+      "id": 25,
+      "axis": "Process",
+      "value": "Anticipation",
+      "column": 1,
+      "category": null,
+      "color": "#e17055"
+    },
+    {
+      "id": 26,
+      "axis": "Process",
+      "value": "Appreciation",
+      "column": 1,
+      "category": null,
+      "color": "#00b894"
+    },
+    {
+      "id": 27,
+      "axis": "Process",
+      "value": "Detection",
+      "column": 1,
+      "category": null,
+      "color": "#74b9ff"
+    },
+    {
+      "id": 28,
+      "axis": "Process",
+      "value": "Discrimination",
+      "column": 1,
+      "category": null,
+      "color": "#0984e3"
+    },
+    {
+      "id": 29,
+      "axis": "Process",
+      "value": "Inference",
+      "column": 1,
+      "category": null,
+      "color": "#6c5ce7"
+    },
+    {
+      "id": 30,
+      "axis": "Outcome",
+      "value": "CognitiveDisruption_Negative",
+      "column": 2,
+      "category": null,
+      "color": "#6c5ce7"
+    },
+    {
+      "id": 31,
+      "axis": "Outcome",
+      "value": "ER_Negative",
+      "column": 2,
+      "category": null,
+      "color": "#d63031"
+    },
+    {
+      "id": 32,
+      "axis": "Outcome",
+      "value": "ER_Positive",
+      "column": 2,
+      "category": null,
+      "color": "#00b894"
+    },
+    {
+      "id": 33,
+      "axis": "Outcome",
+      "value": "ER_Unspecified",
+      "column": 2,
+      "category": null,
+      "color": "#b2bec3"
+    },
+    {
+      "id": 34,
+      "axis": "Outcome",
+      "value": "PR_Negative",
+      "column": 2,
+      "category": null,
+      "color": "#e17055"
+    },
+    {
+      "id": 35,
+      "axis": "Response",
+      "value": "Active Coping",
+      "column": 3,
+      "category": null,
+      "color": "#00b894"
+    },
+    {
+      "id": 36,
+      "axis": "Response",
+      "value": "Preventive Regulation",
+      "column": 3,
+      "category": null,
+      "color": "#0984e3"
+    },
+    {
+      "id": 37,
+      "axis": "Response",
+      "value": "Withdraw",
+      "column": 3,
+      "category": null,
+      "color": "#d63031"
+    },
+    {
+      "id": 38,
+      "axis": "CognitiveDisp",
+      "value": "Deep Thought",
+      "column": 4,
+      "category": null,
+      "color": "#6c5ce7"
+    },
+    {
+      "id": 39,
+      "axis": "CognitiveDisp",
+      "value": "Inner Richness",
+      "column": 4,
+      "category": null,
+      "color": "#e84393"
+    },
+    {
+      "id": 40,
+      "axis": "CognitiveDisp",
+      "value": "Intuition",
+      "column": 4,
+      "category": null,
+      "color": "#636e72"
+    },
+    {
+      "id": 41,
+      "axis": "CognitiveDisp",
+      "value": "Mental Overactivity",
+      "column": 4,
+      "category": null,
+      "color": "#636e72"
+    },
+    {
+      "id": 42,
+      "axis": "DerivedPrimary",
+      "value": "Active Coping",
+      "column": 5,
+      "category": "Coping",
+      "color": "#2ecc71"
+    },
+    {
+      "id": 43,
+      "axis": "DerivedPrimary",
+      "value": "Aesthetic Responsiveness",
+      "column": 5,
+      "category": "Affective and Aesthetic",
+      "color": "#9b59b6"
+    },
+    {
+      "id": 44,
+      "axis": "DerivedPrimary",
+      "value": "Aesthetic Sensitivity",
+      "column": 5,
+      "category": "Affective and Aesthetic",
+      "color": "#9b59b6"
+    },
+    {
+      "id": 45,
+      "axis": "DerivedPrimary",
+      "value": "Anticipatory Processing",
+      "column": 5,
+      "category": "Cognitive Processing",
+      "color": "#f0932b"
+    },
+    {
+      "id": 46,
+      "axis": "DerivedPrimary",
+      "value": "Auditory Overload",
+      "column": 5,
+      "category": "Overload",
+      "color": "#d65db1"
+    },
+    {
+      "id": 47,
+      "axis": "DerivedPrimary",
+      "value": "Aversion to Change",
+      "column": 5,
+      "category": "Aversion",
+      "color": "#ff6f61"
+    },
+    {
+      "id": 48,
+      "axis": "DerivedPrimary",
+      "value": "Aversion to Conflict",
+      "column": 5,
+      "category": "Aversion",
+      "color": "#ff6f61"
+    },
+    {
+      "id": 49,
+      "axis": "DerivedPrimary",
+      "value": "Aversion to Uncertainty",
+      "column": 5,
+      "category": "Aversion",
+      "color": "#ff6f61"
+    },
+    {
+      "id": 50,
+      "axis": "DerivedPrimary",
+      "value": "Avoidance Coping",
+      "column": 5,
+      "category": "Coping",
+      "color": "#2ecc71"
+    },
+    {
+      "id": 51,
+      "axis": "DerivedPrimary",
+      "value": "Bodily-State Sensitivity",
+      "column": 5,
+      "category": "Perceptual Sensitivity",
+      "color": "#3498db"
+    },
+    {
+      "id": 52,
+      "axis": "DerivedPrimary",
+      "value": "Cognitive Disruption",
+      "column": 5,
+      "category": "Cognitive Processing",
+      "color": "#f0932b"
+    },
+    {
+      "id": 53,
+      "axis": "DerivedPrimary",
+      "value": "Cognitive Empathy",
+      "column": 5,
+      "category": "Social Cognition and Empathy",
+      "color": "#1abc9c"
+    },
+    {
+      "id": 54,
+      "axis": "DerivedPrimary",
+      "value": "Conscientious",
+      "column": 5,
+      "category": "Other Descriptors",
+      "color": "#95a5a6"
+    },
+    {
+      "id": 55,
+      "axis": "DerivedPrimary",
+      "value": "Deep Thought",
+      "column": 5,
+      "category": "Cognitive Processing",
+      "color": "#f0932b"
+    },
+    {
+      "id": 56,
+      "axis": "DerivedPrimary",
+      "value": "Difference Sensitivity",
+      "column": 5,
+      "category": "Perceptual Sensitivity",
+      "color": "#3498db"
+    },
+    {
+      "id": 57,
+      "axis": "DerivedPrimary",
+      "value": "Emotional Contagion",
+      "column": 5,
+      "category": "Affective and Aesthetic",
+      "color": "#9b59b6"
+    },
+    {
+      "id": 58,
+      "axis": "DerivedPrimary",
+      "value": "Evaluation Apprehension",
+      "column": 5,
+      "category": "Social Cognition and Empathy",
+      "color": "#1abc9c"
+    },
+    {
+      "id": 59,
+      "axis": "DerivedPrimary",
+      "value": "General Empathy",
+      "column": 5,
+      "category": "Social Cognition and Empathy",
+      "color": "#1abc9c"
+    },
+    {
+      "id": 60,
+      "axis": "DerivedPrimary",
+      "value": "General Overload",
+      "column": 5,
+      "category": "Overload",
+      "color": "#d65db1"
+    },
+    {
+      "id": 61,
+      "axis": "DerivedPrimary",
+      "value": "Gustatory Overload",
+      "column": 5,
+      "category": "Overload",
+      "color": "#d65db1"
+    },
+    {
+      "id": 62,
+      "axis": "DerivedPrimary",
+      "value": "Hedonic Sensitivity",
+      "column": 5,
+      "category": "Affective and Aesthetic",
+      "color": "#9b59b6"
+    },
+    {
+      "id": 63,
+      "axis": "DerivedPrimary",
+      "value": "Inner Emotional Intensity",
+      "column": 5,
+      "category": "Affective and Aesthetic",
+      "color": "#9b59b6"
+    },
+    {
+      "id": 64,
+      "axis": "DerivedPrimary",
+      "value": "Inner Richness",
+      "column": 5,
+      "category": "Cognitive Processing",
+      "color": "#f0932b"
+    },
+    {
+      "id": 65,
+      "axis": "DerivedPrimary",
+      "value": "Intuitive Insight",
+      "column": 5,
+      "category": "Cognitive Processing",
+      "color": "#f0932b"
+    },
+    {
+      "id": 66,
+      "axis": "DerivedPrimary",
+      "value": "Mental Overactivity",
+      "column": 5,
+      "category": "Cognitive Processing",
+      "color": "#f0932b"
+    },
+    {
+      "id": 67,
+      "axis": "DerivedPrimary",
+      "value": "Mental Replay",
+      "column": 5,
+      "category": "Cognitive Processing",
+      "color": "#f0932b"
+    },
+    {
+      "id": 68,
+      "axis": "DerivedPrimary",
+      "value": "Nonverbal Social Perception",
+      "column": 5,
+      "category": "Social Cognition and Empathy",
+      "color": "#1abc9c"
+    },
+    {
+      "id": 69,
+      "axis": "DerivedPrimary",
+      "value": "Observer-Rated Sensitivity",
+      "column": 5,
+      "category": "Other Descriptors",
+      "color": "#95a5a6"
+    },
+    {
+      "id": 70,
+      "axis": "DerivedPrimary",
+      "value": "Olfactory Overload",
+      "column": 5,
+      "category": "Overload",
+      "color": "#d65db1"
+    },
+    {
+      "id": 71,
+      "axis": "DerivedPrimary",
+      "value": "Pressure-Caused Overload",
+      "column": 5,
+      "category": "Overload",
+      "color": "#d65db1"
+    },
+    {
+      "id": 72,
+      "axis": "DerivedPrimary",
+      "value": "Preventive Regulation",
+      "column": 5,
+      "category": "Coping",
+      "color": "#2ecc71"
+    },
+    {
+      "id": 73,
+      "axis": "DerivedPrimary",
+      "value": "Sensitivity to Details",
+      "column": 5,
+      "category": "Perceptual Sensitivity",
+      "color": "#3498db"
+    },
+    {
+      "id": 74,
+      "axis": "DerivedPrimary",
+      "value": "Sensitivity to Subtlety",
+      "column": 5,
+      "category": "Perceptual Sensitivity",
+      "color": "#3498db"
+    },
+    {
+      "id": 75,
+      "axis": "DerivedPrimary",
+      "value": "Social Hedonic Sensitivity",
+      "column": 5,
+      "category": "Affective and Aesthetic",
+      "color": "#9b59b6"
+    },
+    {
+      "id": 76,
+      "axis": "DerivedPrimary",
+      "value": "Social Overload",
+      "column": 5,
+      "category": "Overload",
+      "color": "#d65db1"
+    },
+    {
+      "id": 77,
+      "axis": "DerivedPrimary",
+      "value": "Tactile Overload",
+      "column": 5,
+      "category": "Overload",
+      "color": "#d65db1"
+    },
+    {
+      "id": 78,
+      "axis": "DerivedPrimary",
+      "value": "Visual Overload",
+      "column": 5,
+      "category": "Overload",
+      "color": "#d65db1"
+    }
+  ],
+  "links": [
+    {
+      "source": 21,
+      "target": 31,
+      "value": 3,
+      "itemIds": [
+        "HSC_11",
+        "HSP_1",
+        "HSP_19__HSP-R"
+      ]
+    },
+    {
+      "source": 8,
+      "target": 31,
+      "value": 19,
+      "itemIds": [
+        "DOES_19",
+        "HSC-21_2",
+        "HSC-21_5",
+        "HSC_10",
+        "HSC_4",
+        "HSP_1",
+        "HSP_25__HSP-27",
+        "HSP_25__HSP-R",
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R",
+        "HSP_9",
+        "SPSQ_10",
+        "SPSQ_11",
+        "SPSQ_25",
+        "SPSQ_33",
+        "SPSQ_42",
+        "SPSQ_48",
+        "SPSQ_7",
+        "SPSQ_9"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 60,
+      "value": 9,
+      "itemIds": [
+        "DOES_11",
+        "DOES_3",
+        "HSC-21_4",
+        "HSC_1",
+        "HSP_1",
+        "HSP_19__HSP-27",
+        "HSP_19__HSP-R",
+        "HSP_23",
+        "SPSQ_59"
+      ]
+    },
+    {
+      "source": 21,
+      "target": 27,
+      "value": 1,
+      "itemIds": [
+        "HSP_2"
+      ]
+    },
+    {
+      "source": 16,
+      "target": 27,
+      "value": 17,
+      "itemIds": [
+        "DOES_1",
+        "DOES_13",
+        "DOES_17",
+        "DOES_5",
+        "DOES_9",
+        "HSC-21_10",
+        "HSC-21_17",
+        "HSC-21_19",
+        "HSC-21_7",
+        "HSP_15",
+        "HSP_2",
+        "SPSQ_12",
+        "SPSQ_24",
+        "SPSQ_37",
+        "SPSQ_43",
+        "SPSQ_51",
+        "SPSQ_56"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 74,
+      "value": 17,
+      "itemIds": [
+        "DOES_1",
+        "DOES_13",
+        "DOES_17",
+        "DOES_5",
+        "DOES_9",
+        "HSC-21_10",
+        "HSC-21_17",
+        "HSC-21_19",
+        "HSC-21_7",
+        "HSP_15",
+        "HSP_2",
+        "SPSQ_12",
+        "SPSQ_24",
+        "SPSQ_37",
+        "SPSQ_43",
+        "SPSQ_51",
+        "SPSQ_56"
+      ]
+    },
+    {
+      "source": 14,
+      "target": 24,
+      "value": 5,
+      "itemIds": [
+        "DOES_10",
+        "DOES_2",
+        "HSP_3",
+        "HSP_55",
+        "SPSQ_34"
+      ]
+    },
+    {
+      "source": 24,
+      "target": 33,
+      "value": 4,
+      "itemIds": [
+        "DOES_2",
+        "HSP_3",
+        "HSP_55",
+        "SPSQ_34"
+      ]
+    },
+    {
+      "source": 33,
+      "target": 57,
+      "value": 5,
+      "itemIds": [
+        "DOES_2",
+        "HSP_3",
+        "HSP_41",
+        "HSP_55",
+        "SPSQ_34"
+      ]
+    },
+    {
+      "source": 2,
+      "target": 27,
+      "value": 10,
+      "itemIds": [
+        "HSC-21_11",
+        "HSP_11",
+        "HSP_20",
+        "HSP_4",
+        "HSP_6",
+        "SPSQ_23",
+        "SPSQ_35",
+        "SPSQ_43",
+        "SPSQ_44",
+        "SPSQ_47"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 51,
+      "value": 7,
+      "itemIds": [
+        "HSC-21_11",
+        "HSP_4",
+        "HSP_6",
+        "SPSQ_23",
+        "SPSQ_35",
+        "SPSQ_43",
+        "SPSQ_44"
+      ]
+    },
+    {
+      "source": 19,
+      "target": 31,
+      "value": 5,
+      "itemIds": [
+        "HSC_5",
+        "HSP_16",
+        "HSP_5",
+        "SPSQ_2",
+        "SPSQ_46"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 37,
+      "value": 1,
+      "itemIds": [
+        "HSP_5"
+      ]
+    },
+    {
+      "source": 37,
+      "target": 50,
+      "value": 2,
+      "itemIds": [
+        "HSP_11",
+        "HSP_5"
+      ]
+    },
+    {
+      "source": 37,
+      "target": 71,
+      "value": 1,
+      "itemIds": [
+        "HSP_5"
+      ]
+    },
+    {
+      "source": 22,
+      "target": 31,
+      "value": 6,
+      "itemIds": [
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R",
+        "SPSQ_11",
+        "SPSQ_25",
+        "SPSQ_42",
+        "SPSQ_7"
+      ]
+    },
+    {
+      "source": 1,
+      "target": 31,
+      "value": 14,
+      "itemIds": [
+        "DOES_15",
+        "HSC-21_2",
+        "HSC-21_5",
+        "HSC_10",
+        "HSC_4",
+        "HSP_25__HSP-27",
+        "HSP_25__HSP-R",
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R",
+        "HSP_9",
+        "SPSQ_10",
+        "SPSQ_33",
+        "SPSQ_48",
+        "SPSQ_9"
+      ]
+    },
+    {
+      "source": 17,
+      "target": 31,
+      "value": 3,
+      "itemIds": [
+        "HSC-21_21",
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R"
+      ]
+    },
+    {
+      "source": 13,
+      "target": 31,
+      "value": 4,
+      "itemIds": [
+        "DOES_19",
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R",
+        "SPSQ_25"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 78,
+      "value": 6,
+      "itemIds": [
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R",
+        "SPSQ_11",
+        "SPSQ_25",
+        "SPSQ_42",
+        "SPSQ_7"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 46,
+      "value": 14,
+      "itemIds": [
+        "DOES_15",
+        "HSC-21_2",
+        "HSC-21_5",
+        "HSC_10",
+        "HSC_4",
+        "HSP_25__HSP-27",
+        "HSP_25__HSP-R",
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R",
+        "HSP_9",
+        "SPSQ_10",
+        "SPSQ_33",
+        "SPSQ_48",
+        "SPSQ_9"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 77,
+      "value": 3,
+      "itemIds": [
+        "HSC-21_21",
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 70,
+      "value": 4,
+      "itemIds": [
+        "DOES_19",
+        "HSP_7__HSP-27",
+        "HSP_7__HSP-R",
+        "SPSQ_25"
+      ]
+    },
+    {
+      "source": 9,
+      "target": 39,
+      "value": 2,
+      "itemIds": [
+        "HSP_8",
+        "SPSQ_50"
+      ]
+    },
+    {
+      "source": 39,
+      "target": 55,
+      "value": 3,
+      "itemIds": [
+        "DOES_8",
+        "HSP_8",
+        "SPSQ_50"
+      ]
+    },
+    {
+      "source": 1,
+      "target": 26,
+      "value": 9,
+      "itemIds": [
+        "DOES_18",
+        "HSC_2",
+        "HSP_10__HSP-27",
+        "HSP_10__HSP-R",
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "HSP_81",
+        "SPSQ_22",
+        "SPSQ_28"
+      ]
+    },
+    {
+      "source": 0,
+      "target": 26,
+      "value": 12,
+      "itemIds": [
+        "DOES_14",
+        "DOES_18",
+        "HSC_2",
+        "HSP_10__HSP-27",
+        "HSP_10__HSP-R",
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "HSP_81",
+        "SPSQ_22",
+        "SPSQ_28",
+        "SPSQ_53",
+        "SPSQ_54"
+      ]
+    },
+    {
+      "source": 26,
+      "target": 32,
+      "value": 20,
+      "itemIds": [
+        "DOES_14",
+        "DOES_18",
+        "DOES_6",
+        "HSC-21_8",
+        "HSC_2",
+        "HSC_3",
+        "HSC_8",
+        "HSP_10__HSP-27",
+        "HSP_10__HSP-R",
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "HSP_61",
+        "HSP_81",
+        "SPSQ_15",
+        "SPSQ_22",
+        "SPSQ_26",
+        "SPSQ_28",
+        "SPSQ_30",
+        "SPSQ_53",
+        "SPSQ_54"
+      ]
+    },
+    {
+      "source": 32,
+      "target": 43,
+      "value": 11,
+      "itemIds": [
+        "DOES_14",
+        "DOES_18",
+        "HSP_10__HSP-27",
+        "HSP_10__HSP-R",
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "HSP_81",
+        "SPSQ_22",
+        "SPSQ_28",
+        "SPSQ_53",
+        "SPSQ_54"
+      ]
+    },
+    {
+      "source": 8,
+      "target": 27,
+      "value": 2,
+      "itemIds": [
+        "HSC-21_16",
+        "HSP_11"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 34,
+      "value": 3,
+      "itemIds": [
+        "HSP_11",
+        "HSP_20",
+        "SPSQ_47"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 37,
+      "value": 1,
+      "itemIds": [
+        "HSP_11"
+      ]
+    },
+    {
+      "source": 37,
+      "target": 51,
+      "value": 1,
+      "itemIds": [
+        "HSP_11"
+      ]
+    },
+    {
+      "source": 37,
+      "target": 60,
+      "value": 1,
+      "itemIds": [
+        "HSP_11"
+      ]
+    },
+    {
+      "source": 21,
+      "target": 34,
+      "value": 1,
+      "itemIds": [
+        "HSP_13"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 60,
+      "value": 2,
+      "itemIds": [
+        "HSP_13",
+        "SPSQ_3"
+      ]
+    },
+    {
+      "source": 19,
+      "target": 34,
+      "value": 4,
+      "itemIds": [
+        "HSC-21_3",
+        "HSC_7",
+        "HSP_14",
+        "SPSQ_40"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 71,
+      "value": 8,
+      "itemIds": [
+        "HSC-21_3",
+        "HSC-21_6",
+        "HSC_12",
+        "HSC_7",
+        "HSP_14",
+        "HSP_26",
+        "SPSQ_40",
+        "SPSQ_60"
+      ]
+    },
+    {
+      "source": 14,
+      "target": 27,
+      "value": 6,
+      "itemIds": [
+        "HSP_15",
+        "HSP_48",
+        "HSP_53",
+        "SPSQ_21",
+        "SPSQ_5",
+        "SPSQ_56"
+      ]
+    },
+    {
+      "source": 14,
+      "target": 23,
+      "value": 2,
+      "itemIds": [
+        "HSP_15",
+        "SPSQ_56"
+      ]
+    },
+    {
+      "source": 16,
+      "target": 23,
+      "value": 2,
+      "itemIds": [
+        "HSP_15",
+        "SPSQ_56"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 53,
+      "value": 6,
+      "itemIds": [
+        "HSP_15",
+        "HSP_48",
+        "HSP_53",
+        "SPSQ_21",
+        "SPSQ_5",
+        "SPSQ_56"
+      ]
+    },
+    {
+      "source": 23,
+      "target": 53,
+      "value": 2,
+      "itemIds": [
+        "HSP_15",
+        "SPSQ_56"
+      ]
+    },
+    {
+      "source": 23,
+      "target": 74,
+      "value": 2,
+      "itemIds": [
+        "HSP_15",
+        "SPSQ_56"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 71,
+      "value": 4,
+      "itemIds": [
+        "HSC_5",
+        "HSP_16",
+        "SPSQ_2",
+        "SPSQ_46"
+      ]
+    },
+    {
+      "source": 20,
+      "target": 35,
+      "value": 3,
+      "itemIds": [
+        "HSP_17",
+        "HSP_24",
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 20,
+      "target": 36,
+      "value": 3,
+      "itemIds": [
+        "HSP_17",
+        "HSP_24",
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 35,
+      "target": 42,
+      "value": 3,
+      "itemIds": [
+        "HSP_17",
+        "HSP_24",
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 35,
+      "target": 72,
+      "value": 3,
+      "itemIds": [
+        "HSP_17",
+        "HSP_24",
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 35,
+      "target": 49,
+      "value": 3,
+      "itemIds": [
+        "HSP_17",
+        "HSP_24",
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 36,
+      "target": 42,
+      "value": 3,
+      "itemIds": [
+        "HSP_17",
+        "HSP_24",
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 36,
+      "target": 72,
+      "value": 4,
+      "itemIds": [
+        "HSP_17",
+        "HSP_18",
+        "HSP_24",
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 36,
+      "target": 49,
+      "value": 3,
+      "itemIds": [
+        "HSP_17",
+        "HSP_24",
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 5,
+      "target": 31,
+      "value": 2,
+      "itemIds": [
+        "HSC_9",
+        "HSP_18"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 36,
+      "value": 1,
+      "itemIds": [
+        "HSP_18"
+      ]
+    },
+    {
+      "source": 36,
+      "target": 59,
+      "value": 1,
+      "itemIds": [
+        "HSP_18"
+      ]
+    },
+    {
+      "source": 36,
+      "target": 48,
+      "value": 1,
+      "itemIds": [
+        "HSP_18"
+      ]
+    },
+    {
+      "source": 15,
+      "target": 31,
+      "value": 11,
+      "itemIds": [
+        "DOES_11",
+        "DOES_15",
+        "DOES_3",
+        "HSC-21_4",
+        "HSC-21_9",
+        "HSC_1",
+        "HSP_19__HSP-27",
+        "HSP_19__HSP-R",
+        "HSP_23",
+        "SPSQ_19",
+        "SPSQ_59"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 30,
+      "value": 1,
+      "itemIds": [
+        "HSP_20"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 51,
+      "value": 2,
+      "itemIds": [
+        "HSP_20",
+        "SPSQ_47"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 52,
+      "value": 5,
+      "itemIds": [
+        "HSC-21_6",
+        "HSC_12",
+        "HSP_20",
+        "HSP_26",
+        "SPSQ_60"
+      ]
+    },
+    {
+      "source": 30,
+      "target": 51,
+      "value": 1,
+      "itemIds": [
+        "HSP_20"
+      ]
+    },
+    {
+      "source": 30,
+      "target": 52,
+      "value": 5,
+      "itemIds": [
+        "HSC-21_6",
+        "HSC_12",
+        "HSP_20",
+        "HSP_26",
+        "SPSQ_60"
+      ]
+    },
+    {
+      "source": 3,
+      "target": 31,
+      "value": 3,
+      "itemIds": [
+        "HSC_11",
+        "HSP_21",
+        "SPSQ_18"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 47,
+      "value": 3,
+      "itemIds": [
+        "HSC_11",
+        "HSP_21",
+        "SPSQ_18"
+      ]
+    },
+    {
+      "source": 7,
+      "target": 26,
+      "value": 5,
+      "itemIds": [
+        "HSC-21_8",
+        "HSC_3",
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "SPSQ_28"
+      ]
+    },
+    {
+      "source": 13,
+      "target": 26,
+      "value": 4,
+      "itemIds": [
+        "HSC_8",
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "SPSQ_28"
+      ]
+    },
+    {
+      "source": 16,
+      "target": 26,
+      "value": 4,
+      "itemIds": [
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "SPSQ_28",
+        "SPSQ_6"
+      ]
+    },
+    {
+      "source": 32,
+      "target": 44,
+      "value": 2,
+      "itemIds": [
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R"
+      ]
+    },
+    {
+      "source": 32,
+      "target": 62,
+      "value": 10,
+      "itemIds": [
+        "HSC-21_8",
+        "HSC_2",
+        "HSC_3",
+        "HSC_8",
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "SPSQ_26",
+        "SPSQ_28",
+        "SPSQ_30",
+        "SPSQ_53"
+      ]
+    },
+    {
+      "source": 32,
+      "target": 74,
+      "value": 3,
+      "itemIds": [
+        "HSP_22__HSP-27",
+        "HSP_22__HSP-R",
+        "SPSQ_28"
+      ]
+    },
+    {
+      "source": 12,
+      "target": 34,
+      "value": 4,
+      "itemIds": [
+        "HSC-21_6",
+        "HSC_12",
+        "HSP_26",
+        "SPSQ_60"
+      ]
+    },
+    {
+      "source": 12,
+      "target": 30,
+      "value": 4,
+      "itemIds": [
+        "HSC-21_6",
+        "HSC_12",
+        "HSP_26",
+        "SPSQ_60"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 58,
+      "value": 4,
+      "itemIds": [
+        "HSC-21_6",
+        "HSC_12",
+        "HSP_26",
+        "SPSQ_60"
+      ]
+    },
+    {
+      "source": 30,
+      "target": 58,
+      "value": 4,
+      "itemIds": [
+        "HSC-21_6",
+        "HSC_12",
+        "HSP_26",
+        "SPSQ_60"
+      ]
+    },
+    {
+      "source": 30,
+      "target": 71,
+      "value": 4,
+      "itemIds": [
+        "HSC-21_6",
+        "HSC_12",
+        "HSP_26",
+        "SPSQ_60"
+      ]
+    },
+    {
+      "source": 3,
+      "target": 27,
+      "value": 9,
+      "itemIds": [
+        "DOES_13",
+        "HSC-21_1",
+        "HSC-21_12",
+        "HSC-21_15",
+        "HSC_6",
+        "HSP_71",
+        "HSP_72",
+        "HSP_73",
+        "SPSQ_35"
+      ]
+    },
+    {
+      "source": 3,
+      "target": 28,
+      "value": 9,
+      "itemIds": [
+        "DOES_13",
+        "HSC-21_1",
+        "HSC-21_12",
+        "HSC-21_15",
+        "HSC_6",
+        "HSP_71",
+        "HSP_72",
+        "HSP_73",
+        "SPSQ_35"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 56,
+      "value": 12,
+      "itemIds": [
+        "DOES_13",
+        "DOES_17",
+        "DOES_5",
+        "HSC-21_1",
+        "HSC-21_12",
+        "HSC-21_15",
+        "HSC-21_19",
+        "HSC_6",
+        "HSP_71",
+        "HSP_72",
+        "HSP_73",
+        "SPSQ_35"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 73,
+      "value": 9,
+      "itemIds": [
+        "HSC-21_1",
+        "HSC-21_12",
+        "HSC-21_15",
+        "HSC-21_16",
+        "HSC-21_20",
+        "HSC_6",
+        "HSP_71",
+        "HSP_72",
+        "HSP_73"
+      ]
+    },
+    {
+      "source": 28,
+      "target": 56,
+      "value": 12,
+      "itemIds": [
+        "DOES_13",
+        "DOES_17",
+        "DOES_5",
+        "HSC-21_1",
+        "HSC-21_12",
+        "HSC-21_15",
+        "HSC-21_19",
+        "HSC_6",
+        "HSP_71",
+        "HSP_72",
+        "HSP_73",
+        "SPSQ_35"
+      ]
+    },
+    {
+      "source": 28,
+      "target": 73,
+      "value": 7,
+      "itemIds": [
+        "HSC-21_1",
+        "HSC-21_12",
+        "HSC-21_15",
+        "HSC_6",
+        "HSP_71",
+        "HSP_72",
+        "HSP_73"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 48,
+      "value": 2,
+      "itemIds": [
+        "DOES_10",
+        "HSC_9"
+      ]
+    },
+    {
+      "source": 14,
+      "target": 33,
+      "value": 1,
+      "itemIds": [
+        "HSP_41"
+      ]
+    },
+    {
+      "source": 12,
+      "target": 33,
+      "value": 1,
+      "itemIds": [
+        "HSP_41"
+      ]
+    },
+    {
+      "source": 33,
+      "target": 58,
+      "value": 1,
+      "itemIds": [
+        "HSP_41"
+      ]
+    },
+    {
+      "source": 9,
+      "target": 33,
+      "value": 1,
+      "itemIds": [
+        "HSP_42"
+      ]
+    },
+    {
+      "source": 33,
+      "target": 63,
+      "value": 1,
+      "itemIds": [
+        "HSP_42"
+      ]
+    },
+    {
+      "source": 11,
+      "target": 27,
+      "value": 5,
+      "itemIds": [
+        "HSP_48",
+        "HSP_53",
+        "SPSQ_14",
+        "SPSQ_21",
+        "SPSQ_5"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 68,
+      "value": 5,
+      "itemIds": [
+        "HSP_48",
+        "HSP_53",
+        "SPSQ_14",
+        "SPSQ_21",
+        "SPSQ_5"
+      ]
+    },
+    {
+      "source": 11,
+      "target": 29,
+      "value": 5,
+      "itemIds": [
+        "HSP_52",
+        "HSP_53",
+        "SPSQ_21",
+        "SPSQ_36",
+        "SPSQ_4"
+      ]
+    },
+    {
+      "source": 11,
+      "target": 25,
+      "value": 1,
+      "itemIds": [
+        "HSP_52"
+      ]
+    },
+    {
+      "source": 14,
+      "target": 29,
+      "value": 5,
+      "itemIds": [
+        "HSP_52",
+        "HSP_53",
+        "SPSQ_21",
+        "SPSQ_36",
+        "SPSQ_4"
+      ]
+    },
+    {
+      "source": 14,
+      "target": 25,
+      "value": 1,
+      "itemIds": [
+        "HSP_52"
+      ]
+    },
+    {
+      "source": 29,
+      "target": 53,
+      "value": 5,
+      "itemIds": [
+        "HSP_52",
+        "HSP_53",
+        "SPSQ_21",
+        "SPSQ_36",
+        "SPSQ_4"
+      ]
+    },
+    {
+      "source": 29,
+      "target": 68,
+      "value": 5,
+      "itemIds": [
+        "HSP_52",
+        "HSP_53",
+        "SPSQ_21",
+        "SPSQ_36",
+        "SPSQ_4"
+      ]
+    },
+    {
+      "source": 25,
+      "target": 53,
+      "value": 1,
+      "itemIds": [
+        "HSP_52"
+      ]
+    },
+    {
+      "source": 25,
+      "target": 68,
+      "value": 1,
+      "itemIds": [
+        "HSP_52"
+      ]
+    },
+    {
+      "source": 9,
+      "target": 38,
+      "value": 6,
+      "itemIds": [
+        "DOES_12",
+        "DOES_16",
+        "DOES_20",
+        "DOES_4",
+        "HSP_60",
+        "HSP_67"
+      ]
+    },
+    {
+      "source": 38,
+      "target": 55,
+      "value": 8,
+      "itemIds": [
+        "DOES_12",
+        "DOES_16",
+        "DOES_20",
+        "DOES_4",
+        "DOES_6",
+        "DOES_8",
+        "HSP_60",
+        "HSP_67"
+      ]
+    },
+    {
+      "source": 10,
+      "target": 26,
+      "value": 2,
+      "itemIds": [
+        "DOES_6",
+        "HSP_61"
+      ]
+    },
+    {
+      "source": 32,
+      "target": 75,
+      "value": 2,
+      "itemIds": [
+        "HSP_61",
+        "SPSQ_15"
+      ]
+    },
+    {
+      "source": 32,
+      "target": 55,
+      "value": 1,
+      "itemIds": [
+        "HSP_61"
+      ]
+    },
+    {
+      "source": 18,
+      "target": 27,
+      "value": 4,
+      "itemIds": [
+        "DOES_13",
+        "HSP_72",
+        "HSP_73",
+        "SPSQ_35"
+      ]
+    },
+    {
+      "source": 18,
+      "target": 28,
+      "value": 4,
+      "itemIds": [
+        "DOES_13",
+        "HSP_72",
+        "HSP_73",
+        "SPSQ_35"
+      ]
+    },
+    {
+      "source": 1,
+      "target": 27,
+      "value": 3,
+      "itemIds": [
+        "DOES_1",
+        "HSC-21_16",
+        "SPSQ_51"
+      ]
+    },
+    {
+      "source": 9,
+      "target": 41,
+      "value": 1,
+      "itemIds": [
+        "DOES_4"
+      ]
+    },
+    {
+      "source": 38,
+      "target": 66,
+      "value": 1,
+      "itemIds": [
+        "DOES_4"
+      ]
+    },
+    {
+      "source": 41,
+      "target": 55,
+      "value": 1,
+      "itemIds": [
+        "DOES_4"
+      ]
+    },
+    {
+      "source": 41,
+      "target": 66,
+      "value": 1,
+      "itemIds": [
+        "DOES_4"
+      ]
+    },
+    {
+      "source": 17,
+      "target": 27,
+      "value": 2,
+      "itemIds": [
+        "DOES_5",
+        "HSC-21_20"
+      ]
+    },
+    {
+      "source": 17,
+      "target": 28,
+      "value": 1,
+      "itemIds": [
+        "DOES_5"
+      ]
+    },
+    {
+      "source": 16,
+      "target": 28,
+      "value": 4,
+      "itemIds": [
+        "DOES_13",
+        "DOES_17",
+        "DOES_5",
+        "HSC-21_19"
+      ]
+    },
+    {
+      "source": 28,
+      "target": 74,
+      "value": 4,
+      "itemIds": [
+        "DOES_13",
+        "DOES_17",
+        "DOES_5",
+        "HSC-21_19"
+      ]
+    },
+    {
+      "source": 32,
+      "target": 38,
+      "value": 1,
+      "itemIds": [
+        "DOES_6"
+      ]
+    },
+    {
+      "source": 38,
+      "target": 75,
+      "value": 1,
+      "itemIds": [
+        "DOES_6"
+      ]
+    },
+    {
+      "source": 6,
+      "target": 34,
+      "value": 1,
+      "itemIds": [
+        "DOES_7"
+      ]
+    },
+    {
+      "source": 15,
+      "target": 34,
+      "value": 2,
+      "itemIds": [
+        "DOES_7",
+        "SPSQ_3"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 76,
+      "value": 1,
+      "itemIds": [
+        "DOES_7"
+      ]
+    },
+    {
+      "source": 9,
+      "target": 25,
+      "value": 1,
+      "itemIds": [
+        "DOES_8"
+      ]
+    },
+    {
+      "source": 25,
+      "target": 38,
+      "value": 1,
+      "itemIds": [
+        "DOES_8"
+      ]
+    },
+    {
+      "source": 25,
+      "target": 39,
+      "value": 1,
+      "itemIds": [
+        "DOES_8"
+      ]
+    },
+    {
+      "source": 38,
+      "target": 45,
+      "value": 1,
+      "itemIds": [
+        "DOES_8"
+      ]
+    },
+    {
+      "source": 38,
+      "target": 64,
+      "value": 1,
+      "itemIds": [
+        "DOES_8"
+      ]
+    },
+    {
+      "source": 39,
+      "target": 45,
+      "value": 1,
+      "itemIds": [
+        "DOES_8"
+      ]
+    },
+    {
+      "source": 39,
+      "target": 64,
+      "value": 2,
+      "itemIds": [
+        "DOES_8",
+        "SPSQ_50"
+      ]
+    },
+    {
+      "source": 22,
+      "target": 27,
+      "value": 5,
+      "itemIds": [
+        "DOES_9",
+        "HSC-21_14",
+        "HSC-21_15",
+        "SPSQ_12",
+        "SPSQ_24"
+      ]
+    },
+    {
+      "source": 5,
+      "target": 24,
+      "value": 1,
+      "itemIds": [
+        "DOES_10"
+      ]
+    },
+    {
+      "source": 24,
+      "target": 31,
+      "value": 1,
+      "itemIds": [
+        "DOES_10"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 57,
+      "value": 1,
+      "itemIds": [
+        "DOES_10"
+      ]
+    },
+    {
+      "source": 38,
+      "target": 67,
+      "value": 2,
+      "itemIds": [
+        "DOES_12",
+        "DOES_16"
+      ]
+    },
+    {
+      "source": 22,
+      "target": 26,
+      "value": 2,
+      "itemIds": [
+        "DOES_14",
+        "SPSQ_53"
+      ]
+    },
+    {
+      "source": 32,
+      "target": 59,
+      "value": 1,
+      "itemIds": [
+        "DOES_14"
+      ]
+    },
+    {
+      "source": 13,
+      "target": 27,
+      "value": 4,
+      "itemIds": [
+        "DOES_17",
+        "HSC-21_19",
+        "HSC-21_7",
+        "SPSQ_37"
+      ]
+    },
+    {
+      "source": 13,
+      "target": 28,
+      "value": 2,
+      "itemIds": [
+        "DOES_17",
+        "HSC-21_19"
+      ]
+    },
+    {
+      "source": 7,
+      "target": 31,
+      "value": 1,
+      "itemIds": [
+        "DOES_19"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 61,
+      "value": 1,
+      "itemIds": [
+        "DOES_19"
+      ]
+    },
+    {
+      "source": 26,
+      "target": 62,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_6"
+      ]
+    },
+    {
+      "source": 0,
+      "target": 27,
+      "value": 2,
+      "itemIds": [
+        "SPSQ_12",
+        "SPSQ_51"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 43,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_12"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 44,
+      "value": 2,
+      "itemIds": [
+        "SPSQ_12",
+        "SPSQ_51"
+      ]
+    },
+    {
+      "source": 4,
+      "target": 26,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_15"
+      ]
+    },
+    {
+      "source": 6,
+      "target": 31,
+      "value": 2,
+      "itemIds": [
+        "HSC-21_9",
+        "SPSQ_19"
+      ]
+    },
+    {
+      "source": 31,
+      "target": 76,
+      "value": 2,
+      "itemIds": [
+        "HSC-21_9",
+        "SPSQ_19"
+      ]
+    },
+    {
+      "source": 21,
+      "target": 26,
+      "value": 2,
+      "itemIds": [
+        "SPSQ_26",
+        "SPSQ_30"
+      ]
+    },
+    {
+      "source": 2,
+      "target": 28,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_35"
+      ]
+    },
+    {
+      "source": 28,
+      "target": 51,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_35"
+      ]
+    },
+    {
+      "source": 9,
+      "target": 40,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_49"
+      ]
+    },
+    {
+      "source": 40,
+      "target": 65,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_49"
+      ]
+    },
+    {
+      "source": 21,
+      "target": 35,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 21,
+      "target": 36,
+      "value": 1,
+      "itemIds": [
+        "SPSQ_55"
+      ]
+    },
+    {
+      "source": 7,
+      "target": 27,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_12"
+      ]
+    },
+    {
+      "source": 7,
+      "target": 28,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_12"
+      ]
+    },
+    {
+      "source": 17,
+      "target": 34,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_13"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 77,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_13"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 78,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_14"
+      ]
+    },
+    {
+      "source": 22,
+      "target": 28,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_15"
+      ]
+    },
+    {
+      "source": 27,
+      "target": 46,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_16"
+      ]
+    },
+    {
+      "source": 1,
+      "target": 34,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_18"
+      ]
+    },
+    {
+      "source": 8,
+      "target": 34,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_18"
+      ]
+    },
+    {
+      "source": 34,
+      "target": 46,
+      "value": 1,
+      "itemIds": [
+        "HSC-21_18"
+      ]
+    }
+  ],
+  "nodeItems": {
+    "0": [
+      "DOES_14",
+      "DOES_18",
+      "HSC_2",
+      "HSP_10__HSP-27",
+      "HSP_10__HSP-R",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "HSP_81",
+      "SPSQ_12",
+      "SPSQ_22",
+      "SPSQ_28",
+      "SPSQ_51",
+      "SPSQ_53",
+      "SPSQ_54"
+    ],
+    "1": [
+      "DOES_1",
+      "DOES_15",
+      "DOES_18",
+      "HSC-21_16",
+      "HSC-21_18",
+      "HSC-21_2",
+      "HSC-21_5",
+      "HSC_10",
+      "HSC_2",
+      "HSC_4",
+      "HSP_10__HSP-27",
+      "HSP_10__HSP-R",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "HSP_25__HSP-27",
+      "HSP_25__HSP-R",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R",
+      "HSP_81",
+      "HSP_9",
+      "SPSQ_10",
+      "SPSQ_22",
+      "SPSQ_28",
+      "SPSQ_33",
+      "SPSQ_48",
+      "SPSQ_51",
+      "SPSQ_9"
+    ],
+    "2": [
+      "HSC-21_11",
+      "HSP_11",
+      "HSP_20",
+      "HSP_4",
+      "HSP_6",
+      "SPSQ_23",
+      "SPSQ_35",
+      "SPSQ_43",
+      "SPSQ_44",
+      "SPSQ_47"
+    ],
+    "3": [
+      "DOES_13",
+      "HSC-21_1",
+      "HSC-21_12",
+      "HSC-21_15",
+      "HSC_11",
+      "HSC_6",
+      "HSP_21",
+      "HSP_71",
+      "HSP_72",
+      "HSP_73",
+      "SPSQ_18",
+      "SPSQ_35"
+    ],
+    "4": [
+      "SPSQ_15"
+    ],
+    "5": [
+      "DOES_10",
+      "HSC_9",
+      "HSP_18"
+    ],
+    "6": [
+      "DOES_7",
+      "HSC-21_9",
+      "SPSQ_19"
+    ],
+    "7": [
+      "DOES_19",
+      "HSC-21_12",
+      "HSC-21_8",
+      "HSC_3",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "SPSQ_28"
+    ],
+    "8": [
+      "DOES_19",
+      "HSC-21_16",
+      "HSC-21_18",
+      "HSC-21_2",
+      "HSC-21_5",
+      "HSC_10",
+      "HSC_4",
+      "HSP_1",
+      "HSP_11",
+      "HSP_25__HSP-27",
+      "HSP_25__HSP-R",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R",
+      "HSP_9",
+      "SPSQ_10",
+      "SPSQ_11",
+      "SPSQ_25",
+      "SPSQ_33",
+      "SPSQ_42",
+      "SPSQ_48",
+      "SPSQ_7",
+      "SPSQ_9"
+    ],
+    "9": [
+      "DOES_12",
+      "DOES_16",
+      "DOES_20",
+      "DOES_4",
+      "DOES_8",
+      "HSP_42",
+      "HSP_60",
+      "HSP_67",
+      "HSP_8",
+      "SPSQ_49",
+      "SPSQ_50"
+    ],
+    "10": [
+      "DOES_6",
+      "HSP_61"
+    ],
+    "11": [
+      "HSP_48",
+      "HSP_52",
+      "HSP_53",
+      "SPSQ_14",
+      "SPSQ_21",
+      "SPSQ_36",
+      "SPSQ_4",
+      "SPSQ_5"
+    ],
+    "12": [
+      "HSC-21_6",
+      "HSC_12",
+      "HSP_26",
+      "HSP_41",
+      "SPSQ_60"
+    ],
+    "13": [
+      "DOES_17",
+      "DOES_19",
+      "HSC-21_19",
+      "HSC-21_7",
+      "HSC_8",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R",
+      "SPSQ_25",
+      "SPSQ_28",
+      "SPSQ_37"
+    ],
+    "14": [
+      "DOES_10",
+      "DOES_2",
+      "HSP_15",
+      "HSP_3",
+      "HSP_41",
+      "HSP_48",
+      "HSP_52",
+      "HSP_53",
+      "HSP_55",
+      "SPSQ_21",
+      "SPSQ_34",
+      "SPSQ_36",
+      "SPSQ_4",
+      "SPSQ_5",
+      "SPSQ_56"
+    ],
+    "15": [
+      "DOES_11",
+      "DOES_15",
+      "DOES_3",
+      "DOES_7",
+      "HSC-21_4",
+      "HSC-21_9",
+      "HSC_1",
+      "HSP_19__HSP-27",
+      "HSP_19__HSP-R",
+      "HSP_23",
+      "SPSQ_19",
+      "SPSQ_3",
+      "SPSQ_59"
+    ],
+    "16": [
+      "DOES_1",
+      "DOES_13",
+      "DOES_17",
+      "DOES_5",
+      "DOES_9",
+      "HSC-21_10",
+      "HSC-21_17",
+      "HSC-21_19",
+      "HSC-21_7",
+      "HSP_15",
+      "HSP_2",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "SPSQ_12",
+      "SPSQ_24",
+      "SPSQ_28",
+      "SPSQ_37",
+      "SPSQ_43",
+      "SPSQ_51",
+      "SPSQ_56",
+      "SPSQ_6"
+    ],
+    "17": [
+      "DOES_5",
+      "HSC-21_13",
+      "HSC-21_20",
+      "HSC-21_21",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R"
+    ],
+    "18": [
+      "DOES_13",
+      "HSP_72",
+      "HSP_73",
+      "SPSQ_35"
+    ],
+    "19": [
+      "HSC-21_3",
+      "HSC_5",
+      "HSC_7",
+      "HSP_14",
+      "HSP_16",
+      "HSP_5",
+      "SPSQ_2",
+      "SPSQ_40",
+      "SPSQ_46"
+    ],
+    "20": [
+      "HSP_17",
+      "HSP_24",
+      "SPSQ_55"
+    ],
+    "21": [
+      "HSC_11",
+      "HSP_1",
+      "HSP_13",
+      "HSP_19__HSP-R",
+      "HSP_2",
+      "SPSQ_26",
+      "SPSQ_30",
+      "SPSQ_55"
+    ],
+    "22": [
+      "DOES_14",
+      "DOES_9",
+      "HSC-21_14",
+      "HSC-21_15",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R",
+      "SPSQ_11",
+      "SPSQ_12",
+      "SPSQ_24",
+      "SPSQ_25",
+      "SPSQ_42",
+      "SPSQ_53",
+      "SPSQ_7"
+    ],
+    "23": [
+      "HSP_15",
+      "SPSQ_56"
+    ],
+    "24": [
+      "DOES_10",
+      "DOES_2",
+      "HSP_3",
+      "HSP_55",
+      "SPSQ_34"
+    ],
+    "25": [
+      "DOES_8",
+      "HSP_52"
+    ],
+    "26": [
+      "DOES_14",
+      "DOES_18",
+      "DOES_6",
+      "HSC-21_8",
+      "HSC_2",
+      "HSC_3",
+      "HSC_8",
+      "HSP_10__HSP-27",
+      "HSP_10__HSP-R",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "HSP_61",
+      "HSP_81",
+      "SPSQ_15",
+      "SPSQ_22",
+      "SPSQ_26",
+      "SPSQ_28",
+      "SPSQ_30",
+      "SPSQ_53",
+      "SPSQ_54",
+      "SPSQ_6"
+    ],
+    "27": [
+      "DOES_1",
+      "DOES_13",
+      "DOES_17",
+      "DOES_5",
+      "DOES_9",
+      "HSC-21_1",
+      "HSC-21_10",
+      "HSC-21_11",
+      "HSC-21_12",
+      "HSC-21_14",
+      "HSC-21_15",
+      "HSC-21_16",
+      "HSC-21_17",
+      "HSC-21_19",
+      "HSC-21_20",
+      "HSC-21_7",
+      "HSC_6",
+      "HSP_11",
+      "HSP_15",
+      "HSP_2",
+      "HSP_20",
+      "HSP_4",
+      "HSP_48",
+      "HSP_53",
+      "HSP_6",
+      "HSP_71",
+      "HSP_72",
+      "HSP_73",
+      "SPSQ_12",
+      "SPSQ_14",
+      "SPSQ_21",
+      "SPSQ_23",
+      "SPSQ_24",
+      "SPSQ_35",
+      "SPSQ_37",
+      "SPSQ_43",
+      "SPSQ_44",
+      "SPSQ_47",
+      "SPSQ_5",
+      "SPSQ_51",
+      "SPSQ_56"
+    ],
+    "28": [
+      "DOES_13",
+      "DOES_17",
+      "DOES_5",
+      "HSC-21_1",
+      "HSC-21_12",
+      "HSC-21_15",
+      "HSC-21_19",
+      "HSC_6",
+      "HSP_71",
+      "HSP_72",
+      "HSP_73",
+      "SPSQ_35"
+    ],
+    "29": [
+      "HSP_52",
+      "HSP_53",
+      "SPSQ_21",
+      "SPSQ_36",
+      "SPSQ_4"
+    ],
+    "30": [
+      "HSC-21_6",
+      "HSC_12",
+      "HSP_20",
+      "HSP_26",
+      "SPSQ_60"
+    ],
+    "31": [
+      "DOES_10",
+      "DOES_11",
+      "DOES_15",
+      "DOES_19",
+      "DOES_3",
+      "HSC-21_2",
+      "HSC-21_21",
+      "HSC-21_4",
+      "HSC-21_5",
+      "HSC-21_9",
+      "HSC_1",
+      "HSC_10",
+      "HSC_11",
+      "HSC_4",
+      "HSC_5",
+      "HSC_9",
+      "HSP_1",
+      "HSP_16",
+      "HSP_18",
+      "HSP_19__HSP-27",
+      "HSP_19__HSP-R",
+      "HSP_21",
+      "HSP_23",
+      "HSP_25__HSP-27",
+      "HSP_25__HSP-R",
+      "HSP_5",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R",
+      "HSP_9",
+      "SPSQ_10",
+      "SPSQ_11",
+      "SPSQ_18",
+      "SPSQ_19",
+      "SPSQ_2",
+      "SPSQ_25",
+      "SPSQ_33",
+      "SPSQ_42",
+      "SPSQ_46",
+      "SPSQ_48",
+      "SPSQ_59",
+      "SPSQ_7",
+      "SPSQ_9"
+    ],
+    "32": [
+      "DOES_14",
+      "DOES_18",
+      "DOES_6",
+      "HSC-21_8",
+      "HSC_2",
+      "HSC_3",
+      "HSC_8",
+      "HSP_10__HSP-27",
+      "HSP_10__HSP-R",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "HSP_61",
+      "HSP_81",
+      "SPSQ_15",
+      "SPSQ_22",
+      "SPSQ_26",
+      "SPSQ_28",
+      "SPSQ_30",
+      "SPSQ_53",
+      "SPSQ_54"
+    ],
+    "33": [
+      "DOES_2",
+      "HSP_3",
+      "HSP_41",
+      "HSP_42",
+      "HSP_55",
+      "SPSQ_34"
+    ],
+    "34": [
+      "DOES_7",
+      "HSC-21_13",
+      "HSC-21_18",
+      "HSC-21_3",
+      "HSC-21_6",
+      "HSC_12",
+      "HSC_7",
+      "HSP_11",
+      "HSP_13",
+      "HSP_14",
+      "HSP_20",
+      "HSP_26",
+      "SPSQ_3",
+      "SPSQ_40",
+      "SPSQ_47",
+      "SPSQ_60"
+    ],
+    "35": [
+      "HSP_17",
+      "HSP_24",
+      "SPSQ_55"
+    ],
+    "36": [
+      "HSP_17",
+      "HSP_18",
+      "HSP_24",
+      "SPSQ_55"
+    ],
+    "37": [
+      "HSP_11",
+      "HSP_5"
+    ],
+    "38": [
+      "DOES_12",
+      "DOES_16",
+      "DOES_20",
+      "DOES_4",
+      "DOES_6",
+      "DOES_8",
+      "HSP_60",
+      "HSP_67"
+    ],
+    "39": [
+      "DOES_8",
+      "HSP_8",
+      "SPSQ_50"
+    ],
+    "40": [
+      "SPSQ_49"
+    ],
+    "41": [
+      "DOES_4"
+    ],
+    "42": [
+      "HSP_17",
+      "HSP_24",
+      "SPSQ_55"
+    ],
+    "43": [
+      "DOES_14",
+      "DOES_18",
+      "HSP_10__HSP-27",
+      "HSP_10__HSP-R",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "HSP_81",
+      "SPSQ_12",
+      "SPSQ_22",
+      "SPSQ_28",
+      "SPSQ_53",
+      "SPSQ_54"
+    ],
+    "44": [
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "SPSQ_12",
+      "SPSQ_51"
+    ],
+    "45": [
+      "DOES_8"
+    ],
+    "46": [
+      "DOES_15",
+      "HSC-21_16",
+      "HSC-21_18",
+      "HSC-21_2",
+      "HSC-21_5",
+      "HSC_10",
+      "HSC_4",
+      "HSP_25__HSP-27",
+      "HSP_25__HSP-R",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R",
+      "HSP_9",
+      "SPSQ_10",
+      "SPSQ_33",
+      "SPSQ_48",
+      "SPSQ_9"
+    ],
+    "47": [
+      "HSC_11",
+      "HSP_21",
+      "SPSQ_18"
+    ],
+    "48": [
+      "DOES_10",
+      "HSC_9",
+      "HSP_18"
+    ],
+    "49": [
+      "HSP_17",
+      "HSP_24",
+      "SPSQ_55"
+    ],
+    "50": [
+      "HSP_11",
+      "HSP_5"
+    ],
+    "51": [
+      "HSC-21_11",
+      "HSP_11",
+      "HSP_20",
+      "HSP_4",
+      "HSP_6",
+      "SPSQ_23",
+      "SPSQ_35",
+      "SPSQ_43",
+      "SPSQ_44",
+      "SPSQ_47"
+    ],
+    "52": [
+      "HSC-21_6",
+      "HSC_12",
+      "HSP_20",
+      "HSP_26",
+      "SPSQ_60"
+    ],
+    "53": [
+      "HSP_15",
+      "HSP_48",
+      "HSP_52",
+      "HSP_53",
+      "SPSQ_21",
+      "SPSQ_36",
+      "SPSQ_4",
+      "SPSQ_5",
+      "SPSQ_56"
+    ],
+    "54": [
+      "HSP_12"
+    ],
+    "55": [
+      "DOES_12",
+      "DOES_16",
+      "DOES_20",
+      "DOES_4",
+      "DOES_6",
+      "DOES_8",
+      "HSP_60",
+      "HSP_61",
+      "HSP_67",
+      "HSP_8",
+      "SPSQ_50"
+    ],
+    "56": [
+      "DOES_13",
+      "DOES_17",
+      "DOES_5",
+      "HSC-21_1",
+      "HSC-21_12",
+      "HSC-21_15",
+      "HSC-21_19",
+      "HSC_6",
+      "HSP_71",
+      "HSP_72",
+      "HSP_73",
+      "SPSQ_35"
+    ],
+    "57": [
+      "DOES_10",
+      "DOES_2",
+      "HSP_3",
+      "HSP_41",
+      "HSP_55",
+      "SPSQ_34"
+    ],
+    "58": [
+      "HSC-21_6",
+      "HSC_12",
+      "HSP_26",
+      "HSP_41",
+      "SPSQ_60"
+    ],
+    "59": [
+      "DOES_14",
+      "HSP_18"
+    ],
+    "60": [
+      "DOES_11",
+      "DOES_3",
+      "HSC-21_4",
+      "HSC_1",
+      "HSP_1",
+      "HSP_11",
+      "HSP_13",
+      "HSP_19__HSP-27",
+      "HSP_19__HSP-R",
+      "HSP_23",
+      "SPSQ_3",
+      "SPSQ_59"
+    ],
+    "61": [
+      "DOES_19"
+    ],
+    "62": [
+      "HSC-21_8",
+      "HSC_2",
+      "HSC_3",
+      "HSC_8",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "SPSQ_26",
+      "SPSQ_28",
+      "SPSQ_30",
+      "SPSQ_53",
+      "SPSQ_6"
+    ],
+    "63": [
+      "HSP_42"
+    ],
+    "64": [
+      "DOES_8",
+      "SPSQ_50"
+    ],
+    "65": [
+      "SPSQ_49"
+    ],
+    "66": [
+      "DOES_4"
+    ],
+    "67": [
+      "DOES_12",
+      "DOES_16"
+    ],
+    "68": [
+      "HSP_48",
+      "HSP_52",
+      "HSP_53",
+      "SPSQ_14",
+      "SPSQ_21",
+      "SPSQ_36",
+      "SPSQ_4",
+      "SPSQ_5"
+    ],
+    "69": [
+      "HSP_27"
+    ],
+    "70": [
+      "DOES_19",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R",
+      "SPSQ_25"
+    ],
+    "71": [
+      "HSC-21_3",
+      "HSC-21_6",
+      "HSC_12",
+      "HSC_5",
+      "HSC_7",
+      "HSP_14",
+      "HSP_16",
+      "HSP_26",
+      "HSP_5",
+      "SPSQ_2",
+      "SPSQ_40",
+      "SPSQ_46",
+      "SPSQ_60"
+    ],
+    "72": [
+      "HSP_17",
+      "HSP_18",
+      "HSP_24",
+      "SPSQ_55"
+    ],
+    "73": [
+      "HSC-21_1",
+      "HSC-21_12",
+      "HSC-21_15",
+      "HSC-21_16",
+      "HSC-21_20",
+      "HSC_6",
+      "HSP_71",
+      "HSP_72",
+      "HSP_73"
+    ],
+    "74": [
+      "DOES_1",
+      "DOES_13",
+      "DOES_17",
+      "DOES_5",
+      "DOES_9",
+      "HSC-21_10",
+      "HSC-21_17",
+      "HSC-21_19",
+      "HSC-21_7",
+      "HSP_15",
+      "HSP_2",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
+      "SPSQ_12",
+      "SPSQ_24",
+      "SPSQ_28",
+      "SPSQ_37",
+      "SPSQ_43",
+      "SPSQ_51",
+      "SPSQ_56"
+    ],
+    "75": [
+      "DOES_6",
+      "HSP_61",
+      "SPSQ_15"
+    ],
+    "76": [
+      "DOES_7",
+      "HSC-21_9",
+      "SPSQ_19"
+    ],
+    "77": [
+      "HSC-21_13",
+      "HSC-21_21",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R"
+    ],
+    "78": [
+      "HSC-21_14",
+      "HSP_7__HSP-27",
+      "HSP_7__HSP-R",
+      "SPSQ_11",
+      "SPSQ_25",
+      "SPSQ_42",
+      "SPSQ_7"
+    ]
+  },
+  "items": [
+    {
+      "id": "HSP_1",
+      "text": "Are you easily overwhelmed by strong sensory input?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_2",
+      "text": "Do you seem to be aware of subtleties in your environment?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_3",
+      "text": "Do other people's moods affect you?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_4",
+      "text": "Do you tend to be more sensitive to pain?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_5",
+      "text": "Do you find yourself needing to withdraw during busy days into bed or into a darkened room or any place where you can have some privacy and relief from stimulation?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_6",
+      "text": "Are you particularly sensitive to the effects of caffeine?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_7__HSP-27",
+      "text": "Are you easily overwhelmed by things like bright lights, strong smells, coarse fabrics, or sirens close by?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_8",
+      "text": "Do you have a rich, complex inner life?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_9",
+      "text": "Are you made uncomfortable by loud noises?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_10__HSP-27",
+      "text": "Are you deeply moved by the arts or music?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_11",
+      "text": "Does your nervous system sometimes feel so frazzled that you just have to get off by yourself?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_12",
+      "text": "Are you conscientious?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_13",
+      "text": "Do you startle easily?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_14",
+      "text": "Do you get rattled when you have a lot to do in a short amount of time?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_15",
+      "text": "When people are uncomfortable in a physical environment do you tend to know what needs to be done to make it more comfortable (like changing the lighting or the seating)?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_16",
+      "text": "Are you annoyed when people try to get you to do too many things at once?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_17",
+      "text": "Do you try hard to avoid making mistakes or forgetting things?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_18",
+      "text": "Do you make a point to avoid violent movies and TV shows?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_19__HSP-27",
+      "text": "Do you become unpleasantly aroused when a lot is going on around you?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_20",
+      "text": "Does being very hungry create a strong reaction in you, disrupting your concentration or mood?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_21",
+      "text": "Do changes in your life shake you up?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_22__HSP-27",
+      "text": "Do you notice and enjoy delicate or fine scents, tastes, sounds, works of art?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_23",
+      "text": "Do you find it unpleasant to have a lot going on at once?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_24",
+      "text": "Do you make it a high priority to arrange your life to avoid upsetting or overwhelming situations?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_25__HSP-27",
+      "text": "Are you bothered by intense stimuli, like loud noises or chaotic scenes?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_26",
+      "text": "When you must compete or be observed while performing a task, do you become so nervous or shaky that you do much worse than you would otherwise?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSP_27",
+      "text": "When you were a child, did parents or teachers seem to see you as sensitive or shy?",
+      "scale": "HSP-27"
+    },
+    {
+      "id": "HSC_1",
+      "text": "I find it unpleasant to have a lot going on at once",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_2",
+      "text": "Some music can make me really happy",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_3",
+      "text": "I love nice tastes",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_4",
+      "text": "Loud noises make me feel uncomfortable",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_5",
+      "text": "I am annoyed when people try to get me to do too many things at once",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_6",
+      "text": "I notice it when small things have changed in my environment",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_7",
+      "text": "I get nervous when I have to do a lot in little time",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_8",
+      "text": "I love nice smells",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_9",
+      "text": "I don't like watching TV programs that have a lot of violence in them",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_10",
+      "text": "I don't like loud noises",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_11",
+      "text": "I don't like it when things change in my life",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSC_12",
+      "text": "When someone observes me, I get nervous. This makes me perform worse than normal",
+      "scale": "HSC"
+    },
+    {
+      "id": "HSP_7__HSP-R",
+      "text": "Are you easily overwhelmed by things like bright lights, strong smells, coarse fabrics, or sirens close by?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_10__HSP-R",
+      "text": "Are you deeply moved by the arts or music?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_19__HSP-R",
+      "text": "Do you become unpleasantly aroused when a lot is going on around you?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_22__HSP-R",
+      "text": "Do you notice and enjoy delicate or fine scents, tastes, sounds, works of art?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_25__HSP-R",
+      "text": "Are you bothered by intense stimuli, like loud noises or chaotic scenes?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_41",
+      "text": "Are you easily affected by feedback (both negative and positive)?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_42",
+      "text": "Do you generally react strongly to your experiences, whether you show it or not?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_48",
+      "text": "Do you easily recognize what others are feeling?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_52",
+      "text": "Are you good at anticipating how someone may feel about a situation?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_53",
+      "text": "Do other people tell you that you are good at understanding what they are feeling or thinking?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_55",
+      "text": "Are you easily affected by the mood of people around you?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_60",
+      "text": "Do you tend to reflect on things deeply?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_61",
+      "text": "Do you like deep conversations?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_67",
+      "text": "Do you find yourself thinking about philosophical questions?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_71",
+      "text": "Do you notice when things have been moved around?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_72",
+      "text": "Do you tend to notice subtle signs of changing seasons (winter, spring, etc.)?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_73",
+      "text": "Do you seem to notice changes in the weather more than others do?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "HSP_81",
+      "text": "Do you tend to get deeply immersed in music?",
+      "scale": "HSP-R"
+    },
+    {
+      "id": "DOES_1",
+      "text": "During a walk, I notice sounds around me clearly.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_2",
+      "text": "The moods of other people are highly contagious to me.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_3",
+      "text": "Events where I am exposed to multiple impressions overwhelm me.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_4",
+      "text": "It is difficult for me to switch off mentally.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_5",
+      "text": "I clearly perceive the kind of textiles I wear on my skin.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_6",
+      "text": "I am intensely moved by deep conversations.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_7",
+      "text": "I often feel exhausted after being out with a lot of people.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_8",
+      "text": "I have intense thoughts about situations that I will experience in the future.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_9",
+      "text": "I am aware when the light in a room is glaring or bright.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_10",
+      "text": "When others quarrel, it greatly affects me.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_11",
+      "text": "When there is a lot going on around me, I am easily overwhelmed.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_12",
+      "text": "After experiencing something positive or negative, I think about what happened for a long time.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_13",
+      "text": "I notice slight differences in temperature quickly.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_14",
+      "text": "Emotional film scenes touch me deeply.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_15",
+      "text": "I am very disturbed by sounds that occur at the same time.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_16",
+      "text": "I spend a lot of time thinking about everyday experiences.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_17",
+      "text": "I can perceive smells very clearly.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_18",
+      "text": "When I listen to beautiful music, I can become completely absorbed in it.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_19",
+      "text": "I often find odors like perfume or strong food smells unbearable.",
+      "scale": "DOES"
+    },
+    {
+      "id": "DOES_20",
+      "text": "It often happens to me that I lose myself for hours in new ideas.",
+      "scale": "DOES"
+    },
+    {
+      "id": "SPSQ_2",
+      "text": "I get easily upset from stressful situations.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_3",
+      "text": "I get nervous when too much happens at once.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_4",
+      "text": "Sometimes I notice sad eyes hidden by a smile.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_5",
+      "text": "It usually strikes me when the tone of a person's voice does not match his or her words.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_6",
+      "text": "I find it hard to enjoy small or subtle things.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_7",
+      "text": "Brightly colored flickering lights are disturbing to me.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_9",
+      "text": "I don't like loud music.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_10",
+      "text": "I find certain screeching sounds very annoying.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_11",
+      "text": "Very bright colors sometimes bother me.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_12",
+      "text": "I often notice the emotional side (charge) of paintings and photographs.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_14",
+      "text": "Looking into someone's eyes gives me a good idea whether or not someone is telling the truth.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_15",
+      "text": "I feel good when I'm with people I love.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_18",
+      "text": "I am easily upset by changes in my life.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_19",
+      "text": "I am easily bothered by crowds or chaotic situations.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_21",
+      "text": "It usually strikes me when people try to pretend not to be afraid.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_22",
+      "text": "I can be emotionally touched by music or art.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_23",
+      "text": "I immediately feel when my mouth or throat gets drier.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_24",
+      "text": "Also barely visible visual details attract my attention.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_25",
+      "text": "I am easily disturbed by bright light or strong odors.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_26",
+      "text": "I can enjoy humor or laughable situations.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_28",
+      "text": "I enjoy subtle smells, flavors, music or art.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_30",
+      "text": "I can really enjoy a relaxing activity.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_33",
+      "text": "I find harsh sounds very annoying.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_34",
+      "text": "I am easily infected by other people's moods.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_35",
+      "text": "I am quickly aware of changes in my body such as my body temperature.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_36",
+      "text": "I can usually see when someone masks their feelings with a smile.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_37",
+      "text": "I often notice weak odors.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_40",
+      "text": "I feel quickly rushed when I have to do too much in a short time.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_42",
+      "text": "I am often bothered by too bright light.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_43",
+      "text": "I feel the slightest contraction of hunger in my stomach.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_44",
+      "text": "I often feel my heart beating.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_46",
+      "text": "I get upset when people try to make me do too many things at once.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_47",
+      "text": "I am sensitive to internal physical tension.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_48",
+      "text": "I am easily bothered by noise.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_49",
+      "text": "I sometimes seem to understand things intuitively.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_50",
+      "text": "I have a rich and complex emotional life.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_51",
+      "text": "When I listen to music, I usually notice subtle touching tones in the music.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_53",
+      "text": "Watching a nice movie gives me a good feeling.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_54",
+      "text": "I can be very touched by a beautiful work of art.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_55",
+      "text": "I try to arrange my life in such a way that I avoid annoying or overwhelming situations.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_56",
+      "text": "When people feel uncomfortable, I know how to put them at ease.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_59",
+      "text": "I feel uncomfortable when too much is happening around me.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "SPSQ_60",
+      "text": "When I have to do something competitive, I get so nervous that I perform below my capabilities.",
+      "scale": "SPSQ"
+    },
+    {
+      "id": "HSC-21_1",
+      "text": "I notice when small things have changed in my environment",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_2",
+      "text": "Loud noises make me feel uncomfortable",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_3",
+      "text": "I get nervous when I have to do a lot in little time",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_4",
+      "text": "I find it unpleasant to have a lot going on at once",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_5",
+      "text": "I don't like loud noises",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_6",
+      "text": "When someone observes me, I get nervous. This makes me perform worse than normal",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_7",
+      "text": "I quickly notice how something smells",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_8",
+      "text": "How food tastes matters me very much",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_9",
+      "text": "In crowded places I quickly get overwhelmed",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_10",
+      "text": "I notice small details in my surroundings",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_11",
+      "text": "I quickly feel pain",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_12",
+      "text": "I am good at distinguishing different tastes",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_13",
+      "text": "I startle when being touched",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_14",
+      "text": "I am sensitive to bright light",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_15",
+      "text": "I immediately notice when someone has new clothes or a new haircut",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_16",
+      "text": "I am sensitive to loud noises",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_17",
+      "text": "I have an eye for details in my surroundings",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_18",
+      "text": "I get startled by sudden noises",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_19",
+      "text": "I have a delicate sense of smell",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_20",
+      "text": "I am sensitive to being touched",
+      "scale": "HSC-21"
+    },
+    {
+      "id": "HSC-21_21",
+      "text": "I get upset when other children touch me",
+      "scale": "HSC-21"
+    }
+  ],
+  "axisOrder": [
+    "Stimulus",
+    "Process",
+    "Outcome",
+    "Response",
+    "CognitiveDisp",
+    "DerivedPrimary"
+  ],
+  "axisLabels": {
+    "Stimulus": "Stimulus",
+    "Process": "Process",
+    "Outcome": "Outcome & Valence",
+    "Response": "Response",
+    "CognitiveDisp": "Cognitive Disposition",
+    "DerivedPrimary": "Primary Code"
+  },
+  "categoryMap": {
+    "General Overload": "Overload",
+    "Pressure-Caused Overload": "Overload",
+    "Social Overload": "Overload",
+    "Visual Overload": "Overload",
+    "Auditory Overload": "Overload",
+    "Tactile Overload": "Overload",
+    "Olfactory Overload": "Overload",
+    "Gustatory Overload": "Overload",
+    "Aversion to Change": "Aversion",
+    "Aversion to Conflict": "Aversion",
+    "Aversion to Uncertainty": "Aversion",
+    "Active Coping": "Coping",
+    "Avoidance Coping": "Coping",
+    "Preventive Regulation": "Coping",
+    "Sensitivity to Subtlety": "Perceptual Sensitivity",
+    "Sensitivity to Details": "Perceptual Sensitivity",
+    "Difference Sensitivity": "Perceptual Sensitivity",
+    "Bodily-State Sensitivity": "Perceptual Sensitivity",
+    "Hedonic Sensitivity": "Affective and Aesthetic",
+    "Social Hedonic Sensitivity": "Affective and Aesthetic",
+    "Aesthetic Responsiveness": "Affective and Aesthetic",
+    "Aesthetic Sensitivity": "Affective and Aesthetic",
+    "Emotional Contagion": "Affective and Aesthetic",
+    "Inner Emotional Intensity": "Affective and Aesthetic",
+    "Cognitive Empathy": "Social Cognition and Empathy",
+    "General Empathy": "Social Cognition and Empathy",
+    "Nonverbal Social Perception": "Social Cognition and Empathy",
+    "Evaluation Apprehension": "Social Cognition and Empathy",
+    "Deep Thought": "Cognitive Processing",
+    "Inner Richness": "Cognitive Processing",
+    "Mental Replay": "Cognitive Processing",
+    "Anticipatory Processing": "Cognitive Processing",
+    "Mental Overactivity": "Cognitive Processing",
+    "Intuitive Insight": "Cognitive Processing",
+    "Cognitive Disruption": "Cognitive Processing",
+    "Conscientious": "Other Descriptors",
+    "Observer-Rated Sensitivity": "Other Descriptors",
+    "Comparative": "Other Descriptors",
+    "Reversed": "Other Descriptors"
+  },
+  "categoryColors": {
+    "Overload": "#d65db1",
+    "Aversion": "#ff6f61",
+    "Coping": "#2ecc71",
+    "Perceptual Sensitivity": "#3498db",
+    "Affective and Aesthetic": "#9b59b6",
+    "Social Cognition and Empathy": "#1abc9c",
+    "Cognitive Processing": "#f0932b",
+    "Other Descriptors": "#95a5a6"
+  }
+}
