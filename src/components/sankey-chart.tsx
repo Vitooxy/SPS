@@ -867,12 +867,12 @@ export default function SankeyChart() {
           );
         })}
 
-        {/* Stimulus subcategory bars (left side) */}
+        {/* Stimulus subcategory bars (far left side) */}
         {stimulusGroups.map((group) => {
           if (group.nodes.length === 0) return null;
           const minY = Math.min(...group.nodes.map((n) => n.y));
           const maxY = Math.max(...group.nodes.map((n) => n.y + n.height));
-          const barX = group.nodes[0].x - SUBCAT_BAR_WIDTH - SUBCAT_BAR_GAP;
+          const barX = 80;
           const barH = maxY - minY;
           const color = data.stimulusSubcatColors[group.subcat] || '#D9D9D9';
           return (
@@ -886,7 +886,7 @@ export default function SankeyChart() {
                 rx={2}
               />
               <text
-                x={barX - 6}
+                x={barX - 8}
                 y={minY + barH / 2}
                 textAnchor="end"
                 dominantBaseline="central"
