@@ -626,27 +626,18 @@ export default function SankeyChart() {
     if (mode === 'subtraction') {
       // Determine base nodes (rightmost column) and exclusion nodes (other columns)
       const maxCol = layout.nodes.reduce((max, n) => Math.max(max, n.column), 0);
-      const baseNodeIds = new Set<number>();
       const excludeNodeIds = new Set<number>();
 
       for (const nid of selectedNodes) {
         const node = layout.nodes.find(n => n.id === nid);
         if (!node) continue;
-        if (node.column === maxCol) {
-          baseNodeIds.add(nid);
-        } else {
+        if (node.column !== maxCol) {
           excludeNodeIds.add(nid);
         }
       }
-      // If no base nodes from rightmost column, use first node as base
-      if (baseNodeIds.size === 0 && selectedNodes.length > 0) {
-        baseNodeIds.add(selectedNodes[0]);
-      }
 
-      // Highlight all base nodes
-      for (const nid of baseNodeIds) nodeSet.add(nid);
-
-      // Include all nodes that active links connect to (except exclusion nodes)
+      // Only highlight nodes that active links actually connect to
+      // (don't unconditionally highlight all base nodes)
       for (const idx of activeItemLinkSet) {
         if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
         const il = layout.itemLinkPaths[idx];
