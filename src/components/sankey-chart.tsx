@@ -34,6 +34,7 @@ interface RawItem {
   scale: string;
   derivedPrimary: string[];
   category: string;
+  values: Record<string, string[]>;
 }
 
 interface SankeyData {
@@ -82,7 +83,7 @@ const NODE_WIDTH = 12;
 const NODE_GAP = 3;
 const SUBCAT_BAR_WIDTH = 14;
 const SUBCAT_BAR_GAP = 3;
-const CHART_PADDING = { top: 50, bottom: 160, left: 110, right: 280 };
+const CHART_PADDING = { top: 50, bottom: 160, left: 110, right: 210 };
 const ITEM_LINE_MIN_WIDTH = 1.5;
 
 // ─── Layout Engine ───────────────────────────────────────────────────────────
@@ -91,7 +92,7 @@ function computeLayout(
   data: SankeyData,
   width: number,
   height: number,
-): { nodes: LayoutNode[]; links: LayoutLink[] } {
+): { nodes: LayoutNode[]; links: LayoutLink[]; nodeKeyToId: Map<string, number> } {
   const { nodes, links, axisOrder } = data;
   const chartW = width - CHART_PADDING.left - CHART_PADDING.right;
   const chartH = height - CHART_PADDING.top - CHART_PADDING.bottom;
@@ -101,6 +102,42 @@ function computeLayout(
   for (const node of nodes) {
     columns[node.column].push(node);
   }
+
+  // Sort last column (DerivedPrimary) by category order, then by name
+  const categoryOrder = [
+    'Overload', 'Aversion', 'Coping', 'Perceptual Sensitivity',
+    'Affective and Aesthetic', 'Social Cognition and Empathy',
+    'Cognitive Processing', 'Other Descriptors',
+  ];
+  const lastCol = columns[columns.length - 1];
+  lastCol.sort((a, b) => {
+    const ai = categoryOrder.indexOf(a.category || 'Other Descriptors');
+    const bi = categoryOrder.indexOf(b.category || 'Other Descriptors');
+    if (ai !== bi) return ai - bi;
+    return a.value.localeCompare(b.value);
+  });
+  // Reassign IDs based on new order
+  const allNodes = columns.flat();
+  const idMap = new Map<number, number>();
+  allNodes.forEach((n, i) => idMap.set(n.id, i));
+  for (const node of allNodes) node.id = idMap.get(node.id)!;
+  // Update links
+  for (const link of links) {
+    link.source = idMap.get(link.source)!;
+    link.target = idMap.get(link.target)!;
+  }
+  // Update itemLinks
+  for (const il of data.itemLinks) {
+    il.source = idMap.get(il.source)!;
+    il.target = idMap.get(il.target)!;
+  }
+  // Update nodeItems
+  const newNodeItems: Record<string, string[]> = {};
+  for (const [oldId, items] of Object.entries(data.nodeItems)) {
+    const newId = idMap.get(Number(oldId));
+    if (newId !== undefined) newNodeItems[String(newId)] = items;
+  }
+  (data as any).nodeItems = newNodeItems;
 
   // Compute node heights based on aggregated link flow
   const nodeFlow = new Map<number, number>();
@@ -165,7 +202,12 @@ function computeLayout(
     targetOffsets.set(link.target, tgtOff + linkH_tgt);
   }
 
-  return { nodes: nodes as LayoutNode[], links: layoutLinks };
+  const nodeKeyToId = new Map<string, number>();
+  for (const node of allNodes) {
+    nodeKeyToId.set(`${node.axis}::${node.value}`, node.id);
+  }
+
+  return { nodes: nodes as LayoutNode[], links: layoutLinks, nodeKeyToId };
 }
 
 // ─── Barycentric Reordering ──────────────────────────────────────────────────
@@ -256,7 +298,7 @@ function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; lin
 // ─── Build per-item link paths ──────────────────────────────────────────────
 
 function buildItemLinkPaths(
-  layout: { nodes: LayoutNode[]; links: LayoutLink[] },
+  layout: { nodes: LayoutNode[]; links: LayoutLink[]; nodeKeyToId: Map<string, number> },
   itemLinks: RawItemLink[],
 ): LayoutItemLink[] {
   const { nodes, links } = layout;
@@ -347,9 +389,11 @@ export default function SankeyChart() {
     nodes: LayoutNode[];
     links: LayoutLink[];
     itemLinkPaths: LayoutItemLink[];
+    nodeKeyToId: Map<string, number>;
   } | null>(null);
   const [mode, setMode] = useState<InteractionMode>('single');
   const [selectedNodes, setSelectedNodes] = useState<number[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
   const [tooltip, setTooltip] = useState<{
     x: number;
@@ -437,7 +481,7 @@ export default function SankeyChart() {
 
   // Determine which itemLinks are active based on selected nodes
   const activeItemLinkSet = useMemo(() => {
-    if (!layout || selectedNodes.length === 0) return null;
+    if (!layout || !data || selectedNodes.length === 0) return null;
     const activeSet = new Set<number>();
 
     if (mode === 'subtraction') {
@@ -558,8 +602,18 @@ export default function SankeyChart() {
       }
     }
 
+    // Category selection: highlight all links belonging to the selected category
+    if (selectedCategory) {
+      for (let i = 0; i < layout.itemLinkPaths.length; i++) {
+        const il = layout.itemLinkPaths[i];
+        if (il.category === selectedCategory) {
+          activeSet.add(i);
+        }
+      }
+    }
+
     return activeSet.size > 0 ? activeSet : null;
-  }, [layout, selectedNodes, nodeItemLinks, mode, data]);
+  }, [layout, selectedNodes, nodeItemLinks, mode, data, selectedCategory]);
 
   // Determine which nodes are active - only selected nodes on the same axis
   const activeNodeSet = useMemo(() => {
@@ -600,8 +654,16 @@ export default function SankeyChart() {
         if (tgtNode && !selectedAxes.has(tgtNode.column)) nodeSet.add(il.target);
       }
     }
+
+    // Category selection: highlight all nodes belonging to the selected category
+    if (selectedCategory) {
+      for (const node of layout.nodes) {
+        if (node.category === selectedCategory) nodeSet.add(node.id);
+      }
+    }
+
     return nodeSet;
-  }, [layout, activeItemLinkSet, selectedNodes, mode]);
+  }, [layout, activeItemLinkSet, selectedNodes, mode, selectedCategory]);
 
   // Compute active item IDs from activeItemLinkSet (for bottom panel)
   const activeItemIds = useMemo(() => {
@@ -618,6 +680,7 @@ export default function SankeyChart() {
   // Node click handler
   const handleNodeClick = useCallback(
     (nodeId: number) => {
+      setSelectedCategory(null);
       if (mode === 'single') {
         setSelectedNodes([nodeId]);
       } else if (mode === 'addition') {
@@ -652,20 +715,53 @@ export default function SankeyChart() {
   const handleItemLinkClick = useCallback(
     (il: LayoutItemLink, event: React.MouseEvent) => {
       const item = itemsMap[il.itemId];
-      if (item) {
-        setLinkTooltip({
-          x: event.clientX,
-          y: event.clientY,
-          items: [item],
-        });
+      if (!item || !data || !layout) return;
+      // Highlight the full path of this item
+      setSelectedCategory(null);
+      const pathNodeIds = new Set<number>();
+      for (const axis of data.axisOrder) {
+        const vals = item.values[axis];
+        if (!vals) continue;
+        for (const val of vals) {
+          const key = `${axis}::${val}`;
+          const nid = layout.nodeKeyToId?.get(key);
+          if (nid !== undefined) pathNodeIds.add(nid);
+        }
       }
+      setSelectedNodes(Array.from(pathNodeIds));
+      setLinkTooltip({
+        x: event.clientX,
+        y: event.clientY,
+        items: [item],
+      });
     },
-    [itemsMap],
+    [itemsMap, layout, data],
+  );
+
+  // Category click - highlight all links of that category
+  const handleCategoryClick = useCallback(
+    (category: string) => {
+      setLinkTooltip(null);
+      if (selectedCategory === category) {
+        setSelectedCategory(null);
+        setSelectedNodes([]);
+        return;
+      }
+      setSelectedCategory(category);
+      if (!layout) return;
+      const catNodeIds = new Set<number>();
+      for (const node of layout.nodes) {
+        if (node.category === category) catNodeIds.add(node.id);
+      }
+      setSelectedNodes(Array.from(catNodeIds));
+    },
+    [layout, selectedCategory]
   );
 
   // Clear selection
   const handleClear = useCallback(() => {
     setSelectedNodes([]);
+    setSelectedCategory(null);
     setLinkTooltip(null);
   }, []);
 
@@ -809,18 +905,18 @@ export default function SankeyChart() {
           const minY = Math.min(...catNodes.map((n) => n.y));
           const maxY = Math.max(...catNodes.map((n) => n.y + n.height));
           const lastNode = catNodes[catNodes.length - 1];
-          const barX = lastNode.x + NODE_WIDTH + 160;
+          const barX = lastNode.x + NODE_WIDTH + 12;
           const barH = maxY - minY;
           const color = data.categoryColors[cat] || '#A5A5A5';
+          const isActive = selectedCategory === cat;
           return (
-            <g key={cat}>
-              <rect x={barX} y={minY} width={8} height={barH} fill={color} rx={1} />
+            <g key={cat} style={{ cursor: 'pointer' }} onClick={() => handleCategoryClick(cat)}>
+              <rect x={barX} y={minY} width={8} height={barH} fill={color} rx={1} opacity={selectedNodes.length === 0 && !selectedCategory ? 1 : isActive ? 1 : 0.15} />
               <text
                 x={barX + 14}
                 y={minY + barH / 2}
                 dominantBaseline="central"
-                className="fill-foreground text-[10px] font-semibold"
-                transform={`rotate(-90, ${barX + 14}, ${minY + barH / 2})`}
+                className="fill-foreground text-[9.5px] font-semibold"
               >
                 {cat}
               </text>
