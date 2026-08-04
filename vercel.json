@@ -1,5 +1,6 @@
 {
   "buildCommand": "next build",
   "outputDirectory": ".next",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "nodeVersion": "22.x"
 }
