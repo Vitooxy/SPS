@@ -85,8 +85,8 @@ function trimCell(val: unknown): string {
   return String(val ?? '').trim();
 }
 
-export function parseExcelData(file: ArrayBuffer): SankeyData {
-  const workbook = XLSX.read(file, { type: 'array' });
+export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
+  const workbook = file instanceof ArrayBuffer ? XLSX.read(file, { type: 'array' }) : file;
 
   // ── Parse Primary Code List ──
   const pcSheet = workbook.Sheets['Primary Code List'];
