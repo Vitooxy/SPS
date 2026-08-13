@@ -26,6 +26,8 @@ pnpm run start    # production server
 |------|---------|
 | `src/components/sankey-chart.tsx` | Main alluvial visualization component with layout engine, per-item link rendering, and interactions |
 | `public/sankey-data.json` | Pre-processed data (nodes, item-links, items) parsed from Excel |
+| `src/lib/parse-data.ts` | TypeScript Excel parser (port of Python logic, runs in browser) |
+| `src/app/page.tsx` | Root page with file upload button and data management |
 | `src/app/page.tsx` | Root page rendering the chart |
 | `src/app/layout.tsx` | Root layout with metadata |
 

@@ -346,7 +346,7 @@ function getStimulusSubcatOrder(
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 
-export default function SankeyChart() {
+export default function SankeyChart({ externalData }: { externalData?: SankeyData | null }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<SankeyData | null>(null);
   const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
@@ -371,15 +371,21 @@ export default function SankeyChart() {
     items: RawItem[];
   } | null>(null);
 
-  // Load data
+  // Load data from externalData or fetch
   useEffect(() => {
+    if (externalData) {
+      setData(externalData);
+      setSelectedNodes([]);
+      setSelectedCategory(null);
+      return;
+    }
     fetch('/sankey-data.json')
       .then((r) => r.json())
       .then((d: SankeyData) => {
         setData(d);
       })
       .catch((err) => console.error('Failed to load sankey data:', err));
-  }, []);
+  }, [externalData]);
 
   // Compute layout when data changes
   useEffect(() => {
