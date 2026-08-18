@@ -35,31 +35,41 @@ export default function DataManager({ onDataLoaded }: DataManagerProps) {
 
       // Validate sheets
       const errors: string[] = [];
-      const requiredSheets = ['Items × 6 Axes', 'Primary Code List', 'Axis Value List'];
-      const missingSheets = requiredSheets.filter(s => !wb.SheetNames.includes(s));
+      const requiredSheets = ['Items × Axes', 'Primary Code List', 'Axis Value List'];
+      // Also accept old sheet name
+      const oldNames: Record<string, string> = { 'Items × 6 Axes': 'Items × Axes' };
+      const missingSheets = requiredSheets.filter(s => {
+        if (s === 'Items × Axes') {
+          // Accept either 'Items × Axes' or 'Items × 6 Axes'
+          return !wb.SheetNames.includes('Items × Axes') && !wb.SheetNames.includes('Items × 6 Axes');
+        }
+        return !wb.SheetNames.includes(s);
+      });
       if (missingSheets.length > 0) {
         errors.push(`缺少工作表：${missingSheets.join('、')}。请下载模板查看正确格式。`);
       }
 
-      // Validate Items × 6 Axes headers
-      if (wb.SheetNames.includes('Items × 6 Axes')) {
-        const sheet = wb.Sheets['Items × 6 Axes'];
+      // Find the items sheet name
+      const itemsSheetName = wb.SheetNames.includes('Items × Axes') ? 'Items × Axes' : 'Items × 6 Axes';
+
+      // Validate items sheet headers
+      if (wb.SheetNames.includes(itemsSheetName)) {
+        const sheet = wb.Sheets[itemsSheetName];
         const rows = XLSX.utils.sheet_to_json<string[]>(sheet, { header: 1 });
         if (rows.length < 2) {
-          errors.push('Items × 6 Axes 工作表缺少数据行。');
+          errors.push(`${itemsSheetName} 工作表缺少数据行。`);
         } else {
-          const expectedHeaders = ['Row', 'Scale', 'ItemID', 'ItemText', 'DerivedPrimary', 'Outliner',
-            'Modality', 'Configuration', 'Process', 'Outcome', 'Response', 'CognitiveDisp', 'OriginalPR'];
-          const actualHeaders = (rows[0] as string[]).map(h => String(h).trim());
-          const missingHeaders = expectedHeaders.filter(h => !actualHeaders.includes(h));
-          if (missingHeaders.length > 0) {
-            errors.push(`Items × 6 Axes 工作表缺少列：${missingHeaders.join('、')}`);
+          // Check for essential columns
+          const row0 = rows[0] as string[];
+          const hasRow = row0[0] === 'Row' || row0[0] === '1';
+          if (!hasRow) {
+            errors.push(`${itemsSheetName} 工作表第一行应包含"Row"或序号。`);
           }
 
           // Check for data rows
           const dataRows = rows.slice(1).filter((r: any) => r[2] && String(r[2]).trim());
           if (dataRows.length === 0) {
-            errors.push('Items × 6 Axes 工作表没有有效的数据行（ItemID 列为空）。');
+            errors.push(`${itemsSheetName} 工作表没有有效的数据行（ItemID 列为空）。`);
           } else {
             // Check for missing ItemText
             const missingText = dataRows.filter((r: any) => !r[3] || String(r[3]).trim() === '');
