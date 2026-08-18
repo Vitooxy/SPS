@@ -111,7 +111,7 @@ const NODE_WIDTH = 12;
 const NODE_GAP = 3;
 const SUBCAT_BAR_WIDTH = 10;
 const SUBCAT_BAR_GAP = 2;
-const CHART_PADDING = { top: 50, bottom: 160, left: 200, right: 210 };
+const CHART_PADDING = { top: 50, bottom: 100, left: 200, right: 210 };
 const ITEM_LINE_MIN_WIDTH = 1.5;
 
 // ─── Layout Engine ───────────────────────────────────────────────────────────
@@ -204,7 +204,7 @@ function computeLayout(
 
 // ─── Barycentric Reordering ──────────────────────────────────────────────────
 
-function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; links: LayoutLink[] }) {
+function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; links: LayoutLink[] }, height: number) {
   const { axisOrder } = data;
   const { nodes } = layout;
 
@@ -246,7 +246,7 @@ function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; lin
       // Reassign y positions
       const totalGaps = (colNodes.length - 1) * NODE_GAP;
       const totalH = colNodes.reduce((sum, n) => sum + n.height, 0);
-      const chartH = 800 - CHART_PADDING.top - CHART_PADDING.bottom;
+      const chartH = height - CHART_PADDING.top - CHART_PADDING.bottom;
       const scale = totalH > 0 ? (chartH - totalGaps) / totalH : 0;
       let y = CHART_PADDING.top;
       for (const node of colNodes) {
@@ -423,7 +423,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
     const w = dimensions.width;
     const h = dimensions.height;
     const result = computeLayout(data, w, h);
-    barycentricReorder(data, result);
+    barycentricReorder(data, result, dimensions.height);
     const itemLinkPaths = buildItemLinkPaths(result, data.itemLinks);
     setLayout({ ...result, itemLinkPaths });
   }, [data, dimensions]);
@@ -438,7 +438,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
         if (width > 0) {
           setDimensions({
             width: Math.max(1000, width),
-            height: Math.max(500, Math.min(750, width * 0.55)),
+            height: Math.max(350, Math.min(500, width * 0.4)),
           });
         }
       }
@@ -1181,7 +1181,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
               Clear
             </button>
           </div>
-          <div className="max-h-[300px] overflow-y-auto space-y-1">
+          <div className="max-h-[400px] overflow-y-auto space-y-1">
             {panelItems.map((item) => {
               const itemVals = getItemValues(item.id, data.itemLinks, data.nodes, data.axisOrder);
               const displayOrder = ['DerivedPrimary', 'Stimulus', 'Process', 'Outcome', 'Response', 'CognitiveDisp'];
