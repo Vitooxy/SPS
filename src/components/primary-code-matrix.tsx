@@ -10,7 +10,6 @@ interface Props {
 
 const COL_WIDTH = 70;
 const ROW_HEIGHT = 36;
-const CAT_GAP = 24;
 const SCALE_NAMES = ["SPSQ", "HSP-27", "HSC-21", "DOES", "HSP-R", "HSC"];
 
 export default function PrimaryCodeMatrix({ data }: Props) {
@@ -68,7 +67,10 @@ export default function PrimaryCodeMatrix({ data }: Props) {
         <table className="border-collapse" style={{ fontSize: 11 }}>
           <thead>
             <tr>
-              <th style={{ width: 180, height: 36, textAlign: "left", padding: "0 6px", fontWeight: 600, color: "#666", fontSize: 10, borderBottom: "1px solid #ddd" }}>
+              <th style={{ width: 120, height: 36, textAlign: "left", padding: "0 6px", fontWeight: 600, color: "#666", fontSize: 10, borderBottom: "1px solid #ddd" }}>
+                Category
+              </th>
+              <th style={{ width: 140, height: 36, textAlign: "left", padding: "0 6px", fontWeight: 600, color: "#666", fontSize: 10, borderBottom: "1px solid #ddd" }}>
                 Primary Code
               </th>
               {SCALE_NAMES.map((s) => (
@@ -94,90 +96,82 @@ export default function PrimaryCodeMatrix({ data }: Props) {
             {cats.map((cat) => {
               const color = categoryColors[cat] ?? "#999";
               const codes = categoryPrimaryCodes(cat);
-              return (
-                <tr key={`${side}-${cat}`}>
-                  <td colSpan={SCALE_NAMES.length + 1} style={{ padding: 0, border: "none" }}>
-                    <table className="border-collapse w-full">
-                      <tbody>
-                        {/* Category header row */}
-                        <tr>
-                          <td
-                            colSpan={SCALE_NAMES.length + 1}
-                            style={{
-                              height: CAT_GAP,
-                              padding: 0,
-                              border: "none",
-                              verticalAlign: "bottom",
-                            }}
-                          >
-                            <div style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 4 }}>
-                              <div style={{ width: 4, height: 18, backgroundColor: color, borderRadius: 2, flexShrink: 0 }} />
-                              <span style={{ fontWeight: 700, fontSize: 12, color }}>{cat}</span>
-                            </div>
-                          </td>
-                        </tr>
-                        {/* Primary code rows */}
-                        {codes.map((code) => {
-                          const rowCounts = counts.cnt[code] ?? {};
-                          return (
-                            <tr key={`${side}-${code}`}>
-                              <td
+              return codes.map((code, idx) => {
+                const rowCounts = counts.cnt[code] ?? {};
+                const isFirst = idx === 0;
+                return (
+                  <tr key={`${side}-${code}`}>
+                    <td
+                      style={{
+                        width: 120,
+                        height: ROW_HEIGHT,
+                        padding: "0 6px",
+                        borderBottom: "1px solid #eee",
+                        fontSize: 10,
+                        color: isFirst ? color : "transparent",
+                        fontWeight: isFirst ? 700 : 400,
+                        verticalAlign: "middle",
+                      }}
+                    >
+                      {isFirst && (
+                        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                          <div style={{ width: 4, height: 14, backgroundColor: color, borderRadius: 2, flexShrink: 0 }} />
+                          <span style={{ color }}>{cat}</span>
+                        </div>
+                      )}
+                    </td>
+                    <td
+                      style={{
+                        width: 140,
+                        height: ROW_HEIGHT,
+                        padding: "0 6px",
+                        borderBottom: "1px solid #eee",
+                        fontSize: 10,
+                        color: "#444",
+                        verticalAlign: "middle",
+                      }}
+                    >
+                      {code}
+                    </td>
+                    {SCALE_NAMES.map((scale) => {
+                      const val = rowCounts[scale] ?? 0;
+                      return (
+                        <td
+                          key={`${code}-${scale}`}
+                          style={{
+                            width: COL_WIDTH,
+                            height: ROW_HEIGHT,
+                            textAlign: "center",
+                            borderBottom: "1px solid #eee",
+                            padding: "0 2px",
+                            verticalAlign: "middle",
+                            fontSize: 11,
+                            fontWeight: val > 0 ? 600 : 400,
+                            color: val > 0 ? "#333" : "#ccc",
+                          }}
+                        >
+                          {val > 0 && (
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+                              <span
                                 style={{
-                                  width: 180,
-                                  height: ROW_HEIGHT,
-                                  padding: "0 6px 0 16px",
-                                  borderBottom: "1px solid #eee",
-                                  fontSize: 10,
-                                  color: "#444",
-                                  verticalAlign: "middle",
+                                  display: "inline-block",
+                                  width: 8,
+                                  height: 8,
+                                  borderRadius: "50%",
+                                  backgroundColor: color,
+                                  opacity: 0.7,
                                 }}
-                              >
-                                {code}
-                              </td>
-                              {SCALE_NAMES.map((scale) => {
-                                const val = rowCounts[scale] ?? 0;
-                                return (
-                                  <td
-                                    key={`${code}-${scale}`}
-                                    style={{
-                                      width: COL_WIDTH,
-                                      height: ROW_HEIGHT,
-                                      textAlign: "center",
-                                      borderBottom: "1px solid #eee",
-                                      padding: "0 2px",
-                                      verticalAlign: "middle",
-                                      fontSize: 11,
-                                      fontWeight: val > 0 ? 600 : 400,
-                                      color: val > 0 ? "#333" : "#ccc",
-                                    }}
-                                  >
-                                    {val > 0 && (
-                                      <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-                                        <span
-                                          style={{
-                                            display: "inline-block",
-                                            width: 8,
-                                            height: 8,
-                                            borderRadius: "50%",
-                                            backgroundColor: color,
-                                            opacity: 0.7,
-                                          }}
-                                        />
-                                        {val}
-                                      </span>
-                                    )}
-                                    {val === 0 && <span style={{ color: "#e0e0e0" }}>—</span>}
-                                  </td>
-                                );
-                              })}
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              );
+                              />
+                              {val}
+                            </span>
+                          )}
+                          {val === 0 && <span style={{ color: "#e0e0e0" }}>—</span>}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              });
             })}
           </tbody>
         </table>
