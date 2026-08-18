@@ -231,7 +231,9 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
   const configCol = headers.indexOf('Configuration');
   const isOldFormat = modalityCol >= 0 && configCol >= 0;
 
-  // Build axis column definitions
+  // Build axis order from Axis Value List (source of truth), plus Primary Code
+  const avAxisNames = Object.keys(axisSubcats);
+  // Build axis column definitions by matching AV axis names to Items × Axes headers
   interface AxisColDef {
     name: string;      // Display/header name (e.g. 'Stimulus Input')
     colIdx: number;    // Column index in the raw data
@@ -239,28 +241,31 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
   }
 
   const axisCols: AxisColDef[] = [];
+  
   if (isOldFormat) {
-    // Old format: merge Modality + Configuration into 'Stimulus Input'
-    axisCols.push({ name: 'Stimulus Input', colIdx: modalityCol, isMulti: true });
-    // Skip Configuration (already merged), then add remaining axis columns
-    for (let i = configCol + 1; i < endCol; i++) {
-      const h = headers[i];
-      if (h && h !== '' && h !== 'Original Primary Code') {
-        axisCols.push({ name: h, colIdx: i, isMulti: true });
+    // Old format: merge Modality + Configuration into the matching AV axis name
+    const stimulusName = avAxisNames.find(a => a.toLowerCase().includes('stimulus')) || 'Stimulus Input';
+    axisCols.push({ name: stimulusName, colIdx: modalityCol, isMulti: true });
+    // Add remaining axis columns by matching headers to AV axis names
+    for (const avName of avAxisNames) {
+      if (avName === stimulusName) continue; // already handled
+      const colIdx = headers.indexOf(avName);
+      if (colIdx >= 0) {
+        axisCols.push({ name: avName, colIdx, isMulti: true });
       }
     }
   } else {
-    // New format: each header is an axis column
-    for (let i = lastFixedCol + 1; i < endCol; i++) {
-      const h = headers[i];
-      if (h && h !== '' && h !== 'Original Primary Code') {
-        axisCols.push({ name: h, colIdx: i, isMulti: true });
+    // New format: match AV axis names to headers by exact name
+    for (const avName of avAxisNames) {
+      const colIdx = headers.indexOf(avName);
+      if (colIdx >= 0) {
+        axisCols.push({ name: avName, colIdx, isMulti: true });
       }
     }
   }
 
-  // Build axis order: all axis columns + DerivedPrimary (always last)
-  const axisOrder = [...axisCols.map(c => c.name), 'Derived Primary Code'];
+  // Axis order: AV axis names + Derived Primary Code (always last)
+  const axisOrder = [...avAxisNames, 'Derived Primary Code'];
 
   // ── Parse items ──
   const itemRows: any[] = [];
