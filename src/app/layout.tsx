@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="zh-CN" translate="no">
       <body className="antialiased">
         <Inspector keys={['command', 'i']} onInspectElement={undefined}>
           {children}

@@ -317,6 +317,42 @@
       "axis": "Derived Primary Code",
       "value": "Sensitivity to Subtlety",
       "column": 5
+    },
+    {
+      "id": "Derived Primary Code::Mental Overactivity",
+      "axis": "Derived Primary Code",
+      "value": "Mental Overactivity",
+      "column": 5
+    },
+    {
+      "id": "Derived Primary Code::Social Hedonic Sensitivity",
+      "axis": "Derived Primary Code",
+      "value": "Social Hedonic Sensitivity",
+      "column": 5
+    },
+    {
+      "id": "Derived Primary Code::Anticipatory Processing",
+      "axis": "Derived Primary Code",
+      "value": "Anticipatory Processing",
+      "column": 5
+    },
+    {
+      "id": "Derived Primary Code::Inner Richness",
+      "axis": "Derived Primary Code",
+      "value": "Inner Richness",
+      "column": 5
+    },
+    {
+      "id": "Derived Primary Code::Mental Replay",
+      "axis": "Derived Primary Code",
+      "value": "Mental Replay",
+      "column": 5
+    },
+    {
+      "id": "Derived Primary Code::Intuitive Insight",
+      "axis": "Derived Primary Code",
+      "value": "Intuitive Insight",
+      "column": 5
     }
   ],
   "links": [
@@ -4540,7 +4576,7 @@
       "derivedPrimary": [
         "Social Hedonic Sensitivity"
       ],
-      "category": "",
+      "category": "Other",
       "outliner": "",
       "values": {
         "Stimulus Input": "Close Others",
@@ -5283,7 +5319,7 @@
       "derivedPrimary": [
         "Intuitive Insight"
       ],
-      "category": "",
+      "category": "Other",
       "outliner": "",
       "values": {
         "Stimulus Input": "Internal Mentation",
