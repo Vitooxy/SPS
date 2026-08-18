@@ -67,7 +67,8 @@ export default function PrimaryCodeMatrix({ data }: Props) {
         <table className="border-collapse" style={{ fontSize: 11 }}>
           <thead>
             <tr>
-              <th style={{ width: 120, height: 36, textAlign: "left", padding: "0 6px", fontWeight: 600, color: "#666", fontSize: 10, borderBottom: "1px solid #ddd" }}>
+              <th style={{ width: 10, height: 36, padding: 0, borderBottom: "1px solid #ddd" }} />
+              <th style={{ width: 120, height: 36, textAlign: "center", padding: "0 6px", fontWeight: 600, color: "#666", fontSize: 10, borderBottom: "1px solid #ddd" }}>
                 Category
               </th>
               <th style={{ width: 140, height: 36, textAlign: "left", padding: "0 6px", fontWeight: 600, color: "#666", fontSize: 10, borderBottom: "1px solid #ddd" }}>
@@ -101,25 +102,37 @@ export default function PrimaryCodeMatrix({ data }: Props) {
                 const isFirst = idx === 0;
                 return (
                   <tr key={`${side}-${code}`}>
-                    <td
-                      style={{
-                        width: 120,
-                        height: ROW_HEIGHT,
-                        padding: "0 6px",
-                        borderBottom: "1px solid #eee",
-                        fontSize: 10,
-                        fontWeight: 700,
-                        verticalAlign: "middle",
-                        backgroundColor: color,
-                        color: "#fff",
-                      }}
-                    >
-                      {isFirst ? (
-                        <span style={{ paddingLeft: 4 }}>{cat}</span>
-                      ) : (
-                        <span style={{ paddingLeft: 4, opacity: 0 }}>{cat}</span>
-                      )}
-                    </td>
+                    {/* Color strip */}
+                    {isFirst ? (
+                      <td
+                        rowSpan={codes.length}
+                        style={{
+                          width: 10,
+                          padding: 0,
+                          borderBottom: "1px solid #eee",
+                          backgroundColor: color,
+                        }}
+                      />
+                    ) : null}
+                    {/* Category name (merged) */}
+                    {isFirst ? (
+                      <td
+                        rowSpan={codes.length}
+                        style={{
+                          width: 120,
+                          textAlign: "center",
+                          padding: "0 6px",
+                          borderBottom: "1px solid #eee",
+                          fontSize: 10,
+                          fontWeight: 700,
+                          verticalAlign: "middle",
+                          color: "#444",
+                        }}
+                      >
+                        {cat}
+                      </td>
+                    ) : null}
+                    {/* Primary Code */}
                     <td
                       style={{
                         width: 140,
