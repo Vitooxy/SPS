@@ -6,6 +6,7 @@ import DataManager from '@/components/data-manager';
 import type { SankeyData } from '@/lib/parse-data';
 
 const SankeyChart = dynamic(() => import('@/components/sankey-chart'), { ssr: false });
+const PrimaryCodeMatrix = dynamic(() => import('@/components/primary-code-matrix'), { ssr: false });
 
 const STORAGE_KEY = 'sps-saved-data';
 
@@ -27,6 +28,13 @@ export default function Home() {
       <div className="flex-1">
         <SankeyChart externalData={data} />
       </div>
+
+      {/* Primary Code × Scale Matrix */}
+      {data && (
+        <div className="border-t border-border">
+          <PrimaryCodeMatrix data={data} />
+        </div>
+      )}
     </div>
   );
 }
