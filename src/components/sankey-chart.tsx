@@ -47,6 +47,7 @@ interface SankeyData {
   axisLabels: Record<string, string>;
   axisItemCounts: Record<string, number>;
   categoryColors: Record<string, string>;
+  categoryCodes: Record<string, string[]>;
   categoryOrder: string[];
   stimulusSubcats: Record<string, string>;
   stimulusSubcatOrder: string[];

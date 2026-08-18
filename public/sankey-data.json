@@ -7820,5 +7820,60 @@
     "Demand": "#A5A5A5",
     "Configuration": "#FFC000",
     "Missing / Unspecified": "#D9D9D9"
+  },
+  "categoryCodes": {
+    "Overload": [
+      "Auditory Overload",
+      "General Overload",
+      "Gustatory Overload",
+      "Olfactory Overload",
+      "Social Overload",
+      "Tactile Overload",
+      "Visual Overload"
+    ],
+    "Perceptual Sensitivity": [
+      "Bodily-State Sensitivity",
+      "Cognitive Disruption",
+      "Difference Sensitivity",
+      "Sensitivity to Details",
+      "Sensitivity to Subtlety"
+    ],
+    "Affective and Aesthetic": [
+      "Aesthetic Responsiveness",
+      "Aesthetic Sensitivity",
+      "Emotional Contagion",
+      "Hedonic Sensitivity",
+      "Inner Emotional Intensity",
+      "Social Hedonic Sensitivity"
+    ],
+    "Coping": [
+      "Active Coping",
+      "Aversion to Uncertainty",
+      "Avoidance Coping",
+      "Pressure-Caused Overload",
+      "Preventive Regulation"
+    ],
+    "Cognitive Processing": [
+      "Anticipatory Processing",
+      "Deep Thought",
+      "Inner Richness",
+      "Intuitive Insight",
+      "Mental Overactivity",
+      "Mental Replay"
+    ],
+    "Other Descriptors": [
+      "Conscientious",
+      "Observer-Rated Sensitivity"
+    ],
+    "Social Cognition and Empathy": [
+      "Aversion to Conflict",
+      "Cognitive Empathy",
+      "Evaluation Apprehension",
+      "General Empathy",
+      "Nonverbal Social Perception"
+    ],
+    "Aversion": [
+      "Aversion to Change"
+    ]
   }
 }

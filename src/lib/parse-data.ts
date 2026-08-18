@@ -43,6 +43,7 @@ export interface SankeyData {
   axisLabels: Record<string, string>;
   axisItemCounts: Record<string, number>;
   categoryOrder: string[];
+  categoryCodes: Record<string, string[]>;
   categoryColors: Record<string, string>;
   stimulusSubcats: Record<string, string>;
   stimulusSubcatOrder: string[];
@@ -407,6 +408,7 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     },
     axisItemCounts,
     categoryOrder,
+    categoryCodes,
     categoryColors: CATEGORY_COLORS,
     stimulusSubcats,
     stimulusSubcatOrder,
