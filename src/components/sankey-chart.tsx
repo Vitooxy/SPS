@@ -52,7 +52,6 @@ interface SankeyData {
   stimulusSubcats: Record<string, string>;
   stimulusSubcatOrder: string[];
   stimulusSubcatColors: Record<string, string>;
-  axisSubcats: Record<string, Record<string, string[]>>;
 }
 
 interface LayoutNode extends RawNode {

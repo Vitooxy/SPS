@@ -13,14 +13,13 @@ interface DataEditorProps {
 
 export default function DataEditor({ data, onSave, onClose }: DataEditorProps) {
   const [tab, setTab] = useState<Tab>('items');
-  const { axisOrder = [] } = data;
-  const [items, setItems] = useState<EditorItemData[]>(() => data.items.map(i => ({ ...i, axisValues: { ...(i.axisValues || {}) } })));
+  const [items, setItems] = useState<EditorItemData[]>(() => data.items.map(i => ({ ...i })));
   const [primaryCodeList, setPrimaryCodeList] = useState<EditorPrimaryCode[]>(() => data.primaryCodeList.map(p => ({ ...p })));
   const [axisValueList, setAxisValueList] = useState<EditorAxisValue[]>(() => data.axisValueList.map(a => ({ ...a })));
 
   const handleSave = useCallback(() => {
-    onSave({ items, primaryCodeList, axisValueList, axisOrder });
-  }, [items, primaryCodeList, axisValueList, axisOrder, onSave]);
+    onSave({ items, primaryCodeList, axisValueList });
+  }, [items, primaryCodeList, axisValueList, onSave]);
 
   // ── Item helpers ──
   const updateItem = (idx: number, field: keyof EditorItemData, value: string) => {
@@ -31,30 +30,21 @@ export default function DataEditor({ data, onSave, onClose }: DataEditorProps) {
     });
   };
 
-  const updateItemAxis = (idx: number, axisName: string, value: string) => {
-    setItems(prev => {
-      const next = [...prev];
-      next[idx] = { ...next[idx], axisValues: { ...(next[idx].axisValues || {}), [axisName]: value } };
-      return next;
-    });
-  };
-
   const deleteItem = (idx: number) => {
     setItems(prev => prev.filter((_, i) => i !== idx));
   };
 
   const addItem = () => {
-    const emptyAxis: Record<string, string> = {};
-    for (const ax of axisOrder) {
-      emptyAxis[ax] = '';
-    }
     setItems(prev => [...prev, {
       id: `NEW_${prev.length + 1}`,
       text: '',
       scale: prev[0]?.scale || 'SPSQ',
       derivedPrimary: '',
-      outliner: '',
-      axisValues: emptyAxis,
+      stimulus: '',
+      process: '',
+      outcome: '',
+      response: '',
+      cognitiveDisp: '',
     }]);
   };
 
@@ -89,7 +79,7 @@ export default function DataEditor({ data, onSave, onClose }: DataEditorProps) {
   };
 
   const addAV = () => {
-    setAxisValueList(prev => [...prev, { axis: '', subcategory: '', value: '' }]);
+    setAxisValueList(prev => [...prev, { subcategory: '', value: '' }]);
   };
 
   return (
@@ -154,12 +144,11 @@ export default function DataEditor({ data, onSave, onClose }: DataEditorProps) {
                       <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[180px]">Text</th>
                       <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 w-16">Scale</th>
                       <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[160px]">Derived Primary</th>
-                      <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[80px]">Outliner</th>
-                      {axisOrder.filter(a => a !== 'Derived Primary Code').map(ax => (
-                        <th key={ax} className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[100px]">
-                          {ax}
-                        </th>
-                      ))}
+                      <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[120px]">Stimulus</th>
+                      <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[100px]">Process</th>
+                      <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[100px]">Outcome</th>
+                      <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[100px]">Response</th>
+                      <th className="p-1.5 border-b border-gray-200 text-left font-semibold text-gray-600 min-w-[100px]">Cog. Disp.</th>
                       <th className="p-1.5 border-b border-gray-200 w-10"></th>
                     </tr>
                   </thead>
@@ -184,15 +173,41 @@ export default function DataEditor({ data, onSave, onClose }: DataEditorProps) {
                             className="w-full px-1 py-0.5 border border-gray-200 rounded focus:outline-none focus:border-blue-400 bg-white"
                           />
                         </td>
-                        {axisOrder.filter(a => a !== 'Derived Primary Code').map((ax, axIdx, arr) => (
-                          <td key={ax} className={`p-1 border-b ${axIdx < arr.length - 1 ? 'border-r' : ''} border-gray-100`}>
-                            <input
-                              value={item.axisValues?.[ax] || ''}
-                              onChange={e => updateItemAxis(idx, ax, e.target.value)}
-                              className="w-full px-1 py-0.5 border border-gray-200 rounded focus:outline-none focus:border-blue-400 bg-white"
-                            />
-                          </td>
-                        ))}
+                        <td className="p-1 border-b border-r border-gray-100">
+                          <input
+                            value={item.stimulus}
+                            onChange={e => updateItem(idx, 'stimulus', e.target.value)}
+                            className="w-full px-1 py-0.5 border border-gray-200 rounded focus:outline-none focus:border-blue-400 bg-white"
+                          />
+                        </td>
+                        <td className="p-1 border-b border-r border-gray-100">
+                          <input
+                            value={item.process}
+                            onChange={e => updateItem(idx, 'process', e.target.value)}
+                            className="w-full px-1 py-0.5 border border-gray-200 rounded focus:outline-none focus:border-blue-400 bg-white"
+                          />
+                        </td>
+                        <td className="p-1 border-b border-r border-gray-100">
+                          <input
+                            value={item.outcome}
+                            onChange={e => updateItem(idx, 'outcome', e.target.value)}
+                            className="w-full px-1 py-0.5 border border-gray-200 rounded focus:outline-none focus:border-blue-400 bg-white"
+                          />
+                        </td>
+                        <td className="p-1 border-b border-r border-gray-100">
+                          <input
+                            value={item.response}
+                            onChange={e => updateItem(idx, 'response', e.target.value)}
+                            className="w-full px-1 py-0.5 border border-gray-200 rounded focus:outline-none focus:border-blue-400 bg-white"
+                          />
+                        </td>
+                        <td className="p-1 border-b border-gray-100">
+                          <input
+                            value={item.cognitiveDisp}
+                            onChange={e => updateItem(idx, 'cognitiveDisp', e.target.value)}
+                            className="w-full px-1 py-0.5 border border-gray-200 rounded focus:outline-none focus:border-blue-400 bg-white"
+                          />
+                        </td>
                         <td className="p-1 border-b border-gray-100">
                           <button
                             onClick={() => deleteItem(idx)}
@@ -276,7 +291,6 @@ export default function DataEditor({ data, onSave, onClose }: DataEditorProps) {
                   <thead className="sticky top-0 bg-gray-50 z-10">
                     <tr>
                       <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 w-8">#</th>
-                      <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[160px]">Axis</th>
                       <th className="p-1.5 border-b border-r border-gray-200 text-left font-semibold text-gray-600 min-w-[160px]">Subcategory</th>
                       <th className="p-1.5 border-b border-gray-200 text-left font-semibold text-gray-600 min-w-[200px]">Value</th>
                       <th className="p-1.5 border-b border-gray-200 w-10"></th>
@@ -286,18 +300,6 @@ export default function DataEditor({ data, onSave, onClose }: DataEditorProps) {
                     {axisValueList.map((av, idx) => (
                       <tr key={idx} className="hover:bg-blue-50/30">
                         <td className="p-1 border-b border-r border-gray-100 text-gray-400 text-center">{idx + 1}</td>
-                        <td className="p-1 border-b border-r border-gray-100">
-                          <select
-                            value={av.axis}
-                            onChange={e => updateAV(idx, 'axis', e.target.value)}
-                            className="w-full px-1 py-0.5 border border-gray-200 rounded focus:outline-none focus:border-blue-400 bg-white"
-                          >
-                            <option value="">Select axis...</option>
-                            {axisOrder.filter(a => a !== 'Derived Primary Code').map(a => (
-                              <option key={a} value={a}>{a}</option>
-                            ))}
-                          </select>
-                        </td>
                         <td className="p-1 border-b border-r border-gray-100">
                           <input
                             value={av.subcategory}

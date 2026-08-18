@@ -3,27 +3,27 @@ import * as XLSX from 'xlsx';
 export function downloadTemplate() {
   const wb = XLSX.utils.book_new();
 
-  // --- Sheet 1: Items × Axes ---
+  // --- Sheet 1: Items × 6 Axes ---
   const itemsHeaders = [
-    'Row', 'Scale', 'Item ID', 'Item Text', 'Derived Primary Code', 'Outliner',
-    'Stimulus Input', 'Process', 'Outcome and Appraised Valence', 'Response', 'Cognitive Disposition', 'Original Primary Code'
+    'Row', 'Scale', 'ItemID', 'ItemText', 'DerivedPrimary', 'Outliner',
+    'Modality', 'Configuration', 'Process', 'Outcome', 'Response', 'CognitiveDisp', 'OriginalPR'
   ];
   const itemsSample = [
     [1, 'HSP-27', 'HSP_1', 'Emotional film scenes touch me deeply.', 'Aesthetic Responsiveness', '',
-     'Visual, Auditory, Intense Input', 'Affective Engagement', 'Positive', 'Preventive Regulation', 'Sensitivity to Aesthetic', 'Aesthetic Responsiveness'],
+     'Visual, Auditory', 'Intense Input', 'Affective Engagement', 'Positive', 'Preventive Regulation', 'Sensitivity to Aesthetic', 'Aesthetic Responsiveness'],
     [2, 'HSP-27', 'HSP_2', 'I am easily overwhelmed by bright lights.', 'Visual Overload', '',
-     'Visual, Intense Input', 'Sensory Information Processing', 'Negative', 'Withdrawal', 'Sensitivity to Overload', 'Visual Overload'],
+     'Visual', 'Intense Input', 'Sensory Information Processing', 'Negative', 'Withdrawal', 'Sensitivity to Overload', 'Visual Overload'],
     [3, 'HSP-27', 'HSP_3', 'I notice subtle changes in my environment.', 'Sensitivity to Subtlety', '',
-     'Visual, Auditory, Olfactory, Subtlety', 'Sensory Information Processing', 'Neutral', 'Preventive Regulation', 'Sensitivity to Subtle Stimuli', 'Sensitivity to Subtlety'],
+     'Visual, Auditory, Olfactory', 'Subtlety', 'Sensory Information Processing', 'Neutral', 'Preventive Regulation', 'Sensitivity to Subtle Stimuli', 'Sensitivity to Subtlety'],
   ];
   const itemsSheet = XLSX.utils.aoa_to_sheet([itemsHeaders, ...itemsSample]);
   itemsSheet['!cols'] = [
     { wch: 6 }, { wch: 12 }, { wch: 12 }, { wch: 50 },
     { wch: 28 }, { wch: 10 },
-    { wch: 40 }, { wch: 30 }, { wch: 22 },
+    { wch: 30 }, { wch: 30 }, { wch: 30 }, { wch: 22 },
     { wch: 22 }, { wch: 28 }, { wch: 28 }
   ];
-  XLSX.utils.book_append_sheet(wb, itemsSheet, 'Items × Axes');
+  XLSX.utils.book_append_sheet(wb, itemsSheet, 'Items × 6 Axes');
 
   // --- Sheet 2: Primary Code List ---
   const pcHeaders = ['Level', 'Category', 'PrimaryCode'];
@@ -75,29 +75,29 @@ export function downloadTemplate() {
   // --- Sheet 3: Axis Value List ---
   const avHeaders = ['Axis', 'Subcategory', 'Value'];
   const avData = [
-    ['Stimulus Input', 'Physical', 'Visual'],
-    ['Stimulus Input', 'Physical', 'Auditory'],
-    ['Stimulus Input', 'Physical', 'Tactile'],
-    ['Stimulus Input', 'Physical', 'Gustatory'],
-    ['Stimulus Input', 'Physical', 'Olfactory'],
-    ['Stimulus Input', 'Physical', 'Thermoception'],
-    ['Stimulus Input', 'Internal', 'Bodily State'],
-    ['Stimulus Input', 'Internal', 'Internal Mentation'],
-    ['Stimulus Input', 'Social', 'Nonverbal Social Cues'],
-    ['Stimulus Input', 'Social', "Other's Mood"],
-    ['Stimulus Input', 'Social', 'Conflict'],
-    ['Stimulus Input', 'Social', 'Crowd'],
-    ['Stimulus Input', 'Social', 'Close Others'],
-    ['Stimulus Input', 'Social', 'Artistic Stimuli'],
-    ['Stimulus Input', 'Social', 'Linguistic'],
-    ['Stimulus Input', 'Demand', 'Observation or Competition'],
-    ['Stimulus Input', 'Demand', 'Time/Task Pressure'],
-    ['Stimulus Input', 'Configuration', 'Subtlety'],
-    ['Stimulus Input', 'Configuration', 'Intense Input'],
-    ['Stimulus Input', 'Configuration', 'Stimulus-Dense Environment'],
-    ['Stimulus Input', 'Configuration', 'Changes'],
-    ['Stimulus Input', 'Configuration', 'Uncertainty'],
-    ['Stimulus Input', 'Missing / Unspecified', 'Unspecified'],
+    ['Stimulus (Modality and Configuration)', 'Physical', 'Visual'],
+    ['Stimulus (Modality and Configuration)', 'Physical', 'Auditory'],
+    ['Stimulus (Modality and Configuration)', 'Physical', 'Tactile'],
+    ['Stimulus (Modality and Configuration)', 'Physical', 'Gustatory'],
+    ['Stimulus (Modality and Configuration)', 'Physical', 'Olfactory'],
+    ['Stimulus (Modality and Configuration)', 'Physical', 'Thermoception'],
+    ['Stimulus (Modality and Configuration)', 'Internal', 'Bodily State'],
+    ['Stimulus (Modality and Configuration)', 'Internal', 'Internal Mentation'],
+    ['Stimulus (Modality and Configuration)', 'Social', 'Nonverbal Social Cues'],
+    ['Stimulus (Modality and Configuration)', 'Social', "Other's Mood"],
+    ['Stimulus (Modality and Configuration)', 'Social', 'Conflict'],
+    ['Stimulus (Modality and Configuration)', 'Social', 'Crowd'],
+    ['Stimulus (Modality and Configuration)', 'Social', 'Close Others'],
+    ['Stimulus (Modality and Configuration)', 'Social', 'Artistic Stimuli'],
+    ['Stimulus (Modality and Configuration)', 'Social', 'Linguistic'],
+    ['Stimulus (Modality and Configuration)', 'Demand', 'Observation or Competition'],
+    ['Stimulus (Modality and Configuration)', 'Demand', 'Time/Task Pressure'],
+    ['Stimulus (Modality and Configuration)', 'Configuration', 'Subtlety'],
+    ['Stimulus (Modality and Configuration)', 'Configuration', 'Intense Input'],
+    ['Stimulus (Modality and Configuration)', 'Configuration', 'Stimulus-Dense Environment'],
+    ['Stimulus (Modality and Configuration)', 'Configuration', 'Changes'],
+    ['Stimulus (Modality and Configuration)', 'Configuration', 'Uncertainty'],
+    ['Stimulus (Modality and Configuration)', 'Missing / Unspecified', 'Unspecified'],
     ['Process', '', 'Sensory Information Processing'],
     ['Process', '', 'Affective Engagement'],
     ['Process', '', 'Cognitive Appraisal'],

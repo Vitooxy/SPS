@@ -48,8 +48,6 @@ export interface SankeyData {
   stimulusSubcats: Record<string, string>;
   stimulusSubcatOrder: string[];
   stimulusSubcatColors: Record<string, string>;
-  /** All axes' subcategory mappings from Axis Value List (not just Stimulus) */
-  axisSubcats: Record<string, Record<string, string[]>>;
 }
 
 const EXCLUDE_VALUES = new Set([
@@ -86,17 +84,6 @@ function parseValues(val: unknown): string[] {
 
 function trimCell(val: unknown): string {
   return String(val ?? '').trim();
-}
-
-/** Clean an axis name for display in the chart */
-function cleanAxisLabel(name: string): string {
-  const map: Record<string, string> = {
-    'Stimulus Input': 'Stimulus',
-    'Outcome and Appraised Valence': 'Outcome &\nAppraised Valence',
-    'Cognitive Disposition': 'Cognitive\nDisposition',
-    'Derived Primary Code': 'Primary Code',
-  };
-  return map[name] || name;
 }
 
 export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
@@ -136,54 +123,35 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     }
   }
 
-  // ── Parse Axis Value List — extract all axes' values ──
+  // ── Parse Axis Value List ──
   const avSheet = workbook.Sheets['Axis Value List'];
   const avRaw: (string | null)[][] = XLSX.utils.sheet_to_json(avSheet, { header: 1, defval: null });
-  
-  // Parse ALL axes from Axis Value List, not just Stimulus
-  const axisSubcats: Record<string, Record<string, string[]>> = {}; // axisName -> { subcategory: [values] }
-  let currentAxis: string | null = null;
+  const stimulusOrder: [string, string][] = [];
   let currentSubcat: string | null = null;
-  
+  let inStimulus = false;
   for (let i = 2; i < avRaw.length; i++) {
     const row = avRaw[i];
     if (!row) continue;
     const axis = trimCell(row[0]);
     const subcat = trimCell(row[1]);
     const value = trimCell(row[2]);
-    
-    if (axis && axis !== '') {
-      currentAxis = axis;
-      if (!axisSubcats[currentAxis]) {
-        axisSubcats[currentAxis] = {};
-      }
-      currentSubcat = null;
+    if (axis && axis.includes('Stimulus')) {
+      inStimulus = true;
+    } else if (inStimulus && axis && !axis.includes('Stimulus')) {
+      inStimulus = false;
+      continue;
     }
-    if (!currentAxis || !value || value === '') continue;
-    
+    if (!inStimulus || !value || value === '') continue;
     if (subcat && subcat !== '') currentSubcat = subcat;
-    
-    const subcatKey = currentSubcat || currentAxis; // Use axis name as fallback subcategory
-    if (!axisSubcats[currentAxis][subcatKey]) {
-      axisSubcats[currentAxis][subcatKey] = [];
-    }
-    axisSubcats[currentAxis][subcatKey].push(value);
+    if (currentSubcat && value) stimulusOrder.push([currentSubcat, value]);
   }
 
-  // Build stimulus-specific mappings (for backwards compatibility)
   const stimulusSubcats: Record<string, string> = {};
-  const stimulusSubcatOrder: string[] = [];
-  const stimulusData = axisSubcats['Stimulus Input'] || {};
-  for (const [subcat, values] of Object.entries(stimulusData)) {
-    if (!stimulusSubcatOrder.includes(subcat)) stimulusSubcatOrder.push(subcat);
-    for (const val of values) {
-      stimulusSubcats[val] = subcat;
-    }
-  }
+  for (const [subcat, val] of stimulusOrder) stimulusSubcats[val] = subcat;
+  const stimulusSubcatOrder = [...new Set(stimulusOrder.map(([s]) => s))];
 
-  // ── Parse Items × Axes (auto-detect sheet name) ──
-  const itemsSheetName = workbook.Sheets['Items × Axes'] ? 'Items × Axes' : 'Items × 6 Axes';
-  const itemsSheet = workbook.Sheets[itemsSheetName];
+  // ── Parse Items × 6 Axes ──
+  const itemsSheet = workbook.Sheets['Items × 6 Axes'];
   const itemsRaw: (string | null)[][] = XLSX.utils.sheet_to_json(itemsSheet, { header: 1, defval: null });
 
   // Find data start
@@ -195,107 +163,26 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     }
   }
 
-  // ── Auto-detect column layout from header row ──
-  const headerRow = itemsRaw[dataStart - 1] || [];
-  const headers = headerRow.map((h: unknown) => trimCell(h));
-
-  // Also check the row above for "Derived" and "Outliner" (new format has them there)
-  const subHeaderRow = dataStart >= 2 ? (itemsRaw[dataStart - 2] || []).map((h: unknown) => trimCell(h)) : [];
-
-  // Find fixed column indices by header name
-  const findCol = (names: string[]): number => {
-    for (const n of names) {
-      const i = headers.indexOf(n);
-      if (i >= 0) return i;
-      const j = subHeaderRow.indexOf(n);
-      if (j >= 0) return j;
-    }
-    return -1;
-  };
-  const fixedCols = {
-    row: headers.indexOf('Row'),
-    scale: headers.indexOf('Scale'),
-    itemId: findCol(['Item ID', 'ItemID']),
-    itemText: findCol(['Item Text', 'ItemText']),
-    derived: findCol(['Derived Primary Code', 'DerivedPrimary', 'Derived']),
-    outliner: findCol(['Outliner']),
-  };
-
-  // Detect axis columns: everything between the last fixed column and 'Original Primary Code'
-  const lastFixedCol = Math.max(...Object.values(fixedCols).filter(i => i >= 0));
-  const origPcCol = findCol(['Original Primary Code', 'Original']);
-  const endCol = origPcCol >= 0 ? origPcCol : headers.length;
-
-  // Detect if old format (Modality + Configuration) or new format (single Stimulus Input)
-  const modalityCol = headers.indexOf('Modality');
-  const configCol = headers.indexOf('Configuration');
-  const isOldFormat = modalityCol >= 0 && configCol >= 0;
-
-  // Build axis order from Axis Value List (source of truth), plus Primary Code
-  const avAxisNames = Object.keys(axisSubcats);
-  // Build axis column definitions by matching AV axis names to Items × Axes headers
-  interface AxisColDef {
-    name: string;      // Display/header name (e.g. 'Stimulus Input')
-    colIdx: number;    // Column index in the raw data
-    isMulti: boolean;  // Whether this axis can have multiple values (comma-separated)
-  }
-
-  const axisCols: AxisColDef[] = [];
-  
-  if (isOldFormat) {
-    // Old format: merge Modality + Configuration into the matching AV axis name
-    const stimulusName = avAxisNames.find(a => a.toLowerCase().includes('stimulus')) || 'Stimulus Input';
-    axisCols.push({ name: stimulusName, colIdx: modalityCol, isMulti: true });
-    // Add remaining axis columns by matching headers to AV axis names
-    for (const avName of avAxisNames) {
-      if (avName === stimulusName) continue; // already handled
-      const colIdx = headers.indexOf(avName);
-      if (colIdx >= 0) {
-        axisCols.push({ name: avName, colIdx, isMulti: true });
-      }
-    }
-  } else {
-    // New format: match AV axis names to headers by exact name
-    for (const avName of avAxisNames) {
-      const colIdx = headers.indexOf(avName);
-      if (colIdx >= 0) {
-        axisCols.push({ name: avName, colIdx, isMulti: true });
-      }
-    }
-  }
-
-  // Axis order: AV axis names + Derived Primary Code (always last)
-  const axisOrder = [...avAxisNames, 'Derived Primary Code'];
-
-  // ── Parse items ──
+  // Parse items
   const itemRows: any[] = [];
   for (let i = dataStart; i < itemsRaw.length; i++) {
     const row = itemsRaw[i];
     if (!row) continue;
-    const itemId = trimCell(row[fixedCols.itemId]);
-    if (!itemId || itemId === '' || itemId === 'Item ID' || itemId === 'ItemID') continue;
-    
-    const itemRow: any = {
-      scale: trimCell(row[fixedCols.scale]),
+    const itemId = trimCell(row[2]);
+    if (!itemId || itemId === '' || itemId === 'Item ID') continue;
+    itemRows.push({
+      scale: trimCell(row[1]),
       itemId: itemId,
-      itemText: trimCell(row[fixedCols.itemText]),
-      derivedPrimary: trimCell(row[fixedCols.derived]),
-      outliner: trimCell(row[fixedCols.outliner]),
-    };
-    
-    // Extract axis values dynamically
-    for (const axisDef of axisCols) {
-      if (isOldFormat && axisDef.name === 'Stimulus Input') {
-        // Merge Modality + Configuration values
-        const modalityVal = trimCell(row[modalityCol]);
-        const configVal = trimCell(row[configCol]);
-        itemRow['Stimulus Input'] = [modalityVal, configVal].filter(v => v && v !== '-').join(',');
-      } else {
-        itemRow[axisDef.name] = trimCell(row[axisDef.colIdx]);
-      }
-    }
-    
-    itemRows.push(itemRow);
+      itemText: trimCell(row[3]),
+      derivedPrimary: trimCell(row[4]),
+      outliner: trimCell(row[5]),
+      modality: trimCell(row[6]),
+      configuration: trimCell(row[7]),
+      process: trimCell(row[8]),
+      outcome: trimCell(row[9]),
+      response: trimCell(row[10]),
+      cognitiveDisp: trimCell(row[11]),
+    });
   }
 
   // Handle duplicate IDs
@@ -312,32 +199,25 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     return row.itemId;
   }
 
-  // Collect all axis values and build items
-  const axisValues: Record<string, Set<string>> = {};
-  for (const axis of axisOrder) axisValues[axis] = new Set();
-  
+  // Axis order
+  const axisOrder = ['Stimulus', 'Process', 'Outcome', 'Response', 'CognitiveDisp', 'DerivedPrimary'];
+
+  // Collect all axis values
+  const axisValues: Record<string, Set<string>> = { Stimulus: new Set(), Process: new Set(), Outcome: new Set(), Response: new Set(), CognitiveDisp: new Set(), DerivedPrimary: new Set() };
   const items: SankeyItem[] = [];
 
   for (const row of itemRows) {
     const uid = makeUniqueId(row);
     const dpStr = row.derivedPrimary;
     const dpVals = dpStr ? dpStr.split('/').map((v: string) => v.trim()).filter((v: string) => v && !EXCLUDE_VALUES.has(v)) : [];
-    for (const v of dpVals) axisValues['Derived Primary Code'].add(v);
 
-    const itemValues: Record<string, string[]> = {};
-    for (const axisDef of axisCols) {
-      const rawVal = row[axisDef.name];
-      let vals: string[];
-      if (isOldFormat && axisDef.name === 'Stimulus Input') {
-        // Already merged as comma-separated string
-        vals = parseValues(rawVal);
-      } else {
-        vals = parseValues(rawVal);
-      }
-      itemValues[axisDef.name] = vals;
-      for (const v of vals) axisValues[axisDef.name].add(v);
-    }
-    itemValues['Derived Primary Code'] = dpVals;
+    const stimulusVals = [...parseValues(row.modality), ...parseValues(row.configuration)];
+    for (const v of stimulusVals) axisValues.Stimulus.add(v);
+    for (const v of parseValues(row.process)) axisValues.Process.add(v);
+    for (const v of parseValues(row.outcome)) axisValues.Outcome.add(v);
+    for (const v of parseValues(row.response)) axisValues.Response.add(v);
+    for (const v of parseValues(row.cognitiveDisp)) axisValues.CognitiveDisp.add(v);
+    for (const v of dpVals) axisValues.DerivedPrimary.add(v);
 
     const category = dpVals.length > 0 ? (categoryMap[dpVals[0]] || 'Other Descriptors') : 'Other Descriptors';
 
@@ -347,7 +227,14 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
       scale: row.scale,
       derivedPrimary: dpVals,
       category,
-      values: itemValues,
+      values: {
+        Stimulus: stimulusVals,
+        Process: parseValues(row.process),
+        Outcome: parseValues(row.outcome),
+        Response: parseValues(row.response),
+        CognitiveDisp: parseValues(row.cognitiveDisp),
+        DerivedPrimary: dpVals,
+      },
     });
   }
 
@@ -355,16 +242,12 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
   const nodes: SankeyNode[] = [];
   const nodeIdMap: Record<string, number> = {};
   const axisItemCounts: Record<string, number> = {};
-  const axisLabels: Record<string, string> = {};
 
   for (let colIdx = 0; colIdx < axisOrder.length; colIdx++) {
     const axis = axisOrder[colIdx];
-    axisLabels[axis] = cleanAxisLabel(axis);
-    
     let orderedVals: string[];
 
-    if (axis === 'Derived Primary Code') {
-      // Order by category order from Primary Code List
+    if (axis === 'DerivedPrimary') {
       orderedVals = [];
       for (const cat of categoryOrder) {
         for (const code of categoryCodes[cat]) {
@@ -374,31 +257,16 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
       for (const val of [...axisValues[axis]].sort()) {
         if (!orderedVals.includes(val)) orderedVals.push(val);
       }
-    } else if (axis === 'Stimulus Input') {
-      // Order by Axis Value List order
+    } else if (axis === 'Stimulus') {
       orderedVals = [];
-      for (const [, values] of Object.entries(stimulusData)) {
-        for (const val of values) {
-          if (axisValues[axis].has(val)) orderedVals.push(val);
-        }
+      for (const [, val] of stimulusOrder) {
+        if (axisValues[axis].has(val)) orderedVals.push(val);
       }
       for (const val of [...axisValues[axis]].sort()) {
         if (!orderedVals.includes(val)) orderedVals.push(val);
       }
     } else {
-      // Order by Axis Value List if available, otherwise alphabetically
-      const axisData = axisSubcats[axis];
-      orderedVals = [];
-      if (axisData) {
-        for (const [, values] of Object.entries(axisData)) {
-          for (const val of values) {
-            if (axisValues[axis].has(val)) orderedVals.push(val);
-          }
-        }
-      }
-      for (const val of [...axisValues[axis]].sort()) {
-        if (!orderedVals.includes(val)) orderedVals.push(val);
-      }
+      orderedVals = [...axisValues[axis]].sort();
     }
 
     for (const val of orderedVals) {
@@ -407,34 +275,41 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
       nodeIdMap[nodeKey] = nodeId;
 
       let color = '#808080';
-      let category: string | null = null;
-      let subcategory: string | null = null;
-
-      if (axis === 'Stimulus Input') {
-        subcategory = stimulusSubcats[val] || 'Missing / Unspecified';
-        color = STIMULUS_SUBCAT_COLORS[subcategory] || '#D9D9D9';
-      } else if (axis === 'Derived Primary Code') {
-        category = categoryMap[val] || 'Other Descriptors';
-        color = CATEGORY_COLORS[category] || '#A5A5A5';
+      if (axis === 'Stimulus') {
+        const subcat = stimulusSubcats[val] || 'Missing / Unspecified';
+        color = STIMULUS_SUBCAT_COLORS[subcat] || '#D9D9D9';
+      } else if (axis === 'DerivedPrimary') {
+        const cat = categoryMap[val] || 'Other Descriptors';
+        color = CATEGORY_COLORS[cat] || '#A5A5A5';
       }
-      // Other axes: use default gray color (can be customized later)
 
       nodes.push({
         id: nodeId,
         axis,
         value: val,
         column: colIdx,
-        category,
-        subcategory,
+        category: axis === 'DerivedPrimary' ? (categoryMap[val] || null) : null,
+        subcategory: axis === 'Stimulus' ? (stimulusSubcats[val] || null) : null,
         color,
       });
     }
 
     // Count items with values on this axis
     let count = 0;
-    for (const item of items) {
-      const vals = item.values[axis] || [];
-      if (vals.length > 0) count++;
+    for (const row of itemRows) {
+      const uid = makeUniqueId(row);
+      if (axis === 'Stimulus') {
+        const sv = [...parseValues(row.modality), ...parseValues(row.configuration)];
+        if (sv.length > 0) count++;
+      } else if (axis === 'DerivedPrimary') {
+        const dp = row.derivedPrimary;
+        const dv = dp ? dp.split('/').map((v: string) => v.trim()).filter((v: string) => v && !EXCLUDE_VALUES.has(v)) : [];
+        if (dv.length > 0) count++;
+      } else {
+        const colMap: Record<string, string> = { 'Process': 'process', 'Outcome': 'outcome', 'Response': 'response', 'CognitiveDisp': 'cognitiveDisp' };
+        const v = parseValues(row[colMap[axis]]);
+        if (v.length > 0) count++;
+      }
     }
     axisItemCounts[axis] = count;
   }
@@ -442,12 +317,24 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
   // ── Build per-item links ──
   const itemLinks: ItemLink[] = [];
   for (const item of items) {
+    const itemRow = itemRows.find(r => makeUniqueId(r) === item.id);
+    if (!itemRow) continue;
+
+    const axisVals: Record<string, string[]> = {
+      Stimulus: [...parseValues(itemRow.modality), ...parseValues(itemRow.configuration)],
+      Process: parseValues(itemRow.process),
+      Outcome: parseValues(itemRow.outcome),
+      Response: parseValues(itemRow.response),
+      CognitiveDisp: parseValues(itemRow.cognitiveDisp),
+      DerivedPrimary: item.derivedPrimary,
+    };
+
     let prevAxis: string | null = null;
     let prevVals: string[] | null = null;
 
     for (const axis of axisOrder) {
-      const currVals = item.values[axis] || [];
-      if (currVals.length === 0) continue;
+      const currVals = axisVals[axis];
+      if (!currVals || currVals.length === 0) continue;
 
       if (prevAxis !== null && prevVals && prevVals.length > 0) {
         for (const pv of prevVals) {
@@ -488,7 +375,17 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
   for (const node of nodes) {
     const ids: string[] = [];
     for (const item of items) {
-      const vals = item.values[node.axis] || [];
+      const itemRow = itemRows.find(r => makeUniqueId(r) === item.id);
+      if (!itemRow) continue;
+      const axisVals: Record<string, string[]> = {
+        Stimulus: [...parseValues(itemRow.modality), ...parseValues(itemRow.configuration)],
+        Process: parseValues(itemRow.process),
+        Outcome: parseValues(itemRow.outcome),
+        Response: parseValues(itemRow.response),
+        CognitiveDisp: parseValues(itemRow.cognitiveDisp),
+        DerivedPrimary: item.derivedPrimary,
+      };
+      const vals = axisVals[node.axis] || [];
       if (vals.includes(node.value)) ids.push(item.id);
     }
     nodeItems[String(node.id)] = ids.sort();
@@ -501,7 +398,14 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     nodeItems,
     items,
     axisOrder,
-    axisLabels,
+    axisLabels: {
+      Stimulus: 'Stimulus',
+      Process: 'Process',
+      Outcome: 'Outcome &\nAppraised Valence',
+      Response: 'Response',
+      CognitiveDisp: 'Cognitive\nDisposition',
+      DerivedPrimary: 'Primary Code',
+    },
     axisItemCounts,
     categoryOrder,
     categoryCodes,
@@ -509,6 +413,5 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     stimulusSubcats,
     stimulusSubcatOrder,
     stimulusSubcatColors: STIMULUS_SUBCAT_COLORS,
-    axisSubcats,
   };
 }
