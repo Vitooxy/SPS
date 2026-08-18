@@ -77,6 +77,32 @@ interface LayoutItemLink extends RawItemLink {
 
 type InteractionMode = 'single' | 'addition' | 'subtraction';
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function getItemValues(itemId: string, itemLinks: RawItemLink[], nodes: RawNode[], axisOrder: string[]): Record<string, string[]> {
+  const values: Record<string, string[]> = {};
+  const nodeMap = new Map<number, RawNode>();
+  nodes.forEach((n) => nodeMap.set(n.id, n));
+  const links = itemLinks.filter((il) => il.itemId === itemId);
+  for (const il of links) {
+    const src = nodeMap.get(il.source);
+    const tgt = nodeMap.get(il.target);
+    if (src) {
+      if (!values[src.axis]) values[src.axis] = [];
+      if (!values[src.axis].includes(src.value)) values[src.axis].push(src.value);
+    }
+    if (tgt) {
+      if (!values[tgt.axis]) values[tgt.axis] = [];
+      if (!values[tgt.axis].includes(tgt.value)) values[tgt.axis].push(tgt.value);
+    }
+  }
+  return values;
+}
+
+function getItemCategory(itemId: string, items: { id: string; category: string }[]): string {
+  return items.find((i) => i.id === itemId)?.category ?? '';
+}
+
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const NODE_WIDTH = 12;
@@ -423,6 +449,40 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
     const map: Record<string, RawItem> = {};
     for (const item of data.items) {
       map[item.id] = item;
+    }
+    return map;
+  }, [data]);
+
+  const itemValuesMap = useMemo(() => {
+    if (!data) return {};
+    const map: Record<string, Record<string, string[]>> = {};
+    for (const item of data.items) {
+      if (item.values && Object.keys(item.values).length > 0) {
+        map[item.id] = item.values;
+      } else {
+        // Compute values from itemLinks
+        const vals: Record<string, Set<string>> = {
+          Stimulus: new Set(),
+          Process: new Set(),
+          Outcome: new Set(),
+          Response: new Set(),
+          CognitiveDisp: new Set(),
+          DerivedPrimary: new Set(),
+        };
+        for (const il of data.itemLinks) {
+          if (il.itemId === item.id) {
+            const srcNode = data.nodes.find((n) => n.id === il.source);
+            const tgtNode = data.nodes.find((n) => n.id === il.target);
+            if (srcNode) vals[srcNode.axis]?.add(srcNode.value);
+            if (tgtNode) vals[tgtNode.axis]?.add(tgtNode.value);
+          }
+        }
+        const result: Record<string, string[]> = {};
+        for (const [axis, set] of Object.entries(vals)) {
+          if (set.size > 0) result[axis] = Array.from(set);
+        }
+        map[item.id] = result;
+      }
     }
     return map;
   }, [data]);
@@ -784,9 +844,44 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
   const panelItems = useMemo(() => {
     if (!activeItemIds || activeItemIds.size === 0) return [];
     return Array.from(activeItemIds)
-      .map((id) => itemsMap[id])
-      .filter(Boolean);
-  }, [activeItemIds, itemsMap]);
+      .map((id) => {
+        const item = itemsMap[id];
+        if (!item) return null;
+        const values = itemValuesMap[id] || {};
+        // Display order: DerivedPrimary, Stimulus, Process, Outcome, Response, CognitiveDisp
+        const codingPath: string[] = [];
+        // 1. DerivedPrimary (final code)
+        const dp = values['DerivedPrimary'];
+        if (dp && dp.length > 0) {
+          codingPath.push(...dp.map((v) => v));
+        }
+        // 2. Stimulus (subcategory: specific values)
+        const stim = values['Stimulus'];
+        if (stim && stim.length > 0) {
+          const subcats = data?.stimulusSubcats || {};
+          const subcatMap = new Map<string, string[]>();
+          for (const v of stim) {
+            const subcat = (subcats as Record<string, string>)[v] || '';
+            if (!subcatMap.has(subcat)) subcatMap.set(subcat, []);
+            subcatMap.get(subcat)!.push(v);
+          }
+          const parts: string[] = [];
+          for (const [subcat, vals] of subcatMap) {
+            parts.push(subcat ? `${subcat}: ${vals.join(', ')}` : vals.join(', '));
+          }
+          codingPath.push(parts.join('; '));
+        }
+        // 3-6. Process, Outcome, Response, CognitiveDisp
+        for (const ax of ['Process', 'Outcome', 'Response', 'CognitiveDisp'] as const) {
+          const vals = values[ax];
+          if (vals && vals.length > 0) {
+            codingPath.push(vals.join(', '));
+          }
+        }
+        return { ...item, codingPath: codingPath.join(' → ') };
+      })
+      .filter(Boolean) as (RawItem & { codingPath: string })[];
+  }, [activeItemIds, itemsMap, itemValuesMap, data]);
 
   if (!data || !layout) {
     return (
@@ -1083,26 +1178,71 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
             </button>
           </div>
           <div className="max-h-48 overflow-y-auto space-y-1">
-            {panelItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-start gap-2 text-xs p-1.5 rounded hover:bg-muted/50"
-              >
-                <span className="font-mono text-[10px] text-muted-foreground shrink-0 w-20">
-                  {item.id}
-                </span>
-                <span className="text-foreground leading-snug">{item.text}</span>
-                <span
-                  className="shrink-0 text-[10px] px-1.5 py-0.5 rounded"
-                  style={{
-                    backgroundColor: data.categoryColors[item.category] || '#A5A5A5',
-                    color: '#fff',
-                  }}
+            {panelItems.map((item) => {
+              const itemVals = getItemValues(item.id, data.itemLinks, data.nodes, data.axisOrder);
+              const displayOrder = ['DerivedPrimary', 'Stimulus', 'Process', 'Outcome', 'Response', 'CognitiveDisp'];
+              return (
+                <div
+                  key={item.id}
+                  className="text-xs p-1.5 rounded hover:bg-muted/50"
                 >
-                  {item.category}
-                </span>
-              </div>
-            ))}
+                  <div className="flex items-start gap-2">
+                    <span className="font-mono text-[10px] text-muted-foreground shrink-0 w-20">
+                      {item.id}
+                    </span>
+                    <span className="text-foreground leading-snug flex-1">{item.text}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1 mt-1 ml-20">
+                    {displayOrder.map((axis) => {
+                      const vals = itemVals[axis];
+                      if (!vals || vals.length === 0) return null;
+                      if (axis === 'DerivedPrimary') {
+                        return vals.map((v: string) => (
+                          <span
+                            key={v}
+                            className="text-[10px] px-1.5 py-0.5 rounded"
+                            style={{
+                              backgroundColor: (() => {
+                                const dpNode = nodes.find(n => n.axis === 'DerivedPrimary' && n.value === v);
+                                return dpNode ? (dpNode.color || '#A5A5A5') : '#A5A5A5';
+                              })(),
+                              color: '#fff',
+                            }}
+                          >
+                            {v}
+                          </span>
+                        ));
+                      }
+                      if (axis === 'Stimulus') {
+                        // Group by subcategory
+                        const subcatGroups: Record<string, string[]> = {};
+                        vals.forEach((v: string) => {
+                          const subcat = data.stimulusSubcats?.[v] || '';
+                          if (!subcatGroups[subcat]) subcatGroups[subcat] = [];
+                          subcatGroups[subcat].push(v);
+                        });
+                        return Object.entries(subcatGroups).map(([subcat, svals]) => (
+                          <span
+                            key={subcat}
+                            className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
+                          >
+                            {subcat ? `${subcat}: ` : ''}{svals.join(', ')}
+                          </span>
+                        ));
+                      }
+                      return (
+                        <span
+                          key={axis}
+                          className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
+                        >
+                          {vals.join(', ')}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
