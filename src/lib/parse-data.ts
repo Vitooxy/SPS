@@ -150,8 +150,9 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
   for (const [subcat, val] of stimulusOrder) stimulusSubcats[val] = subcat;
   const stimulusSubcatOrder = [...new Set(stimulusOrder.map(([s]) => s))];
 
-  // ── Parse Items × 6 Axes ──
-  const itemsSheet = workbook.Sheets['Items × 6 Axes'];
+  // ── Parse Items × Axes (auto-detect sheet name) ──
+  const itemsSheetName = workbook.Sheets['Items × Axes'] ? 'Items × Axes' : 'Items × 6 Axes';
+  const itemsSheet = workbook.Sheets[itemsSheetName];
   const itemsRaw: (string | null)[][] = XLSX.utils.sheet_to_json(itemsSheet, { header: 1, defval: null });
 
   // Find data start
@@ -163,6 +164,10 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     }
   }
 
+  // Detect column layout: check if header[7] is 'Configuration' (old) or 'Process' (new)
+  const headerRow = itemsRaw[dataStart - 1] || [];
+  const isOldFormat = trimCell(headerRow[7]) === 'Configuration';
+
   // Parse items
   const itemRows: any[] = [];
   for (let i = dataStart; i < itemsRaw.length; i++) {
@@ -170,19 +175,34 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     if (!row) continue;
     const itemId = trimCell(row[2]);
     if (!itemId || itemId === '' || itemId === 'Item ID') continue;
-    itemRows.push({
-      scale: trimCell(row[1]),
-      itemId: itemId,
-      itemText: trimCell(row[3]),
-      derivedPrimary: trimCell(row[4]),
-      outliner: trimCell(row[5]),
-      modality: trimCell(row[6]),
-      configuration: trimCell(row[7]),
-      process: trimCell(row[8]),
-      outcome: trimCell(row[9]),
-      response: trimCell(row[10]),
-      cognitiveDisp: trimCell(row[11]),
-    });
+    if (isOldFormat) {
+      itemRows.push({
+        scale: trimCell(row[1]),
+        itemId: itemId,
+        itemText: trimCell(row[3]),
+        derivedPrimary: trimCell(row[4]),
+        outliner: trimCell(row[5]),
+        modality: trimCell(row[6]),
+        configuration: trimCell(row[7]),
+        process: trimCell(row[8]),
+        outcome: trimCell(row[9]),
+        response: trimCell(row[10]),
+        cognitiveDisp: trimCell(row[11]),
+      });
+    } else {
+      itemRows.push({
+        scale: trimCell(row[1]),
+        itemId: itemId,
+        itemText: trimCell(row[3]),
+        derivedPrimary: trimCell(row[4]),
+        outliner: trimCell(row[5]),
+        stimulus: trimCell(row[6]),  // Merged Stimulus Input column
+        process: trimCell(row[7]),
+        outcome: trimCell(row[8]),
+        response: trimCell(row[9]),
+        cognitiveDisp: trimCell(row[10]),
+      });
+    }
   }
 
   // Handle duplicate IDs
@@ -211,7 +231,9 @@ export function parseExcelData(file: ArrayBuffer | XLSX.WorkBook): SankeyData {
     const dpStr = row.derivedPrimary;
     const dpVals = dpStr ? dpStr.split('/').map((v: string) => v.trim()).filter((v: string) => v && !EXCLUDE_VALUES.has(v)) : [];
 
-    const stimulusVals = [...parseValues(row.modality), ...parseValues(row.configuration)];
+    const stimulusVals = row.stimulus !== undefined
+      ? parseValues(row.stimulus)  // New format: single Stimulus Input column
+      : [...parseValues(row.modality), ...parseValues(row.configuration)];  // Old format: Modality + Configuration
     for (const v of stimulusVals) axisValues.Stimulus.add(v);
     for (const v of parseValues(row.process)) axisValues.Process.add(v);
     for (const v of parseValues(row.outcome)) axisValues.Outcome.add(v);

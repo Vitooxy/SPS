@@ -98,7 +98,7 @@ export function buildWorkbookFromEditorData(editor: EditorData): XLSX.WorkBook {
   const avRows: (string | null)[][] = [
     ['Axis', 'Subcategory', 'Value'],
     [null, null, null],
-    ['Stimulus (Modality and Configuration)', null, null],
+    ['Stimulus Input', null, null],
   ];
   const subcatMap = new Map<string, string[]>();
   for (const av of editor.axisValueList) {
@@ -114,9 +114,9 @@ export function buildWorkbookFromEditorData(editor: EditorData): XLSX.WorkBook {
   const avSheet = XLSX.utils.aoa_to_sheet(avRows);
   XLSX.utils.book_append_sheet(wb, avSheet, 'Axis Value List');
 
-  // ── Sheet 3: Items × 6 Axes ──
+  // ── Sheet 3: Items × Axes ──
   const itemsRows: (string | null)[][] = [
-    ['Row', 'Scale', 'Item ID', 'Item Text', 'Derived Primary Code', 'Outliner', 'Modality', 'Configuration', 'Process', 'Outcome', 'Response', 'Cognitive Disposition'],
+    ['Row', 'Scale', 'Item ID', 'Item Text', 'Derived Primary Code', 'Outliner', 'Stimulus Input', 'Process', 'Outcome and Appraised Valence', 'Response', 'Cognitive Disposition', 'Original Primary Code'],
   ];
   for (let i = 0; i < editor.items.length; i++) {
     const item = editor.items[i];
@@ -128,15 +128,15 @@ export function buildWorkbookFromEditorData(editor: EditorData): XLSX.WorkBook {
       item.derivedPrimary,
       '',  // Outliner
       item.stimulus,
-      '',
       item.process,
       item.outcome,
       item.response,
       item.cognitiveDisp,
+      '',
     ]);
   }
   const itemsSheet = XLSX.utils.aoa_to_sheet(itemsRows);
-  XLSX.utils.book_append_sheet(wb, itemsSheet, 'Items × 6 Axes');
+  XLSX.utils.book_append_sheet(wb, itemsSheet, 'Items × Axes');
 
   return wb;
 }
