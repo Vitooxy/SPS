@@ -19,12 +19,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative w-full h-screen flex flex-col overflow-hidden">
+    <div className="relative w-full min-h-screen flex flex-col">
       {/* Top bar with buttons */}
       <DataManager onDataLoaded={handleDataLoaded} />
 
       {/* Chart area */}
-      <div className="flex-1 min-h-0">
+      <div className="flex-1">
         <SankeyChart externalData={data} />
       </div>
     </div>
