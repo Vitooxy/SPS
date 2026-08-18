@@ -438,7 +438,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
         if (width > 0) {
           setDimensions({
             width: Math.max(1000, width),
-            height: Math.max(600, Math.min(900, width * 0.65)),
+            height: Math.max(500, Math.min(750, width * 0.55)),
           });
         }
       }
@@ -1169,8 +1169,8 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
 
       {/* Bottom panel: item list */}
       {panelItems.length > 0 && (
-        <div className="mt-6 border-t border-border pt-4">
-          <div className="flex items-center justify-between mb-2">
+        <div className="mt-2 border-t border-border pt-2">
+          <div className="flex items-center justify-between mb-1.5">
             <h3 className="text-xs font-semibold text-foreground">
               Items ({panelItems.length})
             </h3>
@@ -1181,7 +1181,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
               Clear
             </button>
           </div>
-          <div className="max-h-[500px] overflow-y-auto space-y-1">
+          <div className="max-h-[300px] overflow-y-auto space-y-1">
             {panelItems.map((item) => {
               const itemVals = getItemValues(item.id, data.itemLinks, data.nodes, data.axisOrder);
               const displayOrder = ['DerivedPrimary', 'Stimulus', 'Process', 'Outcome', 'Response', 'CognitiveDisp'];
