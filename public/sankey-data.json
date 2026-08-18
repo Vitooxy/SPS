@@ -1724,7 +1724,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -1755,7 +1758,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -1787,7 +1793,10 @@
         "Process": "Affective Influence",
         "Outcome and Appraised Valence": "ER_Unspecified",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Emotional Contagion"
+        ]
       }
     },
     {
@@ -1817,7 +1826,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity"
+        ]
       }
     },
     {
@@ -1850,7 +1862,11 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "Withdraw",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Avoidance Coping",
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -1880,7 +1896,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity"
+        ]
       }
     },
     {
@@ -1919,7 +1938,13 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Visual Overload",
+          "Auditory Overload",
+          "Tactile Overload",
+          "Olfactory Overload"
+        ]
       }
     },
     {
@@ -1949,7 +1974,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Inner Richness"
+        "Cognitive Disposition": "Inner Richness",
+        "Derived Primary Code": [
+          "Deep Thought"
+        ]
       }
     },
     {
@@ -1982,7 +2010,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -2015,7 +2046,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness"
+        ]
       }
     },
     {
@@ -2050,7 +2084,12 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "Withdraw",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Avoidance Coping",
+          "Bodily-State Sensitivity",
+          "General Overload"
+        ]
       }
     },
     {
@@ -2080,7 +2119,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Conscientious"
+        ]
       }
     },
     {
@@ -2112,7 +2154,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -2144,7 +2189,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -2176,7 +2224,11 @@
         "Process": "Detection, Action Knowledge",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -2208,7 +2260,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -2240,7 +2295,12 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "Active Coping, Preventive Regulation",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Active Coping",
+          "Preventive Regulation",
+          "Aversion to Uncertainty"
+        ]
       }
     },
     {
@@ -2274,7 +2334,12 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "Preventive Regulation",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Empathy",
+          "Preventive Regulation",
+          "Aversion to Conflict"
+        ]
       }
     },
     {
@@ -2306,7 +2371,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -2339,7 +2407,11 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "PR_Negative, CognitiveDisruption_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity",
+          "Cognitive Disruption"
+        ]
       }
     },
     {
@@ -2371,7 +2443,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aversion to Change"
+        ]
       }
     },
     {
@@ -2410,7 +2485,13 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness",
+          "Aesthetic Sensitivity",
+          "Hedonic Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -2442,7 +2523,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -2474,7 +2558,12 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "Active Coping, Preventive Regulation",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Active Coping",
+          "Preventive Regulation",
+          "Aversion to Uncertainty"
+        ]
       }
     },
     {
@@ -2507,7 +2596,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -2541,7 +2633,12 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative, CognitiveDisruption_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Evaluation Apprehension",
+          "Cognitive Disruption",
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -2571,7 +2668,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Observer-Rated Sensitivity"
+        ]
       }
     },
     {
@@ -2603,7 +2703,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -2636,7 +2739,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -2668,7 +2774,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -2701,7 +2810,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -2733,7 +2845,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -2764,7 +2879,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -2796,7 +2915,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -2828,7 +2950,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -2860,7 +2985,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aversion to Conflict"
+        ]
       }
     },
     {
@@ -2893,7 +3021,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -2926,7 +3057,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aversion to Change"
+        ]
       }
     },
     {
@@ -2960,7 +3094,12 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative, CognitiveDisruption_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Evaluation Apprehension",
+          "Cognitive Disruption",
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -2999,7 +3138,13 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Visual Overload",
+          "Auditory Overload",
+          "Tactile Overload",
+          "Olfactory Overload"
+        ]
       }
     },
     {
@@ -3032,7 +3177,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness"
+        ]
       }
     },
     {
@@ -3065,7 +3213,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -3104,7 +3255,13 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness",
+          "Aesthetic Sensitivity",
+          "Hedonic Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -3137,7 +3294,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -3171,7 +3331,11 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Unspecified",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Emotional Contagion",
+          "Evaluation Apprehension"
+        ]
       }
     },
     {
@@ -3203,7 +3367,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Unspecified",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Inner Emotional Intensity"
+        ]
       }
     },
     {
@@ -3235,7 +3402,11 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Nonverbal Social Perception"
+        ]
       }
     },
     {
@@ -3267,7 +3438,11 @@
         "Process": "Inference, Anticipation",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Nonverbal Social Perception"
+        ]
       }
     },
     {
@@ -3299,7 +3474,11 @@
         "Process": "Detection, Inference",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Nonverbal Social Perception"
+        ]
       }
     },
     {
@@ -3331,7 +3510,10 @@
         "Process": "Affective Influence",
         "Outcome and Appraised Valence": "ER_Unspecified",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Emotional Contagion"
+        ]
       }
     },
     {
@@ -3361,7 +3543,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Deep Thought"
+        "Cognitive Disposition": "Deep Thought",
+        "Derived Primary Code": [
+          "Deep Thought"
+        ]
       }
     },
     {
@@ -3394,7 +3579,11 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Social Hedonic Sensitivity",
+          "Deep Thought"
+        ]
       }
     },
     {
@@ -3424,7 +3613,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Deep Thought"
+        "Cognitive Disposition": "Deep Thought",
+        "Derived Primary Code": [
+          "Deep Thought"
+        ]
       }
     },
     {
@@ -3455,7 +3647,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -3487,7 +3683,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -3519,7 +3719,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -3552,7 +3756,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness"
+        ]
       }
     },
     {
@@ -3583,7 +3790,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -3615,7 +3825,10 @@
         "Process": "Affective Influence",
         "Outcome and Appraised Valence": "ER_Unspecified",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Emotional Contagion"
+        ]
       }
     },
     {
@@ -3647,7 +3860,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -3678,7 +3894,11 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Deep Thought, Mental Overactivity"
+        "Cognitive Disposition": "Deep Thought, Mental Overactivity",
+        "Derived Primary Code": [
+          "Deep Thought",
+          "Mental Overactivity"
+        ]
       }
     },
     {
@@ -3710,7 +3930,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -3743,7 +3967,11 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "Deep Thought"
+        "Cognitive Disposition": "Deep Thought",
+        "Derived Primary Code": [
+          "Social Hedonic Sensitivity",
+          "Deep Thought"
+        ]
       }
     },
     {
@@ -3776,7 +4004,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Social Overload"
+        ]
       }
     },
     {
@@ -3808,7 +4039,12 @@
         "Process": "Anticipation",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Deep Thought, Inner Richness"
+        "Cognitive Disposition": "Deep Thought, Inner Richness",
+        "Derived Primary Code": [
+          "Anticipatory Processing",
+          "Deep Thought",
+          "Inner Richness"
+        ]
       }
     },
     {
@@ -3839,7 +4075,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -3873,7 +4112,11 @@
         "Process": "Affective Influence",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Emotional Contagion",
+          "Aversion to Conflict"
+        ]
       }
     },
     {
@@ -3905,7 +4148,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -3936,7 +4182,11 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Deep Thought"
+        "Cognitive Disposition": "Deep Thought",
+        "Derived Primary Code": [
+          "Deep Thought",
+          "Mental Replay"
+        ]
       }
     },
     {
@@ -3969,7 +4219,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -4003,7 +4257,11 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness",
+          "General Empathy"
+        ]
       }
     },
     {
@@ -4036,7 +4294,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -4067,7 +4328,11 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Deep Thought"
+        "Cognitive Disposition": "Deep Thought",
+        "Derived Primary Code": [
+          "Deep Thought",
+          "Mental Replay"
+        ]
       }
     },
     {
@@ -4099,7 +4364,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -4132,7 +4401,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness"
+        ]
       }
     },
     {
@@ -4167,7 +4439,11 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Gustatory Overload",
+          "Olfactory Overload"
+        ]
       }
     },
     {
@@ -4197,7 +4473,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Deep Thought"
+        "Cognitive Disposition": "Deep Thought",
+        "Derived Primary Code": [
+          "Deep Thought"
+        ]
       }
     },
     {
@@ -4229,7 +4508,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -4261,7 +4543,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -4293,7 +4578,11 @@
         "Process": "Inference",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Nonverbal Social Perception"
+        ]
       }
     },
     {
@@ -4325,7 +4614,11 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Nonverbal Social Perception"
+        ]
       }
     },
     {
@@ -4355,7 +4648,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -4388,7 +4684,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Visual Overload"
+        ]
       }
     },
     {
@@ -4421,7 +4720,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -4454,7 +4756,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -4487,7 +4792,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Visual Overload"
+        ]
       }
     },
     {
@@ -4521,7 +4829,12 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness",
+          "Aesthetic Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -4551,7 +4864,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Nonverbal Social Perception"
+        ]
       }
     },
     {
@@ -4583,7 +4899,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Social Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -4615,7 +4934,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aversion to Change"
+        ]
       }
     },
     {
@@ -4648,7 +4970,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Social Overload"
+        ]
       }
     },
     {
@@ -4680,7 +5005,11 @@
         "Process": "Detection, Inference",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Nonverbal Social Perception"
+        ]
       }
     },
     {
@@ -4713,7 +5042,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness"
+        ]
       }
     },
     {
@@ -4743,7 +5075,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity"
+        ]
       }
     },
     {
@@ -4774,7 +5109,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -4809,7 +5147,11 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Visual Overload",
+          "Olfactory Overload"
+        ]
       }
     },
     {
@@ -4841,7 +5183,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -4879,7 +5224,12 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Hedonic Sensitivity",
+          "Sensitivity to Subtlety",
+          "Aesthetic Responsiveness"
+        ]
       }
     },
     {
@@ -4911,7 +5261,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -4944,7 +5297,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -4976,7 +5332,10 @@
         "Process": "Affective Influence",
         "Outcome and Appraised Valence": "ER_Unspecified",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Emotional Contagion"
+        ]
       }
     },
     {
@@ -5009,7 +5368,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity",
+          "Difference Sensitivity"
+        ]
       }
     },
     {
@@ -5041,7 +5404,11 @@
         "Process": "Inference",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Nonverbal Social Perception"
+        ]
       }
     },
     {
@@ -5072,7 +5439,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -5104,7 +5474,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -5137,7 +5510,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Visual Overload"
+        ]
       }
     },
     {
@@ -5169,7 +5545,11 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -5199,7 +5579,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity"
+        ]
       }
     },
     {
@@ -5231,7 +5614,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -5263,7 +5649,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity"
+        ]
       }
     },
     {
@@ -5296,7 +5685,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -5326,7 +5718,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Intuition"
+        "Cognitive Disposition": "Intuition",
+        "Derived Primary Code": [
+          "Intuitive Insight"
+        ]
       }
     },
     {
@@ -5357,7 +5752,11 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "Inner Richness"
+        "Cognitive Disposition": "Inner Richness",
+        "Derived Primary Code": [
+          "Deep Thought",
+          "Inner Richness"
+        ]
       }
     },
     {
@@ -5390,7 +5789,11 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -5424,7 +5827,11 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness",
+          "Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -5456,7 +5863,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Aesthetic Responsiveness"
+        ]
       }
     },
     {
@@ -5489,7 +5899,12 @@
         "Process": "-",
         "Outcome and Appraised Valence": "",
         "Response": "Active Coping, Preventive Regulation",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Active Coping",
+          "Preventive Regulation",
+          "Aversion to Uncertainty"
+        ]
       }
     },
     {
@@ -5521,7 +5936,11 @@
         "Process": "Detection, Action Knowledge",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Cognitive Empathy",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -5553,7 +5972,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -5587,7 +6009,12 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative, CognitiveDisruption_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Evaluation Apprehension",
+          "Cognitive Disruption",
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -5618,7 +6045,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -5651,7 +6082,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -5683,7 +6117,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -5715,7 +6152,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "General Overload"
+        ]
       }
     },
     {
@@ -5748,7 +6188,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -5782,7 +6225,12 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative, CognitiveDisruption_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Evaluation Apprehension",
+          "Cognitive Disruption",
+          "Pressure-Caused Overload"
+        ]
       }
     },
     {
@@ -5813,7 +6261,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -5845,7 +6296,10 @@
         "Process": "Appreciation",
         "Outcome and Appraised Valence": "ER_Positive",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Hedonic Sensitivity"
+        ]
       }
     },
     {
@@ -5878,7 +6332,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Social Overload"
+        ]
       }
     },
     {
@@ -5908,7 +6365,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -5938,7 +6398,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Bodily-State Sensitivity"
+        ]
       }
     },
     {
@@ -5970,7 +6433,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -6002,7 +6469,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Tactile Overload"
+        ]
       }
     },
     {
@@ -6032,7 +6502,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Visual Overload"
+        ]
       }
     },
     {
@@ -6064,7 +6537,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -6096,7 +6573,11 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload",
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -6126,7 +6607,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -6159,7 +6643,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "PR_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Auditory Overload"
+        ]
       }
     },
     {
@@ -6191,7 +6678,11 @@
         "Process": "Detection, Discrimination",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Difference Sensitivity",
+          "Sensitivity to Subtlety"
+        ]
       }
     },
     {
@@ -6221,7 +6712,10 @@
         "Process": "Detection",
         "Outcome and Appraised Valence": "",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Sensitivity to Details"
+        ]
       }
     },
     {
@@ -6253,7 +6747,10 @@
         "Process": "-",
         "Outcome and Appraised Valence": "ER_Negative",
         "Response": "-",
-        "Cognitive Disposition": "-"
+        "Cognitive Disposition": "-",
+        "Derived Primary Code": [
+          "Tactile Overload"
+        ]
       }
     }
   ],
