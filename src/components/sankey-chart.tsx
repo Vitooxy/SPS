@@ -47,6 +47,7 @@ interface SankeyData {
   axisLabels: Record<string, string>;
   axisItemCounts: Record<string, number>;
   categoryColors: Record<string, string>;
+  categoryOrder: string[];
   stimulusSubcats: Record<string, string>;
   stimulusSubcatOrder: string[];
   stimulusSubcatColors: Record<string, string>;
@@ -372,7 +373,7 @@ function getStimulusSubcatOrder(
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 
-export default function SankeyChart({ externalData }: { externalData?: SankeyData | null }) {
+export default function SankeyChart({ externalData, onDataLoaded }: { externalData?: SankeyData | null; onDataLoaded?: (data: SankeyData) => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<SankeyData | null>(null);
   const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
@@ -403,12 +404,14 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
       setData(externalData);
       setSelectedNodes([]);
       setSelectedCategory(null);
+      if (onDataLoaded) onDataLoaded(externalData);
       return;
     }
     fetch('/sankey-data.json')
       .then((r) => r.json())
       .then((d: SankeyData) => {
         setData(d);
+        if (onDataLoaded) onDataLoaded(d);
       })
       .catch((err) => console.error('Failed to load sankey data:', err));
   }, [externalData]);

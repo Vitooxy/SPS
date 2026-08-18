@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import DataManager from '@/components/data-manager';
 import type { SankeyData } from '@/lib/parse-data';
@@ -12,11 +12,26 @@ const STORAGE_KEY = 'sps-saved-data';
 
 export default function Home() {
   const [data, setData] = useState<SankeyData | null>(null);
+  const [chartData, setChartData] = useState<SankeyData | null>(null);
 
   const handleDataLoaded = useCallback((parsed: SankeyData) => {
     setData(parsed);
-    // Save to localStorage so save button can persist it
+    setChartData(parsed);
     localStorage.setItem('sps-uploaded-data', JSON.stringify(parsed));
+  }, []);
+
+  // Load saved data on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved) as SankeyData;
+        setData(parsed);
+        setChartData(parsed);
+      } catch {
+        // ignore invalid saved data
+      }
+    }
   }, []);
 
   return (
@@ -26,7 +41,7 @@ export default function Home() {
 
       {/* Chart area */}
       <div className="flex-1">
-        <SankeyChart externalData={data} />
+        <SankeyChart externalData={chartData} onDataLoaded={handleDataLoaded} />
       </div>
 
       {/* Primary Code × Scale Matrix */}
