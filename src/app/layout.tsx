@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Inspector } from 'react-dev-inspector';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -15,9 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <Inspector keys={['command', 'i']} onInspectElement={undefined}>
-          {children}
-        </Inspector>
+        {children}
       </body>
     </html>
   );
