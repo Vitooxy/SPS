@@ -85,7 +85,6 @@ export default function Home() {
           <button
             onClick={handleOpenEditor}
             className="px-3 py-1 text-xs font-medium text-blue-600 border border-blue-300 rounded hover:bg-blue-50 transition-colors"
-            suppressHydrationWarning
           >
             Edit Data
           </button>

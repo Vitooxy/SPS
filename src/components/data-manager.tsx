@@ -167,25 +167,24 @@ export default function DataManager({ onDataLoaded }: DataManagerProps) {
   }, [onDataLoaded]);
 
   return (
-    <div className="flex items-center gap-3 px-4 py-2 bg-background border-b border-border" suppressHydrationWarning>
+    <div className="flex items-center gap-3 px-4 py-2 bg-background border-b border-border">
       {/* Upload button */}
       <button
         onClick={() => fileInputRef.current?.click()}
         disabled={loading}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-colors"
-        suppressHydrationWarning
       >
         {loading ? (
           <>
             <span className="animate-spin w-3 h-3 border-2 border-current border-t-transparent rounded-full" />
-            <span suppressHydrationWarning>解析中...</span>
+            解析中...
           </>
         ) : (
           <>
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
             </svg>
-            <span suppressHydrationWarning>上传数据</span>
+            上传数据
           </>
         )}
       </button>
@@ -201,24 +200,22 @@ export default function DataManager({ onDataLoaded }: DataManagerProps) {
       <button
         onClick={downloadTemplate}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border bg-card text-card-foreground hover:bg-accent transition-colors"
-        suppressHydrationWarning
       >
         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-        <span suppressHydrationWarning>下载模板</span>
+        下载模板
       </button>
 
       {/* Save button */}
       <button
         onClick={handleSave}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border border-border bg-card text-card-foreground hover:bg-accent transition-colors"
-        suppressHydrationWarning
       >
         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
         </svg>
-        <span suppressHydrationWarning>保存</span>
+        保存
       </button>
 
       {/* Status message */}
@@ -227,7 +224,7 @@ export default function DataManager({ onDataLoaded }: DataManagerProps) {
           message.type === 'success' ? 'text-green-600' :
           message.type === 'error' ? 'text-red-600' :
           'text-muted-foreground'
-        }`} suppressHydrationWarning>
+        }`}>
           {message.text}
         </span>
       )}
