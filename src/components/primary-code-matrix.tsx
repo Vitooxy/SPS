@@ -108,16 +108,16 @@ export default function PrimaryCodeMatrix({ data }: Props) {
                         padding: "0 6px",
                         borderBottom: "1px solid #eee",
                         fontSize: 10,
-                        color: isFirst ? color : "transparent",
-                        fontWeight: isFirst ? 700 : 400,
+                        fontWeight: 700,
                         verticalAlign: "middle",
+                        backgroundColor: color,
+                        color: "#fff",
                       }}
                     >
-                      {isFirst && (
-                        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                          <div style={{ width: 4, height: 14, backgroundColor: color, borderRadius: 2, flexShrink: 0 }} />
-                          <span style={{ color }}>{cat}</span>
-                        </div>
+                      {isFirst ? (
+                        <span style={{ paddingLeft: 4 }}>{cat}</span>
+                      ) : (
+                        <span style={{ paddingLeft: 4, opacity: 0 }}>{cat}</span>
                       )}
                     </td>
                     <td
