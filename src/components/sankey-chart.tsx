@@ -171,13 +171,8 @@ function computeLayout(
   const layoutLinks: LayoutLink[] = [];
 
   for (const link of links) {
-    const src = nodes.find((n) => n.id === link.source) as LayoutNode | undefined;
-    const tgt = nodes.find((n) => n.id === link.target) as LayoutNode | undefined;
-    if (!src || !tgt) {
-      if (!src) console.warn('computeLayout: missing source node', link.source);
-      if (!tgt) console.warn('computeLayout: missing target node', link.target);
-      continue;
-    }
+    const src = nodes.find((n) => n.id === link.source) as LayoutNode;
+    const tgt = nodes.find((n) => n.id === link.target) as LayoutNode;
 
     const srcOff = sourceOffsets.get(link.source) || 0;
     const tgtOff = targetOffsets.get(link.target) || 0;
@@ -267,13 +262,8 @@ function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; lin
   const targetOffsets = new Map<number, number>();
 
   for (const link of layout.links) {
-    const src = nodes.find((n) => n.id === link.source);
-    const tgt = nodes.find((n) => n.id === link.target);
-    if (!src || !tgt) {
-      if (!src) console.warn('barycentricReorder: missing source node', link.source);
-      if (!tgt) console.warn('barycentricReorder: missing target node', link.target);
-      continue;
-    }
+    const src = nodes.find((n) => n.id === link.source)!;
+    const tgt = nodes.find((n) => n.id === link.target)!;
 
     const srcOff = sourceOffsets.get(link.source) || 0;
     const tgtOff = targetOffsets.get(link.target) || 0;
@@ -324,13 +314,8 @@ function buildItemLinkPaths(
     );
     if (!aggLink) continue;
 
-    const srcNode = nodes.find((n) => n.id === aggLink.source);
-    const tgtNode = nodes.find((n) => n.id === aggLink.target);
-    if (!srcNode || !tgtNode) {
-      if (!srcNode) console.warn('buildItemLinkPaths: missing source node', aggLink.source);
-      if (!tgtNode) console.warn('buildItemLinkPaths: missing target node', aggLink.target);
-      continue;
-    }
+    const srcNode = nodes.find((n) => n.id === aggLink.source)!;
+    const tgtNode = nodes.find((n) => n.id === aggLink.target)!;
 
     // Total height available for this link
     const totalH_src = aggLink.sy1 - aggLink.sy0;
@@ -375,7 +360,7 @@ function getStimulusSubcatOrder(
   subcatOrder: string[],
   subcats: Record<string, string>,
 ): { subcat: string; nodes: LayoutNode[] }[] {
-  const stimulusNodes = nodes.filter((n) => n.axis === 'Stimulus Input');
+  const stimulusNodes = nodes.filter((n) => n.axis === 'Stimulus');
   const groups: { subcat: string; nodes: LayoutNode[] }[] = [];
 
   for (const sc of subcatOrder) {
@@ -863,38 +848,39 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
   // Get items for bottom panel
   const panelItems = useMemo(() => {
     if (!activeItemIds || activeItemIds.size === 0) return [];
-    const axisOrder = data?.axisOrder || [];
-    // Map full axis names to display labels
-    const axisLabels = data?.axisLabels || {};
     return Array.from(activeItemIds)
       .map((id) => {
         const item = itemsMap[id];
         if (!item) return null;
         const values = itemValuesMap[id] || {};
-        // Use axisOrder for display order
+        // Display order: DerivedPrimary, Stimulus, Process, Outcome, Response, CognitiveDisp
         const codingPath: string[] = [];
-        for (const axis of axisOrder) {
-          const vals = values[axis];
+        // 1. DerivedPrimary (final code)
+        const dp = values['DerivedPrimary'];
+        if (dp && dp.length > 0) {
+          codingPath.push(...dp.map((v) => v));
+        }
+        // 2. Stimulus (subcategory: specific values)
+        const stim = values['Stimulus'];
+        if (stim && stim.length > 0) {
+          const subcats = data?.stimulusSubcats || {};
+          const subcatMap = new Map<string, string[]>();
+          for (const v of stim) {
+            const subcat = (subcats as Record<string, string>)[v] || '';
+            if (!subcatMap.has(subcat)) subcatMap.set(subcat, []);
+            subcatMap.get(subcat)!.push(v);
+          }
+          const parts: string[] = [];
+          for (const [subcat, vals] of subcatMap) {
+            parts.push(subcat ? `${subcat}: ${vals.join(', ')}` : vals.join(', '));
+          }
+          codingPath.push(parts.join('; '));
+        }
+        // 3-6. Process, Outcome, Response, CognitiveDisp
+        for (const ax of ['Process', 'Outcome', 'Response', 'CognitiveDisp'] as const) {
+          const vals = values[ax];
           if (vals && vals.length > 0) {
-            if (axis === 'Derived Primary Code') {
-              codingPath.push(...vals.map((v) => v));
-            } else if (axis === 'Stimulus Input') {
-              // Group by subcategory
-              const subcats = data?.stimulusSubcats || {};
-              const subcatMap = new Map<string, string[]>();
-              for (const v of vals) {
-                const subcat = (subcats as Record<string, string>)[v] || '';
-                if (!subcatMap.has(subcat)) subcatMap.set(subcat, []);
-                subcatMap.get(subcat)!.push(v);
-              }
-              const parts: string[] = [];
-              for (const [subcat, svals] of subcatMap) {
-                parts.push(subcat ? `${subcat}: ${svals.join(', ')}` : svals.join(', '));
-              }
-              codingPath.push(parts.join('; '));
-            } else {
-              codingPath.push(vals.join(', '));
-            }
+            codingPath.push(vals.join(', '));
           }
         }
         return { ...item, codingPath: codingPath.join(' → ') };
@@ -902,7 +888,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
       .filter(Boolean) as (RawItem & { codingPath: string })[];
   }, [activeItemIds, itemsMap, itemValuesMap, data]);
 
-  if (!data || !layout || !data.axisOrder) {
+  if (!data || !layout) {
     return (
       <div className="flex items-center justify-center h-64">
         <p className="text-muted-foreground">Loading...</p>
@@ -982,7 +968,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
           const colNodes = nodes.filter((n) => n.column === i);
           if (colNodes.length === 0) return null;
           const x = colNodes[0].x + NODE_WIDTH / 2;
-          const count = (data.axisItemCounts?.[axis]) || 0;
+          const count = data.axisItemCounts[axis] || 0;
           return (
             <text
               key={axis}
@@ -1199,7 +1185,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
           <div className="max-h-[400px] overflow-y-auto space-y-1">
             {panelItems.map((item) => {
               const itemVals = getItemValues(item.id, data.itemLinks, data.nodes, data.axisOrder);
-              const displayOrder = data.axisOrder;
+              const displayOrder = ['DerivedPrimary', 'Stimulus', 'Process', 'Outcome', 'Response', 'CognitiveDisp'];
               return (
                 <div
                   key={item.id}
@@ -1215,14 +1201,14 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
                     {displayOrder.map((axis) => {
                       const vals = itemVals[axis];
                       if (!vals || vals.length === 0) return null;
-                      if (axis === 'Derived Primary Code') {
+                      if (axis === 'DerivedPrimary') {
                         return vals.map((v: string) => (
                           <span
                             key={v}
                             className="text-[10px] px-1.5 py-0.5 rounded"
                             style={{
                               backgroundColor: (() => {
-                                const dpNode = nodes.find(n => n.axis === 'Derived Primary Code' && n.value === v);
+                                const dpNode = nodes.find(n => n.axis === 'DerivedPrimary' && n.value === v);
                                 return dpNode ? (dpNode.color || '#A5A5A5') : '#A5A5A5';
                               })(),
                               color: '#fff',
@@ -1232,7 +1218,7 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
                           </span>
                         ));
                       }
-                      if (axis === 'Stimulus Input') {
+                      if (axis === 'Stimulus') {
                         // Group by subcategory
                         const subcatGroups: Record<string, string[]> = {};
                         vals.forEach((v: string) => {
