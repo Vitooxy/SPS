@@ -25,7 +25,7 @@ const AXIS_ORDER = ['Stimulus', 'Process', 'Outcome', 'Response', 'CognitiveDisp
 const EMPTY_VALUES = new Set(['', '-', 'nan', 'NaN']);
 
 export const CATEGORY_COLORS: Record<string, string> = {
-  Overload: '#C55A11', Aversion: '#ED7D31', Coping: '#FFC000', 'Perceptual Sensitivity': '#4472C4',
+  Overload: '#C55A11', Aversion: '#ED7D31', Coping: '#FFC000', 'Coping Behavior': '#FFC000', 'Perceptual Sensitivity': '#4472C4',
   'Affective and Aesthetic': '#7030A0', 'Social Cognition and Empathy': '#00B050',
   'Cognitive Processing': '#00B0F0', 'Other Descriptors': '#A5A5A5',
 };

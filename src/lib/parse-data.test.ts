@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import * as XLSX from 'xlsx';
-import { buildSankeyDataFromEditor, DataContractError, parseExcelData } from './parse-data';
+import { buildSankeyDataFromEditor, CATEGORY_COLORS, DataContractError, parseExcelData } from './parse-data';
 import { buildWorkbookFromEditorData, type EditorData } from './build-workbook';
+import { createTemplateEditorData } from './template';
 
 function makeWorkbook(stimulus = 'Visual'): XLSX.WorkBook {
   const workbook = XLSX.utils.book_new();
@@ -105,4 +106,19 @@ test('editor validation rejects duplicate definitions and uncoded items', () => 
     assert.match(error.message, /缺少 Derived Primary Code/);
     return true;
   });
+});
+
+test('download template follows the current 37-code contract and preserves coping color', () => {
+  const template = createTemplateEditorData();
+  const parsed = parseExcelData(buildWorkbookFromEditorData(template));
+  const codes = Object.values(parsed.categoryCodes).flat();
+  const responseValues = parsed.axisValueList
+    .filter((entry) => entry.axis === 'Response')
+    .map((entry) => entry.value);
+
+  assert.equal(codes.length, 37);
+  assert.ok(codes.includes('Crowd-Caused Overload'));
+  assert.ok(!codes.includes('Social Overload'));
+  assert.deepEqual(responseValues, ['Preventive Behavior', 'Recovery Behavior']);
+  assert.equal(CATEGORY_COLORS['Coping Behavior'], CATEGORY_COLORS.Coping);
 });

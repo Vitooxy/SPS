@@ -1271,11 +1271,11 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
           Primary-code category
         </p>
         <div className="flex items-center justify-center gap-4 flex-wrap">
-          {Object.entries(data.categoryColors).map(([cat, color]) => (
+          {data.categoryOrder.map((cat) => (
             <div key={cat} className="flex items-center gap-1.5">
               <div
                 className="w-3 h-3 rounded-sm"
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: data.categoryColors[cat] || '#A5A5A5' }}
               />
               <span className="text-[10px] text-foreground">{cat}</span>
             </div>

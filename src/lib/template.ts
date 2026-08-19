@@ -1,11 +1,10 @@
 import { downloadEditorWorkbook, type EditorData } from './build-workbook';
 
-export function downloadTemplate() {
+export function createTemplateEditorData(): EditorData {
   const categoryCodes: Record<string, string[]> = {
-    Overload: ['General Overload', 'Pressure-Caused Overload', 'Social Overload', 'Visual Overload', 'Auditory Overload', 'Tactile Overload', 'Olfactory Overload', 'Gustatory Overload'],
-    Aversion: ['Aversion to Change', 'Aversion to Conflict', 'Aversion to Uncertainty'],
-    Coping: ['Active Coping', 'Avoidance Coping', 'Preventive Regulation'],
-    'Perceptual Sensitivity': ['Sensitivity to Subtlety', 'Sensitivity to Details', 'Difference Sensitivity', 'Bodily-State Sensitivity'],
+    Overload: ['General Overload', 'Pressure-Caused Overload', 'Crowd-Caused Overload', 'Strong-Visual-Stimulus-Caused Overload', 'Strong-Auditory-Stimulus-Caused Overload', 'Tactile Overload', 'Olfactory Overload', 'Gustatory Overload', 'Change-Related Overload', 'Conflict-Related Overload'],
+    'Coping Behavior': ['Preventive Behavior', 'Recovery Behavior'],
+    'Perceptual Sensitivity': ['Sensitivity to Subtlety', 'Sensitivity to Details', 'Sensitivity to Small Differences and Changes', 'Bodily-State Sensitivity'],
     'Affective and Aesthetic': ['Hedonic Sensitivity', 'Social Hedonic Sensitivity', 'Aesthetic Responsiveness', 'Aesthetic Sensitivity', 'Emotional Contagion', 'Inner Emotional Intensity'],
     'Social Cognition and Empathy': ['Cognitive Empathy', 'General Empathy', 'Nonverbal Social Perception', 'Evaluation Apprehension'],
     'Cognitive Processing': ['Deep Thought', 'Inner Richness', 'Mental Replay', 'Anticipatory Processing', 'Mental Overactivity', 'Intuitive Insight', 'Cognitive Disruption'],
@@ -30,9 +29,13 @@ export function downloadTemplate() {
       ...Object.entries(stimulus).flatMap(([subcategory, values]) => values.map(value => ({ axis: 'Stimulus' as const, subcategory, value }))),
       ...['Detection', 'Discrimination', 'Appreciation', 'Inference', 'Anticipation', 'Action Knowledge', 'Affective Influence'].map(value => ({ axis: 'Process' as const, subcategory: '', value })),
       ...['ER_Negative', 'ER_Positive', 'ER_Unspecified', 'PR_Negative', 'CognitiveDisruption_Negative'].map(value => ({ axis: 'Outcome' as const, subcategory: '', value })),
-      ...['Preventive Regulation', 'Withdraw', 'Active Coping'].map(value => ({ axis: 'Response' as const, subcategory: '', value })),
+      ...['Preventive Behavior', 'Recovery Behavior'].map(value => ({ axis: 'Response' as const, subcategory: '', value })),
       ...['Deep Thought', 'Inner Richness', 'Mental Overactivity', 'Intuition'].map(value => ({ axis: 'CognitiveDisp' as const, subcategory: '', value })),
     ],
   };
-  downloadEditorWorkbook(editor, 'SPS-Coding-Template');
+  return editor;
+}
+
+export function downloadTemplate() {
+  downloadEditorWorkbook(createTemplateEditorData(), 'SPS-Coding-Template');
 }
