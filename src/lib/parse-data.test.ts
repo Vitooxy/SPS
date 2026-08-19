@@ -69,3 +69,40 @@ test('editing the shared model rebuilds nodes, links and item mapping together',
   assert.deepEqual(roundTrip.items[0].values, data.items[0].values);
   assert.equal(roundTrip.items[0].originalPrimaryCode, 'Original label');
 });
+
+test('editor validation rejects duplicate definitions and uncoded items', () => {
+  const workbook = makeWorkbook();
+  const parsed = parseExcelData(workbook);
+  const editor: EditorData = {
+    items: [{
+      id: parsed.items[0].id,
+      sourceId: parsed.items[0].sourceId,
+      scale: parsed.items[0].scale,
+      text: parsed.items[0].text,
+      derivedPrimary: '',
+      stimulus: 'Visual',
+      process: 'Detection',
+      outcome: 'ER_Negative',
+      response: 'Withdraw',
+      cognitiveDisp: 'Deep Thought',
+      outliner: '',
+      originalPrimaryCode: '',
+    }],
+    primaryCodeList: [
+      { category: 'Overload', code: 'Visual Overload' },
+      { category: 'Overload', code: 'Visual Overload' },
+    ],
+    axisValueList: [
+      ...parsed.axisValueList,
+      { axis: 'Stimulus', subcategory: 'Physical', value: 'Visual' },
+    ],
+  };
+
+  assert.throws(() => buildSankeyDataFromEditor(editor), (error) => {
+    assert.ok(error instanceof DataContractError);
+    assert.match(error.message, /Primary Code.*重复/);
+    assert.match(error.message, /Stimulus.*Visual.*重复/);
+    assert.match(error.message, /缺少 Derived Primary Code/);
+    return true;
+  });
+});

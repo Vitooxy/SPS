@@ -735,17 +735,39 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
     return nodeSet;
   }, [layout, activeItemLinkSet, selectedNodes, mode, selectedCategory]);
 
-  // Compute active item IDs from activeItemLinkSet (for bottom panel)
+  // Compute active item IDs directly from node membership for the bottom panel.
+  // This intentionally does not depend on ribbons: an item can have only a
+  // Primary Code and therefore no itemLink, but must still map back from its node.
   const activeItemIds = useMemo(() => {
-    if (!activeItemLinkSet || !layout) return null;
+    if (!data) return null;
+
+    if (selectedCategory) {
+      const categoryItems = new Set(
+        data.items
+          .filter((item) => item.category === selectedCategory)
+          .map((item) => item.id),
+      );
+      return categoryItems.size > 0 ? categoryItems : null;
+    }
+
+    if (selectedNodes.length === 0) return null;
+    const idsForNode = (nodeId: number) =>
+      new Set(data.nodeItems[String(nodeId)] ?? []);
+
+    if (mode === 'subtraction') {
+      const ids = idsForNode(selectedNodes[0]);
+      for (const nodeId of selectedNodes.slice(1)) {
+        for (const itemId of idsForNode(nodeId)) ids.delete(itemId);
+      }
+      return ids.size > 0 ? ids : null;
+    }
+
     const ids = new Set<string>();
-    for (const idx of activeItemLinkSet) {
-      if (idx < 0 || idx >= layout.itemLinkPaths.length) continue;
-      const il = layout.itemLinkPaths[idx];
-      if (il) ids.add(il.itemId);
+    for (const nodeId of selectedNodes) {
+      for (const itemId of idsForNode(nodeId)) ids.add(itemId);
     }
     return ids.size > 0 ? ids : null;
-  }, [activeItemLinkSet, layout]);
+  }, [data, mode, selectedCategory, selectedNodes]);
 
   // Node click handler
   const handleNodeClick = useCallback(
@@ -1174,7 +1196,8 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
           </div>
           <div className="max-h-[400px] overflow-y-auto space-y-1">
             {panelItems.map((item) => {
-              const itemVals = getItemValues(item.id, data.itemLinks, data.nodes, data.axisOrder);
+              const itemVals = itemValuesMap[item.id]
+                || getItemValues(item.id, data.itemLinks, data.nodes, data.axisOrder);
               const displayOrder = ['DerivedPrimary', 'Stimulus', 'Process', 'Outcome', 'Response', 'CognitiveDisp'];
               return (
                 <div

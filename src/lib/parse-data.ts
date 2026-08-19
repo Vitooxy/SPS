@@ -128,10 +128,19 @@ function validateEditorData(editor: EditorData): string[] {
   for (const entry of editor.primaryCodeList) {
     const category = clean(entry.category); const code = clean(entry.code); if (!category && !code) continue;
     if (!category || !code) { issues.push('Primary Code List 存在未填写完整的 Category/Code 行。'); continue; }
-    const previous = codeCategory.get(code); if (previous && previous !== category) issues.push(`Primary Code“${code}”被分配到多个 Category。`); codeCategory.set(code, category);
+    const previous = codeCategory.get(code);
+    if (previous) issues.push(previous === category
+      ? `Primary Code“${code}”重复出现。`
+      : `Primary Code“${code}”被分配到多个 Category。`);
+    else codeCategory.set(code, category);
   }
   const axisValues = new Map<string, Set<string>>(); for (const axis of AXIS_ORDER.slice(0, 5)) axisValues.set(axis, new Set());
-  for (const entry of editor.axisValueList) if (entry.axis && entry.value) axisValues.get(entry.axis)?.add(clean(entry.value));
+  for (const entry of editor.axisValueList) if (entry.axis && entry.value) {
+    const value = clean(entry.value); const values = axisValues.get(entry.axis);
+    if (values?.has(value)) issues.push(`${entry.axis} 轴的值“${value}”重复出现。`);
+    values?.add(value);
+  }
+  for (const axis of AXIS_ORDER.slice(0, 5)) if ((axisValues.get(axis)?.size ?? 0) === 0) issues.push(`Axis Value List 缺少“${axis}”轴的值。`);
   const rawCounts = new Map<string, number>(); for (const item of editor.items) { const sourceId = clean(item.sourceId || item.id); rawCounts.set(sourceId, (rawCounts.get(sourceId) ?? 0) + 1); }
   const uniqueIds = new Set<string>();
   for (const item of editor.items) {
@@ -139,7 +148,9 @@ function validateEditorData(editor: EditorData): string[] {
     if (!sourceId || !scale || !clean(item.text)) { issues.push('每个 item 都必须有稳定的 Item ID、Scale 和 Item Text。'); continue; }
     const uniqueId = (rawCounts.get(sourceId) ?? 0) > 1 ? `${sourceId}__${scale.replace(/\s/g, '')}` : sourceId;
     if (uniqueIds.has(uniqueId)) issues.push(`Item 唯一标识冲突：“${uniqueId}”。`); uniqueIds.add(uniqueId);
-    for (const code of splitValues(item.derivedPrimary, true)) if (!codeCategory.has(code)) issues.push(`${uniqueId} 引用了 Primary Code List 中不存在的编码“${code}”。`);
+    const derivedCodes = splitValues(item.derivedPrimary, true);
+    if (derivedCodes.length === 0) issues.push(`${uniqueId} 缺少 Derived Primary Code。`);
+    for (const code of derivedCodes) if (!codeCategory.has(code)) issues.push(`${uniqueId} 引用了 Primary Code List 中不存在的编码“${code}”。`);
     const fields: Array<[string, string, string]> = [['Stimulus', item.stimulus, 'Stimulus'], ['Process', item.process, 'Process'], ['Outcome', item.outcome, 'Outcome'], ['Response', item.response, 'Response'], ['CognitiveDisp', item.cognitiveDisp, 'Cognitive Disposition']];
     for (const [axis, value, label] of fields) for (const member of splitValues(value)) if (!axisValues.get(axis)?.has(member)) issues.push(`${uniqueId} 的 ${label} 值“${member}”不在 Axis Value List 中。`);
   }
