@@ -2,6 +2,7 @@ import * as XLSX from 'xlsx';
 
 export interface EditorItemData {
   id: string;
+  sourceId: string;
   text: string;
   scale: string;
   derivedPrimary: string;
@@ -10,6 +11,8 @@ export interface EditorItemData {
   outcome: string;
   response: string;
   cognitiveDisp: string;
+  outliner: string;
+  originalPrimaryCode: string;
 }
 
 export interface EditorPrimaryCode {
@@ -18,6 +21,7 @@ export interface EditorPrimaryCode {
 }
 
 export interface EditorAxisValue {
+  axis: 'Stimulus' | 'Process' | 'Outcome' | 'Response' | 'CognitiveDisp';
   subcategory: string;
   value: string;
 }
@@ -32,21 +36,25 @@ export interface EditorData {
  * Extract editable data from SankeyData for the editor
  */
 export function extractEditorData(data: {
-  items: { id: string; text: string; scale: string; derivedPrimary: string[]; values: Record<string, string[]> }[];
+  items: { id: string; sourceId?: string; text: string; scale: string; derivedPrimary: string[]; values?: Record<string, string[]>; outliner?: string; originalPrimaryCode?: string }[];
   categoryCodes: Record<string, string[]>;
   stimulusSubcats: Record<string, string>;
+  axisValueList?: EditorAxisValue[];
 }): EditorData {
   // Items
   const items: EditorItemData[] = data.items.map((item) => ({
     id: item.id,
+    sourceId: item.sourceId || item.id,
     text: item.text,
     scale: item.scale,
     derivedPrimary: item.derivedPrimary.join(', '),
-    stimulus: (item.values['Stimulus'] || []).join(', '),
-    process: (item.values['Process'] || []).join(', '),
-    outcome: (item.values['Outcome'] || []).join(', '),
-    response: (item.values['Response'] || []).join(', '),
-    cognitiveDisp: (item.values['CognitiveDisp'] || []).join(', '),
+    stimulus: (item.values?.['Stimulus'] || []).join(', '),
+    process: (item.values?.['Process'] || []).join(', '),
+    outcome: (item.values?.['Outcome'] || []).join(', '),
+    response: (item.values?.['Response'] || []).join(', '),
+    cognitiveDisp: (item.values?.['CognitiveDisp'] || []).join(', '),
+    outliner: item.outliner || '',
+    originalPrimaryCode: item.originalPrimaryCode || '',
   }));
 
   // Primary Code List
@@ -57,10 +65,11 @@ export function extractEditorData(data: {
     }
   }
 
-  // Axis Value List (Stimulus)
-  const axisValueList: EditorAxisValue[] = [];
-  for (const [value, subcat] of Object.entries(data.stimulusSubcats)) {
-    axisValueList.push({ subcategory: subcat, value });
+  const axisValueList: EditorAxisValue[] = data.axisValueList?.map((entry) => ({ ...entry })) || [];
+  if (axisValueList.length === 0) {
+    for (const [value, subcat] of Object.entries(data.stimulusSubcats)) {
+      axisValueList.push({ axis: 'Stimulus', subcategory: subcat, value });
+    }
   }
 
   return { items, primaryCodeList, axisValueList };
@@ -98,45 +107,59 @@ export function buildWorkbookFromEditorData(editor: EditorData): XLSX.WorkBook {
   const avRows: (string | null)[][] = [
     ['Axis', 'Subcategory', 'Value'],
     [null, null, null],
-    ['Stimulus (Modality and Configuration)', null, null],
+    ['Stimulus Input', null, null],
   ];
   const subcatMap = new Map<string, string[]>();
   for (const av of editor.axisValueList) {
-    if (!subcatMap.has(av.subcategory)) subcatMap.set(av.subcategory, []);
-    subcatMap.get(av.subcategory)!.push(av.value);
+    if (av.axis !== 'Stimulus') continue;
+    const subcategory = av.subcategory || 'Missing / Unspecified';
+    if (!subcatMap.has(subcategory)) subcatMap.set(subcategory, []);
+    subcatMap.get(subcategory)!.push(av.value);
   }
   for (const [subcat, values] of subcatMap) {
-    avRows.push([null, subcat, null]);
-    for (const val of values) {
-      avRows.push([null, null, val]);
+    for (let i = 0; i < values.length; i++) {
+      avRows.push([i === 0 && avRows.length === 3 ? 'Stimulus Input' : null, i === 0 ? subcat : null, values[i]]);
     }
+  }
+  const axisLabels: Record<EditorAxisValue['axis'], string> = {
+    Stimulus: 'Stimulus Input', Process: 'Process', Outcome: 'Outcome and Appraised Valence',
+    Response: 'Response', CognitiveDisp: 'Cognitive Disposition',
+  };
+  for (const axis of ['Process', 'Outcome', 'Response', 'CognitiveDisp'] as const) {
+    const values = editor.axisValueList.filter((entry) => entry.axis === axis);
+    for (let i = 0; i < values.length; i++) avRows.push([i === 0 ? axisLabels[axis] : null, null, values[i].value]);
   }
   const avSheet = XLSX.utils.aoa_to_sheet(avRows);
   XLSX.utils.book_append_sheet(wb, avSheet, 'Axis Value List');
 
-  // ── Sheet 3: Items × 6 Axes ──
+  // ── Sheet 3: Items × 5 Axes ──
   const itemsRows: (string | null)[][] = [
-    ['Row', 'Scale', 'Item ID', 'Item Text', 'Derived Primary Code', 'Outliner', 'Modality', 'Configuration', 'Process', 'Outcome', 'Response', 'Cognitive Disposition'],
+    ['Row', 'Scale', 'Item ID', 'Item Text', 'Derived Primary Code', 'Outliner', 'Stimulus Input', 'Process', 'Outcome and Appraised Valence', 'Response', 'Cognitive Disposition', 'Original Primary Code'],
   ];
   for (let i = 0; i < editor.items.length; i++) {
     const item = editor.items[i];
     itemsRows.push([
       String(i + 1),
       item.scale,
-      item.id,
+      item.sourceId || item.id,
       item.text,
       item.derivedPrimary,
-      '',  // Outliner
+      item.outliner,
       item.stimulus,
-      '',
       item.process,
       item.outcome,
       item.response,
       item.cognitiveDisp,
+      item.originalPrimaryCode,
     ]);
   }
   const itemsSheet = XLSX.utils.aoa_to_sheet(itemsRows);
-  XLSX.utils.book_append_sheet(wb, itemsSheet, 'Items × 6 Axes');
+  XLSX.utils.book_append_sheet(wb, itemsSheet, 'Items × 5 Axes');
 
   return wb;
+}
+
+export function downloadEditorWorkbook(editor: EditorData, fileName: string) {
+  const workbook = buildWorkbookFromEditorData(editor);
+  XLSX.writeFile(workbook, `${fileName.replace(/[\\/:*?"<>|]/g, '_') || 'SPS-project'}.xlsx`);
 }

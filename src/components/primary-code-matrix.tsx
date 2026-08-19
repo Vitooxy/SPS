@@ -10,7 +10,7 @@ interface Props {
 
 const COL_WIDTH = 70;
 const ROW_HEIGHT = 36;
-const SCALE_NAMES = ["SPSQ", "HSP-27", "HSC-21", "DOES", "HSP-R", "HSC"];
+const DEFAULT_SCALE_ORDER = ["SPSQ", "HSP-27", "HSC-21", "DOES", "HSP-R", "HSC"];
 
 export default function PrimaryCodeMatrix({ data }: Props) {
   const matrixRef = useRef<HTMLDivElement>(null);
@@ -18,6 +18,13 @@ export default function PrimaryCodeMatrix({ data }: Props) {
   const categoryPrimaryCodes = useCallback((cat: string) => {
     return data.categoryCodes?.[cat] ?? [];
   }, [data]);
+  const scaleNames = useMemo(() => {
+    const present = new Set(data.items.map(item => item.scale));
+    return [
+      ...DEFAULT_SCALE_ORDER.filter(scale => present.has(scale)),
+      ...[...present].filter(scale => !DEFAULT_SCALE_ORDER.includes(scale)).sort(),
+    ];
+  }, [data.items]);
 
   // Compute counts for each primary code per scale
   const counts = useMemo(() => {
@@ -74,7 +81,7 @@ export default function PrimaryCodeMatrix({ data }: Props) {
               <th style={{ width: 140, height: 36, textAlign: "left", padding: "0 6px", fontWeight: 600, color: "#666", fontSize: 10, borderBottom: "1px solid #ddd" }}>
                 Primary Code
               </th>
-              {SCALE_NAMES.map((s) => (
+              {scaleNames.map((s) => (
                 <th
                   key={`${side}-${s}`}
                   style={{
@@ -146,7 +153,7 @@ export default function PrimaryCodeMatrix({ data }: Props) {
                     >
                       {code}
                     </td>
-                    {SCALE_NAMES.map((scale) => {
+                    {scaleNames.map((scale) => {
                       const val = rowCounts[scale] ?? 0;
                       return (
                         <td

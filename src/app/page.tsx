@@ -4,111 +4,203 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import DataManager from '@/components/data-manager';
 import DataEditor from '@/components/data-editor';
-import { parseExcelData } from '@/lib/parse-data';
-import { extractEditorData, buildWorkbookFromEditorData } from '@/lib/build-workbook';
-import type { SankeyData } from '@/lib/parse-data';
-import type { EditorData } from '@/lib/build-workbook';
+import ProjectManager from '@/components/project-manager';
+import { buildSankeyDataFromEditor, normalizeSankeyData, type SankeyData } from '@/lib/parse-data';
+import { downloadEditorWorkbook, extractEditorData, type EditorData } from '@/lib/build-workbook';
+import { createSnapshot, loadSnapshots, persistSnapshots, type ProjectSnapshot } from '@/lib/project-storage';
 
 const SankeyChart = dynamic(() => import('@/components/sankey-chart'), { ssr: false });
 const PrimaryCodeMatrix = dynamic(() => import('@/components/primary-code-matrix'), { ssr: false });
-
-const STORAGE_KEY = 'sps-saved-data';
+const ACTIVE_PROJECT_KEY = 'sps-active-project-id-v1';
 
 export default function Home() {
-  const [data, setData] = useState<SankeyData | null>(null);
-  const [chartData, setChartData] = useState<SankeyData | null>(null);
+  const [currentData, setCurrentData] = useState<SankeyData | null>(null);
+  const [projectName, setProjectName] = useState('SPS V3.14');
+  const [snapshots, setSnapshots] = useState<ProjectSnapshot[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [showEditor, setShowEditor] = useState(false);
   const [editorData, setEditorData] = useState<EditorData | null>(null);
-  // Track if we have uploaded data (to show edit button)
-  const [hasData, setHasData] = useState(false);
+  const [editorValidationError, setEditorValidationError] = useState<string | null>(null);
+  const editorOriginalData = useRef<SankeyData | null>(null);
 
-  const handleDataLoaded = useCallback((parsed: SankeyData) => {
-    setData(parsed);
-    setChartData(parsed);
-    setHasData(true);
-    localStorage.setItem('sps-uploaded-data', JSON.stringify(parsed));
+  useEffect(() => {
+    const savedSnapshots = loadSnapshots();
+    setSnapshots(savedSnapshots);
+    const savedActiveId = localStorage.getItem(ACTIVE_PROJECT_KEY);
+    const savedActive = savedSnapshots.find(snapshot => snapshot.id === savedActiveId);
+    if (savedActive) {
+      setCurrentData(normalizeSankeyData(savedActive.data));
+      setProjectName(savedActive.name);
+      setActiveId(savedActive.id);
+      return;
+    }
+    fetch('/sankey-data.json')
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then((data: SankeyData) => setCurrentData(normalizeSankeyData(data)))
+      .catch(error => console.error('Failed to load default data:', error));
   }, []);
 
-  // Load saved data on mount
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved) as SankeyData;
-        setData(parsed);
-        setChartData(parsed);
-        setHasData(true);
-      } catch {
-        // ignore invalid saved data
-      }
+  const handleDataLoaded = useCallback((data: SankeyData, sourceName: string) => {
+    setCurrentData(normalizeSankeyData(data));
+    setProjectName(sourceName || 'SPS Project');
+    setActiveId(null);
+    localStorage.removeItem(ACTIVE_PROJECT_KEY);
+    setShowEditor(false);
+  }, []);
+
+  const handleOpenEditor = useCallback(() => {
+    if (!currentData) return;
+    editorOriginalData.current = currentData;
+    setEditorData(extractEditorData(currentData));
+    setEditorValidationError(null);
+    setShowEditor(true);
+  }, [currentData]);
+
+  const handleEditorPreview = useCallback((edited: EditorData) => {
+    try {
+      setCurrentData(buildSankeyDataFromEditor(edited));
+      setEditorValidationError(null);
+    } catch (error) {
+      setEditorValidationError(error instanceof Error ? error.message : '数据合同无效');
     }
   }, []);
 
-  // Open editor
-  const handleOpenEditor = useCallback(() => {
-    const current = data || chartData;
-    if (!current) return;
-    const editor = extractEditorData(current);
-    setEditorData(editor);
-    setShowEditor(true);
-  }, [data, chartData]);
-
-  // Save from editor
   const handleEditorSave = useCallback((edited: EditorData) => {
     try {
-      const wb = buildWorkbookFromEditorData(edited);
-      const parsed = parseExcelData(wb);
-      setData(parsed);
-      setChartData(parsed);
+      setCurrentData(buildSankeyDataFromEditor(edited));
       setShowEditor(false);
       setEditorData(null);
-      localStorage.setItem('sps-uploaded-data', JSON.stringify(parsed));
-    } catch (err) {
-      console.error('Failed to rebuild data:', err);
-      alert('Error saving edited data. Check console for details.');
+      setEditorValidationError(null);
+      editorOriginalData.current = null;
+    } catch (error) {
+      setEditorValidationError(error instanceof Error ? error.message : '数据合同无效');
     }
   }, []);
 
   const handleEditorClose = useCallback(() => {
+    if (editorOriginalData.current) setCurrentData(editorOriginalData.current);
+    editorOriginalData.current = null;
     setShowEditor(false);
     setEditorData(null);
+    setEditorValidationError(null);
   }, []);
+
+  const commitSnapshots = useCallback((next: ProjectSnapshot[]) => {
+    const sorted = [...next].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    try {
+      persistSnapshots(sorted);
+      setSnapshots(sorted);
+      return true;
+    } catch {
+      window.alert('浏览器存储空间不足，方案未保存。请先导出 Excel，并删除不再需要的本地方案。');
+      return false;
+    }
+  }, []);
+
+  const handleSave = useCallback(() => {
+    if (!currentData || !projectName.trim()) return;
+    if (!activeId) {
+      const snapshot = createSnapshot(projectName, currentData);
+      if (commitSnapshots([snapshot, ...snapshots])) {
+        setActiveId(snapshot.id);
+        localStorage.setItem(ACTIVE_PROJECT_KEY, snapshot.id);
+      }
+      return;
+    }
+    commitSnapshots(snapshots.map(snapshot => snapshot.id === activeId
+      ? { ...snapshot, name: projectName.trim(), updatedAt: new Date().toISOString(), data: currentData }
+      : snapshot));
+  }, [activeId, commitSnapshots, currentData, projectName, snapshots]);
+
+  const handleSaveAs = useCallback(() => {
+    if (!currentData || !projectName.trim()) return;
+    const snapshot = createSnapshot(projectName, currentData);
+    if (commitSnapshots([snapshot, ...snapshots])) {
+      setActiveId(snapshot.id);
+      localStorage.setItem(ACTIVE_PROJECT_KEY, snapshot.id);
+    }
+  }, [commitSnapshots, currentData, projectName, snapshots]);
+
+  const handleLoad = useCallback((id: string) => {
+    const snapshot = snapshots.find(entry => entry.id === id);
+    if (!snapshot) return;
+    setCurrentData(normalizeSankeyData(snapshot.data));
+    setProjectName(snapshot.name);
+    setActiveId(snapshot.id);
+    localStorage.setItem(ACTIVE_PROJECT_KEY, snapshot.id);
+    setShowEditor(false);
+  }, [snapshots]);
+
+  const handleRename = useCallback(() => {
+    const nextName = projectName.trim();
+    if (!activeId || !nextName) return;
+    commitSnapshots(snapshots.map(snapshot => snapshot.id === activeId
+      ? { ...snapshot, name: nextName, updatedAt: new Date().toISOString() }
+      : snapshot));
+  }, [activeId, commitSnapshots, projectName, snapshots]);
+
+  const handleDelete = useCallback(() => {
+    if (!activeId) return;
+    const target = snapshots.find(snapshot => snapshot.id === activeId);
+    if (!target || !window.confirm(`确定删除方案“${target.name}”？此操作只删除浏览器中的存档。`)) return;
+    if (commitSnapshots(snapshots.filter(snapshot => snapshot.id !== activeId))) {
+      setActiveId(null);
+      localStorage.removeItem(ACTIVE_PROJECT_KEY);
+    }
+  }, [activeId, commitSnapshots, snapshots]);
+
+  const handleExport = useCallback(() => {
+    if (!currentData) return;
+    downloadEditorWorkbook(extractEditorData(currentData), projectName);
+  }, [currentData, projectName]);
 
   return (
     <div className="relative w-full min-h-screen flex flex-col">
-      {/* Top bar with buttons */}
-      <DataManager onDataLoaded={handleDataLoaded} />
+      <div className="flex items-center justify-between gap-3 px-4 py-2 bg-background border-b border-border flex-wrap">
+        <DataManager onDataLoaded={handleDataLoaded} />
+        <ProjectManager
+          name={projectName}
+          onNameChange={setProjectName}
+          snapshots={snapshots}
+          activeId={activeId}
+          onSave={handleSave}
+          onSaveAs={handleSaveAs}
+          onLoad={handleLoad}
+          onRename={handleRename}
+          onDelete={handleDelete}
+          onExport={handleExport}
+          disabled={!currentData}
+        />
+      </div>
 
-      {/* Edit Data button */}
-      {hasData && (
+      {currentData && (
         <div className="flex justify-end px-4 py-1">
-          <button
-            onClick={handleOpenEditor}
-            className="px-3 py-1 text-xs font-medium text-blue-600 border border-blue-300 rounded hover:bg-blue-50 transition-colors"
-          >
+          <button onClick={handleOpenEditor} className="px-3 py-1 text-xs font-medium text-blue-600 border border-blue-300 rounded hover:bg-blue-50 transition-colors">
             Edit Data
           </button>
         </div>
       )}
 
-      {/* Chart area */}
       <div className="flex-1">
-        <SankeyChart externalData={chartData} onDataLoaded={handleDataLoaded} />
+        <SankeyChart externalData={currentData} />
       </div>
 
-      {/* Primary Code × Scale Matrix */}
-      {data && (
+      {currentData && (
         <div className="border-t border-border mt-2">
-          <PrimaryCodeMatrix data={data} />
+          <PrimaryCodeMatrix data={currentData} />
         </div>
       )}
 
-      {/* Data Editor Modal */}
       {showEditor && editorData && (
         <DataEditor
           data={editorData}
+          onPreview={handleEditorPreview}
           onSave={handleEditorSave}
           onClose={handleEditorClose}
+          validationError={editorValidationError}
         />
       )}
     </div>

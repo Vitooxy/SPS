@@ -7,6 +7,8 @@
     "dev": "bash ./scripts/dev.sh",
     "lint": "eslint",
     "lint:build": "eslint . --quiet",
+    "generate:data": "tsx scripts/generate-sankey-data.ts",
+    "test": "tsx --test src/**/*.test.ts",
     "start": "next start",
     "ts-check": "tsc -p tsconfig.json"
   },

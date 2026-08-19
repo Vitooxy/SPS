@@ -226,6 +226,7 @@ function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; lin
     for (let col = 1; col < axisOrder.length - 1; col++) {
       const colNodes = nodes.filter((n) => n.column === col);
       const prevColNodes = nodes.filter((n) => n.column === col - 1);
+      const barycenters = new Map<number, number>();
 
       for (const node of colNodes) {
         const adj = backwardAdj.get(node.id) || [];
@@ -238,10 +239,13 @@ function barycentricReorder(data: SankeyData, layout: { nodes: LayoutNode[]; lin
             totalWeight += weight;
           }
         }
-        (node as any)._barycenter = totalWeight > 0 ? barycenter / totalWeight : node.y;
+        barycenters.set(node.id, totalWeight > 0 ? barycenter / totalWeight : node.y);
       }
 
-      colNodes.sort((a, b) => (a as any)._barycenter - (b as any)._barycenter);
+      colNodes.sort(
+        (a, b) =>
+          (barycenters.get(a.id) ?? a.y) - (barycenters.get(b.id) ?? b.y),
+      );
 
       // Reassign y positions
       const totalGaps = (colNodes.length - 1) * NODE_GAP;
@@ -374,9 +378,9 @@ function getStimulusSubcatOrder(
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 
-export default function SankeyChart({ externalData, onDataLoaded }: { externalData?: SankeyData | null; onDataLoaded?: (data: SankeyData) => void }) {
+export default function SankeyChart({ externalData }: { externalData?: SankeyData | null }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [data, setData] = useState<SankeyData | null>(null);
+  const data = externalData ?? null;
   const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
   const [layout, setLayout] = useState<{
     nodes: LayoutNode[];
@@ -399,22 +403,9 @@ export default function SankeyChart({ externalData, onDataLoaded }: { externalDa
     items: RawItem[];
   } | null>(null);
 
-  // Load data from externalData or fetch
   useEffect(() => {
-    if (externalData) {
-      setData(externalData);
-      setSelectedNodes([]);
-      setSelectedCategory(null);
-      if (onDataLoaded) onDataLoaded(externalData);
-      return;
-    }
-    fetch('/sankey-data.json')
-      .then((r) => r.json())
-      .then((d: SankeyData) => {
-        setData(d);
-        if (onDataLoaded) onDataLoaded(d);
-      })
-      .catch((err) => console.error('Failed to load sankey data:', err));
+    setSelectedNodes([]);
+    setSelectedCategory(null);
   }, [externalData]);
 
   // Compute layout when data changes

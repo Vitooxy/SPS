@@ -1,135 +1,38 @@
-import * as XLSX from 'xlsx';
+import { downloadEditorWorkbook, type EditorData } from './build-workbook';
 
 export function downloadTemplate() {
-  const wb = XLSX.utils.book_new();
-
-  // --- Sheet 1: Items × 6 Axes ---
-  const itemsHeaders = [
-    'Row', 'Scale', 'ItemID', 'ItemText', 'DerivedPrimary', 'Outliner',
-    'Modality', 'Configuration', 'Process', 'Outcome', 'Response', 'CognitiveDisp', 'OriginalPR'
-  ];
-  const itemsSample = [
-    [1, 'HSP-27', 'HSP_1', 'Emotional film scenes touch me deeply.', 'Aesthetic Responsiveness', '',
-     'Visual, Auditory', 'Intense Input', 'Affective Engagement', 'Positive', 'Preventive Regulation', 'Sensitivity to Aesthetic', 'Aesthetic Responsiveness'],
-    [2, 'HSP-27', 'HSP_2', 'I am easily overwhelmed by bright lights.', 'Visual Overload', '',
-     'Visual', 'Intense Input', 'Sensory Information Processing', 'Negative', 'Withdrawal', 'Sensitivity to Overload', 'Visual Overload'],
-    [3, 'HSP-27', 'HSP_3', 'I notice subtle changes in my environment.', 'Sensitivity to Subtlety', '',
-     'Visual, Auditory, Olfactory', 'Subtlety', 'Sensory Information Processing', 'Neutral', 'Preventive Regulation', 'Sensitivity to Subtle Stimuli', 'Sensitivity to Subtlety'],
-  ];
-  const itemsSheet = XLSX.utils.aoa_to_sheet([itemsHeaders, ...itemsSample]);
-  itemsSheet['!cols'] = [
-    { wch: 6 }, { wch: 12 }, { wch: 12 }, { wch: 50 },
-    { wch: 28 }, { wch: 10 },
-    { wch: 30 }, { wch: 30 }, { wch: 30 }, { wch: 22 },
-    { wch: 22 }, { wch: 28 }, { wch: 28 }
-  ];
-  XLSX.utils.book_append_sheet(wb, itemsSheet, 'Items × 6 Axes');
-
-  // --- Sheet 2: Primary Code List ---
-  const pcHeaders = ['Level', 'Category', 'PrimaryCode'];
-  const pcData = [
-    ['Final', 'Overload', 'General Overload'],
-    ['Final', 'Overload', 'Pressure-Caused Overload'],
-    ['Final', 'Overload', 'Social Overload'],
-    ['Final', 'Overload', 'Visual Overload'],
-    ['Final', 'Overload', 'Auditory Overload'],
-    ['Final', 'Overload', 'Tactile Overload'],
-    ['Final', 'Overload', 'Olfactory Overload'],
-    ['Final', 'Overload', 'Gustatory Overload'],
-    ['Final', 'Aversion', 'Aversion to Change'],
-    ['Final', 'Aversion', 'Aversion to Conflict'],
-    ['Final', 'Aversion', 'Aversion to Uncertainty'],
-    ['Final', 'Coping', 'Active Coping'],
-    ['Final', 'Coping', 'Avoidance Coping'],
-    ['Final', 'Coping', 'Preventive Regulation'],
-    ['Final', 'Perceptual Sensitivity', 'Sensitivity to Subtlety'],
-    ['Final', 'Perceptual Sensitivity', 'Sensitivity to Details'],
-    ['Final', 'Perceptual Sensitivity', 'Difference Sensitivity'],
-    ['Final', 'Perceptual Sensitivity', 'Bodily-State Sensitivity'],
-    ['Final', 'Affective and Aesthetic', 'Hedonic Sensitivity'],
-    ['Final', 'Affective and Aesthetic', 'Social Hedonic Sensitivity'],
-    ['Final', 'Affective and Aesthetic', 'Aesthetic Sensitivity'],
-    ['Final', 'Affective and Aesthetic', 'Aesthetic Responsiveness'],
-    ['Final', 'Affective and Aesthetic', 'Emotional Contagion'],
-    ['Final', 'Affective and Aesthetic', 'Inner Emotional Intensity'],
-    ['Final', 'Social Cognition and Empathy', 'General Empathy'],
-    ['Final', 'Social Cognition and Empathy', 'Cognitive Empathy'],
-    ['Final', 'Social Cognition and Empathy', 'Nonverbal Social Perception'],
-    ['Final', 'Social Cognition and Empathy', 'Evaluation Apprehension'],
-    ['Final', 'Cognitive Processing', 'Deep Thought'],
-    ['Final', 'Cognitive Processing', 'Inner Richness'],
-    ['Final', 'Cognitive Processing', 'Mental Replay'],
-    ['Final', 'Cognitive Processing', 'Anticipatory Processing'],
-    ['Final', 'Cognitive Processing', 'Mental Overactivity'],
-    ['Final', 'Cognitive Processing', 'Intuitive Insight'],
-    ['Final', 'Cognitive Processing', 'Cognitive Disruption'],
-    ['Final', 'Other Descriptors', 'Conscientious'],
-    ['Final', 'Other Descriptors', 'Observer-Rated Sensitivity'],
-    ['Final', 'Other Descriptors', 'Comparative Sensitivity'],
-    ['Final', 'Other Descriptors', 'Reversed'],
-  ];
-  const pcSheet = XLSX.utils.aoa_to_sheet([pcHeaders, ...pcData]);
-  pcSheet['!cols'] = [{ wch: 10 }, { wch: 28 }, { wch: 30 }];
-  XLSX.utils.book_append_sheet(wb, pcSheet, 'Primary Code List');
-
-  // --- Sheet 3: Axis Value List ---
-  const avHeaders = ['Axis', 'Subcategory', 'Value'];
-  const avData = [
-    ['Stimulus (Modality and Configuration)', 'Physical', 'Visual'],
-    ['Stimulus (Modality and Configuration)', 'Physical', 'Auditory'],
-    ['Stimulus (Modality and Configuration)', 'Physical', 'Tactile'],
-    ['Stimulus (Modality and Configuration)', 'Physical', 'Gustatory'],
-    ['Stimulus (Modality and Configuration)', 'Physical', 'Olfactory'],
-    ['Stimulus (Modality and Configuration)', 'Physical', 'Thermoception'],
-    ['Stimulus (Modality and Configuration)', 'Internal', 'Bodily State'],
-    ['Stimulus (Modality and Configuration)', 'Internal', 'Internal Mentation'],
-    ['Stimulus (Modality and Configuration)', 'Social', 'Nonverbal Social Cues'],
-    ['Stimulus (Modality and Configuration)', 'Social', "Other's Mood"],
-    ['Stimulus (Modality and Configuration)', 'Social', 'Conflict'],
-    ['Stimulus (Modality and Configuration)', 'Social', 'Crowd'],
-    ['Stimulus (Modality and Configuration)', 'Social', 'Close Others'],
-    ['Stimulus (Modality and Configuration)', 'Social', 'Artistic Stimuli'],
-    ['Stimulus (Modality and Configuration)', 'Social', 'Linguistic'],
-    ['Stimulus (Modality and Configuration)', 'Demand', 'Observation or Competition'],
-    ['Stimulus (Modality and Configuration)', 'Demand', 'Time/Task Pressure'],
-    ['Stimulus (Modality and Configuration)', 'Configuration', 'Subtlety'],
-    ['Stimulus (Modality and Configuration)', 'Configuration', 'Intense Input'],
-    ['Stimulus (Modality and Configuration)', 'Configuration', 'Stimulus-Dense Environment'],
-    ['Stimulus (Modality and Configuration)', 'Configuration', 'Changes'],
-    ['Stimulus (Modality and Configuration)', 'Configuration', 'Uncertainty'],
-    ['Stimulus (Modality and Configuration)', 'Missing / Unspecified', 'Unspecified'],
-    ['Process', '', 'Sensory Information Processing'],
-    ['Process', '', 'Affective Engagement'],
-    ['Process', '', 'Cognitive Appraisal'],
-    ['Process', '', 'Higher-Order Cognitive Processing'],
-    ['Process', '', 'Response Preparation'],
-    ['Outcome and Appraised Valence', '', 'Positive'],
-    ['Outcome and Appraised Valence', '', 'Negative'],
-    ['Outcome and Appraised Valence', '', 'Neutral'],
-    ['Outcome and Appraised Valence', '', 'Unspecified'],
-    ['Response', '', 'Withdrawal'],
-    ['Response', '', 'Active Coping'],
-    ['Response', '', 'Preventive Regulation'],
-    ['Cognitive Disposition', '', 'Sensitivity to Overload'],
-    ['Cognitive Disposition', '', 'Sensitivity to Subtle Stimuli'],
-    ['Cognitive Disposition', '', 'Sensitivity to Aesthetic'],
-    ['Cognitive Disposition', '', 'Sensitivity to Social Stimuli'],
-    ['Cognitive Disposition', '', 'Sensitivity to Bodily Cues'],
-    ['Cognitive Disposition', '', 'Sensitivity to Reward'],
-    ['Cognitive Disposition', '', 'Sensitivity to Change'],
-    ['Cognitive Disposition', '', 'Sensitivity to Uncertainty'],
-  ];
-  const avSheet = XLSX.utils.aoa_to_sheet([avHeaders, ...avData]);
-  avSheet['!cols'] = [{ wch: 36 }, { wch: 24 }, { wch: 30 }];
-  XLSX.utils.book_append_sheet(wb, avSheet, 'Axis Value List');
-
-  // Generate and download
-  const wbData = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-  const blob = new Blob([wbData], { type: 'application/octet-stream' });
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'SPS-Coding-Template.xlsx';
-  a.click();
-  window.URL.revokeObjectURL(url);
+  const categoryCodes: Record<string, string[]> = {
+    Overload: ['General Overload', 'Pressure-Caused Overload', 'Social Overload', 'Visual Overload', 'Auditory Overload', 'Tactile Overload', 'Olfactory Overload', 'Gustatory Overload'],
+    Aversion: ['Aversion to Change', 'Aversion to Conflict', 'Aversion to Uncertainty'],
+    Coping: ['Active Coping', 'Avoidance Coping', 'Preventive Regulation'],
+    'Perceptual Sensitivity': ['Sensitivity to Subtlety', 'Sensitivity to Details', 'Difference Sensitivity', 'Bodily-State Sensitivity'],
+    'Affective and Aesthetic': ['Hedonic Sensitivity', 'Social Hedonic Sensitivity', 'Aesthetic Responsiveness', 'Aesthetic Sensitivity', 'Emotional Contagion', 'Inner Emotional Intensity'],
+    'Social Cognition and Empathy': ['Cognitive Empathy', 'General Empathy', 'Nonverbal Social Perception', 'Evaluation Apprehension'],
+    'Cognitive Processing': ['Deep Thought', 'Inner Richness', 'Mental Replay', 'Anticipatory Processing', 'Mental Overactivity', 'Intuitive Insight', 'Cognitive Disruption'],
+    'Other Descriptors': ['Conscientious', 'Observer-Rated Sensitivity', 'Comparative', 'Reversed'],
+  };
+  const stimulus: Record<string, string[]> = {
+    Physical: ['Visual', 'Auditory', 'Tactile', 'Gustatory', 'Olfactory', 'Thermoception'],
+    Internal: ['Bodily State', 'Internal Mentation'],
+    Social: ['Nonverbal Social Cues', "Other's Mood", 'Conflict', 'Crowd', 'Close Others', 'Artistic Stimuli', 'Linguistic'],
+    Demand: ['Observation or Competition', 'Time/Task Pressure'],
+    Configuration: ['Subtlety', 'Intense Input', 'Stimulus-Dense Environment', 'Changes', 'Uncertainty'],
+    'Missing / Unspecified': ['Unspecified'],
+  };
+  const editor: EditorData = {
+    items: [{
+      id: 'HSP_1', sourceId: 'HSP_1', scale: 'HSP-27', text: 'Are you easily overwhelmed by strong sensory input?',
+      derivedPrimary: 'General Overload', stimulus: 'Unspecified, Intense Input', process: '', outcome: 'ER_Negative',
+      response: '', cognitiveDisp: '', outliner: '', originalPrimaryCode: 'Sensory overload',
+    }],
+    primaryCodeList: Object.entries(categoryCodes).flatMap(([category, codes]) => codes.map(code => ({ category, code }))),
+    axisValueList: [
+      ...Object.entries(stimulus).flatMap(([subcategory, values]) => values.map(value => ({ axis: 'Stimulus' as const, subcategory, value }))),
+      ...['Detection', 'Discrimination', 'Appreciation', 'Inference', 'Anticipation', 'Action Knowledge', 'Affective Influence'].map(value => ({ axis: 'Process' as const, subcategory: '', value })),
+      ...['ER_Negative', 'ER_Positive', 'ER_Unspecified', 'PR_Negative', 'CognitiveDisruption_Negative'].map(value => ({ axis: 'Outcome' as const, subcategory: '', value })),
+      ...['Preventive Regulation', 'Withdraw', 'Active Coping'].map(value => ({ axis: 'Response' as const, subcategory: '', value })),
+      ...['Deep Thought', 'Inner Richness', 'Mental Overactivity', 'Intuition'].map(value => ({ axis: 'CognitiveDisp' as const, subcategory: '', value })),
+    ],
+  };
+  downloadEditorWorkbook(editor, 'SPS-Coding-Template');
 }

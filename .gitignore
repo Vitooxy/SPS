@@ -89,6 +89,7 @@ logs/
 
 # Preview files
 .preview
+outputs/
 
 # CodeGraph index
 .codegraph
