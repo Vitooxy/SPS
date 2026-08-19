@@ -111,7 +111,11 @@ const NODE_WIDTH = 12;
 const NODE_GAP = 3;
 const SUBCAT_BAR_WIDTH = 10;
 const SUBCAT_BAR_GAP = 2;
-const CHART_PADDING = { top: 50, bottom: 100, left: 200, right: 210 };
+const CHART_MIN_WIDTH = 2048;
+const STIMULUS_GROUP_LABEL_X = 110;
+const STIMULUS_GROUP_BAR_X = 120;
+const PRIMARY_CATEGORY_BAR_OFFSET = 240;
+const CHART_PADDING = { top: 50, bottom: 100, left: 320, right: 430 };
 const ITEM_LINE_MIN_WIDTH = 1.5;
 
 // ─── Layout Engine ───────────────────────────────────────────────────────────
@@ -381,7 +385,7 @@ function getStimulusSubcatOrder(
 export default function SankeyChart({ externalData }: { externalData?: SankeyData | null }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const data = externalData ?? null;
-  const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
+  const [dimensions, setDimensions] = useState({ width: CHART_MIN_WIDTH, height: 800 });
   const [layout, setLayout] = useState<{
     nodes: LayoutNode[];
     links: LayoutLink[];
@@ -428,8 +432,8 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
         const { width } = entry.contentRect;
         if (width > 0) {
           setDimensions({
-            width: Math.max(1000, width),
-            height: Math.max(350, Math.min(500, width * 0.4)),
+            width: Math.max(CHART_MIN_WIDTH, width),
+            height: Math.max(800, Math.min(900, width * 0.5)),
           });
         }
       }
@@ -902,8 +906,10 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
 
   if (!data || !layout) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <p className="text-muted-foreground">Loading...</p>
+      <div className="w-full overflow-x-auto" ref={containerRef}>
+        <div className="flex items-center justify-center h-64">
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
       </div>
     );
   }
@@ -931,7 +937,7 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
   const isAnySelected = selectedNodes.length > 0 || (activeItemIds?.size ?? 0) > 0;
 
   return (
-    <div className="w-full" ref={containerRef}>
+    <div className="w-full overflow-x-auto" ref={containerRef}>
       {/* Title */}
       <div className="text-center mb-2">
         <h1 className="text-lg font-semibold text-foreground">
@@ -999,7 +1005,7 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
           if (group.nodes.length === 0) return null;
           const minY = Math.min(...group.nodes.map((n) => n.y));
           const maxY = Math.max(...group.nodes.map((n) => n.y + n.height));
-          const barX = 95;
+          const barX = STIMULUS_GROUP_BAR_X;
           const barH = maxY - minY;
           const color = data.stimulusSubcatColors[group.subcat] || '#D9D9D9';
           return (
@@ -1013,9 +1019,9 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
                 rx={2}
               />
               <text
-                x={8}
+                x={STIMULUS_GROUP_LABEL_X}
                 y={minY + barH / 2}
-                textAnchor="start"
+                textAnchor="end"
                 dominantBaseline="central"
                 className="fill-foreground text-[9px] font-medium"
               >
@@ -1031,7 +1037,7 @@ export default function SankeyChart({ externalData }: { externalData?: SankeyDat
           const minY = Math.min(...catNodes.map((n) => n.y));
           const maxY = Math.max(...catNodes.map((n) => n.y + n.height));
           const lastNode = catNodes[catNodes.length - 1];
-          const barX = lastNode.x + NODE_WIDTH + 120;
+          const barX = lastNode.x + NODE_WIDTH + PRIMARY_CATEGORY_BAR_OFFSET;
           const barH = maxY - minY;
           const color = data.categoryColors[cat] || '#A5A5A5';
           const isActive = selectedCategory === cat;
