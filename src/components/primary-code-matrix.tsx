@@ -3,6 +3,7 @@
 import { useMemo, useRef, useCallback } from "react";
 import { toPng } from "html-to-image";
 import type { SankeyData } from "@/lib/parse-data";
+import { buildPrimaryCodeMatrixCounts } from "@/lib/primary-code-matrix";
 
 interface Props {
   data: SankeyData;
@@ -26,28 +27,9 @@ export default function PrimaryCodeMatrix({ data }: Props) {
     ];
   }, [data.items]);
 
-  // Compute counts for each primary code per scale
-  const counts = useMemo(() => {
-    const cnt: Record<string, Record<string, number>> = {};
-    const items: Record<string, Record<string, string[]>> = {};
-
-    for (const item of data.items) {
-      const scale = item.scale;
-      for (const dp of item.derivedPrimary) {
-        if (!cnt[dp]) {
-          cnt[dp] = {};
-          items[dp] = {};
-        }
-        if (!cnt[dp][scale]) {
-          cnt[dp][scale] = 0;
-          items[dp][scale] = [];
-        }
-        cnt[dp][scale]++;
-        items[dp][scale].push(item.text);
-      }
-    }
-    return { cnt, items };
-  }, [data]);
+  // Other Descriptors include matching Outliner annotations; a duplicated
+  // Derived Primary Code + Outliner value is counted once per item.
+  const counts = useMemo(() => buildPrimaryCodeMatrixCounts(data), [data]);
 
   const downloadImage = useCallback(async () => {
     if (!matrixRef.current) return;
@@ -208,7 +190,7 @@ export default function PrimaryCodeMatrix({ data }: Props) {
     <div className="mt-6">
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-base font-semibold text-gray-700">
-          SPS Primary Coding Matrix: Sorted by Category
+          SPS Coding Matrix: Primary Codes and Other Descriptors
         </h3>
         <button
           onClick={downloadImage}

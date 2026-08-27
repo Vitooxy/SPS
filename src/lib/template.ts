@@ -2,7 +2,7 @@ import { downloadEditorWorkbook, type EditorData } from './build-workbook';
 
 export function createTemplateEditorData(): EditorData {
   const categoryCodes: Record<string, string[]> = {
-    Overload: ['General Overload', 'Pressure-Caused Overload', 'Crowd-Caused Overload', 'Strong-Visual-Stimulus-Caused Overload', 'Strong-Auditory-Stimulus-Caused Overload', 'Tactile Overload', 'Olfactory Overload', 'Gustatory Overload', 'Change-Related Overload', 'Conflict-Related Overload'],
+    Overload: ['General Overload', 'Pressure-Caused Overload', 'Crowd-Caused Overload', 'Strong-Visual-Stimulus-Caused Overload', 'Strong-Auditory-Stimulus-Caused Overload', 'Tactile Overload', 'Olfactory Overload', 'Change-Related Overload', 'Conflict-Related Overload'],
     'Coping Behavior': ['Preventive Behavior', 'Recovery Behavior'],
     'Perceptual Sensitivity': ['Sensitivity to Subtlety and Detail', 'Sensitivity to Small Differences and Changes', 'Bodily-State Sensitivity'],
     'Affective and Aesthetic': ['Hedonic Sensitivity', 'Social Hedonic Sensitivity', 'Aesthetic Sensitivity', 'Emotional Contagion', 'Inner Emotional Intensity'],

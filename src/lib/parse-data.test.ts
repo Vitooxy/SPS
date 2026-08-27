@@ -119,7 +119,7 @@ test('editor validation rejects duplicate definitions and uncoded items', () => 
   });
 });
 
-test('download template follows the current 35-code contract and preserves coping color', () => {
+test('download template follows the current 34-code contract and preserves coping color', () => {
   const template = createTemplateEditorData();
   const parsed = parseExcelData(buildWorkbookFromEditorData(template));
   const codes = Object.values(parsed.categoryCodes).flat();
@@ -127,13 +127,14 @@ test('download template follows the current 35-code contract and preserves copin
     .filter((entry) => entry.axis === 'Response')
     .map((entry) => entry.value);
 
-  assert.equal(codes.length, 35);
+  assert.equal(codes.length, 34);
   assert.ok(codes.includes('Crowd-Caused Overload'));
   assert.ok(codes.includes('Sensitivity to Subtlety and Detail'));
   assert.ok(!codes.includes('Social Overload'));
   assert.ok(!codes.includes('Sensitivity to Subtlety'));
   assert.ok(!codes.includes('Sensitivity to Details'));
   assert.ok(!codes.includes('Aesthetic Responsiveness'));
+  assert.ok(!codes.includes('Gustatory Overload'));
   assert.deepEqual(responseValues, ['Preventive Behavior', 'Recovery Behavior']);
   assert.equal(CATEGORY_COLORS['Coping Behavior'], CATEGORY_COLORS.Coping);
 });
