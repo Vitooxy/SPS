@@ -69,8 +69,8 @@
       "value": "Bodily State",
       "column": 0,
       "category": null,
-      "subcategory": "Physical",
-      "color": "#4472C4"
+      "subcategory": "Internal",
+      "color": "#70AD47"
     },
     {
       "id": 8,
@@ -78,8 +78,8 @@
       "value": "Internal Mentation",
       "column": 0,
       "category": null,
-      "subcategory": "Physical",
-      "color": "#4472C4"
+      "subcategory": "Internal",
+      "color": "#70AD47"
     },
     {
       "id": 9,
@@ -87,8 +87,8 @@
       "value": "Nonverbal Social Cues",
       "column": 0,
       "category": null,
-      "subcategory": "Physical",
-      "color": "#4472C4"
+      "subcategory": "Social",
+      "color": "#ED7D31"
     },
     {
       "id": 10,
@@ -96,8 +96,8 @@
       "value": "Other's Mood",
       "column": 0,
       "category": null,
-      "subcategory": "Physical",
-      "color": "#4472C4"
+      "subcategory": "Social",
+      "color": "#ED7D31"
     },
     {
       "id": 11,
@@ -105,8 +105,8 @@
       "value": "Conflict",
       "column": 0,
       "category": null,
-      "subcategory": "Physical",
-      "color": "#4472C4"
+      "subcategory": "Social",
+      "color": "#ED7D31"
     },
     {
       "id": 12,
@@ -114,8 +114,8 @@
       "value": "Crowd",
       "column": 0,
       "category": null,
-      "subcategory": "Physical",
-      "color": "#4472C4"
+      "subcategory": "Social",
+      "color": "#ED7D31"
     },
     {
       "id": 13,
@@ -123,8 +123,8 @@
       "value": "Close Others",
       "column": 0,
       "category": null,
-      "subcategory": "Physical",
-      "color": "#4472C4"
+      "subcategory": "Social",
+      "color": "#ED7D31"
     },
     {
       "id": 14,
@@ -132,8 +132,8 @@
       "value": "Linguistic",
       "column": 0,
       "category": null,
-      "subcategory": "Physical",
-      "color": "#4472C4"
+      "subcategory": "Social",
+      "color": "#ED7D31"
     },
     {
       "id": 15,
@@ -10146,14 +10146,14 @@
     "Olfactory": "Physical",
     "Thermoception": "Physical",
     "Artistic Stimuli": "Physical",
-    "Bodily State": "Physical",
-    "Internal Mentation": "Physical",
-    "Nonverbal Social Cues": "Physical",
-    "Other's Mood": "Physical",
-    "Conflict": "Physical",
-    "Crowd": "Physical",
-    "Close Others": "Physical",
-    "Linguistic": "Physical",
+    "Bodily State": "Internal",
+    "Internal Mentation": "Internal",
+    "Nonverbal Social Cues": "Social",
+    "Other's Mood": "Social",
+    "Conflict": "Social",
+    "Crowd": "Social",
+    "Close Others": "Social",
+    "Linguistic": "Social",
     "Observation or Competition": "Demand",
     "Time/Task Pressure": "Demand",
     "Subtlety": "Configuration",
@@ -10165,6 +10165,8 @@
   },
   "stimulusSubcatOrder": [
     "Physical",
+    "Internal",
+    "Social",
     "Demand",
     "Configuration",
     "Missing / Unspecified"
@@ -10215,42 +10217,42 @@
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Physical",
+      "subcategory": "Internal",
       "value": "Bodily State"
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Physical",
+      "subcategory": "Internal",
       "value": "Internal Mentation"
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Physical",
+      "subcategory": "Social",
       "value": "Nonverbal Social Cues"
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Physical",
+      "subcategory": "Social",
       "value": "Other's Mood"
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Physical",
+      "subcategory": "Social",
       "value": "Conflict"
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Physical",
+      "subcategory": "Social",
       "value": "Crowd"
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Physical",
+      "subcategory": "Social",
       "value": "Close Others"
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Physical",
+      "subcategory": "Social",
       "value": "Linguistic"
     },
     {
