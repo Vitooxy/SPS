@@ -41,6 +41,20 @@ function splitValues(value: unknown, derived = false): string[] {
   const separator = derived ? /\s*(?:\/|,)\s*/ : /\s*,\s*/;
   return [...new Set(text.split(separator).map((part) => part.trim()).filter((part) => !EMPTY_VALUES.has(part)))];
 }
+function splitAxisValues(value: unknown, declaredValues: Iterable<string>): string[] {
+  const declared = [...declaredValues];
+  const canonical = new Map(declared.map((entry) => [entry.toLocaleLowerCase(), entry]));
+  const result: string[] = [];
+  for (const chunk of splitValues(value)) {
+    const exact = canonical.get(chunk.toLocaleLowerCase());
+    if (exact) { result.push(exact); continue; }
+    const slashParts = chunk.split(/\s*\/\s*/).map((part) => part.trim()).filter(Boolean);
+    const resolved = slashParts.map((part) => canonical.get(part.toLocaleLowerCase()));
+    if (slashParts.length > 1 && resolved.every((part): part is string => Boolean(part))) result.push(...resolved);
+    else result.push(chunk);
+  }
+  return [...new Set(result)];
+}
 function canonicalAxis(value: unknown): EditorAxisValue['axis'] | null {
   const normalized = normalizeHeader(value); if (!normalized) return null;
   if (normalized.includes('stimulus')) return 'Stimulus';
@@ -152,7 +166,7 @@ function validateEditorData(editor: EditorData): string[] {
     if (derivedCodes.length === 0) issues.push(`${uniqueId} 缺少 Derived Primary Code。`);
     for (const code of derivedCodes) if (!codeCategory.has(code)) issues.push(`${uniqueId} 引用了 Primary Code List 中不存在的编码“${code}”。`);
     const fields: Array<[string, string, string]> = [['Stimulus', item.stimulus, 'Stimulus'], ['Process', item.process, 'Process'], ['Outcome', item.outcome, 'Outcome'], ['Response', item.response, 'Response'], ['CognitiveDisp', item.cognitiveDisp, 'Cognitive Disposition']];
-    for (const [axis, value, label] of fields) for (const member of splitValues(value)) if (!axisValues.get(axis)?.has(member)) issues.push(`${uniqueId} 的 ${label} 值“${member}”不在 Axis Value List 中。`);
+    for (const [axis, value, label] of fields) for (const member of splitAxisValues(value, axisValues.get(axis) ?? [])) if (!axisValues.get(axis)?.has(member)) issues.push(`${uniqueId} 的 ${label} 值“${member}”不在 Axis Value List 中。`);
   }
   return [...new Set(issues)];
 }
@@ -179,10 +193,11 @@ export function buildSankeyDataFromEditor(editor: EditorData): SankeyData {
   const cleanAxisList = editor.axisValueList.map((entry) => ({ axis: entry.axis, subcategory: clean(entry.subcategory), value: clean(entry.value) })).filter((entry) => entry.axis && entry.value);
   const stimulusSubcats: Record<string, string> = {}; for (const entry of cleanAxisList) if (entry.axis === 'Stimulus') stimulusSubcats[entry.value] = entry.subcategory || 'Missing / Unspecified';
   const stimulusSubcatOrder = [...new Set(cleanAxisList.filter((entry) => entry.axis === 'Stimulus').map((entry) => entry.subcategory || 'Missing / Unspecified'))];
+  const declaredByAxis = new Map(AXIS_ORDER.slice(0, 5).map((axis) => [axis, cleanAxisList.filter((entry) => entry.axis === axis).map((entry) => entry.value)]));
   const rawCounts = new Map<string, number>(); for (const item of editor.items) { const sourceId = clean(item.sourceId || item.id); rawCounts.set(sourceId, (rawCounts.get(sourceId) ?? 0) + 1); }
   const items: SankeyItem[] = editor.items.map((item) => {
     const sourceId = clean(item.sourceId || item.id); const scale = clean(item.scale); const id = (rawCounts.get(sourceId) ?? 0) > 1 ? `${sourceId}__${scale.replace(/\s/g, '')}` : sourceId;
-    const derivedPrimary = splitValues(item.derivedPrimary, true); const values = { Stimulus: splitValues(item.stimulus), Process: splitValues(item.process), Outcome: splitValues(item.outcome), Response: splitValues(item.response), CognitiveDisp: splitValues(item.cognitiveDisp), DerivedPrimary: derivedPrimary };
+    const derivedPrimary = splitValues(item.derivedPrimary, true); const values = { Stimulus: splitAxisValues(item.stimulus, declaredByAxis.get('Stimulus') ?? []), Process: splitAxisValues(item.process, declaredByAxis.get('Process') ?? []), Outcome: splitAxisValues(item.outcome, declaredByAxis.get('Outcome') ?? []), Response: splitAxisValues(item.response, declaredByAxis.get('Response') ?? []), CognitiveDisp: splitAxisValues(item.cognitiveDisp, declaredByAxis.get('CognitiveDisp') ?? []), DerivedPrimary: derivedPrimary };
     return { id, sourceId, text: clean(item.text), scale, derivedPrimary, category: categoryMap[derivedPrimary[0]] || 'Other Descriptors', values, outliner: clean(item.outliner), originalPrimaryCode: clean(item.originalPrimaryCode) };
   });
   const usedByAxis: Record<string, Set<string>> = Object.fromEntries(AXIS_ORDER.map((axis) => [axis, new Set<string>()]));

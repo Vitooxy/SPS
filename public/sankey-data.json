@@ -57,74 +57,74 @@
     {
       "id": 6,
       "axis": "Stimulus",
-      "value": "Bodily State",
+      "value": "Artistic Stimuli",
       "column": 0,
       "category": null,
-      "subcategory": "Internal",
-      "color": "#70AD47"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 7,
       "axis": "Stimulus",
-      "value": "Internal Mentation",
+      "value": "Bodily State",
       "column": 0,
       "category": null,
-      "subcategory": "Internal",
-      "color": "#70AD47"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 8,
       "axis": "Stimulus",
-      "value": "Nonverbal Social Cues",
+      "value": "Internal Mentation",
       "column": 0,
       "category": null,
-      "subcategory": "Social",
-      "color": "#ED7D31"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 9,
       "axis": "Stimulus",
-      "value": "Other's Mood",
+      "value": "Nonverbal Social Cues",
       "column": 0,
       "category": null,
-      "subcategory": "Social",
-      "color": "#ED7D31"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 10,
       "axis": "Stimulus",
-      "value": "Conflict",
+      "value": "Other's Mood",
       "column": 0,
       "category": null,
-      "subcategory": "Social",
-      "color": "#ED7D31"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 11,
       "axis": "Stimulus",
-      "value": "Crowd",
+      "value": "Conflict",
       "column": 0,
       "category": null,
-      "subcategory": "Social",
-      "color": "#ED7D31"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 12,
       "axis": "Stimulus",
-      "value": "Close Others",
+      "value": "Crowd",
       "column": 0,
       "category": null,
-      "subcategory": "Social",
-      "color": "#ED7D31"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 13,
       "axis": "Stimulus",
-      "value": "Artistic Stimuli",
+      "value": "Close Others",
       "column": 0,
       "category": null,
-      "subcategory": "Social",
-      "color": "#ED7D31"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 14,
@@ -132,8 +132,8 @@
       "value": "Linguistic",
       "column": 0,
       "category": null,
-      "subcategory": "Social",
-      "color": "#ED7D31"
+      "subcategory": "Physical",
+      "color": "#4472C4"
     },
     {
       "id": 15,
@@ -435,7 +435,7 @@
     {
       "id": 48,
       "axis": "DerivedPrimary",
-      "value": "Gustatory Overload",
+      "value": "Change-Related Overload",
       "column": 5,
       "category": "Overload",
       "subcategory": null,
@@ -444,7 +444,7 @@
     {
       "id": 49,
       "axis": "DerivedPrimary",
-      "value": "Change-Related Overload",
+      "value": "Conflict-Related Overload",
       "column": 5,
       "category": "Overload",
       "subcategory": null,
@@ -453,15 +453,6 @@
     {
       "id": 50,
       "axis": "DerivedPrimary",
-      "value": "Conflict-Related Overload",
-      "column": 5,
-      "category": "Overload",
-      "subcategory": null,
-      "color": "#C55A11"
-    },
-    {
-      "id": 51,
-      "axis": "DerivedPrimary",
       "value": "Preventive Behavior",
       "column": 5,
       "category": "Coping Behavior",
@@ -469,7 +460,7 @@
       "color": "#FFC000"
     },
     {
-      "id": 52,
+      "id": 51,
       "axis": "DerivedPrimary",
       "value": "Recovery Behavior",
       "column": 5,
@@ -478,25 +469,16 @@
       "color": "#FFC000"
     },
     {
+      "id": 52,
+      "axis": "DerivedPrimary",
+      "value": "Sensitivity to Subtlety and Detail",
+      "column": 5,
+      "category": "Perceptual Sensitivity",
+      "subcategory": null,
+      "color": "#4472C4"
+    },
+    {
       "id": 53,
-      "axis": "DerivedPrimary",
-      "value": "Sensitivity to Subtlety",
-      "column": 5,
-      "category": "Perceptual Sensitivity",
-      "subcategory": null,
-      "color": "#4472C4"
-    },
-    {
-      "id": 54,
-      "axis": "DerivedPrimary",
-      "value": "Sensitivity to Details",
-      "column": 5,
-      "category": "Perceptual Sensitivity",
-      "subcategory": null,
-      "color": "#4472C4"
-    },
-    {
-      "id": 55,
       "axis": "DerivedPrimary",
       "value": "Sensitivity to Small Differences and Changes",
       "column": 5,
@@ -505,7 +487,7 @@
       "color": "#4472C4"
     },
     {
-      "id": 56,
+      "id": 54,
       "axis": "DerivedPrimary",
       "value": "Bodily-State Sensitivity",
       "column": 5,
@@ -514,7 +496,7 @@
       "color": "#4472C4"
     },
     {
-      "id": 57,
+      "id": 55,
       "axis": "DerivedPrimary",
       "value": "Hedonic Sensitivity",
       "column": 5,
@@ -523,7 +505,7 @@
       "color": "#7030A0"
     },
     {
-      "id": 58,
+      "id": 56,
       "axis": "DerivedPrimary",
       "value": "Social Hedonic Sensitivity",
       "column": 5,
@@ -532,16 +514,7 @@
       "color": "#7030A0"
     },
     {
-      "id": 59,
-      "axis": "DerivedPrimary",
-      "value": "Aesthetic Responsiveness",
-      "column": 5,
-      "category": "Affective and Aesthetic",
-      "subcategory": null,
-      "color": "#7030A0"
-    },
-    {
-      "id": 60,
+      "id": 57,
       "axis": "DerivedPrimary",
       "value": "Aesthetic Sensitivity",
       "column": 5,
@@ -550,7 +523,7 @@
       "color": "#7030A0"
     },
     {
-      "id": 61,
+      "id": 58,
       "axis": "DerivedPrimary",
       "value": "Emotional Contagion",
       "column": 5,
@@ -559,7 +532,7 @@
       "color": "#7030A0"
     },
     {
-      "id": 62,
+      "id": 59,
       "axis": "DerivedPrimary",
       "value": "Inner Emotional Intensity",
       "column": 5,
@@ -568,7 +541,7 @@
       "color": "#7030A0"
     },
     {
-      "id": 63,
+      "id": 60,
       "axis": "DerivedPrimary",
       "value": "Cognitive Empathy",
       "column": 5,
@@ -577,7 +550,7 @@
       "color": "#00B050"
     },
     {
-      "id": 64,
+      "id": 61,
       "axis": "DerivedPrimary",
       "value": "General Empathy",
       "column": 5,
@@ -586,7 +559,7 @@
       "color": "#00B050"
     },
     {
-      "id": 65,
+      "id": 62,
       "axis": "DerivedPrimary",
       "value": "Nonverbal Social Perception",
       "column": 5,
@@ -595,7 +568,7 @@
       "color": "#00B050"
     },
     {
-      "id": 66,
+      "id": 63,
       "axis": "DerivedPrimary",
       "value": "Evaluation Apprehension",
       "column": 5,
@@ -604,7 +577,7 @@
       "color": "#00B050"
     },
     {
-      "id": 67,
+      "id": 64,
       "axis": "DerivedPrimary",
       "value": "Deep Thought",
       "column": 5,
@@ -613,7 +586,7 @@
       "color": "#00B0F0"
     },
     {
-      "id": 68,
+      "id": 65,
       "axis": "DerivedPrimary",
       "value": "Inner Richness",
       "column": 5,
@@ -622,7 +595,7 @@
       "color": "#00B0F0"
     },
     {
-      "id": 69,
+      "id": 66,
       "axis": "DerivedPrimary",
       "value": "Mental Replay",
       "column": 5,
@@ -631,7 +604,7 @@
       "color": "#00B0F0"
     },
     {
-      "id": 70,
+      "id": 67,
       "axis": "DerivedPrimary",
       "value": "Anticipatory Processing",
       "column": 5,
@@ -640,7 +613,7 @@
       "color": "#00B0F0"
     },
     {
-      "id": 71,
+      "id": 68,
       "axis": "DerivedPrimary",
       "value": "Mental Overactivity",
       "column": 5,
@@ -649,7 +622,7 @@
       "color": "#00B0F0"
     },
     {
-      "id": 72,
+      "id": 69,
       "axis": "DerivedPrimary",
       "value": "Intuitive Insight",
       "column": 5,
@@ -658,7 +631,7 @@
       "color": "#00B0F0"
     },
     {
-      "id": 73,
+      "id": 70,
       "axis": "DerivedPrimary",
       "value": "Cognitive Disruption",
       "column": 5,
@@ -667,7 +640,7 @@
       "color": "#00B0F0"
     },
     {
-      "id": 74,
+      "id": 71,
       "axis": "DerivedPrimary",
       "value": "Conscientious",
       "column": 5,
@@ -676,7 +649,7 @@
       "color": "#A5A5A5"
     },
     {
-      "id": 75,
+      "id": 72,
       "axis": "DerivedPrimary",
       "value": "Observer-Rated Sensitivity",
       "column": 5,
@@ -699,7 +672,7 @@
     {
       "source": 30,
       "target": 41,
-      "value": 10
+      "value": 12
     },
     {
       "source": 22,
@@ -709,15 +682,15 @@
     {
       "source": 17,
       "target": 23,
-      "value": 17
+      "value": 21
     },
     {
       "source": 23,
-      "target": 53,
-      "value": 17
+      "target": 52,
+      "value": 22
     },
     {
-      "source": 9,
+      "source": 10,
       "target": 29,
       "value": 5
     },
@@ -728,17 +701,17 @@
     },
     {
       "source": 32,
-      "target": 61,
-      "value": 5
+      "target": 58,
+      "value": 4
     },
     {
-      "source": 6,
+      "source": 7,
       "target": 23,
       "value": 10
     },
     {
       "source": 23,
-      "target": 56,
+      "target": 54,
       "value": 7
     },
     {
@@ -748,7 +721,12 @@
     },
     {
       "source": 36,
-      "target": 52,
+      "target": 51,
+      "value": 2
+    },
+    {
+      "source": 36,
+      "target": 41,
       "value": 2
     },
     {
@@ -792,13 +770,33 @@
       "value": 4
     },
     {
-      "source": 7,
+      "source": 8,
+      "target": 37,
+      "value": 8
+    },
+    {
+      "source": 8,
       "target": 38,
       "value": 2
     },
     {
+      "source": 37,
+      "target": 64,
+      "value": 10
+    },
+    {
+      "source": 37,
+      "target": 65,
+      "value": 3
+    },
+    {
       "source": 38,
-      "target": 67,
+      "target": 64,
+      "value": 3
+    },
+    {
+      "source": 38,
+      "target": 65,
       "value": 3
     },
     {
@@ -807,7 +805,7 @@
       "value": 9
     },
     {
-      "source": 13,
+      "source": 6,
       "target": 25,
       "value": 12
     },
@@ -818,8 +816,8 @@
     },
     {
       "source": 31,
-      "target": 59,
-      "value": 11
+      "target": 57,
+      "value": 12
     },
     {
       "source": 18,
@@ -838,12 +836,7 @@
     },
     {
       "source": 36,
-      "target": 56,
-      "value": 1
-    },
-    {
-      "source": 36,
-      "target": 41,
+      "target": 54,
       "value": 1
     },
     {
@@ -867,33 +860,23 @@
       "value": 8
     },
     {
-      "source": 9,
+      "source": 10,
       "target": 23,
       "value": 6
     },
     {
-      "source": 9,
-      "target": 28,
-      "value": 2
-    },
-    {
-      "source": 17,
+      "source": 10,
       "target": 28,
       "value": 2
     },
     {
       "source": 23,
-      "target": 63,
+      "target": 60,
       "value": 6
     },
     {
       "source": 28,
-      "target": 63,
-      "value": 2
-    },
-    {
-      "source": 28,
-      "target": 53,
+      "target": 60,
       "value": 2
     },
     {
@@ -913,11 +896,11 @@
     },
     {
       "source": 35,
-      "target": 51,
+      "target": 50,
       "value": 4
     },
     {
-      "source": 10,
+      "source": 11,
       "target": 30,
       "value": 2
     },
@@ -928,12 +911,7 @@
     },
     {
       "source": 35,
-      "target": 64,
-      "value": 1
-    },
-    {
-      "source": 35,
-      "target": 50,
+      "target": 49,
       "value": 1
     },
     {
@@ -948,22 +926,22 @@
     },
     {
       "source": 33,
-      "target": 56,
+      "target": 54,
       "value": 2
     },
     {
       "source": 33,
-      "target": 73,
+      "target": 70,
       "value": 5
     },
     {
       "source": 34,
-      "target": 56,
+      "target": 54,
       "value": 1
     },
     {
       "source": 34,
-      "target": 73,
+      "target": 70,
       "value": 5
     },
     {
@@ -973,7 +951,17 @@
     },
     {
       "source": 30,
-      "target": 49,
+      "target": 48,
+      "value": 3
+    },
+    {
+      "source": 1,
+      "target": 23,
+      "value": 4
+    },
+    {
+      "source": 3,
+      "target": 23,
       "value": 3
     },
     {
@@ -983,7 +971,17 @@
     },
     {
       "source": 4,
+      "target": 23,
+      "value": 6
+    },
+    {
+      "source": 4,
       "target": 25,
+      "value": 4
+    },
+    {
+      "source": 6,
+      "target": 23,
       "value": 4
     },
     {
@@ -992,19 +990,24 @@
       "value": 4
     },
     {
-      "source": 31,
-      "target": 60,
+      "source": 23,
+      "target": 31,
       "value": 2
     },
     {
       "source": 31,
-      "target": 57,
+      "target": 55,
       "value": 10
     },
     {
       "source": 31,
-      "target": 53,
+      "target": 52,
       "value": 3
+    },
+    {
+      "source": 35,
+      "target": 41,
+      "value": 1
     },
     {
       "source": 15,
@@ -1018,12 +1021,12 @@
     },
     {
       "source": 33,
-      "target": 66,
+      "target": 63,
       "value": 4
     },
     {
       "source": 34,
-      "target": 66,
+      "target": 63,
       "value": 4
     },
     {
@@ -1042,34 +1045,29 @@
       "value": 9
     },
     {
-      "source": 23,
-      "target": 55,
-      "value": 10
+      "source": 17,
+      "target": 24,
+      "value": 5
     },
     {
       "source": 23,
-      "target": 54,
-      "value": 7
-    },
-    {
-      "source": 24,
-      "target": 55,
+      "target": 53,
       "value": 10
     },
     {
       "source": 24,
-      "target": 54,
-      "value": 7
+      "target": 53,
+      "value": 10
+    },
+    {
+      "source": 24,
+      "target": 52,
+      "value": 9
     },
     {
       "source": 30,
-      "target": 50,
+      "target": 49,
       "value": 2
-    },
-    {
-      "source": 9,
-      "target": 32,
-      "value": 1
     },
     {
       "source": 15,
@@ -1078,40 +1076,25 @@
     },
     {
       "source": 32,
-      "target": 66,
+      "target": 63,
       "value": 1
     },
     {
-      "source": 7,
+      "source": 8,
       "target": 32,
       "value": 1
     },
     {
       "source": 32,
-      "target": 62,
+      "target": 59,
       "value": 1
     },
     {
-      "source": 8,
+      "source": 9,
       "target": 23,
       "value": 5
     },
     {
-      "source": 23,
-      "target": 65,
-      "value": 5
-    },
-    {
-      "source": 8,
-      "target": 26,
-      "value": 5
-    },
-    {
-      "source": 8,
-      "target": 27,
-      "value": 1
-    },
-    {
       "source": 9,
       "target": 26,
       "value": 5
@@ -1122,34 +1105,24 @@
       "value": 1
     },
     {
-      "source": 26,
-      "target": 63,
+      "source": 10,
+      "target": 26,
       "value": 5
     },
     {
+      "source": 10,
+      "target": 27,
+      "value": 1
+    },
+    {
       "source": 26,
-      "target": 65,
+      "target": 60,
       "value": 5
     },
     {
       "source": 27,
-      "target": 63,
+      "target": 60,
       "value": 1
-    },
-    {
-      "source": 27,
-      "target": 65,
-      "value": 1
-    },
-    {
-      "source": 7,
-      "target": 37,
-      "value": 6
-    },
-    {
-      "source": 37,
-      "target": 67,
-      "value": 8
     },
     {
       "source": 14,
@@ -1158,12 +1131,12 @@
     },
     {
       "source": 31,
-      "target": 58,
+      "target": 56,
       "value": 2
     },
     {
       "source": 31,
-      "target": 67,
+      "target": 64,
       "value": 1
     },
     {
@@ -1177,28 +1150,23 @@
       "value": 4
     },
     {
-      "source": 1,
-      "target": 23,
-      "value": 2
-    },
-    {
-      "source": 7,
+      "source": 8,
       "target": 39,
       "value": 1
     },
     {
       "source": 37,
-      "target": 71,
+      "target": 68,
       "value": 1
     },
     {
       "source": 39,
-      "target": 67,
+      "target": 64,
       "value": 1
     },
     {
       "source": 39,
-      "target": 71,
+      "target": 68,
       "value": 1
     },
     {
@@ -1210,16 +1178,6 @@
       "source": 2,
       "target": 24,
       "value": 1
-    },
-    {
-      "source": 17,
-      "target": 24,
-      "value": 2
-    },
-    {
-      "source": 24,
-      "target": 53,
-      "value": 2
     },
     {
       "source": 31,
@@ -1228,11 +1186,11 @@
     },
     {
       "source": 37,
-      "target": 58,
+      "target": 56,
       "value": 1
     },
     {
-      "source": 11,
+      "source": 12,
       "target": 33,
       "value": 1
     },
@@ -1247,7 +1205,7 @@
       "value": 1
     },
     {
-      "source": 7,
+      "source": 8,
       "target": 27,
       "value": 1
     },
@@ -1263,23 +1221,13 @@
     },
     {
       "source": 37,
-      "target": 70,
-      "value": 1
-    },
-    {
-      "source": 37,
-      "target": 68,
+      "target": 67,
       "value": 1
     },
     {
       "source": 38,
-      "target": 70,
+      "target": 67,
       "value": 1
-    },
-    {
-      "source": 38,
-      "target": 68,
-      "value": 2
     },
     {
       "source": 0,
@@ -1287,7 +1235,7 @@
       "value": 4
     },
     {
-      "source": 10,
+      "source": 11,
       "target": 29,
       "value": 1
     },
@@ -1298,12 +1246,12 @@
     },
     {
       "source": 30,
-      "target": 61,
+      "target": 58,
       "value": 1
     },
     {
       "source": 37,
-      "target": 69,
+      "target": 66,
       "value": 2
     },
     {
@@ -1313,51 +1261,41 @@
     },
     {
       "source": 31,
-      "target": 64,
+      "target": 61,
       "value": 1
     },
     {
-      "source": 4,
-      "target": 23,
-      "value": 4
+      "source": 26,
+      "target": 62,
+      "value": 3
     },
     {
-      "source": 3,
-      "target": 30,
-      "value": 1
+      "source": 23,
+      "target": 62,
+      "value": 3
     },
     {
-      "source": 30,
-      "target": 48,
+      "source": 25,
+      "target": 55,
       "value": 1
     },
     {
       "source": 25,
-      "target": 57,
+      "target": 52,
       "value": 1
+    },
+    {
+      "source": 23,
+      "target": 57,
+      "value": 2
     },
     {
       "source": 13,
-      "target": 23,
-      "value": 2
-    },
-    {
-      "source": 23,
-      "target": 59,
-      "value": 1
-    },
-    {
-      "source": 23,
-      "target": 60,
-      "value": 2
-    },
-    {
-      "source": 12,
       "target": 25,
       "value": 1
     },
     {
-      "source": 11,
+      "source": 12,
       "target": 30,
       "value": 2
     },
@@ -1372,23 +1310,23 @@
       "value": 2
     },
     {
-      "source": 6,
+      "source": 7,
       "target": 24,
       "value": 1
     },
     {
       "source": 24,
-      "target": 56,
+      "target": 54,
       "value": 1
     },
     {
-      "source": 7,
+      "source": 8,
       "target": 40,
       "value": 1
     },
     {
       "source": 40,
-      "target": 72,
+      "target": 69,
       "value": 1
     },
     {
@@ -1397,8 +1335,8 @@
       "value": 1
     },
     {
-      "source": 3,
-      "target": 23,
+      "source": 17,
+      "target": 28,
       "value": 1
     },
     {
@@ -1501,13 +1439,13 @@
     {
       "itemId": "HSP_2",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_3",
-      "source": 9,
+      "source": 10,
       "target": 29,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -1522,13 +1460,13 @@
     {
       "itemId": "HSP_3",
       "source": 32,
-      "target": 61,
+      "target": 58,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSP_4",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
@@ -1536,7 +1474,7 @@
     {
       "itemId": "HSP_4",
       "source": 23,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -1550,13 +1488,20 @@
     {
       "itemId": "HSP_5",
       "source": 36,
-      "target": 52,
+      "target": 51,
+      "category": "Coping Behavior",
+      "color": "#FFC000"
+    },
+    {
+      "itemId": "HSP_5",
+      "source": 36,
+      "target": 41,
       "category": "Coping Behavior",
       "color": "#FFC000"
     },
     {
       "itemId": "HSP_6",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
@@ -1564,7 +1509,7 @@
     {
       "itemId": "HSP_6",
       "source": 23,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -1633,15 +1578,43 @@
     },
     {
       "itemId": "HSP_8",
-      "source": 7,
+      "source": 8,
+      "target": 37,
+      "category": "Cognitive Processing",
+      "color": "#00B0F0"
+    },
+    {
+      "itemId": "HSP_8",
+      "source": 8,
       "target": 38,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "HSP_8",
+      "source": 37,
+      "target": 64,
+      "category": "Cognitive Processing",
+      "color": "#00B0F0"
+    },
+    {
+      "itemId": "HSP_8",
+      "source": 37,
+      "target": 65,
+      "category": "Cognitive Processing",
+      "color": "#00B0F0"
+    },
+    {
+      "itemId": "HSP_8",
       "source": 38,
-      "target": 67,
+      "target": 64,
+      "category": "Cognitive Processing",
+      "color": "#00B0F0"
+    },
+    {
+      "itemId": "HSP_8",
+      "source": 38,
+      "target": 65,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -1675,7 +1648,7 @@
     },
     {
       "itemId": "HSP_10__HSP-27",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -1690,13 +1663,13 @@
     {
       "itemId": "HSP_10__HSP-27",
       "source": 31,
-      "target": 59,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSP_11",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Coping Behavior",
       "color": "#FFC000"
@@ -1725,14 +1698,14 @@
     {
       "itemId": "HSP_11",
       "source": 36,
-      "target": 52,
+      "target": 51,
       "category": "Coping Behavior",
       "color": "#FFC000"
     },
     {
       "itemId": "HSP_11",
       "source": 36,
-      "target": 56,
+      "target": 54,
       "category": "Coping Behavior",
       "color": "#FFC000"
     },
@@ -1773,28 +1746,14 @@
     },
     {
       "itemId": "HSP_15",
-      "source": 9,
+      "source": 10,
       "target": 23,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSP_15",
-      "source": 9,
-      "target": 28,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_15",
-      "source": 17,
-      "target": 23,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_15",
-      "source": 17,
+      "source": 10,
       "target": 28,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
@@ -1802,28 +1761,14 @@
     {
       "itemId": "HSP_15",
       "source": 23,
-      "target": 63,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_15",
-      "source": 23,
-      "target": 53,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSP_15",
       "source": 28,
-      "target": 63,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_15",
-      "source": 28,
-      "target": 53,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -1851,44 +1796,37 @@
     {
       "itemId": "HSP_17",
       "source": 35,
-      "target": 51,
+      "target": 50,
       "category": "Coping Behavior",
       "color": "#FFC000"
     },
     {
       "itemId": "HSP_18",
-      "source": 10,
+      "source": 11,
       "target": 30,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
+      "category": "Coping Behavior",
+      "color": "#FFC000"
     },
     {
       "itemId": "HSP_18",
       "source": 30,
       "target": 35,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_18",
-      "source": 35,
-      "target": 64,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_18",
-      "source": 35,
-      "target": 51,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
+      "category": "Coping Behavior",
+      "color": "#FFC000"
     },
     {
       "itemId": "HSP_18",
       "source": 35,
       "target": 50,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
+      "category": "Coping Behavior",
+      "color": "#FFC000"
+    },
+    {
+      "itemId": "HSP_18",
+      "source": 35,
+      "target": 49,
+      "category": "Coping Behavior",
+      "color": "#FFC000"
     },
     {
       "itemId": "HSP_19__HSP-27",
@@ -1906,7 +1844,7 @@
     },
     {
       "itemId": "HSP_20",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
@@ -1928,28 +1866,28 @@
     {
       "itemId": "HSP_20",
       "source": 33,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_20",
       "source": 33,
-      "target": 73,
+      "target": 70,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_20",
       "source": 34,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_20",
       "source": 34,
-      "target": 73,
+      "target": 70,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -1963,14 +1901,28 @@
     {
       "itemId": "HSP_21",
       "source": 30,
-      "target": 49,
+      "target": 48,
       "category": "Overload",
       "color": "#C55A11"
     },
     {
       "itemId": "HSP_22__HSP-27",
       "source": 1,
+      "target": 23,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-27",
+      "source": 1,
       "target": 25,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-27",
+      "source": 3,
+      "target": 23,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -1984,13 +1936,27 @@
     {
       "itemId": "HSP_22__HSP-27",
       "source": 4,
+      "target": 23,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-27",
+      "source": 4,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSP_22__HSP-27",
-      "source": 13,
+      "source": 6,
+      "target": 23,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-27",
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -1998,7 +1964,21 @@
     {
       "itemId": "HSP_22__HSP-27",
       "source": 17,
+      "target": 23,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-27",
+      "source": 17,
       "target": 25,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-27",
+      "source": 23,
+      "target": 31,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -2012,20 +1992,6 @@
     {
       "itemId": "HSP_22__HSP-27",
       "source": 31,
-      "target": 59,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "HSP_22__HSP-27",
-      "source": 31,
-      "target": 60,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "HSP_22__HSP-27",
-      "source": 31,
       "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -2033,7 +1999,14 @@
     {
       "itemId": "HSP_22__HSP-27",
       "source": 31,
-      "target": 53,
+      "target": 55,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-27",
+      "source": 31,
+      "target": 52,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -2061,7 +2034,14 @@
     {
       "itemId": "HSP_24",
       "source": 35,
-      "target": 51,
+      "target": 50,
+      "category": "Coping Behavior",
+      "color": "#FFC000"
+    },
+    {
+      "itemId": "HSP_24",
+      "source": 35,
+      "target": 41,
       "category": "Coping Behavior",
       "color": "#FFC000"
     },
@@ -2087,6 +2067,13 @@
       "color": "#C55A11"
     },
     {
+      "itemId": "HSP_25__HSP-27",
+      "source": 30,
+      "target": 41,
+      "category": "Overload",
+      "color": "#C55A11"
+    },
+    {
       "itemId": "HSP_26",
       "source": 15,
       "target": 33,
@@ -2103,14 +2090,14 @@
     {
       "itemId": "HSP_26",
       "source": 33,
-      "target": 66,
+      "target": 63,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSP_26",
       "source": 33,
-      "target": 73,
+      "target": 70,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -2124,14 +2111,14 @@
     {
       "itemId": "HSP_26",
       "source": 34,
-      "target": 66,
+      "target": 63,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSP_26",
       "source": 34,
-      "target": 73,
+      "target": 70,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -2165,7 +2152,7 @@
     },
     {
       "itemId": "HSC_2",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -2174,6 +2161,13 @@
       "itemId": "HSC_2",
       "source": 25,
       "target": 31,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSC_2",
+      "source": 31,
+      "target": 55,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -2201,7 +2195,7 @@
     {
       "itemId": "HSC_3",
       "source": 31,
-      "target": 57,
+      "target": 55,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -2256,29 +2250,43 @@
     },
     {
       "itemId": "HSC_6",
-      "source": 23,
-      "target": 55,
+      "source": 17,
+      "target": 23,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC_6",
+      "source": 17,
+      "target": 24,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC_6",
       "source": 23,
-      "target": 54,
+      "target": 53,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC_6",
+      "source": 23,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC_6",
       "source": 24,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC_6",
       "source": 24,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -2313,13 +2321,13 @@
     {
       "itemId": "HSC_8",
       "source": 31,
-      "target": 57,
+      "target": 55,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSC_9",
-      "source": 10,
+      "source": 11,
       "target": 30,
       "category": "Overload",
       "color": "#C55A11"
@@ -2327,7 +2335,7 @@
     {
       "itemId": "HSC_9",
       "source": 30,
-      "target": 50,
+      "target": 49,
       "category": "Overload",
       "color": "#C55A11"
     },
@@ -2369,7 +2377,7 @@
     {
       "itemId": "HSC_11",
       "source": 30,
-      "target": 49,
+      "target": 48,
       "category": "Overload",
       "color": "#C55A11"
     },
@@ -2390,14 +2398,14 @@
     {
       "itemId": "HSC_12",
       "source": 33,
-      "target": 66,
+      "target": 63,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSC_12",
       "source": 33,
-      "target": 73,
+      "target": 70,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -2411,14 +2419,14 @@
     {
       "itemId": "HSC_12",
       "source": 34,
-      "target": 66,
+      "target": 63,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSC_12",
       "source": 34,
-      "target": 73,
+      "target": 70,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -2501,7 +2509,7 @@
     },
     {
       "itemId": "HSP_10__HSP-R",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -2516,7 +2524,7 @@
     {
       "itemId": "HSP_10__HSP-R",
       "source": 31,
-      "target": 59,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -2544,7 +2552,21 @@
     {
       "itemId": "HSP_22__HSP-R",
       "source": 1,
+      "target": 23,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-R",
+      "source": 1,
       "target": 25,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-R",
+      "source": 3,
+      "target": 23,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -2558,13 +2580,27 @@
     {
       "itemId": "HSP_22__HSP-R",
       "source": 4,
+      "target": 23,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-R",
+      "source": 4,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSP_22__HSP-R",
-      "source": 13,
+      "source": 6,
+      "target": 23,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-R",
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -2572,7 +2608,21 @@
     {
       "itemId": "HSP_22__HSP-R",
       "source": 17,
+      "target": 23,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-R",
+      "source": 17,
       "target": 25,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-R",
+      "source": 23,
+      "target": 31,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -2586,20 +2636,6 @@
     {
       "itemId": "HSP_22__HSP-R",
       "source": 31,
-      "target": 59,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "HSP_22__HSP-R",
-      "source": 31,
-      "target": 60,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "HSP_22__HSP-R",
-      "source": 31,
       "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -2607,7 +2643,14 @@
     {
       "itemId": "HSP_22__HSP-R",
       "source": 31,
-      "target": 53,
+      "target": 55,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "HSP_22__HSP-R",
+      "source": 31,
+      "target": 52,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -2633,36 +2676,29 @@
       "color": "#C55A11"
     },
     {
-      "itemId": "HSP_41",
-      "source": 9,
-      "target": 32,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
+      "itemId": "HSP_25__HSP-R",
+      "source": 30,
+      "target": 41,
+      "category": "Overload",
+      "color": "#C55A11"
     },
     {
       "itemId": "HSP_41",
       "source": 15,
       "target": 32,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
     },
     {
       "itemId": "HSP_41",
       "source": 32,
-      "target": 61,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "HSP_41",
-      "source": 32,
-      "target": 66,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
+      "target": 63,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
     },
     {
       "itemId": "HSP_42",
-      "source": 7,
+      "source": 8,
       "target": 32,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -2670,19 +2706,12 @@
     {
       "itemId": "HSP_42",
       "source": 32,
-      "target": 62,
+      "target": 59,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSP_48",
-      "source": 8,
-      "target": 23,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_48",
       "source": 9,
       "target": 23,
       "category": "Social Cognition and Empathy",
@@ -2690,29 +2719,15 @@
     },
     {
       "itemId": "HSP_48",
-      "source": 23,
-      "target": 63,
+      "source": 10,
+      "target": 23,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSP_48",
       "source": 23,
-      "target": 65,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_52",
-      "source": 8,
-      "target": 26,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_52",
-      "source": 8,
-      "target": 27,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -2732,43 +2747,29 @@
     },
     {
       "itemId": "HSP_52",
-      "source": 26,
-      "target": 63,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_52",
-      "source": 26,
-      "target": 65,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_52",
-      "source": 27,
-      "target": 63,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_52",
-      "source": 27,
-      "target": 65,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_53",
-      "source": 8,
-      "target": 23,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_53",
-      "source": 8,
+      "source": 10,
       "target": 26,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
+    },
+    {
+      "itemId": "HSP_52",
+      "source": 10,
+      "target": 27,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
+    },
+    {
+      "itemId": "HSP_52",
+      "source": 26,
+      "target": 60,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
+    },
+    {
+      "itemId": "HSP_52",
+      "source": 27,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -2788,35 +2789,35 @@
     },
     {
       "itemId": "HSP_53",
-      "source": 23,
-      "target": 63,
+      "source": 10,
+      "target": 23,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
+    },
+    {
+      "itemId": "HSP_53",
+      "source": 10,
+      "target": 26,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSP_53",
       "source": 23,
-      "target": 65,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSP_53",
       "source": 26,
-      "target": 63,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "HSP_53",
-      "source": 26,
-      "target": 65,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSP_55",
-      "source": 9,
+      "source": 10,
       "target": 29,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -2831,13 +2832,13 @@
     {
       "itemId": "HSP_55",
       "source": 32,
-      "target": 61,
+      "target": 58,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSP_60",
-      "source": 7,
+      "source": 8,
       "target": 37,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -2845,7 +2846,7 @@
     {
       "itemId": "HSP_60",
       "source": 37,
-      "target": 67,
+      "target": 64,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -2866,20 +2867,20 @@
     {
       "itemId": "HSP_61",
       "source": 31,
-      "target": 58,
+      "target": 56,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSP_61",
       "source": 31,
-      "target": 67,
+      "target": 64,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSP_67",
-      "source": 7,
+      "source": 8,
       "target": 37,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -2887,7 +2888,7 @@
     {
       "itemId": "HSP_67",
       "source": 37,
-      "target": 67,
+      "target": 64,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -2908,28 +2909,28 @@
     {
       "itemId": "HSP_71",
       "source": 23,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_71",
       "source": 23,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_71",
       "source": 24,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_71",
       "source": 24,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -2963,29 +2964,43 @@
     },
     {
       "itemId": "HSP_72",
-      "source": 23,
-      "target": 55,
+      "source": 17,
+      "target": 23,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSP_72",
+      "source": 17,
+      "target": 24,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_72",
       "source": 23,
-      "target": 54,
+      "target": 53,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSP_72",
+      "source": 23,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_72",
       "source": 24,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_72",
       "source": 24,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -3020,28 +3035,28 @@
     {
       "itemId": "HSP_73",
       "source": 23,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_73",
       "source": 23,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_73",
       "source": 24,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSP_73",
       "source": 24,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -3054,7 +3069,7 @@
     },
     {
       "itemId": "HSP_81",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -3069,7 +3084,7 @@
     {
       "itemId": "HSP_81",
       "source": 31,
-      "target": 59,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -3090,13 +3105,13 @@
     {
       "itemId": "DOES_1",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "DOES_2",
-      "source": 9,
+      "source": 10,
       "target": 29,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -3111,7 +3126,7 @@
     {
       "itemId": "DOES_2",
       "source": 32,
-      "target": 61,
+      "target": 58,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -3131,14 +3146,14 @@
     },
     {
       "itemId": "DOES_4",
-      "source": 7,
+      "source": 8,
       "target": 37,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
-      "source": 7,
+      "source": 8,
       "target": 39,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -3146,28 +3161,28 @@
     {
       "itemId": "DOES_4",
       "source": 37,
-      "target": 67,
+      "target": 64,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
       "source": 37,
-      "target": 71,
+      "target": 68,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
       "source": 39,
-      "target": 67,
+      "target": 64,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "DOES_4",
       "source": 39,
-      "target": 71,
+      "target": 68,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -3202,21 +3217,14 @@
     {
       "itemId": "DOES_5",
       "source": 23,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "DOES_5",
       "source": 23,
-      "target": 53,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
-      "itemId": "DOES_5",
-      "source": 24,
-      "target": 55,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -3224,6 +3232,13 @@
       "itemId": "DOES_5",
       "source": 24,
       "target": 53,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "DOES_5",
+      "source": 24,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -3251,20 +3266,20 @@
     {
       "itemId": "DOES_6",
       "source": 37,
-      "target": 58,
+      "target": 56,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "DOES_6",
       "source": 37,
-      "target": 67,
+      "target": 64,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "DOES_7",
-      "source": 11,
+      "source": 12,
       "target": 33,
       "category": "Overload",
       "color": "#C55A11"
@@ -3285,7 +3300,7 @@
     },
     {
       "itemId": "DOES_8",
-      "source": 7,
+      "source": 8,
       "target": 27,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -3307,13 +3322,6 @@
     {
       "itemId": "DOES_8",
       "source": 37,
-      "target": 70,
-      "category": "Cognitive Processing",
-      "color": "#00B0F0"
-    },
-    {
-      "itemId": "DOES_8",
-      "source": 37,
       "target": 67,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -3321,14 +3329,14 @@
     {
       "itemId": "DOES_8",
       "source": 37,
-      "target": 68,
+      "target": 64,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "DOES_8",
-      "source": 38,
-      "target": 70,
+      "source": 37,
+      "target": 65,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -3342,7 +3350,14 @@
     {
       "itemId": "DOES_8",
       "source": 38,
-      "target": 68,
+      "target": 64,
+      "category": "Cognitive Processing",
+      "color": "#00B0F0"
+    },
+    {
+      "itemId": "DOES_8",
+      "source": 38,
+      "target": 65,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -3363,20 +3378,20 @@
     {
       "itemId": "DOES_9",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "DOES_10",
-      "source": 9,
+      "source": 10,
       "target": 29,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "DOES_10",
-      "source": 10,
+      "source": 11,
       "target": 29,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -3391,14 +3406,14 @@
     {
       "itemId": "DOES_10",
       "source": 30,
-      "target": 61,
+      "target": 58,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "DOES_10",
       "source": 30,
-      "target": 50,
+      "target": 49,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -3418,7 +3433,7 @@
     },
     {
       "itemId": "DOES_12",
-      "source": 7,
+      "source": 8,
       "target": 37,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -3426,14 +3441,14 @@
     {
       "itemId": "DOES_12",
       "source": 37,
-      "target": 67,
+      "target": 64,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "DOES_12",
       "source": 37,
-      "target": 69,
+      "target": 66,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -3482,21 +3497,14 @@
     {
       "itemId": "DOES_13",
       "source": 23,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "DOES_13",
       "source": 23,
-      "target": 53,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
-      "itemId": "DOES_13",
-      "source": 24,
-      "target": 55,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -3504,6 +3512,13 @@
       "itemId": "DOES_13",
       "source": 24,
       "target": 53,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "DOES_13",
+      "source": 24,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -3516,7 +3531,7 @@
     },
     {
       "itemId": "DOES_14",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -3531,14 +3546,14 @@
     {
       "itemId": "DOES_14",
       "source": 31,
-      "target": 59,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "DOES_14",
       "source": 31,
-      "target": 64,
+      "target": 61,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -3565,7 +3580,7 @@
     },
     {
       "itemId": "DOES_16",
-      "source": 7,
+      "source": 8,
       "target": 37,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -3573,14 +3588,14 @@
     {
       "itemId": "DOES_16",
       "source": 37,
-      "target": 67,
+      "target": 64,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "DOES_16",
       "source": 37,
-      "target": 69,
+      "target": 66,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -3601,7 +3616,7 @@
     {
       "itemId": "DOES_17",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -3614,7 +3629,7 @@
     },
     {
       "itemId": "DOES_18",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -3629,16 +3644,9 @@
     {
       "itemId": "DOES_18",
       "source": 31,
-      "target": 59,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
-    },
-    {
-      "itemId": "DOES_19",
-      "source": 3,
-      "target": 30,
-      "category": "Overload",
-      "color": "#C55A11"
     },
     {
       "itemId": "DOES_19",
@@ -3657,20 +3665,13 @@
     {
       "itemId": "DOES_19",
       "source": 30,
-      "target": 48,
-      "category": "Overload",
-      "color": "#C55A11"
-    },
-    {
-      "itemId": "DOES_19",
-      "source": 30,
       "target": 47,
       "category": "Overload",
       "color": "#C55A11"
     },
     {
       "itemId": "DOES_20",
-      "source": 7,
+      "source": 8,
       "target": 37,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -3678,7 +3679,7 @@
     {
       "itemId": "DOES_20",
       "source": 37,
-      "target": 67,
+      "target": 64,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -3712,13 +3713,6 @@
     },
     {
       "itemId": "SPSQ_4",
-      "source": 8,
-      "target": 26,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "SPSQ_4",
       "source": 9,
       "target": 26,
       "category": "Social Cognition and Empathy",
@@ -3726,22 +3720,22 @@
     },
     {
       "itemId": "SPSQ_4",
-      "source": 26,
-      "target": 63,
+      "source": 10,
+      "target": 26,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_4",
       "source": 26,
-      "target": 65,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
-      "itemId": "SPSQ_5",
-      "source": 8,
-      "target": 23,
+      "itemId": "SPSQ_4",
+      "source": 26,
+      "target": 62,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -3754,15 +3748,22 @@
     },
     {
       "itemId": "SPSQ_5",
-      "source": 23,
-      "target": 63,
+      "source": 10,
+      "target": 23,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_5",
       "source": 23,
-      "target": 65,
+      "target": 60,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
+    },
+    {
+      "itemId": "SPSQ_5",
+      "source": 23,
+      "target": 62,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -3776,7 +3777,14 @@
     {
       "itemId": "SPSQ_6",
       "source": 25,
-      "target": 57,
+      "target": 55,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "SPSQ_6",
+      "source": 25,
+      "target": 52,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -3873,7 +3881,7 @@
     },
     {
       "itemId": "SPSQ_12",
-      "source": 13,
+      "source": 6,
       "target": 23,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -3888,27 +3896,20 @@
     {
       "itemId": "SPSQ_12",
       "source": 23,
-      "target": 59,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "SPSQ_12",
       "source": 23,
-      "target": 60,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "SPSQ_12",
-      "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "SPSQ_14",
-      "source": 8,
+      "source": 9,
       "target": 23,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
@@ -3916,13 +3917,13 @@
     {
       "itemId": "SPSQ_14",
       "source": 23,
-      "target": 65,
+      "target": 62,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_15",
-      "source": 12,
+      "source": 13,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -3937,7 +3938,7 @@
     {
       "itemId": "SPSQ_15",
       "source": 31,
-      "target": 58,
+      "target": 56,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -3951,13 +3952,13 @@
     {
       "itemId": "SPSQ_18",
       "source": 30,
-      "target": 49,
+      "target": 48,
       "category": "Overload",
       "color": "#C55A11"
     },
     {
       "itemId": "SPSQ_19",
-      "source": 11,
+      "source": 12,
       "target": 30,
       "category": "Overload",
       "color": "#C55A11"
@@ -3978,20 +3979,6 @@
     },
     {
       "itemId": "SPSQ_21",
-      "source": 8,
-      "target": 23,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "SPSQ_21",
-      "source": 8,
-      "target": 26,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "SPSQ_21",
       "source": 9,
       "target": 23,
       "category": "Social Cognition and Empathy",
@@ -4006,29 +3993,43 @@
     },
     {
       "itemId": "SPSQ_21",
-      "source": 23,
-      "target": 63,
+      "source": 10,
+      "target": 23,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
+    },
+    {
+      "itemId": "SPSQ_21",
+      "source": 10,
+      "target": 26,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_21",
       "source": 23,
-      "target": 65,
+      "target": 60,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
+    },
+    {
+      "itemId": "SPSQ_21",
+      "source": 23,
+      "target": 62,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_21",
       "source": 26,
-      "target": 63,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_21",
       "source": 26,
-      "target": 65,
+      "target": 62,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -4041,7 +4042,7 @@
     },
     {
       "itemId": "SPSQ_22",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -4056,13 +4057,13 @@
     {
       "itemId": "SPSQ_22",
       "source": 31,
-      "target": 59,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "SPSQ_23",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
@@ -4070,7 +4071,7 @@
     {
       "itemId": "SPSQ_23",
       "source": 23,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -4091,7 +4092,7 @@
     {
       "itemId": "SPSQ_24",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -4147,7 +4148,7 @@
     {
       "itemId": "SPSQ_26",
       "source": 31,
-      "target": 57,
+      "target": 55,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -4174,7 +4175,7 @@
     },
     {
       "itemId": "SPSQ_28",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -4196,21 +4197,21 @@
     {
       "itemId": "SPSQ_28",
       "source": 31,
+      "target": 55,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "SPSQ_28",
+      "source": 31,
+      "target": 52,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
+      "itemId": "SPSQ_28",
+      "source": 31,
       "target": 57,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "SPSQ_28",
-      "source": 31,
-      "target": 53,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "SPSQ_28",
-      "source": 31,
-      "target": 59,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -4231,7 +4232,7 @@
     {
       "itemId": "SPSQ_30",
       "source": 31,
-      "target": 57,
+      "target": 55,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -4258,7 +4259,7 @@
     },
     {
       "itemId": "SPSQ_34",
-      "source": 9,
+      "source": 10,
       "target": 29,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -4273,7 +4274,7 @@
     {
       "itemId": "SPSQ_34",
       "source": 32,
-      "target": 61,
+      "target": 58,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -4293,14 +4294,14 @@
     },
     {
       "itemId": "SPSQ_35",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "SPSQ_35",
-      "source": 6,
+      "source": 7,
       "target": 24,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
@@ -4322,37 +4323,30 @@
     {
       "itemId": "SPSQ_35",
       "source": 23,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "SPSQ_35",
       "source": 23,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "SPSQ_35",
       "source": 24,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "SPSQ_35",
       "source": 24,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
-    },
-    {
-      "itemId": "SPSQ_36",
-      "source": 8,
-      "target": 26,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
     },
     {
       "itemId": "SPSQ_36",
@@ -4363,15 +4357,22 @@
     },
     {
       "itemId": "SPSQ_36",
-      "source": 26,
-      "target": 63,
+      "source": 10,
+      "target": 26,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_36",
       "source": 26,
-      "target": 65,
+      "target": 60,
+      "category": "Social Cognition and Empathy",
+      "color": "#00B050"
+    },
+    {
+      "itemId": "SPSQ_36",
+      "source": 26,
+      "target": 62,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -4392,7 +4393,7 @@
     {
       "itemId": "SPSQ_37",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -4433,7 +4434,7 @@
     },
     {
       "itemId": "SPSQ_43",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
@@ -4448,20 +4449,20 @@
     {
       "itemId": "SPSQ_43",
       "source": 23,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "SPSQ_43",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "SPSQ_44",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
@@ -4469,7 +4470,7 @@
     {
       "itemId": "SPSQ_44",
       "source": 23,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -4489,7 +4490,7 @@
     },
     {
       "itemId": "SPSQ_47",
-      "source": 6,
+      "source": 7,
       "target": 23,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
@@ -4504,7 +4505,7 @@
     {
       "itemId": "SPSQ_47",
       "source": 33,
-      "target": 56,
+      "target": 54,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -4531,7 +4532,7 @@
     },
     {
       "itemId": "SPSQ_49",
-      "source": 7,
+      "source": 8,
       "target": 40,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
@@ -4539,28 +4540,49 @@
     {
       "itemId": "SPSQ_49",
       "source": 40,
-      "target": 72,
+      "target": 69,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_50",
-      "source": 7,
+      "source": 8,
       "target": 38,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_50",
-      "source": 38,
-      "target": 67,
+      "source": 8,
+      "target": 37,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
     {
       "itemId": "SPSQ_50",
       "source": 38,
-      "target": 68,
+      "target": 64,
+      "category": "Cognitive Processing",
+      "color": "#00B0F0"
+    },
+    {
+      "itemId": "SPSQ_50",
+      "source": 38,
+      "target": 65,
+      "category": "Cognitive Processing",
+      "color": "#00B0F0"
+    },
+    {
+      "itemId": "SPSQ_50",
+      "source": 37,
+      "target": 64,
+      "category": "Cognitive Processing",
+      "color": "#00B0F0"
+    },
+    {
+      "itemId": "SPSQ_50",
+      "source": 37,
+      "target": 65,
       "category": "Cognitive Processing",
       "color": "#00B0F0"
     },
@@ -4573,7 +4595,7 @@
     },
     {
       "itemId": "SPSQ_51",
-      "source": 13,
+      "source": 6,
       "target": 23,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -4588,14 +4610,14 @@
     {
       "itemId": "SPSQ_51",
       "source": 23,
-      "target": 60,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "SPSQ_51",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -4608,7 +4630,7 @@
     },
     {
       "itemId": "SPSQ_53",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -4617,13 +4639,6 @@
       "itemId": "SPSQ_53",
       "source": 25,
       "target": 31,
-      "category": "Affective and Aesthetic",
-      "color": "#7030A0"
-    },
-    {
-      "itemId": "SPSQ_53",
-      "source": 31,
-      "target": 59,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -4635,8 +4650,15 @@
       "color": "#7030A0"
     },
     {
+      "itemId": "SPSQ_53",
+      "source": 31,
+      "target": 55,
+      "category": "Affective and Aesthetic",
+      "color": "#7030A0"
+    },
+    {
       "itemId": "SPSQ_54",
-      "source": 13,
+      "source": 6,
       "target": 25,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
@@ -4651,7 +4673,7 @@
     {
       "itemId": "SPSQ_54",
       "source": 31,
-      "target": 59,
+      "target": 57,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
@@ -4672,20 +4694,20 @@
     {
       "itemId": "SPSQ_55",
       "source": 35,
-      "target": 51,
+      "target": 50,
       "category": "Coping Behavior",
       "color": "#FFC000"
     },
     {
       "itemId": "SPSQ_56",
-      "source": 9,
+      "source": 10,
       "target": 23,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_56",
-      "source": 9,
+      "source": 10,
       "target": 28,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
@@ -4707,28 +4729,14 @@
     {
       "itemId": "SPSQ_56",
       "source": 23,
-      "target": 63,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "SPSQ_56",
-      "source": 23,
-      "target": 53,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_56",
       "source": 28,
-      "target": 63,
-      "category": "Social Cognition and Empathy",
-      "color": "#00B050"
-    },
-    {
-      "itemId": "SPSQ_56",
-      "source": 28,
-      "target": 53,
+      "target": 60,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -4763,14 +4771,14 @@
     {
       "itemId": "SPSQ_60",
       "source": 33,
-      "target": 66,
+      "target": 63,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_60",
       "source": 33,
-      "target": 73,
+      "target": 70,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -4784,14 +4792,14 @@
     {
       "itemId": "SPSQ_60",
       "source": 34,
-      "target": 66,
+      "target": 63,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "SPSQ_60",
       "source": 34,
-      "target": 73,
+      "target": 70,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -4818,29 +4826,43 @@
     },
     {
       "itemId": "HSC-21_1",
-      "source": 23,
-      "target": 55,
+      "source": 17,
+      "target": 23,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_1",
+      "source": 17,
+      "target": 24,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC-21_1",
       "source": 23,
-      "target": 54,
+      "target": 53,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_1",
+      "source": 23,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC-21_1",
       "source": 24,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC-21_1",
       "source": 24,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -4931,14 +4953,14 @@
     {
       "itemId": "HSC-21_6",
       "source": 33,
-      "target": 66,
+      "target": 63,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSC-21_6",
       "source": 33,
-      "target": 73,
+      "target": 70,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -4952,14 +4974,14 @@
     {
       "itemId": "HSC-21_6",
       "source": 34,
-      "target": 66,
+      "target": 63,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
     {
       "itemId": "HSC-21_6",
       "source": 34,
-      "target": 73,
+      "target": 70,
       "category": "Social Cognition and Empathy",
       "color": "#00B050"
     },
@@ -4987,7 +5009,7 @@
     {
       "itemId": "HSC-21_7",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -5008,13 +5030,13 @@
     {
       "itemId": "HSC-21_8",
       "source": 31,
-      "target": 57,
+      "target": 55,
       "category": "Affective and Aesthetic",
       "color": "#7030A0"
     },
     {
       "itemId": "HSC-21_9",
-      "source": 11,
+      "source": 12,
       "target": 30,
       "category": "Overload",
       "color": "#C55A11"
@@ -5043,77 +5065,77 @@
     {
       "itemId": "HSC-21_10",
       "source": 23,
+      "target": 52,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_11",
+      "source": 7,
+      "target": 23,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_11",
+      "source": 23,
+      "target": 54,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_12",
+      "source": 3,
+      "target": 23,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_12",
+      "source": 3,
+      "target": 24,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_12",
+      "source": 20,
+      "target": 23,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_12",
+      "source": 20,
+      "target": 24,
+      "category": "Perceptual Sensitivity",
+      "color": "#4472C4"
+    },
+    {
+      "itemId": "HSC-21_12",
+      "source": 23,
       "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
-      "itemId": "HSC-21_11",
-      "source": 6,
-      "target": 23,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
-      "itemId": "HSC-21_11",
-      "source": 23,
-      "target": 56,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
-      "itemId": "HSC-21_12",
-      "source": 3,
-      "target": 23,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
-      "itemId": "HSC-21_12",
-      "source": 3,
-      "target": 24,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
-      "itemId": "HSC-21_12",
-      "source": 20,
-      "target": 23,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
-      "itemId": "HSC-21_12",
-      "source": 20,
-      "target": 24,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
       "itemId": "HSC-21_12",
       "source": 23,
-      "target": 55,
-      "category": "Perceptual Sensitivity",
-      "color": "#4472C4"
-    },
-    {
-      "itemId": "HSC-21_12",
-      "source": 23,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC-21_12",
       "source": 24,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC-21_12",
       "source": 24,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -5176,28 +5198,28 @@
     {
       "itemId": "HSC-21_15",
       "source": 23,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC-21_15",
       "source": 23,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC-21_15",
       "source": 24,
-      "target": 55,
+      "target": 53,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
     {
       "itemId": "HSC-21_15",
       "source": 24,
-      "target": 54,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -5225,7 +5247,7 @@
     {
       "itemId": "HSC-21_17",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -5267,7 +5289,7 @@
     {
       "itemId": "HSC-21_19",
       "source": 23,
-      "target": 53,
+      "target": 52,
       "category": "Perceptual Sensitivity",
       "color": "#4472C4"
     },
@@ -5347,7 +5369,6 @@
       "HSP_7__HSP-R"
     ],
     "3": [
-      "DOES_19",
       "HSC-21_12",
       "HSC-21_8",
       "HSC_3",
@@ -5376,71 +5397,6 @@
       "SPSQ_35"
     ],
     "6": [
-      "HSC-21_11",
-      "HSP_11",
-      "HSP_20",
-      "HSP_4",
-      "HSP_6",
-      "SPSQ_23",
-      "SPSQ_35",
-      "SPSQ_43",
-      "SPSQ_44",
-      "SPSQ_47"
-    ],
-    "7": [
-      "DOES_12",
-      "DOES_16",
-      "DOES_20",
-      "DOES_4",
-      "DOES_8",
-      "HSP_42",
-      "HSP_60",
-      "HSP_67",
-      "HSP_8",
-      "SPSQ_49",
-      "SPSQ_50"
-    ],
-    "8": [
-      "HSP_48",
-      "HSP_52",
-      "HSP_53",
-      "SPSQ_14",
-      "SPSQ_21",
-      "SPSQ_36",
-      "SPSQ_4",
-      "SPSQ_5"
-    ],
-    "9": [
-      "DOES_10",
-      "DOES_2",
-      "HSP_15",
-      "HSP_3",
-      "HSP_41",
-      "HSP_48",
-      "HSP_52",
-      "HSP_53",
-      "HSP_55",
-      "SPSQ_21",
-      "SPSQ_34",
-      "SPSQ_36",
-      "SPSQ_4",
-      "SPSQ_5",
-      "SPSQ_56"
-    ],
-    "10": [
-      "DOES_10",
-      "HSC_9",
-      "HSP_18"
-    ],
-    "11": [
-      "DOES_7",
-      "HSC-21_9",
-      "SPSQ_19"
-    ],
-    "12": [
-      "SPSQ_15"
-    ],
-    "13": [
       "DOES_14",
       "DOES_18",
       "HSC_2",
@@ -5455,6 +5411,70 @@
       "SPSQ_51",
       "SPSQ_53",
       "SPSQ_54"
+    ],
+    "7": [
+      "HSC-21_11",
+      "HSP_11",
+      "HSP_20",
+      "HSP_4",
+      "HSP_6",
+      "SPSQ_23",
+      "SPSQ_35",
+      "SPSQ_43",
+      "SPSQ_44",
+      "SPSQ_47"
+    ],
+    "8": [
+      "DOES_12",
+      "DOES_16",
+      "DOES_20",
+      "DOES_4",
+      "DOES_8",
+      "HSP_42",
+      "HSP_60",
+      "HSP_67",
+      "HSP_8",
+      "SPSQ_49",
+      "SPSQ_50"
+    ],
+    "9": [
+      "HSP_48",
+      "HSP_52",
+      "HSP_53",
+      "SPSQ_14",
+      "SPSQ_21",
+      "SPSQ_36",
+      "SPSQ_4",
+      "SPSQ_5"
+    ],
+    "10": [
+      "DOES_10",
+      "DOES_2",
+      "HSP_15",
+      "HSP_3",
+      "HSP_48",
+      "HSP_52",
+      "HSP_53",
+      "HSP_55",
+      "SPSQ_21",
+      "SPSQ_34",
+      "SPSQ_36",
+      "SPSQ_4",
+      "SPSQ_5",
+      "SPSQ_56"
+    ],
+    "11": [
+      "DOES_10",
+      "HSC_9",
+      "HSP_18"
+    ],
+    "12": [
+      "DOES_7",
+      "HSC-21_9",
+      "SPSQ_19"
+    ],
+    "13": [
+      "SPSQ_15"
     ],
     "14": [
       "DOES_6",
@@ -5482,14 +5502,16 @@
       "DOES_17",
       "DOES_5",
       "DOES_9",
+      "HSC-21_1",
       "HSC-21_10",
       "HSC-21_17",
       "HSC-21_19",
       "HSC-21_7",
-      "HSP_15",
+      "HSC_6",
       "HSP_2",
       "HSP_22__HSP-27",
       "HSP_22__HSP-R",
+      "HSP_72",
       "SPSQ_12",
       "SPSQ_24",
       "SPSQ_28",
@@ -5589,6 +5611,8 @@
       "HSP_15",
       "HSP_2",
       "HSP_20",
+      "HSP_22__HSP-27",
+      "HSP_22__HSP-R",
       "HSP_4",
       "HSP_48",
       "HSP_53",
@@ -5783,7 +5807,9 @@
       "DOES_6",
       "DOES_8",
       "HSP_60",
-      "HSP_67"
+      "HSP_67",
+      "HSP_8",
+      "SPSQ_50"
     ],
     "38": [
       "DOES_8",
@@ -5807,6 +5833,10 @@
       "HSP_19__HSP-27",
       "HSP_19__HSP-R",
       "HSP_23",
+      "HSP_24",
+      "HSP_25__HSP-27",
+      "HSP_25__HSP-R",
+      "HSP_5",
       "SPSQ_2",
       "SPSQ_3",
       "SPSQ_59"
@@ -5870,60 +5900,54 @@
       "SPSQ_25"
     ],
     "48": [
-      "DOES_19"
-    ],
-    "49": [
       "HSC_11",
       "HSP_21",
       "SPSQ_18"
     ],
-    "50": [
+    "49": [
       "DOES_10",
       "HSC_9",
       "HSP_18"
     ],
-    "51": [
+    "50": [
       "HSP_17",
       "HSP_18",
       "HSP_24",
       "SPSQ_55"
     ],
-    "52": [
+    "51": [
       "HSP_11",
       "HSP_5"
     ],
-    "53": [
+    "52": [
       "DOES_1",
       "DOES_13",
       "DOES_17",
       "DOES_5",
       "DOES_9",
+      "HSC-21_1",
       "HSC-21_10",
+      "HSC-21_12",
+      "HSC-21_15",
       "HSC-21_17",
       "HSC-21_19",
       "HSC-21_7",
-      "HSP_15",
+      "HSC_6",
       "HSP_2",
       "HSP_22__HSP-27",
       "HSP_22__HSP-R",
+      "HSP_71",
+      "HSP_72",
+      "HSP_73",
       "SPSQ_12",
       "SPSQ_24",
       "SPSQ_28",
       "SPSQ_37",
       "SPSQ_43",
       "SPSQ_51",
-      "SPSQ_56"
+      "SPSQ_6"
     ],
-    "54": [
-      "HSC-21_1",
-      "HSC-21_12",
-      "HSC-21_15",
-      "HSC_6",
-      "HSP_71",
-      "HSP_72",
-      "HSP_73"
-    ],
-    "55": [
+    "53": [
       "DOES_13",
       "DOES_5",
       "HSC-21_1",
@@ -5935,7 +5959,7 @@
       "HSP_73",
       "SPSQ_35"
     ],
-    "56": [
+    "54": [
       "HSC-21_11",
       "HSP_11",
       "HSP_20",
@@ -5947,7 +5971,7 @@
       "SPSQ_44",
       "SPSQ_47"
     ],
-    "57": [
+    "55": [
       "HSC-21_8",
       "HSC_2",
       "HSC_3",
@@ -5960,14 +5984,15 @@
       "SPSQ_53",
       "SPSQ_6"
     ],
-    "58": [
+    "56": [
       "DOES_6",
       "HSP_61",
       "SPSQ_15"
     ],
-    "59": [
+    "57": [
       "DOES_14",
       "DOES_18",
+      "HSC_2",
       "HSP_10__HSP-27",
       "HSP_10__HSP-R",
       "HSP_22__HSP-27",
@@ -5976,27 +6001,21 @@
       "SPSQ_12",
       "SPSQ_22",
       "SPSQ_28",
+      "SPSQ_51",
       "SPSQ_53",
       "SPSQ_54"
     ],
-    "60": [
-      "HSP_22__HSP-27",
-      "HSP_22__HSP-R",
-      "SPSQ_12",
-      "SPSQ_51"
-    ],
-    "61": [
+    "58": [
       "DOES_10",
       "DOES_2",
       "HSP_3",
-      "HSP_41",
       "HSP_55",
       "SPSQ_34"
     ],
-    "62": [
+    "59": [
       "HSP_42"
     ],
-    "63": [
+    "60": [
       "HSP_15",
       "HSP_48",
       "HSP_52",
@@ -6007,28 +6026,24 @@
       "SPSQ_5",
       "SPSQ_56"
     ],
-    "64": [
-      "DOES_14",
-      "HSP_18"
+    "61": [
+      "DOES_14"
     ],
-    "65": [
-      "HSP_48",
-      "HSP_52",
-      "HSP_53",
+    "62": [
       "SPSQ_14",
       "SPSQ_21",
       "SPSQ_36",
       "SPSQ_4",
       "SPSQ_5"
     ],
-    "66": [
+    "63": [
       "HSC-21_6",
       "HSC_12",
       "HSP_26",
       "HSP_41",
       "SPSQ_60"
     ],
-    "67": [
+    "64": [
       "DOES_12",
       "DOES_16",
       "DOES_20",
@@ -6041,34 +6056,35 @@
       "HSP_8",
       "SPSQ_50"
     ],
-    "68": [
+    "65": [
       "DOES_8",
+      "HSP_8",
       "SPSQ_50"
     ],
-    "69": [
+    "66": [
       "DOES_12",
       "DOES_16"
     ],
-    "70": [
+    "67": [
       "DOES_8"
     ],
-    "71": [
+    "68": [
       "DOES_4"
     ],
-    "72": [
+    "69": [
       "SPSQ_49"
     ],
-    "73": [
+    "70": [
       "HSC-21_6",
       "HSC_12",
       "HSP_20",
       "HSP_26",
       "SPSQ_60"
     ],
-    "74": [
+    "71": [
       "HSP_12"
     ],
-    "75": [
+    "72": [
       "HSP_27"
     ]
   },
@@ -6106,7 +6122,7 @@
       "text": "Do you seem to be aware of subtleties in your environment?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -6121,7 +6137,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -6187,7 +6203,8 @@
       "text": "Do you find yourself needing to withdraw during busy days into bed or into a darkened room or any place where you can have some privacy and relief from stimulation?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "Recovery Behavior"
+        "Recovery Behavior",
+        "General Overload"
       ],
       "category": "Coping Behavior",
       "values": {
@@ -6201,7 +6218,8 @@
         ],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Recovery Behavior"
+          "Recovery Behavior",
+          "General Overload"
         ]
       },
       "outliner": "",
@@ -6275,7 +6293,8 @@
       "text": "Do you have a rich, complex inner life?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "Deep Thought"
+        "Deep Thought",
+        "Inner Richness"
       ],
       "category": "Cognitive Processing",
       "values": {
@@ -6286,10 +6305,12 @@
         "Outcome": [],
         "Response": [],
         "CognitiveDisp": [
+          "Deep Thought",
           "Inner Richness"
         ],
         "DerivedPrimary": [
-          "Deep Thought"
+          "Deep Thought",
+          "Inner Richness"
         ]
       },
       "outliner": "",
@@ -6328,7 +6349,7 @@
       "text": "Are you deeply moved by the arts or music?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "Aesthetic Responsiveness"
+        "Aesthetic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -6345,7 +6366,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness"
+          "Aesthetic Sensitivity"
         ]
       },
       "outliner": "",
@@ -6466,14 +6487,12 @@
       "text": "When people are uncomfortable in a physical environment do you tend to know what needs to be done to make it more comfortable (like changing the lighting or the seating)?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "Cognitive Empathy",
-        "Sensitivity to Subtlety"
+        "Cognitive Empathy"
       ],
       "category": "Social Cognition and Empathy",
       "values": {
         "Stimulus": [
-          "Other's Mood",
-          "Subtlety"
+          "Other's Mood"
         ],
         "Process": [
           "Detection",
@@ -6483,8 +6502,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Cognitive Empathy",
-          "Sensitivity to Subtlety"
+          "Cognitive Empathy"
         ]
       },
       "outliner": "",
@@ -6548,11 +6566,10 @@
       "text": "Do you make a point to avoid violent movies and TV shows?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "General Empathy",
         "Preventive Behavior",
         "Conflict-Related Overload"
       ],
-      "category": "Social Cognition and Empathy",
+      "category": "Coping Behavior",
       "values": {
         "Stimulus": [
           "Conflict"
@@ -6566,7 +6583,6 @@
         ],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "General Empathy",
           "Preventive Behavior",
           "Conflict-Related Overload"
         ]
@@ -6663,10 +6679,9 @@
       "text": "Do you notice and enjoy delicate or fine scents, tastes, sounds, works of art?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "Aesthetic Responsiveness",
         "Aesthetic Sensitivity",
         "Hedonic Sensitivity",
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -6678,6 +6693,7 @@
           "Subtlety"
         ],
         "Process": [
+          "Detection",
           "Appreciation"
         ],
         "Outcome": [
@@ -6686,10 +6702,9 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness",
           "Aesthetic Sensitivity",
           "Hedonic Sensitivity",
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -6727,7 +6742,8 @@
       "text": "Do you make it a high priority to arrange your life to avoid upsetting or overwhelming situations?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "Preventive Behavior"
+        "Preventive Behavior",
+        "General Overload"
       ],
       "category": "Coping Behavior",
       "values": {
@@ -6741,7 +6757,8 @@
         ],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Preventive Behavior"
+          "Preventive Behavior",
+          "General Overload"
         ]
       },
       "outliner": "",
@@ -6753,7 +6770,8 @@
       "text": "Are you bothered by intense stimuli, like loud noises or chaotic scenes?",
       "scale": "HSP-27",
       "derivedPrimary": [
-        "Strong-Auditory-Stimulus-Caused Overload"
+        "Strong-Auditory-Stimulus-Caused Overload",
+        "General Overload"
       ],
       "category": "Overload",
       "values": {
@@ -6768,7 +6786,8 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Strong-Auditory-Stimulus-Caused Overload"
+          "Strong-Auditory-Stimulus-Caused Overload",
+          "General Overload"
         ]
       },
       "outliner": "",
@@ -6859,7 +6878,8 @@
       "text": "Some music can make me really happy",
       "scale": "HSC",
       "derivedPrimary": [
-        "Hedonic Sensitivity"
+        "Hedonic Sensitivity",
+        "Aesthetic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -6876,7 +6896,8 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Hedonic Sensitivity"
+          "Hedonic Sensitivity",
+          "Aesthetic Sensitivity"
         ]
       },
       "outliner": "",
@@ -6970,12 +6991,13 @@
       "scale": "HSC",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Details"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
         "Stimulus": [
-          "Changes"
+          "Changes",
+          "Subtlety"
         ],
         "Process": [
           "Detection",
@@ -6986,7 +7008,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Details"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -7199,7 +7221,7 @@
       "text": "Are you deeply moved by the arts or music?",
       "scale": "HSP-R",
       "derivedPrimary": [
-        "Aesthetic Responsiveness"
+        "Aesthetic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -7216,7 +7238,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness"
+          "Aesthetic Sensitivity"
         ]
       },
       "outliner": "",
@@ -7255,10 +7277,9 @@
       "text": "Do you notice and enjoy delicate or fine scents, tastes, sounds, works of art?",
       "scale": "HSP-R",
       "derivedPrimary": [
-        "Aesthetic Responsiveness",
         "Aesthetic Sensitivity",
         "Hedonic Sensitivity",
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -7270,6 +7291,7 @@
           "Subtlety"
         ],
         "Process": [
+          "Detection",
           "Appreciation"
         ],
         "Outcome": [
@@ -7278,10 +7300,9 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness",
           "Aesthetic Sensitivity",
           "Hedonic Sensitivity",
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -7293,7 +7314,8 @@
       "text": "Are you bothered by intense stimuli, like loud noises or chaotic scenes?",
       "scale": "HSP-R",
       "derivedPrimary": [
-        "Strong-Auditory-Stimulus-Caused Overload"
+        "Strong-Auditory-Stimulus-Caused Overload",
+        "General Overload"
       ],
       "category": "Overload",
       "values": {
@@ -7308,7 +7330,8 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Strong-Auditory-Stimulus-Caused Overload"
+          "Strong-Auditory-Stimulus-Caused Overload",
+          "General Overload"
         ]
       },
       "outliner": "",
@@ -7320,13 +7343,11 @@
       "text": "Are you easily affected by feedback (both negative and positive)?",
       "scale": "HSP-R",
       "derivedPrimary": [
-        "Emotional Contagion",
         "Evaluation Apprehension"
       ],
-      "category": "Affective and Aesthetic",
+      "category": "Social Cognition and Empathy",
       "values": {
         "Stimulus": [
-          "Other's Mood",
           "Observation or Competition"
         ],
         "Process": [],
@@ -7336,7 +7357,6 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Emotional Contagion",
           "Evaluation Apprehension"
         ]
       },
@@ -7375,8 +7395,7 @@
       "text": "Do you easily recognize what others are feeling?",
       "scale": "HSP-R",
       "derivedPrimary": [
-        "Cognitive Empathy",
-        "Nonverbal Social Perception"
+        "Cognitive Empathy"
       ],
       "category": "Social Cognition and Empathy",
       "values": {
@@ -7391,8 +7410,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Cognitive Empathy",
-          "Nonverbal Social Perception"
+          "Cognitive Empathy"
         ]
       },
       "outliner": "",
@@ -7404,8 +7422,7 @@
       "text": "Are you good at anticipating how someone may feel about a situation?",
       "scale": "HSP-R",
       "derivedPrimary": [
-        "Cognitive Empathy",
-        "Nonverbal Social Perception"
+        "Cognitive Empathy"
       ],
       "category": "Social Cognition and Empathy",
       "values": {
@@ -7421,8 +7438,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Cognitive Empathy",
-          "Nonverbal Social Perception"
+          "Cognitive Empathy"
         ]
       },
       "outliner": "",
@@ -7434,8 +7450,7 @@
       "text": "Do other people tell you that you are good at understanding what they are feeling or thinking?",
       "scale": "HSP-R",
       "derivedPrimary": [
-        "Cognitive Empathy",
-        "Nonverbal Social Perception"
+        "Cognitive Empathy"
       ],
       "category": "Social Cognition and Empathy",
       "values": {
@@ -7451,8 +7466,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Cognitive Empathy",
-          "Nonverbal Social Perception"
+          "Cognitive Empathy"
         ]
       },
       "outliner": "Observer-Rated Sensitivity",
@@ -7575,7 +7589,7 @@
       "scale": "HSP-R",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Details"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -7591,7 +7605,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Details"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -7604,13 +7618,14 @@
       "scale": "HSP-R",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Details"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
         "Stimulus": [
           "Thermoception",
-          "Changes"
+          "Changes",
+          "Subtlety"
         ],
         "Process": [
           "Detection",
@@ -7621,7 +7636,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Details"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -7634,7 +7649,7 @@
       "scale": "HSP-R",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Details"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -7651,7 +7666,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Details"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "Comparative",
@@ -7663,7 +7678,7 @@
       "text": "Do you tend to get deeply immersed in music?",
       "scale": "HSP-R",
       "derivedPrimary": [
-        "Aesthetic Responsiveness"
+        "Aesthetic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -7680,7 +7695,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness"
+          "Aesthetic Sensitivity"
         ]
       },
       "outliner": "",
@@ -7692,7 +7707,7 @@
       "text": "During a walk, I notice sounds around me clearly.",
       "scale": "DOES",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -7707,7 +7722,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -7803,7 +7818,7 @@
       "scale": "DOES",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -7820,7 +7835,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -7924,7 +7939,7 @@
       "text": "I am aware when the light in a room is glaring or bright.",
       "scale": "DOES",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -7939,7 +7954,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -8037,7 +8052,7 @@
       "scale": "DOES",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -8055,7 +8070,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -8067,7 +8082,7 @@
       "text": "Emotional film scenes touch me deeply.",
       "scale": "DOES",
       "derivedPrimary": [
-        "Aesthetic Responsiveness",
+        "Aesthetic Sensitivity",
         "General Empathy"
       ],
       "category": "Affective and Aesthetic",
@@ -8085,7 +8100,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness",
+          "Aesthetic Sensitivity",
           "General Empathy"
         ]
       },
@@ -8153,7 +8168,7 @@
       "text": "I can perceive smells very clearly.",
       "scale": "DOES",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -8168,7 +8183,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -8180,7 +8195,7 @@
       "text": "When I listen to beautiful music, I can become completely absorbed in it.",
       "scale": "DOES",
       "derivedPrimary": [
-        "Aesthetic Responsiveness"
+        "Aesthetic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -8197,7 +8212,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness"
+          "Aesthetic Sensitivity"
         ]
       },
       "outliner": "",
@@ -8209,13 +8224,11 @@
       "text": "I often find odors like perfume or strong food smells unbearable.",
       "scale": "DOES",
       "derivedPrimary": [
-        "Gustatory Overload",
         "Olfactory Overload"
       ],
       "category": "Overload",
       "values": {
         "Stimulus": [
-          "Gustatory",
           "Olfactory",
           "Intense Input"
         ],
@@ -8226,7 +8239,6 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Gustatory Overload",
           "Olfactory Overload"
         ]
       },
@@ -8375,7 +8387,8 @@
       "text": "I find it hard to enjoy small or subtle things.",
       "scale": "SPSQ",
       "derivedPrimary": [
-        "Hedonic Sensitivity"
+        "Hedonic Sensitivity",
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -8389,7 +8402,8 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Hedonic Sensitivity"
+          "Hedonic Sensitivity",
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "Reversed",
@@ -8509,9 +8523,8 @@
       "text": "I often notice the emotional side (charge) of paintings and photographs.",
       "scale": "SPSQ",
       "derivedPrimary": [
-        "Aesthetic Responsiveness",
         "Aesthetic Sensitivity",
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -8527,9 +8540,8 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness",
           "Aesthetic Sensitivity",
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -8678,7 +8690,7 @@
       "text": "I can be emotionally touched by music or art.",
       "scale": "SPSQ",
       "derivedPrimary": [
-        "Aesthetic Responsiveness"
+        "Aesthetic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -8695,7 +8707,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness"
+          "Aesthetic Sensitivity"
         ]
       },
       "outliner": "",
@@ -8733,7 +8745,7 @@
       "text": "Also barely visible visual details attract my attention.",
       "scale": "SPSQ",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -8748,7 +8760,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -8819,8 +8831,8 @@
       "scale": "SPSQ",
       "derivedPrimary": [
         "Hedonic Sensitivity",
-        "Sensitivity to Subtlety",
-        "Aesthetic Responsiveness"
+        "Sensitivity to Subtlety and Detail",
+        "Aesthetic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -8841,8 +8853,8 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Hedonic Sensitivity",
-          "Sensitivity to Subtlety",
-          "Aesthetic Responsiveness"
+          "Sensitivity to Subtlety and Detail",
+          "Aesthetic Sensitivity"
         ]
       },
       "outliner": "",
@@ -8997,7 +9009,7 @@
       "text": "I often notice weak odors.",
       "scale": "SPSQ",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -9012,7 +9024,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9078,7 +9090,7 @@
       "scale": "SPSQ",
       "derivedPrimary": [
         "Bodily-State Sensitivity",
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -9094,7 +9106,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Bodily-State Sensitivity",
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9251,7 +9263,8 @@
         "Outcome": [],
         "Response": [],
         "CognitiveDisp": [
-          "Inner Richness"
+          "Inner Richness",
+          "Deep Thought"
         ],
         "DerivedPrimary": [
           "Deep Thought",
@@ -9268,7 +9281,7 @@
       "scale": "SPSQ",
       "derivedPrimary": [
         "Aesthetic Sensitivity",
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -9285,7 +9298,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Aesthetic Sensitivity",
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9297,7 +9310,7 @@
       "text": "Watching a nice movie gives me a good feeling.",
       "scale": "SPSQ",
       "derivedPrimary": [
-        "Aesthetic Responsiveness",
+        "Aesthetic Sensitivity",
         "Hedonic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
@@ -9315,7 +9328,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness",
+          "Aesthetic Sensitivity",
           "Hedonic Sensitivity"
         ]
       },
@@ -9328,7 +9341,7 @@
       "text": "I can be very touched by a beautiful work of art.",
       "scale": "SPSQ",
       "derivedPrimary": [
-        "Aesthetic Responsiveness"
+        "Aesthetic Sensitivity"
       ],
       "category": "Affective and Aesthetic",
       "values": {
@@ -9344,7 +9357,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Aesthetic Responsiveness"
+          "Aesthetic Sensitivity"
         ]
       },
       "outliner": "",
@@ -9383,8 +9396,7 @@
       "text": "When people feel uncomfortable, I know how to put them at ease.",
       "scale": "SPSQ",
       "derivedPrimary": [
-        "Cognitive Empathy",
-        "Sensitivity to Subtlety"
+        "Cognitive Empathy"
       ],
       "category": "Social Cognition and Empathy",
       "values": {
@@ -9400,8 +9412,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Cognitive Empathy",
-          "Sensitivity to Subtlety"
+          "Cognitive Empathy"
         ]
       },
       "outliner": "",
@@ -9471,12 +9482,13 @@
       "scale": "HSC-21",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Details"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
         "Stimulus": [
-          "Changes"
+          "Changes",
+          "Subtlety"
         ],
         "Process": [
           "Detection",
@@ -9487,7 +9499,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Details"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9636,7 +9648,7 @@
       "text": "I quickly notice how something smells",
       "scale": "HSC-21",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -9651,7 +9663,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9718,7 +9730,7 @@
       "text": "I notice small details in my surroundings",
       "scale": "HSC-21",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -9732,7 +9744,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9771,7 +9783,7 @@
       "scale": "HSC-21",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Details"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -9788,7 +9800,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Details"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9852,7 +9864,7 @@
       "scale": "HSC-21",
       "derivedPrimary": [
         "Sensitivity to Small Differences and Changes",
-        "Sensitivity to Details"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -9869,7 +9881,7 @@
         "CognitiveDisp": [],
         "DerivedPrimary": [
           "Sensitivity to Small Differences and Changes",
-          "Sensitivity to Details"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9906,7 +9918,7 @@
       "text": "I have an eye for details in my surroundings",
       "scale": "HSC-21",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -9920,7 +9932,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -9959,7 +9971,7 @@
       "text": "I have a delicate sense of smell",
       "scale": "HSC-21",
       "derivedPrimary": [
-        "Sensitivity to Subtlety"
+        "Sensitivity to Subtlety and Detail"
       ],
       "category": "Perceptual Sensitivity",
       "values": {
@@ -9974,7 +9986,7 @@
         "Response": [],
         "CognitiveDisp": [],
         "DerivedPrimary": [
-          "Sensitivity to Subtlety"
+          "Sensitivity to Subtlety and Detail"
         ]
       },
       "outliner": "",
@@ -10082,15 +10094,13 @@
       "Recovery Behavior"
     ],
     "Perceptual Sensitivity": [
-      "Sensitivity to Subtlety",
-      "Sensitivity to Details",
+      "Sensitivity to Subtlety and Detail",
       "Sensitivity to Small Differences and Changes",
       "Bodily-State Sensitivity"
     ],
     "Affective and Aesthetic": [
       "Hedonic Sensitivity",
       "Social Hedonic Sensitivity",
-      "Aesthetic Responsiveness",
       "Aesthetic Sensitivity",
       "Emotional Contagion",
       "Inner Emotional Intensity"
@@ -10135,15 +10145,15 @@
     "Gustatory": "Physical",
     "Olfactory": "Physical",
     "Thermoception": "Physical",
-    "Bodily State": "Internal",
-    "Internal Mentation": "Internal",
-    "Nonverbal Social Cues": "Social",
-    "Other's Mood": "Social",
-    "Conflict": "Social",
-    "Crowd": "Social",
-    "Close Others": "Social",
-    "Artistic Stimuli": "Social",
-    "Linguistic": "Social",
+    "Artistic Stimuli": "Physical",
+    "Bodily State": "Physical",
+    "Internal Mentation": "Physical",
+    "Nonverbal Social Cues": "Physical",
+    "Other's Mood": "Physical",
+    "Conflict": "Physical",
+    "Crowd": "Physical",
+    "Close Others": "Physical",
+    "Linguistic": "Physical",
     "Observation or Competition": "Demand",
     "Time/Task Pressure": "Demand",
     "Subtlety": "Configuration",
@@ -10155,8 +10165,6 @@
   },
   "stimulusSubcatOrder": [
     "Physical",
-    "Internal",
-    "Social",
     "Demand",
     "Configuration",
     "Missing / Unspecified"
@@ -10202,47 +10210,47 @@
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Internal",
-      "value": "Bodily State"
-    },
-    {
-      "axis": "Stimulus",
-      "subcategory": "Internal",
-      "value": "Internal Mentation"
-    },
-    {
-      "axis": "Stimulus",
-      "subcategory": "Social",
-      "value": "Nonverbal Social Cues"
-    },
-    {
-      "axis": "Stimulus",
-      "subcategory": "Social",
-      "value": "Other's Mood"
-    },
-    {
-      "axis": "Stimulus",
-      "subcategory": "Social",
-      "value": "Conflict"
-    },
-    {
-      "axis": "Stimulus",
-      "subcategory": "Social",
-      "value": "Crowd"
-    },
-    {
-      "axis": "Stimulus",
-      "subcategory": "Social",
-      "value": "Close Others"
-    },
-    {
-      "axis": "Stimulus",
-      "subcategory": "Social",
+      "subcategory": "Physical",
       "value": "Artistic Stimuli"
     },
     {
       "axis": "Stimulus",
-      "subcategory": "Social",
+      "subcategory": "Physical",
+      "value": "Bodily State"
+    },
+    {
+      "axis": "Stimulus",
+      "subcategory": "Physical",
+      "value": "Internal Mentation"
+    },
+    {
+      "axis": "Stimulus",
+      "subcategory": "Physical",
+      "value": "Nonverbal Social Cues"
+    },
+    {
+      "axis": "Stimulus",
+      "subcategory": "Physical",
+      "value": "Other's Mood"
+    },
+    {
+      "axis": "Stimulus",
+      "subcategory": "Physical",
+      "value": "Conflict"
+    },
+    {
+      "axis": "Stimulus",
+      "subcategory": "Physical",
+      "value": "Crowd"
+    },
+    {
+      "axis": "Stimulus",
+      "subcategory": "Physical",
+      "value": "Close Others"
+    },
+    {
+      "axis": "Stimulus",
+      "subcategory": "Physical",
       "value": "Linguistic"
     },
     {

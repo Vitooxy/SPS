@@ -4,8 +4,8 @@ export function createTemplateEditorData(): EditorData {
   const categoryCodes: Record<string, string[]> = {
     Overload: ['General Overload', 'Pressure-Caused Overload', 'Crowd-Caused Overload', 'Strong-Visual-Stimulus-Caused Overload', 'Strong-Auditory-Stimulus-Caused Overload', 'Tactile Overload', 'Olfactory Overload', 'Gustatory Overload', 'Change-Related Overload', 'Conflict-Related Overload'],
     'Coping Behavior': ['Preventive Behavior', 'Recovery Behavior'],
-    'Perceptual Sensitivity': ['Sensitivity to Subtlety', 'Sensitivity to Details', 'Sensitivity to Small Differences and Changes', 'Bodily-State Sensitivity'],
-    'Affective and Aesthetic': ['Hedonic Sensitivity', 'Social Hedonic Sensitivity', 'Aesthetic Responsiveness', 'Aesthetic Sensitivity', 'Emotional Contagion', 'Inner Emotional Intensity'],
+    'Perceptual Sensitivity': ['Sensitivity to Subtlety and Detail', 'Sensitivity to Small Differences and Changes', 'Bodily-State Sensitivity'],
+    'Affective and Aesthetic': ['Hedonic Sensitivity', 'Social Hedonic Sensitivity', 'Aesthetic Sensitivity', 'Emotional Contagion', 'Inner Emotional Intensity'],
     'Social Cognition and Empathy': ['Cognitive Empathy', 'General Empathy', 'Nonverbal Social Perception', 'Evaluation Apprehension'],
     'Cognitive Processing': ['Deep Thought', 'Inner Richness', 'Mental Replay', 'Anticipatory Processing', 'Mental Overactivity', 'Intuitive Insight', 'Cognitive Disruption'],
     'Other Descriptors': ['Conscientious', 'Observer-Rated Sensitivity', 'Comparative', 'Reversed'],
